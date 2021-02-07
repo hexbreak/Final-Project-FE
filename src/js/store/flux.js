@@ -1,8 +1,8 @@
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
-			platform: [],
-			title: [],
+			gamePlatform: [],
+			gameTitle: [],
 			demo: [
 				{
 					title: "FIRST",
@@ -22,7 +22,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				getActions().changeColor(0, "green");
 			},
 			loadSomeData: () => {
-				fetch("examples/example.json")
+				fetch("https://api.rawg.io/api/platforms?key=177fced3a65f46e4a1f84503a84675ad")
 					.then(function(response) {
 						if (!response.ok) {
 							throw Error(response.statusText);
