@@ -1,6 +1,8 @@
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
+			platform: [],
+			title: [],
 			demo: [
 				{
 					title: "FIRST",
@@ -20,6 +22,21 @@ const getState = ({ getStore, getActions, setStore }) => {
 				getActions().changeColor(0, "green");
 			},
 			loadSomeData: () => {
+				fetch("examples/example.json")
+					.then(function(response) {
+						if (!response.ok) {
+							throw Error(response.statusText);
+						}
+						// Read the response as json.
+						return response.json();
+					})
+					.then(function(responseAsJson) {
+						// Do stuff with the JSON
+						console.log(responseAsJson);
+					})
+					.catch(function(error) {
+						console.log("Looks like there was a problem: \n", error);
+					});
 				/**
 					fetch().then().then(data => setStore({ "foo": data.bar }))
 				*/
