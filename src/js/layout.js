@@ -5,10 +5,10 @@ import ScrollToTop from "./component/scrollToTop";
 import { Home } from "./views/home";
 import { Demo } from "./views/demo";
 import { Single } from "./views/single";
+import { GameDetails } from "./views/gameDetails";
 import injectContext from "./store/appContext";
 
 import { Game } from "./component/game";
-
 import { Navbar } from "./component/navbar";
 import { Footer } from "./component/footer";
 
@@ -33,6 +33,7 @@ const Layout = () => {
 						<Route exact path="/single/:theid">
 							<Single />
 						</Route>
+                        <Route exact path="/details/:gameName" component={GameDetails} />
 						<Route>
 							<h1>Not found!</h1>
 						</Route>
