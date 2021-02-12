@@ -25,7 +25,7 @@ const Layout = () => {
 					<Navbar />
 					<Switch>
 						<Route exact path="/">
-							<Game />
+							<Home />
 						</Route>
 						<Route exact path="/demo">
 							<Demo />
@@ -33,7 +33,7 @@ const Layout = () => {
 						<Route exact path="/single/:theid">
 							<Single />
 						</Route>
-                        <Route exact path="/details/:gameName" component={GameDetails} />
+						<Route exact path="/details/:gameName" component={GameDetails} />
 						<Route>
 							<h1>Not found!</h1>
 						</Route>

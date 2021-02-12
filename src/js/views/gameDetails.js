@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import { Context } from "../store/appContext";
 import PropTypes from "prop-types";
 
-
 export const GameDetails = props => {
 	const { store, actions } = useContext(Context);
 	const params = useParams();
