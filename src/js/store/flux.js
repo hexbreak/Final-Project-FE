@@ -4,6 +4,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			gameList: [],
 			gameTitle: [],
 			gameListReversedRating: [],
+			game: [],
 			demo: [
 				{
 					title: "FIRST",
@@ -84,7 +85,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					})
 					.then(function(responseAsJson) {
 						// Do stuff with the JSON
-						return responseAsJson;
+						return setStore({ game: responseAsJson });
 					})
 					.catch(function(error) {
 						console.log("Looks like there was a problem: \n", error);
