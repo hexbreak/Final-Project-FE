@@ -2,6 +2,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
+
 //include bootstrap npm library into the bundle
 import "bootstrap/dist/css/bootstrap.css";
 

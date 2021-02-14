@@ -1,3 +1,46 @@
 /* 
     General Styles
 */
+@import "~bootstrap/scss/bootstrap";
+.scroller{
+    overflow-x: scroll;
+	overflow-y: hidden;
+    display: flex;
+    background-image: gray;
+}
+.card{
+    width: 18rem;
+    height: 10rem;
+    flex: 0 0 auto;
+}
+body{
+    background-color: gray;
+    color: white;
+    max-width: 100%;
+    max-height: 100%;
+}
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: rgb(70, 68, 68);
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: rgb(34, 34, 34); 
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: rgb(0, 0, 0); 
+}
+.detailsImage{
+    width: 50%;
+    height: 50%;
+}
+.detail{
+    text-align: center;
+}

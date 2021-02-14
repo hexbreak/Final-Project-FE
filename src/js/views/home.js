@@ -13,16 +13,12 @@ export const Home = () => {
 		if (store.gameList[0].name != undefined) {
 			return (
 				<div className="container-fluid">
-					<Carousel>
-						{store.gameList.forEach((game, index) => {
-							return <GameCarousel key={index} game={game} get_game={actions.loadGame} />;
-						})}
-					</Carousel>
+					<GameCarousel />
 					<div>
 						<h1> Games </h1>
 						<div className="scroller">
-							{store.gameList.forEach((game, index) => {
-								return <GameCard key={index} game={game} />;
+							{store.gameList.map((value, index) => {
+								return <GameCard className="card" key={index} game={value} />;
 							})}
 						</div>
 					</div>

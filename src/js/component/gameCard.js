@@ -6,7 +6,6 @@ import PropTypes from "prop-types";
 
 export const GameCard = props => {
 	const { store, actions } = useContext(Context);
-	console.log(props.game);
 	return (
 		<Card className="bg-dark text-white">
 			<Card.Img src={props.game.background_image} alt="Card image" />
