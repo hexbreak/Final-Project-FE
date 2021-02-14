@@ -5,20 +5,12 @@ import { Context } from "../store/appContext";
 import PropTypes from "prop-types";
 import "../../styles/home.scss";
 import { Game } from "../component/game";
-import { GameCarrousel } from "../component/gameCarrousel";
+import { GameCarousel } from "../component/gameCarousel";
 export const Home = () => {
 	const { store, actions } = useContext(Context);
 	actions.loadGameList(1);
 	if (store.gameList != []) {
-		return (
-			<Carousel>
-				{store.gameList.forEach((game, index) => {
-					console.log(game);
-
-					return <GameCarrousel game={game} key={index} />;
-				})}
-			</Carousel>
-		);
+		return <GameCarousel />;
 	} else {
 		return <h1>Loading...</h1>;
 	}

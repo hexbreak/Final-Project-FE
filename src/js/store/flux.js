@@ -2,8 +2,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
 			gameList: [],
-			gamePlatform: [],
 			gameTitle: [],
+			gameListReversedRating: [],
 			demo: [
 				{
 					title: "FIRST",
@@ -67,7 +67,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					})
 					.then(function(responseAsJson) {
 						// Do stuff with the JSON
-						setStore({ gameList: responseAsJson.results });
+						return setStore({ gameList: responseAsJson.results });
 					})
 					.catch(function(error) {
 						console.log("Looks like there was a problem: \n", error);
@@ -85,6 +85,23 @@ const getState = ({ getStore, getActions, setStore }) => {
 					.then(function(responseAsJson) {
 						// Do stuff with the JSON
 						return responseAsJson;
+					})
+					.catch(function(error) {
+						console.log("Looks like there was a problem: \n", error);
+					});
+			},
+			loadGameListReversedRating: pageNumber => {
+				fetch(`https://api.rawg.io/api/games?ordering=-rating&page=${pageNumber}`)
+					.then(function(response) {
+						if (!response.ok) {
+							throw Error(response.statusText);
+						}
+						// Read the response as json.
+						return response.json();
+					})
+					.then(function(responseAsJson) {
+						// Do stuff with the JSON
+						return setStore({ gameListReversedRating: responseAsJson.results });
 					})
 					.catch(function(error) {
 						console.log("Looks like there was a problem: \n", error);
