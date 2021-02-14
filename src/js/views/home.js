@@ -4,7 +4,6 @@ import { Link } from "react-router-dom";
 import { Context } from "../store/appContext";
 import PropTypes from "prop-types";
 import "../../styles/home.scss";
-import { Game } from "../component/game";
 import { GameCarrousel } from "../component/gameCarrousel";
 export const Home = () => {
 	const { store, actions } = useContext(Context);

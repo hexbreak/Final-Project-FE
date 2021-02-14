@@ -14,7 +14,7 @@ export const Navbar = () => {
 			</div>
 			<div className="ml">
 				<Link to="/profile">
-					<button className="btn btn-light">Profile Page</button>
+					<button className="btn btn-light">Profile</button>
 				</Link>
 			</div>
 		</nav>
