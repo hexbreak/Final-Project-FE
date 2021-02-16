@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
-import { Carousel, Card } from "react-bootstrap";
+import { Carousel, Card, Container, Row, Col } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { Context } from "../store/appContext";
 import PropTypes from "prop-types";
@@ -12,17 +12,22 @@ export const Home = () => {
 	if (store.gameList[0] != undefined) {
 		if (store.gameList[0].name != undefined) {
 			return (
-				<div className="container-fluid">
-					<GameCarousel />
-					<div>
-						<h1> Games </h1>
-						<div className="scroller">
-							{store.gameList.map((value, index) => {
-								return <GameCard className="card" key={index} game={value} />;
-							})}
+				<Container fluid>
+					<Row>
+						<GameCarousel />
+					</Row>
+					<Row />
+					<Row>
+						<div>
+							<h1> Games </h1>
+							<div className="scroller">
+								{store.gameList.map((value, index) => {
+									return <GameCard className="card" key={index} game={value} />;
+								})}
+							</div>
 						</div>
-					</div>
-				</div>
+					</Row>
+				</Container>
 			);
 		} else {
 			return <h1>Loading...</h1>;
