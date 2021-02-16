@@ -2,6 +2,10 @@
     General Styles
 */
 @import "~bootstrap/scss/bootstrap";
+.gameimg{
+    width: 50em;
+    height: 30em;
+}
 .scroller{
     overflow-x: scroll;
 	overflow-y: hidden;

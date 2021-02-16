@@ -9,15 +9,9 @@ export const GameCarousel = () => {
 	return (
 		<Carousel>
 			{store.gameList.map((value, index) => {
-				actions.loadGame(value.id);
 				return (
 					<Carousel.Item key={index}>
-						<img
-							className="d-block w-100"
-							src={value.background_image}
-							href="http://google.com"
-							alt="First slide"
-						/>
+						<img className="d-block w-100" src={value.background_image} alt="First slide" />
 						<Carousel.Caption>
 							<h3>{value.name}</h3>
 							{/* <p>{actions.loadGame(game.id).description}</p> */}
