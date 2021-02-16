@@ -6,10 +6,9 @@ import PropTypes from "prop-types";
 
 export const GameCard = props => {
 	const { store, actions } = useContext(Context);
-	actions.loadGame(props.game.id);
 	console.log(store.game);
 	return (
-		<Link to={{ pathname: `/details/${store.game.name}`, state: store.game }}>
+		<Link to={{ pathname: `/details/${store.game.name}`, state: props.game.id }}>
 			<Card className="bg-dark text-white">
 				<Card.Img src={props.game.background_image} alt="Card image" />
 				<Card.ImgOverlay>
