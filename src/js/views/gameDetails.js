@@ -13,8 +13,8 @@ export const GameDetails = props => {
 
 	if (store.game.name != undefined) {
 		return (
-			<Container>
-				<Jumbotron fluid className="text-dark">
+			<Container fluid>
+				<Jumbotron className="text-dark">
 					<Container>
 						<div>
 							<img src={store.game.background_image} alt="First slide" />
@@ -108,6 +108,33 @@ export const GameDetails = props => {
 													})}
 												</div>
 											</Col>
+										</Row>
+										<Row>
+											<Col>
+												<h1>Website</h1>
+												<a className="fab fa-reddit" href={store.game.reddit_url} />
+												<a className="fas fa-window-restore" href={store.game.website} />
+											</Col>
+											<Col>
+												<h1>Tags</h1>
+												{store.game.tags.map((value, index) => {
+													return ` ${value.name}`;
+												})}
+											</Col>
+											<Row>
+												<h1>PC Requirements</h1>
+											</Row>
+											<Row>
+												{store.game.platforms.map(value => {
+													if (value.platform.name == "PC") {
+														value.requirements.map(value => {
+															return value;
+														});
+													} else {
+														return null;
+													}
+												})}
+											</Row>
 										</Row>
 									</Tab.Pane>
 									<Tab.Pane eventKey="statistics">Lets go statistics</Tab.Pane>
