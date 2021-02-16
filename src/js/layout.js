@@ -33,7 +33,7 @@ const Layout = () => {
 						<Route exact path="/single/:theid">
 							<Single />
 						</Route>
-						<Route exact path="/details/:gamename" component={GameDetails} />
+						<Route exact path="/details/:id" component={GameDetails} />
 						<Route exact path="/profile" component={UserProfile} />
 						<Route>
 							<h1>Not found!</h1>

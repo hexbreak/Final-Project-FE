@@ -2,6 +2,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
 			gameList: [],
+			otherGamesList: [],
+			dlcsList: [],
 			gameTitle: [],
 			gameListReversedRating: [],
 			game: [],
@@ -103,6 +105,40 @@ const getState = ({ getStore, getActions, setStore }) => {
 					.then(function(responseAsJson) {
 						// Do stuff with the JSON
 						return setStore({ gameListReversedRating: responseAsJson.results });
+					})
+					.catch(function(error) {
+						console.log("Looks like there was a problem: \n", error);
+					});
+			},
+			loadDlcs: gameId => {
+				fetch(`https://api.rawg.io/api/games/${gameId}/additions`)
+					.then(function(response) {
+						if (!response.ok) {
+							throw Error(response.statusText);
+						}
+						// Read the response as json.
+						return response.json();
+					})
+					.then(function(responseAsJson) {
+						// Do stuff with the JSON
+						return setStore({ dlcsList: responseAsJson.results });
+					})
+					.catch(function(error) {
+						console.log("Looks like there was a problem: \n", error);
+					});
+			},
+			loadOtherGames: gameId => {
+				fetch(`https://api.rawg.io/api/games/${gameId}/game-series`)
+					.then(function(response) {
+						if (!response.ok) {
+							throw Error(response.statusText);
+						}
+						// Read the response as json.
+						return response.json();
+					})
+					.then(function(responseAsJson) {
+						// Do stuff with the JSON
+						return setStore({ otherGamesList: responseAsJson.results });
 					})
 					.catch(function(error) {
 						console.log("Looks like there was a problem: \n", error);
