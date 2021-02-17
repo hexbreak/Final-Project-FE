@@ -121,20 +121,25 @@ export const GameDetails = props => {
 													return ` ${value.name}`;
 												})}
 											</Col>
-											<Row>
-												<h1>PC Requirements</h1>
-											</Row>
-											<Row>
-												{store.game.platforms.map(value => {
-													if (value.platform.name == "PC") {
-														value.requirements.map(value => {
-															return value;
-														});
-													} else {
+										</Row>
+										<Row>
+											<h1>PC Requirements</h1>
+										</Row>
+										<Row>
+											{store.game.platforms.map(value => {
+												if (value.platform.id == 4 && value.requirements != undefined) {
+													if (
+														Object.keys(value.requirements).length === 0 &&
+														value.requirements.constructor === Object
+													) {
 														return null;
+													} else {
+														return Object.values(value.requirements);
 													}
-												})}
-											</Row>
+												} else {
+													return null;
+												}
+											})}
 										</Row>
 									</Tab.Pane>
 									<Tab.Pane eventKey="statistics">Lets go statistics</Tab.Pane>
