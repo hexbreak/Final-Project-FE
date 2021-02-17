@@ -7,6 +7,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			gameTitle: [],
 			gameListReversedRating: [],
 			game: [],
+			similarGamesList: [],
 			demo: [
 				{
 					title: "FIRST",
@@ -139,6 +140,23 @@ const getState = ({ getStore, getActions, setStore }) => {
 					.then(function(responseAsJson) {
 						// Do stuff with the JSON
 						return setStore({ otherGamesList: responseAsJson.results });
+					})
+					.catch(function(error) {
+						console.log("Looks like there was a problem: \n", error);
+					});
+			},
+			loadSimilarGames: genreId => {
+				fetch(`https://api.rawg.io/api/games?genres=${genreId[0]}`)
+					.then(function(response) {
+						if (!response.ok) {
+							throw Error(response.statusText);
+						}
+						// Read the response as json.
+						return response.json();
+					})
+					.then(function(responseAsJson) {
+						// Do stuff with the JSON
+						return setStore({ similarGamesList: responseAsJson.results });
 					})
 					.catch(function(error) {
 						console.log("Looks like there was a problem: \n", error);

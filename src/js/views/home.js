@@ -8,7 +8,10 @@ import { GameCarousel } from "../component/gameCarousel";
 import { GameCard } from "../component/gameCard";
 export const Home = () => {
 	const { store, actions } = useContext(Context);
-	actions.loadGameList(1);
+	useEffect(() => {
+		actions.loadGameList(1);
+	}, []);
+
 	if (store.gameList[0] != undefined) {
 		if (store.gameList[0].name != undefined) {
 			return (

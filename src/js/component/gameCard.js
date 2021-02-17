@@ -9,7 +9,14 @@ export const GameCard = props => {
 	return (
 		<Link to={{ pathname: `/details/${props.game.id}`, state: props.game.id }}>
 			<Card className="bg-dark text-white">
-				<Card.Img src={props.game.background_image} alt="Card image" />
+				<Card.Img
+					src={
+						props.game.background_image != null
+							? props.game.background_image
+							: "https://cdn.pixabay.com/photo/2020/12/14/15/48/light-bulb-5831252_960_720.jpg"
+					}
+					alt="Card Image"
+				/>
 				<Card.ImgOverlay>
 					<Card.Title>{props.game.name}</Card.Title>
 				</Card.ImgOverlay>

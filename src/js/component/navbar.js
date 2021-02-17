@@ -5,7 +5,11 @@ export const Navbar = () => {
 	return (
 		<nav className="navbar navbar-dark bg-dark mb-3">
 			<Link to="/">
-				<span className="navbar-brand mb-0 h1">React Boilerplate</span>
+				<span className="navbar-brand mb-0 h1">
+					Game
+					<i className="fas fa-gamepad" />
+					Finder
+				</span>
 			</Link>
 			<div className="ml-auto">
 				<Link to="/demo">
