@@ -7,6 +7,8 @@ import PropTypes from "prop-types";
 
 export const GameDetails = props => {
 	const { store, actions } = useContext(Context);
+	let gameStatus = "";
+
 	useEffect(() => {
 		const loadGame = () => {
 			actions.loadDlcs(props.location.state);
@@ -185,7 +187,42 @@ export const GameDetails = props => {
 											</div>
 										</Row>
 									</Tab.Pane>
-									<Tab.Pane eventKey="statistics">Lets go statistics</Tab.Pane>
+									<Tab.Pane eventKey="statistics">
+										<Row>
+											<Col>
+												<h1>Rating</h1>
+												{store.game.rating}
+											</Col>
+										</Row>
+										<Row>
+											<Col>
+												<h1>Metascore</h1>
+												{store.game.metacritic != null && store.game.metacritic}
+											</Col>
+											<Col>
+												<h1>Rating Count</h1>
+												{store.game.ratings_count}
+											</Col>
+											<Col>
+												<h1>Added on Players</h1>
+												{store.game.added}
+											</Col>
+										</Row>
+										<Row>
+											<Col>
+												<h1>Players Status</h1>
+												{}
+											</Col>
+											<Col>
+												<h1>People on Favorites</h1>
+												{}
+											</Col>
+										</Row>
+										<Row>
+											<h1>Achivements</h1>
+											{store.game.achievements_count}
+										</Row>
+									</Tab.Pane>
 								</Tab.Content>
 							</Col>
 						</Row>

@@ -146,21 +146,40 @@ const getState = ({ getStore, getActions, setStore }) => {
 					});
 			},
 			loadSimilarGames: genreId => {
-				fetch(`https://api.rawg.io/api/games?genres=${genreId[0]}`)
-					.then(function(response) {
-						if (!response.ok) {
-							throw Error(response.statusText);
-						}
-						// Read the response as json.
-						return response.json();
-					})
-					.then(function(responseAsJson) {
-						// Do stuff with the JSON
-						return setStore({ similarGamesList: responseAsJson.results });
-					})
-					.catch(function(error) {
-						console.log("Looks like there was a problem: \n", error);
-					});
+				console.log(genreId[0]);
+				if (genreId[1] != undefined) {
+					fetch(`https://api.rawg.io/api/games?genres=${genreId[1]}`)
+						.then(function(response) {
+							if (!response.ok) {
+								throw Error(response.statusText);
+							}
+							// Read the response as json.
+							return response.json();
+						})
+						.then(function(responseAsJson) {
+							// Do stuff with the JSON
+							return setStore({ similarGamesList: responseAsJson.results });
+						})
+						.catch(function(error) {
+							console.log("Looks like there was a problem: \n", error);
+						});
+				} else {
+					fetch(`https://api.rawg.io/api/games?genres=${genreId[0]}`)
+						.then(function(response) {
+							if (!response.ok) {
+								throw Error(response.statusText);
+							}
+							// Read the response as json.
+							return response.json();
+						})
+						.then(function(responseAsJson) {
+							// Do stuff with the JSON
+							return setStore({ similarGamesList: responseAsJson.results });
+						})
+						.catch(function(error) {
+							console.log("Looks like there was a problem: \n", error);
+						});
+				}
 			}
 		}
 	};
