@@ -8,6 +8,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			gameListReversedRating: [],
 			game: [],
 			similarGamesList: [],
+			favorites: [],
 			demo: [
 				{
 					title: "FIRST",
@@ -26,7 +27,17 @@ const getState = ({ getStore, getActions, setStore }) => {
 			exampleFunction: () => {
 				getActions().changeColor(0, "green");
 			},
-			loadSomeData: () => {
+			addFavorite: newItem => {
+				var storeCopy = getStore();
+				var checkItem = storeCopy.favorites.find(value => {
+					return value == newItem;
+				});
+				if (checkItem == undefined) {
+					var newFavorites = storeCopy.favorites.concat(newItem);
+					setStore({ favorites: newFavorites });
+				}
+			},
+			loadFavoriteData: () => {
 				fetch("https://api.rawg.io/api/platforms?key=177fced3a65f46e4a1f84503a84675ad")
 					.then(function(response) {
 						if (!response.ok) {
