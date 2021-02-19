@@ -7,8 +7,6 @@ import PropTypes from "prop-types";
 
 export const GameDetails = props => {
 	const { store, actions } = useContext(Context);
-	let gameStatus = "";
-
 	useEffect(() => {
 		const loadGame = () => {
 			actions.loadDlcs(props.location.state);
@@ -23,6 +21,7 @@ export const GameDetails = props => {
 				return value.id;
 			});
 			actions.loadSimilarGames(genreId);
+			actions.loadAddedByPlayers(store.game.added_by_status);
 		}
 	}, [store.game]);
 	if (store.game.id == props.location.state) {
@@ -54,6 +53,12 @@ export const GameDetails = props => {
 									</Nav.Item>
 									<Nav.Item>
 										<Nav.Link eventKey="statistics">Statistic</Nav.Link>
+									</Nav.Item>
+									<Nav.Item>
+										<Nav.Link eventKey="store">Store</Nav.Link>
+									</Nav.Item>
+									<Nav.Item>
+										<Nav.Link eventKey="media">Media</Nav.Link>
 									</Nav.Item>
 								</Row>
 							</Nav>
@@ -144,8 +149,15 @@ export const GameDetails = props => {
 										<Row>
 											<Col>
 												<h1>Website</h1>
-												<a className="fab fa-reddit" href={store.game.reddit_url} />
 												<a
+													className="fab fa-reddit"
+													href={store.game.reddit_url}
+													target="_blank"
+													rel="noreferrer"
+												/>
+												<a
+													target="_blank"
+													rel="noreferrer"
 													className="fas fa-window-restore"
 													href={store.game.website != null ? store.game.website : null}
 												/>
@@ -211,7 +223,9 @@ export const GameDetails = props => {
 										<Row>
 											<Col>
 												<h1>Players Status</h1>
-												{}
+												{store.addedByPlayers.map(value => {
+													return ` ${value}`;
+												})}
 											</Col>
 											<Col>
 												<h1>People on Favorites</h1>
@@ -219,8 +233,137 @@ export const GameDetails = props => {
 											</Col>
 										</Row>
 										<Row>
-											<h1>Achivements</h1>
-											{store.game.achievements_count}
+											<Col>
+												<h1>Achivements</h1>
+												{store.game.achievements_count}
+											</Col>
+										</Row>
+									</Tab.Pane>
+									<Tab.Pane eventKey="store">
+										<Row>
+											<Col>
+												<h1>Stores</h1>
+												<div>
+													{store.game.stores.map(value => {
+														if (value.store.id == 11) {
+															return (
+																<a href={value.url} target="_blank" rel="noreferrer">
+																	<img
+																		src="https://d3bzyjrsc4233l.cloudfront.net/company_office/epicgames_logo.png"
+																		alt="epic store"
+																	/>
+																</a>
+															);
+														} else if (value.store.id == 3) {
+															return (
+																<a href={value.url} target="_blank" rel="noreferrer">
+																	<img
+																		src="https://cdn4.iconfinder.com/data/icons/liu-square-blac/60/playstation-square-social-media-128.png"
+																		alt="psn"
+																	/>
+																</a>
+															);
+														} else if (value.store.id == 2) {
+															return (
+																<a href={value.url} target="_blank" rel="noreferrer">
+																	<img
+																		src="https://cdn4.iconfinder.com/data/icons/logos-and-brands/512/387_Xbox_logo-512.png"
+																		alt="xbox store"
+																	/>
+																</a>
+															);
+														} else if (value.store.id == 4) {
+															return (
+																<a href={value.url} target="_blank" rel="noreferrer">
+																	<img
+																		src="https://i.pinimg.com/originals/8e/14/6e/8e146e9e28baeb9b59c6004ed7b1343b.png"
+																		alt="app store"
+																	/>
+																</a>
+															);
+														} else if (value.store.id == 5) {
+															return (
+																<a href={value.url} target="_blank" rel="noreferrer">
+																	<img
+																		src="https://cdn.iconscout.com/icon/free/png-512/gog-galaxy-555193.png"
+																		alt="gog"
+																	/>
+																</a>
+															);
+														} else if (value.store.id == 6) {
+															return (
+																<a href={value.url} target="_blank" rel="noreferrer">
+																	<img
+																		src="https://media.pocketgamer.com/artwork/na-hois/eshop-logo.png"
+																		alt="nintendo"
+																	/>
+																</a>
+															);
+														} else if (value.store.id == 7) {
+															return (
+																<a href={value.url} target="_blank" rel="noreferrer">
+																	<img
+																		src="https://www.freepnglogos.com/uploads/xbox-one-png-23.png"
+																		alt="xbox 360"
+																	/>
+																</a>
+															);
+														} else if (value.store.id == 8) {
+															return (
+																<a href={value.url} target="_blank" rel="noreferrer">
+																	<img
+																		src="https://cdn3.iconfinder.com/data/icons/logos-and-brands-adobe/512/152_Google_Play-512.png"
+																		alt="google play"
+																	/>
+																</a>
+															);
+														} else if (value.store.id == 9) {
+															return (
+																<a href={value.url} target="_blank" rel="noreferrer">
+																	<img
+																		src="https://img.icons8.com/windows/452/itch-io.png"
+																		alt="itch io"
+																	/>
+																</a>
+															);
+														} else if (value.store.id == 9) {
+															return (
+																<a href={value.url} target="_blank" rel="noreferrer">
+																	<img
+																		src="https://img.icons8.com/windows/452/itch-io.png"
+																		alt="itch io"
+																	/>
+																</a>
+															);
+														} else if (value.store.id == 1) {
+															return (
+																<a href={value.url} target="_blank" rel="noreferrer">
+																	<img
+																		src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/83/Steam_icon_logo.svg/1024px-Steam_icon_logo.svg.png"
+																		alt="steam"
+																	/>
+																</a>
+															);
+														}
+													})}
+												</div>
+											</Col>
+										</Row>
+									</Tab.Pane>
+									<Tab.Pane eventKey="media">
+										<Row>
+											<Col>
+												<h1>Media</h1>
+												<div>
+													<video width="400" controls>
+														<source
+															src={store.game.clip != null && store.game.clip.clip}
+															type="video/mp4"
+														/>
+														Your browser does not support HTML video.
+													</video>
+												</div>
+											</Col>
 										</Row>
 									</Tab.Pane>
 								</Tab.Content>

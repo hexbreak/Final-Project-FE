@@ -11,7 +11,6 @@ export const Home = () => {
 	useEffect(() => {
 		actions.loadGameList(1);
 	}, []);
-
 	if (store.gameList[0] != undefined) {
 		if (store.gameList[0].name != undefined) {
 			return (

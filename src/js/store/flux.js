@@ -9,6 +9,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			game: [],
 			similarGamesList: [],
 			favorites: [],
+			addedByPlayers: [],
 			demo: [
 				{
 					title: "FIRST",
@@ -157,7 +158,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 					});
 			},
 			loadSimilarGames: genreId => {
-				console.log(genreId[0]);
 				if (genreId[1] != undefined) {
 					fetch(`https://api.rawg.io/api/games?genres=${genreId[1]}`)
 						.then(function(response) {
@@ -191,6 +191,13 @@ const getState = ({ getStore, getActions, setStore }) => {
 							console.log("Looks like there was a problem: \n", error);
 						});
 				}
+			},
+			loadAddedByPlayers: addedList => {
+				let playerlist = [];
+				for (let value in addedList) {
+					playerlist.push(`${value} : ${addedList[value]}`);
+				}
+				return setStore({ addedByPlayers: playerlist });
 			}
 		}
 	};
