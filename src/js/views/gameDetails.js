@@ -354,15 +354,14 @@ export const GameDetails = props => {
 										<Row>
 											<Col>
 												<h1>Media</h1>
-												<div>
-													<video width="400" controls>
-														<source
-															src={store.game.clip != null && store.game.clip.clip}
-															type="video/mp4"
-														/>
-														Your browser does not support HTML video.
-													</video>
-												</div>
+												{store.game.clip != null && (
+													<div>
+														<video width="400" controls>
+															<source src={store.game.clip.clip} type="video/mp4" />
+															Your browser does not support HTML video.
+														</video>
+													</div>
+												)}
 											</Col>
 										</Row>
 									</Tab.Pane>
