@@ -30,11 +30,11 @@ export const UserProfile = props => {
 				<Col md={{ span: 3, offset: 0 }}>
 					<UserAbout />
 				</Col>
-				<Col md={{ span: 4, offset: 0 }}>
+				<Col md={{ span: 4, offset: 1 }}>
 					<UserBacklog />
 				</Col>
-				<Col md={{ span: 4, offset: 1 }}>
-					<div className="test">Text Goes Here</div>
+				<Col md={{ span: 4, offset: 0 }}>
+					<UserFavoriteList />
 				</Col>
 			</Row>
 			<Row>
