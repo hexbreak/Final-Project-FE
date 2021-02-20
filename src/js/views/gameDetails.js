@@ -149,18 +149,22 @@ export const GameDetails = props => {
 										<Row>
 											<Col>
 												<h1>Website</h1>
-												<a
-													className="fab fa-reddit"
-													href={store.game.reddit_url}
-													target="_blank"
-													rel="noreferrer"
-												/>
-												<a
-													target="_blank"
-													rel="noreferrer"
-													className="fas fa-window-restore"
-													href={store.game.website != null ? store.game.website : null}
-												/>
+												{store.game.reddit_url != "" && (
+													<a
+														className="fab fa-reddit"
+														href={store.game.reddit_url}
+														target="_blank"
+														rel="noreferrer"
+													/>
+												)}
+												{store.game.website != "" && (
+													<a
+														target="_blank"
+														rel="noreferrer"
+														className="fas fa-window-restore"
+														href={store.game.website}
+													/>
+												)}
 											</Col>
 											<Col>
 												<h1>Tags</h1>
