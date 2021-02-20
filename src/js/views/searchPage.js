@@ -7,14 +7,65 @@ import PropTypes from "prop-types";
 
 export const SearchPage = props => {
 	const { store, actions } = useContext(Context);
+	const [gameName, setGameName] = useState("");
+	const handleChange = e => {
+		setGameName(e.target.value);
+		actions.loadSuperSearch(gameName);
+	};
+	var counter = 0;
 	return (
-		<div className="jumbotron">
-			<Link to="/">
-				<span className="btn btn-primary btn-lg" href="#" role="button">
-					Back home
-				</span>
-			</Link>
-		</div>
+		<Container fluid>
+			<Row>
+				<Col>
+					<div className="jumbotron">
+						<Link to="/">
+							<span className="btn btn-primary btn-lg" href="#" role="button">
+								Back home
+							</span>
+						</Link>
+					</div>
+				</Col>
+			</Row>
+			<Row>
+				<Col>
+					<input
+						type="text"
+						className="form-control"
+						onChange={event => handleChange(event)}
+						placeholder="Search..."
+						value={gameName}
+						aria-haspopup="true"
+						aria-expanded="false"
+						style={{ width: "50em" }}
+					/>
+					{gameName != "" && <i className="fas fa-times float-right" onClick={e => setGameName("")} />}
+				</Col>
+			</Row>
+			{store.superSearch[0] != undefined &&
+				gameName != "" &&
+				store.superSearch.map((value, index) => {
+					if (counter >= 5) {
+						counter = 0;
+					}
+					if (counter == 0) {
+						counter++;
+						return (
+							<Row key={index}>
+								<Col>
+									<GameCard className="card" game={value} />
+								</Col>
+							</Row>
+						);
+					} else if (counter < 4) {
+						counter++;
+						return (
+							<Col key={index}>
+								<GameCard className="card" game={value} />
+							</Col>
+						);
+					}
+				})}
+		</Container>
 	);
 };
 

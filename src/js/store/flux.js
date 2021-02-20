@@ -13,6 +13,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			favorites: [],
 			addedByPlayers: [],
 			searchBar: [],
+			superSearch: [],
 			demo: [
 				{
 					title: "FIRST",
@@ -246,6 +247,23 @@ const getState = ({ getStore, getActions, setStore }) => {
 					.then(function(responseAsJson) {
 						// Do stuff with the JSON
 						return setStore({ searchBar: responseAsJson.results });
+					})
+					.catch(function(error) {
+						console.log("Looks like there was a problem: \n", error);
+					});
+			},
+			loadSuperSearch: gameName => {
+				fetch(`https://api.rawg.io/api/games?search=${gameName}&page_size=30`)
+					.then(function(response) {
+						if (!response.ok) {
+							throw Error(response.statusText);
+						}
+						// Read the response as json.
+						return response.json();
+					})
+					.then(function(responseAsJson) {
+						// Do stuff with the JSON
+						return setStore({ superSearch: responseAsJson.results });
 					})
 					.catch(function(error) {
 						console.log("Looks like there was a problem: \n", error);
