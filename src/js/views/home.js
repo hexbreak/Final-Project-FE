@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
-import { Carousel, Card, Container, Row, Col, Dropdown, Button } from "react-bootstrap";
+import { Carousel, Card, Container, Row, Col, Dropdown, DropdownButton, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { Context } from "../store/appContext";
 import PropTypes from "prop-types";
@@ -50,35 +50,29 @@ export const Home = () => {
 							</Button>
 						</Col>
 						<Col>
-							<Dropdown>
-								<Dropdown.Toggle variant="dark" id="dropdown-basic">
-									Sort
-								</Dropdown.Toggle>
-
-								<Dropdown.Menu>
-									<Dropdown.Item variant="dark" onClick={e => setSort("name")}>
-										Name
-									</Dropdown.Item>
-									<Dropdown.Item variant="dark" onClick={e => setSort("released")}>
-										Released
-									</Dropdown.Item>
-									<Dropdown.Item variant="dark" onClick={e => setSort("added")}>
-										Added
-									</Dropdown.Item>
-									<Dropdown.Item variant="dark" onClick={e => setSort("created")}>
-										Created
-									</Dropdown.Item>
-									<Dropdown.Item variant="dark" onClick={e => setSort("updated")}>
-										Updated
-									</Dropdown.Item>
-									<Dropdown.Item variant="dark" onClick={e => setSort("rating")}>
-										Rating
-									</Dropdown.Item>
-									<Dropdown.Item variant="dark" onClick={e => setSort("metacritic")}>
-										Metacritic
-									</Dropdown.Item>
-								</Dropdown.Menu>
-							</Dropdown>
+							<DropdownButton variant="dark" title={sortKey.charAt(0).toUpperCase() + sortKey.slice(1)}>
+								<Dropdown.Item variant="dark" onClick={e => setSort("name")}>
+									Name
+								</Dropdown.Item>
+								<Dropdown.Item variant="dark" onClick={e => setSort("released")}>
+									Released
+								</Dropdown.Item>
+								<Dropdown.Item variant="dark" onClick={e => setSort("added")}>
+									Added
+								</Dropdown.Item>
+								<Dropdown.Item variant="dark" onClick={e => setSort("created")}>
+									Created
+								</Dropdown.Item>
+								<Dropdown.Item variant="dark" onClick={e => setSort("updated")}>
+									Updated
+								</Dropdown.Item>
+								<Dropdown.Item variant="dark" onClick={e => setSort("rating")}>
+									Rating
+								</Dropdown.Item>
+								<Dropdown.Item variant="dark" onClick={e => setSort("metacritic")}>
+									Metacritic
+								</Dropdown.Item>
+							</DropdownButton>
 						</Col>
 					</Row>
 					<Row>

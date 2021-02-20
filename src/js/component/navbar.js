@@ -1,7 +1,12 @@
-import React from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
+import { Carousel, Card, Container, Row, Col, Dropdown, DropdownButton, Button } from "react-bootstrap";
+import { Context } from "../store/appContext";
+import { GameCard } from "../component/gameCard";
 
 export const Navbar = () => {
+	const [gameName, setGameName] = useState("");
+	const { store, actions } = useContext(Context);
 	return (
 		<nav className="navbar navbar-dark bg-dark mb-3">
 			<Link to="/">
@@ -12,9 +17,18 @@ export const Navbar = () => {
 				</span>
 			</Link>
 			<div className="ml-auto">
-				<Link to="/demo">
-					<button className="btn btn-primary">Check the Context in action</button>
-				</Link>
+				<div className="dropdown">
+					<input
+						onChange={event => setGameName(event.target.value)}
+						value={gameName}
+						placeholder="Search..."
+					/>
+					<div id="myDropdown" className="dropdown-content">
+						{store.searchBar.map(value => {
+							return <GameCard className="card" key={index} game={value} />;
+						})}
+					</div>
+				</div>
 			</div>
 			<div className="ml">
 				<Link to="/profile">
