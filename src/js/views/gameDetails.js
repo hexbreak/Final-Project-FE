@@ -249,7 +249,7 @@ export const GameDetails = props => {
 												<h1>Stores</h1>
 												<div>
 													{store.game.stores.map(value => {
-														if (value.store.id == 11) {
+														if (value.store.id == 11 && value.store.url != "") {
 															return (
 																<a href={value.url} target="_blank" rel="noreferrer">
 																	<img
@@ -258,7 +258,7 @@ export const GameDetails = props => {
 																	/>
 																</a>
 															);
-														} else if (value.store.id == 3) {
+														} else if (value.store.id == 3 && value.store.url != "") {
 															return (
 																<a href={value.url} target="_blank" rel="noreferrer">
 																	<img
@@ -267,7 +267,7 @@ export const GameDetails = props => {
 																	/>
 																</a>
 															);
-														} else if (value.store.id == 2) {
+														} else if (value.store.id == 2 && value.store.url != "") {
 															return (
 																<a href={value.url} target="_blank" rel="noreferrer">
 																	<img
@@ -276,7 +276,7 @@ export const GameDetails = props => {
 																	/>
 																</a>
 															);
-														} else if (value.store.id == 4) {
+														} else if (value.store.id == 4 && value.store.url != "") {
 															return (
 																<a href={value.url} target="_blank" rel="noreferrer">
 																	<img
@@ -285,7 +285,7 @@ export const GameDetails = props => {
 																	/>
 																</a>
 															);
-														} else if (value.store.id == 5) {
+														} else if (value.store.id == 5 && value.store.url != "") {
 															return (
 																<a href={value.url} target="_blank" rel="noreferrer">
 																	<img
@@ -294,7 +294,7 @@ export const GameDetails = props => {
 																	/>
 																</a>
 															);
-														} else if (value.store.id == 6) {
+														} else if (value.store.id == 6 && value.store.url != "") {
 															return (
 																<a href={value.url} target="_blank" rel="noreferrer">
 																	<img
@@ -303,7 +303,7 @@ export const GameDetails = props => {
 																	/>
 																</a>
 															);
-														} else if (value.store.id == 7) {
+														} else if (value.store.id == 7 && value.store.url != "") {
 															return (
 																<a href={value.url} target="_blank" rel="noreferrer">
 																	<img
@@ -312,7 +312,7 @@ export const GameDetails = props => {
 																	/>
 																</a>
 															);
-														} else if (value.store.id == 8) {
+														} else if (value.store.id == 8 && value.store.url != "") {
 															return (
 																<a href={value.url} target="_blank" rel="noreferrer">
 																	<img
@@ -321,7 +321,7 @@ export const GameDetails = props => {
 																	/>
 																</a>
 															);
-														} else if (value.store.id == 9) {
+														} else if (value.store.id == 9 && value.store.url != "") {
 															return (
 																<a href={value.url} target="_blank" rel="noreferrer">
 																	<img
@@ -330,16 +330,7 @@ export const GameDetails = props => {
 																	/>
 																</a>
 															);
-														} else if (value.store.id == 9) {
-															return (
-																<a href={value.url} target="_blank" rel="noreferrer">
-																	<img
-																		src="https://img.icons8.com/windows/452/itch-io.png"
-																		alt="itch io"
-																	/>
-																</a>
-															);
-														} else if (value.store.id == 1) {
+														} else if (value.store.id == 1 && value.store.url != "") {
 															return (
 																<a href={value.url} target="_blank" rel="noreferrer">
 																	<img
