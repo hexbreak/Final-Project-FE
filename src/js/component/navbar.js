@@ -7,6 +7,10 @@ import { GameCard } from "../component/gameCard";
 export const Navbar = () => {
 	const [gameName, setGameName] = useState("");
 	const { store, actions } = useContext(Context);
+	const handleChange = e => {
+		setGameName(e.target.value);
+		actions.loadSearch(gameName);
+	};
 	return (
 		<nav className="navbar navbar-dark bg-dark mb-3">
 			<Link to="/">
@@ -19,15 +23,25 @@ export const Navbar = () => {
 			<div className="ml-auto">
 				<div className="dropdown">
 					<input
-						onChange={event => setGameName(event.target.value)}
-						value={gameName}
+						type="text"
+						className="form-control"
+						onChange={event => handleChange(event)}
 						placeholder="Search..."
+						value={gameName}
+						aria-haspopup="true"
+						aria-expanded="false"
 					/>
-					<div id="myDropdown" className="dropdown-content">
-						{store.searchBar.map(value => {
-							return <GameCard className="card" key={index} game={value} />;
-						})}
-					</div>
+					{store.searchBar[0] != undefined && gameName != "" && (
+						<div
+							id="myDropdown"
+							aria-labelledby="dropdownMenuButton"
+							className="dropdown-content"
+							style={{ display: "show", position: "absolute", zIndex: "300" }}>
+							{store.searchBar.map((value, index) => {
+								return <GameCard className="card" key={index} game={value} />;
+							})}
+						</div>
+					)}
 				</div>
 			</div>
 			<div className="ml">

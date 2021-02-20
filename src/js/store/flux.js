@@ -235,7 +235,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					});
 			},
 			loadSearch: gameName => {
-				fetch(`https://api.rawg.io/api/games?search=${gamename}`)
+				fetch(`https://api.rawg.io/api/games?search=${gameName}`)
 					.then(function(response) {
 						if (!response.ok) {
 							throw Error(response.statusText);
