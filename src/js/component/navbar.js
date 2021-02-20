@@ -11,8 +11,14 @@ export const Navbar = () => {
 		setGameName(e.target.value);
 		actions.loadSearch(gameName);
 	};
+	const handleKeyDown = e => {
+		if (e.keyCode == 13 && gameName != "") {
+			window.open("/search", (target = "_blank"));
+			setGameName("");
+		}
+	};
 	return (
-		<nav className="navbar navbar-dark bg-dark mb-3">
+		<nav className="navbar navbar-dark bg-dark mb-3 container-fluid">
 			<Link to="/">
 				<span className="navbar-brand mb-0 h1">
 					Game
@@ -20,17 +26,20 @@ export const Navbar = () => {
 					Finder
 				</span>
 			</Link>
-			<div className="ml-auto">
+			<div className="">
 				<div className="dropdown">
 					<input
 						type="text"
 						className="form-control"
 						onChange={event => handleChange(event)}
+						onKeyDown={e => handleKeyDown(e)}
 						placeholder="Search..."
 						value={gameName}
 						aria-haspopup="true"
 						aria-expanded="false"
+						style={{ width: "50em" }}
 					/>
+					{gameName != "" && <i className="fas fa-times float-right" onClick={e => setGameName("")} />}
 					{store.searchBar[0] != undefined && gameName != "" && (
 						<div
 							id="myDropdown"

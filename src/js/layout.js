@@ -8,7 +8,7 @@ import { Single } from "./views/single";
 import { GameDetails } from "./views/gameDetails";
 import { UserProfile } from "./views/userProfile";
 import injectContext from "./store/appContext";
-
+import { SearchPage } from "./views/searchPage";
 import { Navbar } from "./component/navbar";
 import { Footer } from "./component/footer";
 
@@ -34,6 +34,7 @@ const Layout = () => {
 							<Single />
 						</Route>
 						<Route exact path="/details/:id" component={GameDetails} />
+						<Route exact path="/search" component={SearchPage} />
 						<Route exact path="/profile" component={UserProfile} />
 						<Route>
 							<h1>Not found!</h1>
