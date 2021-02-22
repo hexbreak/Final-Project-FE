@@ -122,7 +122,7 @@ export const GameDetails = props => {
 										</Row>
 										<Row>
 											<Col>
-												<h1> Downloable Content </h1>
+												<h1> Downloadable Content </h1>
 												<div className="scroller">
 													{store.dlcsList != null &&
 														store.dlcsList.map((value, index) => {
