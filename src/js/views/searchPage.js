@@ -44,26 +44,15 @@ export const SearchPage = props => {
 			{store.superSearch[0] != undefined &&
 				gameName != "" &&
 				store.superSearch.map((value, index) => {
-					if (counter >= 5) {
-						counter = 0;
-					}
-					if (counter == 0) {
-						counter++;
-						return (
-							<Row key={index}>
+					return (
+						<Row key={index}>
+							{index < 20 && (
 								<Col>
 									<GameCard className="card" game={value} />
 								</Col>
-							</Row>
-						);
-					} else if (counter < 4) {
-						counter++;
-						return (
-							<Col key={index}>
-								<GameCard className="card" game={value} />
-							</Col>
-						);
-					}
+							)}
+						</Row>
+					);
 				})}
 		</Container>
 	);

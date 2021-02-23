@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { Carousel, Card, Container, Row, Col, Dropdown, DropdownButton, Button } from "react-bootstrap";
 import { Context } from "../store/appContext";
 import { GameCard } from "../component/gameCard";
@@ -7,13 +7,14 @@ import { GameCard } from "../component/gameCard";
 export const Navbar = () => {
 	const [gameName, setGameName] = useState("");
 	const { store, actions } = useContext(Context);
+	let history = useHistory();
 	const handleChange = e => {
 		setGameName(e.target.value);
 		actions.loadSearch(gameName);
 	};
 	const handleKeyDown = e => {
 		if (e.keyCode == 13 && gameName != "") {
-			window.open("/search", (target = "_blank"));
+			history.push("/search");
 			setGameName("");
 		}
 	};
