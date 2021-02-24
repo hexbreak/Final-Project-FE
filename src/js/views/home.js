@@ -6,6 +6,7 @@ import PropTypes from "prop-types";
 import "../../styles/home.scss";
 import { GameCarousel } from "../component/gameCarousel";
 import { GameCard } from "../component/gameCard";
+import { Sorter } from "../component/sorter";
 export const Home = () => {
 	const { store, actions } = useContext(Context);
 	const [sortKey, setSort] = useState("name");
@@ -38,42 +39,7 @@ export const Home = () => {
 						<Col>
 							<h1> Games </h1>
 						</Col>
-						<Col>
-							<Button
-								variant="primary"
-								onClick={inverted == false ? e => setInverted(true) : e => setInverted(false)}>
-								{inverted == false ? (
-									<i className="fas fa-sort-up"></i>
-								) : (
-									<i className="fas fa-sort-down"></i>
-								)}
-							</Button>
-						</Col>
-						<Col>
-							<DropdownButton variant="dark" title={sortKey.charAt(0).toUpperCase() + sortKey.slice(1)}>
-								<Dropdown.Item variant="dark" onClick={e => setSort("name")}>
-									Name
-								</Dropdown.Item>
-								<Dropdown.Item variant="dark" onClick={e => setSort("released")}>
-									Released
-								</Dropdown.Item>
-								<Dropdown.Item variant="dark" onClick={e => setSort("added")}>
-									Added
-								</Dropdown.Item>
-								<Dropdown.Item variant="dark" onClick={e => setSort("created")}>
-									Created
-								</Dropdown.Item>
-								<Dropdown.Item variant="dark" onClick={e => setSort("updated")}>
-									Updated
-								</Dropdown.Item>
-								<Dropdown.Item variant="dark" onClick={e => setSort("rating")}>
-									Rating
-								</Dropdown.Item>
-								<Dropdown.Item variant="dark" onClick={e => setSort("metacritic")}>
-									Metacritic
-								</Dropdown.Item>
-							</DropdownButton>
-						</Col>
+						<Sorter setSort={setSort} sortKey={sortKey} setInverted={setInverted} inverted={inverted} />
 					</Row>
 					<Row>
 						<Col>

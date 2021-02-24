@@ -13,6 +13,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 			dlcsList: [],
 			gameTitle: [],
 			favorites: [],
+			tags: [],
+			genres: [],
+			platforms: [],
 			addedByPlayers: [],
 			searchBar: [],
 			superSearch: [],
@@ -300,6 +303,57 @@ const getState = ({ getStore, getActions, setStore }) => {
 					.then(function(responseAsJson) {
 						// Do stuff with the JSON
 						return setStore({ gameTrailers: responseAsJson.results });
+					})
+					.catch(function(error) {
+						console.log("Looks like there was a problem: \n", error);
+					});
+			},
+			loadTags: pageSize => {
+				fetch(`https://api.rawg.io/api/tags?page_size=${pageSize}`)
+					.then(function(response) {
+						if (!response.ok) {
+							throw Error(response.statusText);
+						}
+						// Read the response as json.
+						return response.json();
+					})
+					.then(function(responseAsJson) {
+						// Do stuff with the JSON
+						return setStore({ tags: responseAsJson.results });
+					})
+					.catch(function(error) {
+						console.log("Looks like there was a problem: \n", error);
+					});
+			},
+			loadGenres: pageSize => {
+				fetch(`https://api.rawg.io/api/genres?page_size=${pageSize}`)
+					.then(function(response) {
+						if (!response.ok) {
+							throw Error(response.statusText);
+						}
+						// Read the response as json.
+						return response.json();
+					})
+					.then(function(responseAsJson) {
+						// Do stuff with the JSON
+						return setStore({ genres: responseAsJson.results });
+					})
+					.catch(function(error) {
+						console.log("Looks like there was a problem: \n", error);
+					});
+			},
+			loadPlatforms: pageSize => {
+				fetch(`https://api.rawg.io/api/platforms?page_size=${pageSize}`)
+					.then(function(response) {
+						if (!response.ok) {
+							throw Error(response.statusText);
+						}
+						// Read the response as json.
+						return response.json();
+					})
+					.then(function(responseAsJson) {
+						// Do stuff with the JSON
+						return setStore({ platforms: responseAsJson.results });
 					})
 					.catch(function(error) {
 						console.log("Looks like there was a problem: \n", error);

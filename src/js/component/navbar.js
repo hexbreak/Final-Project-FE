@@ -8,10 +8,12 @@ export const Navbar = () => {
 	const [gameName, setGameName] = useState("");
 	const { store, actions } = useContext(Context);
 	let history = useHistory();
-	const handleChange = e => {
-		setGameName(e.target.value);
-		actions.loadSearch(gameName);
-	};
+	useEffect(() => {
+		const search = () => {
+			actions.loadSearch(gameName);
+		};
+		search();
+	}, [gameName]);
 	const handleKeyDown = e => {
 		if (e.keyCode == 13 && gameName != "") {
 			history.push("/search");
@@ -32,7 +34,7 @@ export const Navbar = () => {
 					<input
 						type="text"
 						className="form-control"
-						onChange={event => handleChange(event)}
+						onChange={event => setGameName(event.target.value)}
 						onKeyDown={e => handleKeyDown(e)}
 						placeholder="Search..."
 						value={gameName}
