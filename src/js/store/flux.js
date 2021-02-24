@@ -241,7 +241,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					});
 			},
 			loadSearch: gameName => {
-				fetch(`https://api.rawg.io/api/games?search=${gameName}`)
+				fetch(`https://api.rawg.io/api/games?search=${gameName}&page_size=6`)
 					.then(function(response) {
 						if (!response.ok) {
 							throw Error(response.statusText);
@@ -257,8 +257,39 @@ const getState = ({ getStore, getActions, setStore }) => {
 						console.log("Looks like there was a problem: \n", error);
 					});
 			},
-			loadSuperSearch: gameName => {
-				fetch(`https://api.rawg.io/api/games?search=${gameName}&page_size=30`)
+			loadSuperSearch: (gameName, pagination, genres, tags, sort, platforms) => {
+				let get = `https://api.rawg.io/api/games`;
+				if (gameName != "" && get[29] != "?") {
+					get += `?search=${gameName}`;
+				} else if (gameName != "") {
+					get += `&search=${gameName}`;
+				}
+				if (pagination != null && get[29] != "?") {
+					get += `?page=${pagination}`;
+				} else if (pagination != null) {
+					get += `&page=${pagination}`;
+				}
+				if (genres != null && get[29] != "?") {
+					get += `?genres=${genres}`;
+				} else if (genres != null) {
+					get += `&genres=${genres}`;
+				}
+				if (tags != null && get[29] != "?") {
+					get += `?tags=${tags}`;
+				} else if (tags != null) {
+					get += `&tags=${tags}`;
+				}
+				if (sort != null && get[29] != "?") {
+					get += `?ordering=${sort}`;
+				} else if (sort != null) {
+					get += `&ordering=${sort}`;
+				}
+				if (platforms != null && get[29] != "?") {
+					get += `?platforms=${platforms}`;
+				} else if (platforms != null) {
+					get += `&platforms=${platforms}`;
+				}
+				fetch(get)
 					.then(function(response) {
 						if (!response.ok) {
 							throw Error(response.statusText);

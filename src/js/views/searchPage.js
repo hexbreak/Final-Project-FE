@@ -26,19 +26,18 @@ export const SearchPage = props => {
 	const [tags, setTags] = useState(null);
 	const [genres, setGenres] = useState(null);
 	const [platforms, setPlatforms] = useState(null);
-	const handleChange = e => {
-		setGameName(e.target.value);
-		actions.loadSuperSearch(gameName);
-	};
 	useEffect(() => {
 		let sort = "";
-		if (inverted == true) {
-			sort = `-${sortKey}`;
-		} else {
-			sort = sortKey;
-		}
-		actions.loadSortedGameList(pagination, sort, tags, genres, platforms);
-	}, [sortKey, pagination, inverted, tags, genres, platforms]);
+		const realSearch = () => {
+			if (inverted == true) {
+				sort = `-${sortKey}`;
+			} else {
+				sort = sortKey;
+			}
+			actions.loadSuperSearch(gameName, pagination, genres, tags, sort, platforms);
+		};
+		realSearch();
+	}, [sortKey, pagination, inverted, tags, genres, platforms, gameName]);
 	useEffect(() => {
 		const loadSearch = () => {
 			actions.loadTags("40");
@@ -54,10 +53,16 @@ export const SearchPage = props => {
 				<Row>
 					<Col>
 						{store.genres != null && (
-							<ToggleButtonGroup type="checkbox" className="mb-2">
+							<ToggleButtonGroup value={genres} type="checkbox" className="mb-2">
 								{store.genres.map((value, index) => {
 									return (
-										<ToggleButton key={index} value={value.id} variant="dark">
+										<ToggleButton
+											key={index}
+											onChange={
+												genres != value.id ? e => setGenres(value.id) : e => setGenres(null)
+											}
+											value={value.id}
+											variant="dark">
 											{value.name}
 										</ToggleButton>
 									);
@@ -69,10 +74,14 @@ export const SearchPage = props => {
 				<Row>
 					<Col>
 						{store.tags != null && (
-							<ToggleButtonGroup type="checkbox" className="mb-2">
+							<ToggleButtonGroup value={tags} type="checkbox" className="mb-2">
 								{store.tags.map((value, index) => {
 									return (
-										<ToggleButton key={index} value={value.id} variant="dark">
+										<ToggleButton
+											key={index}
+											onChange={tags != value.id ? e => setTags(value.id) : e => setTags(null)}
+											value={value.id}
+											variant="dark">
 											{value.name}
 										</ToggleButton>
 									);
@@ -84,10 +93,18 @@ export const SearchPage = props => {
 				<Row>
 					<Col>
 						{store.platforms != null && (
-							<ToggleButtonGroup type="checkbox" className="mb-2">
+							<ToggleButtonGroup value={platforms} type="checkbox" className="mb-2">
 								{store.platforms.map((value, index) => {
 									return (
-										<ToggleButton key={index} value={value.id} variant="dark">
+										<ToggleButton
+											key={index}
+											value={value.id}
+											variant="dark"
+											onChange={
+												genres != value.id
+													? e => setPlatforms(value.id)
+													: e => setPlatforms(null)
+											}>
 											{value.name}
 										</ToggleButton>
 									);
@@ -102,7 +119,7 @@ export const SearchPage = props => {
 					<input
 						type="text"
 						className="form-control"
-						onChange={event => handleChange(event)}
+						onChange={event => setGameName(event.target.value)}
 						placeholder="Search..."
 						value={gameName}
 						aria-haspopup="true"
@@ -114,7 +131,6 @@ export const SearchPage = props => {
 				<Sorter setSort={setSort} sortKey={sortKey} setInverted={setInverted} inverted={inverted} />
 			</Row>
 			{store.superSearch[0] != undefined &&
-				gameName != "" &&
 				store.superSearch.map((value, index) => {
 					return (
 						<Row key={index}>
