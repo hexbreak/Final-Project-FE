@@ -12,6 +12,8 @@ export const GameDetails = props => {
 			actions.loadDlcs(props.location.state);
 			actions.loadOtherGames(props.location.state);
 			actions.loadGame(props.location.state);
+			actions.loadGameAchievements(props.location.state);
+			actions.loadGameTrailers(props.location.state);
 		};
 		loadGame();
 	}, [props.location.state]);
@@ -239,7 +241,17 @@ export const GameDetails = props => {
 										<Row>
 											<Col>
 												<h1>Achivements</h1>
-												{store.game.achievements_count}
+												{store.gameAchievements != null &&
+													store.gameAchievements.map((value, index) => {
+														return (
+															<Col key={index}>
+																<h1>{value.name}</h1>
+																<p>{value.description}</p>
+																<img src={value.image} alt="achievemnt" />
+																<h6>%{value.percent}</h6>
+															</Col>
+														);
+													})}
 											</Col>
 										</Row>
 									</Tab.Pane>
@@ -248,10 +260,14 @@ export const GameDetails = props => {
 											<Col>
 												<h1>Stores</h1>
 												<div>
-													{store.game.stores.map(value => {
+													{store.game.stores.map((value, index) => {
 														if (value.store.id == 11 && value.store.url != "") {
 															return (
-																<a href={value.url} target="_blank" rel="noreferrer">
+																<a
+																	href={value.url}
+																	key={index}
+																	target="_blank"
+																	rel="noreferrer">
 																	<img
 																		src="https://d3bzyjrsc4233l.cloudfront.net/company_office/epicgames_logo.png"
 																		alt="epic store"
@@ -260,7 +276,11 @@ export const GameDetails = props => {
 															);
 														} else if (value.store.id == 3 && value.store.url != "") {
 															return (
-																<a href={value.url} target="_blank" rel="noreferrer">
+																<a
+																	href={value.url}
+																	key={index}
+																	target="_blank"
+																	rel="noreferrer">
 																	<img
 																		src="https://cdn4.iconfinder.com/data/icons/liu-square-blac/60/playstation-square-social-media-128.png"
 																		alt="psn"
@@ -269,7 +289,11 @@ export const GameDetails = props => {
 															);
 														} else if (value.store.id == 2 && value.store.url != "") {
 															return (
-																<a href={value.url} target="_blank" rel="noreferrer">
+																<a
+																	href={value.url}
+																	key={index}
+																	target="_blank"
+																	rel="noreferrer">
 																	<img
 																		src="https://cdn4.iconfinder.com/data/icons/logos-and-brands/512/387_Xbox_logo-512.png"
 																		alt="xbox store"
@@ -278,7 +302,11 @@ export const GameDetails = props => {
 															);
 														} else if (value.store.id == 4 && value.store.url != "") {
 															return (
-																<a href={value.url} target="_blank" rel="noreferrer">
+																<a
+																	href={value.url}
+																	key={index}
+																	target="_blank"
+																	rel="noreferrer">
 																	<img
 																		src="https://i.pinimg.com/originals/8e/14/6e/8e146e9e28baeb9b59c6004ed7b1343b.png"
 																		alt="app store"
@@ -287,7 +315,11 @@ export const GameDetails = props => {
 															);
 														} else if (value.store.id == 5 && value.store.url != "") {
 															return (
-																<a href={value.url} target="_blank" rel="noreferrer">
+																<a
+																	href={value.url}
+																	key={index}
+																	target="_blank"
+																	rel="noreferrer">
 																	<img
 																		src="https://cdn.iconscout.com/icon/free/png-512/gog-galaxy-555193.png"
 																		alt="gog"
@@ -296,7 +328,11 @@ export const GameDetails = props => {
 															);
 														} else if (value.store.id == 6 && value.store.url != "") {
 															return (
-																<a href={value.url} target="_blank" rel="noreferrer">
+																<a
+																	href={value.url}
+																	key={index}
+																	target="_blank"
+																	rel="noreferrer">
 																	<img
 																		src="https://media.pocketgamer.com/artwork/na-hois/eshop-logo.png"
 																		alt="nintendo"
@@ -305,7 +341,11 @@ export const GameDetails = props => {
 															);
 														} else if (value.store.id == 7 && value.store.url != "") {
 															return (
-																<a href={value.url} target="_blank" rel="noreferrer">
+																<a
+																	href={value.url}
+																	key={index}
+																	target="_blank"
+																	rel="noreferrer">
 																	<img
 																		src="https://www.freepnglogos.com/uploads/xbox-one-png-23.png"
 																		alt="xbox 360"
@@ -314,7 +354,11 @@ export const GameDetails = props => {
 															);
 														} else if (value.store.id == 8 && value.store.url != "") {
 															return (
-																<a href={value.url} target="_blank" rel="noreferrer">
+																<a
+																	href={value.url}
+																	key={index}
+																	target="_blank"
+																	rel="noreferrer">
 																	<img
 																		src="https://cdn3.iconfinder.com/data/icons/logos-and-brands-adobe/512/152_Google_Play-512.png"
 																		alt="google play"
@@ -323,7 +367,11 @@ export const GameDetails = props => {
 															);
 														} else if (value.store.id == 9 && value.store.url != "") {
 															return (
-																<a href={value.url} target="_blank" rel="noreferrer">
+																<a
+																	href={value.url}
+																	key={index}
+																	arget="_blank"
+																	rel="noreferrer">
 																	<img
 																		src="https://img.icons8.com/windows/452/itch-io.png"
 																		alt="itch io"
@@ -332,7 +380,11 @@ export const GameDetails = props => {
 															);
 														} else if (value.store.id == 1 && value.store.url != "") {
 															return (
-																<a href={value.url} target="_blank" rel="noreferrer">
+																<a
+																	href={value.url}
+																	key={index}
+																	target="_blank"
+																	rel="noreferrer">
 																	<img
 																		src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/83/Steam_icon_logo.svg/1024px-Steam_icon_logo.svg.png"
 																		alt="steam"
@@ -349,8 +401,21 @@ export const GameDetails = props => {
 										<Row>
 											<Col>
 												<h1>Media</h1>
+												{store.gameTrailers != null &&
+													store.gameTrailers.map((value, index) => {
+														return (
+															<div key={index}>
+																<h3>{value.name}</h3>
+																<video width="400" poster={value.preview} controls>
+																	<source src={value.data.max} type="video/mp4" />
+																	Your browser does not support HTML video.
+																</video>
+															</div>
+														);
+													})}
 												{store.game.clip != null && (
 													<div>
+														<h3>Gameplay</h3>
 														<video width="400" controls>
 															<source src={store.game.clip.clip} type="video/mp4" />
 															Your browser does not support HTML video.

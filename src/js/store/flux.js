@@ -5,6 +5,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 			gameMetacriticList: [],
 			gameRatingList: [],
 			game: [],
+			gameAchievements: [],
+			gameTrailers: [],
 			similarGamesList: [],
 			sortedGameList: [],
 			otherGamesList: [],
@@ -264,6 +266,40 @@ const getState = ({ getStore, getActions, setStore }) => {
 					.then(function(responseAsJson) {
 						// Do stuff with the JSON
 						return setStore({ superSearch: responseAsJson.results });
+					})
+					.catch(function(error) {
+						console.log("Looks like there was a problem: \n", error);
+					});
+			},
+			loadGameAchievements: gameId => {
+				fetch(`https://api.rawg.io/api/games/${gameId}/achievements`)
+					.then(function(response) {
+						if (!response.ok) {
+							throw Error(response.statusText);
+						}
+						// Read the response as json.
+						return response.json();
+					})
+					.then(function(responseAsJson) {
+						// Do stuff with the JSON
+						return setStore({ gameAchievements: responseAsJson.results });
+					})
+					.catch(function(error) {
+						console.log("Looks like there was a problem: \n", error);
+					});
+			},
+			loadGameTrailers: gameId => {
+				fetch(`https://api.rawg.io/api/games/${gameId}/movies`)
+					.then(function(response) {
+						if (!response.ok) {
+							throw Error(response.statusText);
+						}
+						// Read the response as json.
+						return response.json();
+					})
+					.then(function(responseAsJson) {
+						// Do stuff with the JSON
+						return setStore({ gameTrailers: responseAsJson.results });
 					})
 					.catch(function(error) {
 						console.log("Looks like there was a problem: \n", error);
