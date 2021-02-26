@@ -59,7 +59,7 @@ export const SearchPage = props => {
 										<ToggleButton
 											key={index}
 											onChange={
-												genres != value.id ? e => setGenres(value.id) : e => setGenres(null)
+												genres == value.id ? e => setGenres(null) : e => setGenres(value.id)
 											}
 											value={value.id}
 											variant="dark">
@@ -79,7 +79,7 @@ export const SearchPage = props => {
 									return (
 										<ToggleButton
 											key={index}
-											onChange={tags != value.id ? e => setTags(value.id) : e => setTags(null)}
+											onChange={tags == value.id ? e => setTags(null) : e => setTags(value.id)}
 											value={value.id}
 											variant="dark">
 											{value.name}
@@ -101,9 +101,9 @@ export const SearchPage = props => {
 											value={value.id}
 											variant="dark"
 											onChange={
-												genres != value.id
-													? e => setPlatforms(value.id)
-													: e => setPlatforms(null)
+												genres == value.id
+													? e => setPlatforms(null)
+													: e => setPlatforms(value.id)
 											}>
 											{value.name}
 										</ToggleButton>
