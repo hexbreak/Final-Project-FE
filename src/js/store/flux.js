@@ -88,7 +88,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					})
 					.catch(error => console.error("Error:", error));
 			},
-			exProfile: getUser => {
+			exProfile: test => {
 				fetch(`${beURL}/user/1`)
 					.then(function(response) {
 						if (!response.ok) {
@@ -99,27 +99,26 @@ const getState = ({ getStore, getActions, setStore }) => {
 					})
 					.then(function(responseAsJson) {
 						// Do stuff with the JSON
+						console.log(test);
 						return setStore({ backlogGet: responseAsJson });
 					})
 					.catch(function(error) {
 						console.log("Looks like there was a problem: \n", error);
 					});
 			},
-			loginUser: user => {
+			backlogAdd: () => {
+				const store = getStore();
 				fetch(`${beURL}/user/1/backlog`, {
 					method: "POST",
 					headers: {
 						"Content-Type": "application/json"
 					},
 					body: JSON.stringify({
-						game_id: game_id,
-						game_name: game_name,
-						game_platform: game_platform,
-						game_genre: game_genre,
-						game_tags: game_tags,
-						game_notes: game_notes,
-						progress_status: progress_status,
-						now_playing: now_playing
+						game_id: store.game.id,
+						game_name: store.game.name,
+						game_platform: store.game.platforms,
+						game_genre: store.game.genres,
+						game_tags: store.game.tags
 					})
 				})
 					.then(response => {

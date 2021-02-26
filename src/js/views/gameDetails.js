@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
-import { Jumbotron, Card, Container, Row, Col, Nav, Tab, Sonnet } from "react-bootstrap";
+import { Jumbotron, Card, Container, Row, Col, Nav, Tab, Sonnet, Button } from "react-bootstrap";
 import { Context } from "../store/appContext";
 import { GameCard } from "../component/gameCard";
 import PropTypes from "prop-types";
@@ -61,6 +61,9 @@ export const GameDetails = props => {
 									</Nav.Item>
 									<Nav.Item>
 										<Nav.Link eventKey="media">Media</Nav.Link>
+									</Nav.Item>
+									<Nav.Item>
+										<Button onClick={() => actions.backlogAdd()}>Add to Backlog</Button>
 									</Nav.Item>
 								</Row>
 							</Nav>
