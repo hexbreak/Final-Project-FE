@@ -1,6 +1,10 @@
 const getState = ({ getStore, getActions, setStore }) => {
+	const beURL = "https://3000-pink-quail-nf253rza.ws-us03.gitpod.io"; // Use ${beURL} to make it easier when handling the BE's constant URL changes
 	return {
 		store: {
+			user: {
+				// Login, Registration, Username, UserType, UserId, Token, Validation
+			},
 			gameList: [],
 			gameMetacriticList: [],
 			gameRatingList: [],
@@ -37,35 +41,26 @@ const getState = ({ getStore, getActions, setStore }) => {
 			exampleFunction: () => {
 				getActions().changeColor(0, "green");
 			},
-			addFavorite: newItem => {
-				var storeCopy = getStore();
-				var checkItem = storeCopy.favorites.find(value => {
-					return value == newItem;
-				});
-				if (checkItem == undefined) {
-					var newFavorites = storeCopy.favorites.concat(newItem);
-					setStore({ favorites: newFavorites });
-				}
-			},
-			loadFavoriteData: () => {
-				fetch("https://api.rawg.io/api/platforms?key=177fced3a65f46e4a1f84503a84675ad")
-					.then(function(response) {
+			// User Registration
+			registerUser: user => {
+				fetch(`${beURL}/user`, {
+					method: "POST",
+					headers: {
+						"Content-Type": "application/json"
+					},
+					body: JSON.stringify(user)
+				})
+					.then(response => {
 						if (!response.ok) {
 							throw Error(response.statusText);
 						}
-						// Read the response as json.
 						return response.json();
 					})
-					.then(function(responseAsJson) {
-						// Do stuff with the JSON
-						console.log(responseAsJson);
+					.then(response => {
+						console.log("Success:", response);
+						// setStates in here to push data to BE
 					})
-					.catch(function(error) {
-						console.log("Looks like there was a problem: \n", error);
-					});
-				/**
-					fetch().then().then(data => setStore({ "foo": data.bar }))
-                */
+					.catch(error => console.error("Error:", error));
 			},
 			changeColor: (index, color) => {
 				//get the store
