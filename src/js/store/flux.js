@@ -5,6 +5,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 			user: {
 				// Login, Registration, Username, UserType, UserId, Token, Validation
 			},
+			backlogPost: [],
+			backlogGet: [],
 			gameList: [],
 			gameMetacriticList: [],
 			gameRatingList: [],
@@ -41,9 +43,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 			exampleFunction: () => {
 				getActions().changeColor(0, "green");
 			},
-			// User Registration
+			// User Registration // incomplete code until JWT integration
 			registerUser: user => {
-				fetch(`${beURL}/user`, {
+				fetch(`${beURL}/user` + id, {
 					method: "POST",
 					headers: {
 						"Content-Type": "application/json"
@@ -58,7 +60,78 @@ const getState = ({ getStore, getActions, setStore }) => {
 					})
 					.then(response => {
 						console.log("Success:", response);
-						// setStates in here to push data to BE
+						// return setStates in here to push data to BE
+					})
+					.catch(error => console.error("Error:", error));
+			},
+			// Login Account // incomplete code until JWT integration
+			loginUser: user => {
+				fetch(`${beURL}/user/` + id, {
+					method: "POST",
+					headers: {
+						"Content-Type": "application/json"
+					},
+					body: JSON.stringify({
+						username: username,
+						password: password
+					})
+				})
+					.then(response => {
+						if (!response.ok) {
+							throw Error(response.statusText);
+						}
+						return response.json();
+					})
+					.then(response => {
+						console.log("Success:", response);
+						// return setStates in here to push data to BE
+					})
+					.catch(error => console.error("Error:", error));
+			},
+			exProfile: getUser => {
+				fetch(`${beURL}/user/1`)
+					.then(function(response) {
+						if (!response.ok) {
+							throw Error(response.statusText);
+						}
+						// Read the response as json.
+						return response.json();
+					})
+					.then(function(responseAsJson) {
+						// Do stuff with the JSON
+						return setStore({ backlogGet: responseAsJson });
+					})
+					.catch(function(error) {
+						console.log("Looks like there was a problem: \n", error);
+					});
+			},
+			loginUser: user => {
+				fetch(`${beURL}/user/1/backlog`, {
+					method: "POST",
+					headers: {
+						"Content-Type": "application/json"
+					},
+					body: JSON.stringify({
+						game_id: game_id,
+						game_name: game_name,
+						game_platform: game_platform,
+						game_genre: game_genre,
+						game_tags: game_tags,
+						game_notes: game_notes,
+						progress_status: progress_status,
+						now_playing: now_playing
+					})
+				})
+					.then(response => {
+						if (!response.ok) {
+							throw Error(response.statusText);
+						}
+						return response.json();
+					})
+					.then(response => {
+						console.log("Success:", response);
+						// Do stuff with the JSON
+						return setStore({ backlogPost: responseAsJson });
 					})
 					.catch(error => console.error("Error:", error));
 			},
