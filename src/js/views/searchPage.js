@@ -37,7 +37,9 @@ export const SearchPage = props => {
 	useEffect(() => {
 		let sort = "";
 		const realSearch = () => {
-			setGameName(props.location.state);
+			if (props.location.state != undefined) {
+				setGameName(props.location.state);
+			}
 			if (inverted == true) {
 				sort = `-${sortKey}`;
 			} else {
