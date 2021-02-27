@@ -3,7 +3,44 @@ const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
 			user: {
-				// Login, Registration, Username, UserType, UserId, Token, Validation
+				// Login, Registration, Username, UserType, UserId, Token, Validation\
+				username: "99lalo",
+				password: "5468",
+				id: "1",
+				about: "I'm one the founders of this proyect, and love videogames",
+				image: "https://cdn.pixabay.com/photo/2017/08/15/08/23/galaxy-2643089_960_720.jpg",
+				favorites: [
+					{ name: "The Elder Scrolls V: Skyrim", id: "5679" },
+					{ name: "Terraria", id: "422" },
+					{ name: "The Binding of Isaac: Afterbirth+", id: "23742" }
+				],
+				platforms: [
+					{ name: "PC", id: "4" },
+					{ name: "Playstation 4", id: "18" },
+					{ name: "Nintendo Switch", id: "7" }
+				],
+				game_progression: {
+					"4": {
+						started: { name: "Skul: The Hero Slayer", id: "412477" },
+						finished: { name: "Warhammer: Vermintide 2", id: "45969" },
+						completed: { name: "Terraria", id: "422" }
+					},
+					"18": {
+						started: { name: "God of War", id: "58175" },
+						finished: null,
+						completed: { name: "Borderlands 3", id: "58617" }
+					},
+					"7": {
+						started: { name: "Super Mario Odyssey", id: "28026" },
+						finished: { name: "Cuphead", id: "28154" },
+						completed: { name: "Super Smash Bros. Ultimate", id: "58829" }
+					}
+				},
+				playing: [
+					{ name: "Curse of the Dead Gods", id: "387328", notes: "2 Stages Cleared!" },
+					{ name: "Minecraft", id: "22509", notes: "Looking for Nether Fortress" }
+				],
+				tags: { liked: [{ id: "31", name: "Singleplayer" }], disliked: [{ id: "7", name: "Multiplayer" }] }
 			},
 			backlogPost: [],
 			backlogGet: [],

@@ -6,9 +6,16 @@ import PropTypes from "prop-types";
 
 export const GameCard = props => {
 	const { store, actions } = useContext(Context);
+	let preference = store.user.tags.liked.forEach((value, index) => {
+		props.game.tags.forEach(tag => {
+			if (tag.id == value.id) {
+				return "success";
+			}
+		});
+	});
 	return (
 		<Link to={{ pathname: `/details/${props.game.id}`, state: props.game.id }}>
-			<Card className="bg-dark text-white">
+			<Card className="bg-dark text-white" border={preference != null && preference}>
 				<Card.Img
 					src={
 						props.game.background_image != null

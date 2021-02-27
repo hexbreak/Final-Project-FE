@@ -31,15 +31,15 @@ export const SearchPage = props => {
 			actions.loadTags("40");
 			actions.loadGenres("40");
 			actions.loadPlatforms("50");
+			if (props.location.state != undefined) {
+				setGameName(props.location.state);
+			}
 		};
 		loadSearch();
 	}, []);
 	useEffect(() => {
 		let sort = "";
 		const realSearch = () => {
-			if (props.location.state != undefined) {
-				setGameName(props.location.state);
-			}
 			if (inverted == true) {
 				sort = `-${sortKey}`;
 			} else {

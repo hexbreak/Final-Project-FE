@@ -1,23 +1,29 @@
 import React, { useState, useEffect, useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { Context } from "../store/appContext";
+import { Card, Container, Row, Col, Dropdown, DropdownButton, Button, ListGroup } from "react-bootstrap";
 import PropTypes from "prop-types";
 
 export const UserFavoriteList = props => {
 	const { store, actions } = useContext(Context);
+	let history = useHistory();
 	return (
-		<div className="container">
-			<div className="d-flex mx-auto justify-content-center">
-				<div className="card">
-					<input />
-					<ul className="list-group list-group-flush custom-fav-list">
-						<li className="custom-fav-list">One.</li>
-						<li className="custom-fav-list">Two..</li>
-						<li className="custom-fav-list">Three!</li>
-					</ul>
-				</div>
-			</div>
-		</div>
+		<Card bg="dark" style={{ width: "18rem" }}>
+			<Card.Header>Favorites</Card.Header>
+			<ListGroup variant="flush dark">
+				{store.user.favorites.map((value, index) => {
+					return (
+						<ListGroup.Item variant="dark" key={index}>
+							<span
+								onClick={e => history.push({ pathname: `/details/${value.id}`, state: value.id })}
+								style={{ cursor: "pointer" }}>
+								{value.name}
+							</span>
+						</ListGroup.Item>
+					);
+				})}
+			</ListGroup>
+		</Card>
 	);
 };
 
