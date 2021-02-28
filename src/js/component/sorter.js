@@ -14,6 +14,13 @@ export const Sorter = props => {
 				onClick={props.inverted == false ? e => props.setInverted(true) : e => props.setInverted(false)}>
 				{props.inverted == false ? <i className="fas fa-sort-up"></i> : <i className="fas fa-sort-down"></i>}
 			</Button>
+			<Button variant="secondary" onClick={e => actions.changePreference()}>
+				{store.user.preference == false ? (
+					<i className="fas fa-chess-pawn" />
+				) : (
+					<i className="fas fa-chess-king" />
+				)}
+			</Button>
 			<DropdownButton variant="dark" title={props.sortKey.charAt(0).toUpperCase() + props.sortKey.slice(1)}>
 				<Dropdown.Item variant="dark" onClick={e => props.setSort("name")}>
 					Name

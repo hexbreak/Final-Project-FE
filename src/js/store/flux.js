@@ -40,7 +40,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 					{ name: "Curse of the Dead Gods", id: "387328", notes: "2 Stages Cleared!" },
 					{ name: "Minecraft", id: "22509", notes: "Looking for Nether Fortress" }
 				],
-				tags: { liked: [{ id: "31", name: "Singleplayer" }], disliked: [{ id: "7", name: "Multiplayer" }] }
+				tags: { liked: [{ id: "31", name: "Singleplayer" }], disliked: [{ id: "7", name: "Multiplayer" }] },
+				preference: true
 			},
 			backlogPost: [],
 			backlogGet: [],
@@ -493,6 +494,17 @@ const getState = ({ getStore, getActions, setStore }) => {
 					.catch(function(error) {
 						console.log("Looks like there was a problem: \n", error);
 					});
+			},
+			changePreference: () => {
+				const store = getStore();
+
+				if (store.user.preference == true) {
+					let newUser = { ...store.user, preference: false };
+					setStore({ user: newUser });
+				} else {
+					let newUser = { ...store.user, preference: true };
+					setStore({ user: newUser });
+				}
 			}
 		}
 	};
