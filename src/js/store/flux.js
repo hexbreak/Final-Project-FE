@@ -153,10 +153,10 @@ const getState = ({ getStore, getActions, setStore }) => {
 					},
 					body: JSON.stringify({
 						game_id: store.game.id,
-						game_name: store.game.name,
-						game_platform: store.game.platforms,
-						game_genre: store.game.genres,
-						game_tags: store.game.tags
+						game_name: store.game.name
+						// game_platform: store.game.platforms, use if statements to push { prop { value }} with optional choices for user
+						// game_genre: store.game.genres,
+						// game_tags: store.game.tags
 					})
 				})
 					.then(response => {
