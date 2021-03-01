@@ -10,7 +10,9 @@ export const GameCard = props => {
 		let cardBorder = null;
 		props.game.tags.forEach(value => {
 			store.user.tags.liked.forEach(tags => {
-				if (value.id == tags.id) {
+				if (value.id == tags.id && cardBorder == "danger") {
+					cardBorder = "warning";
+				} else if (value.id == tags.id) {
 					cardBorder = "success";
 				}
 			});

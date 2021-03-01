@@ -12,7 +12,7 @@ export const Sorter = props => {
 			<Button
 				variant="primary"
 				onClick={props.inverted == false ? e => props.setInverted(true) : e => props.setInverted(false)}>
-				{props.inverted == false ? <i className="fas fa-sort-up"></i> : <i className="fas fa-sort-down"></i>}
+				{props.inverted == false ? <i className="fas fa-sort-up" /> : <i className="fas fa-sort-down" />}
 			</Button>
 			<Button variant="secondary" onClick={e => actions.changePreference()}>
 				{store.user.preference == false ? (
