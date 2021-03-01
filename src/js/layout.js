@@ -7,6 +7,7 @@ import { Demo } from "./views/demo";
 import { Single } from "./views/single";
 import { GameDetails } from "./views/gameDetails";
 import { UserProfile } from "./views/userProfile";
+import { UserProfileUpdate } from "./views/userProfileUpdate";
 import injectContext from "./store/appContext";
 import { SearchPage } from "./views/searchPage";
 import { Navbar } from "./component/navbar";
@@ -36,6 +37,7 @@ const Layout = () => {
 						<Route exact path="/details/:id" component={GameDetails} />
 						<Route exact path="/search" component={SearchPage} />
 						<Route exact path="/profile" component={UserProfile} />
+						<Route exact path="/editprofile" component={UserProfileUpdate} />
 						<Route>
 							<h1>Not found!</h1>
 						</Route>

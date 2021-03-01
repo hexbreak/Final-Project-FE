@@ -6,8 +6,7 @@ import { UserNowPlaying } from "../component/userNowPlaying";
 import { UserFavoriteList } from "../component/userFavoriteList";
 import { UserBacklog } from "../component/userBacklog";
 import { UserTags } from "../component/userTags";
-import { Container, Row, Col } from "react-bootstrap";
-import { Card, CardImg, CardFooter } from "react-bootstrap";
+import { Container, Row, Col, Card, CardImg, CardFooter, Button } from "react-bootstrap";
 import PropTypes from "prop-types";
 
 export const UserProfile = props => {
@@ -38,6 +37,9 @@ export const UserProfile = props => {
 			<Row>
 				<Col md={{ span: 3, offset: 0 }}>
 					<UserAbout />
+					<Link to="/editprofile">
+						<Button variant="dark">Edit Profile</Button>
+					</Link>
 				</Col>
 				<Col md={{ span: 4, offset: 0 }}>
 					<UserBacklog />

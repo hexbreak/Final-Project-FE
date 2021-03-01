@@ -10,14 +10,14 @@ export const GameCard = props => {
 		let cardBorder = null;
 		props.game.tags.forEach(value => {
 			store.user.tags.liked.forEach(tags => {
-				if (value.id == tags.id && cardBorder == "danger") {
+				if (value.id == tags.id && cardBorder != null) {
 					cardBorder = "warning";
 				} else if (value.id == tags.id) {
 					cardBorder = "success";
 				}
 			});
 			store.user.tags.disliked.forEach(tags => {
-				if (value.id == tags.id && cardBorder == "success") {
+				if (value.id == tags.id && cardBorder != null) {
 					cardBorder = "warning";
 				} else if (value.id == tags.id) {
 					cardBorder = "danger";
