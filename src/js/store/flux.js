@@ -126,29 +126,19 @@ const getState = ({ getStore, getActions, setStore }) => {
 					})
 					.catch(error => console.error("Error:", error)); // BE RIGHT BACK <<<
 			},
-			exProfile: test => {
-				fetch(`${beURL}/user/1`)
-					.then(function(response) {
-						if (!response.ok) {
-							throw Error(response.statusText);
-						}
-						// Read the response as json.
-						return response.json();
-					})
-					.then(function(responseAsJson) {
-						// Do stuff with the JSON
-						console.log(test);
-						return setStore({ backlogGet: responseAsJson });
-					})
-					.catch(function(error) {
-						console.log("Looks like there was a problem: \n", error);
-					});
-			},
 			backlogAdd: () => {
 				const store = getStore();
 				let plat = store.game.platforms;
 				const getPlatforms = platforms => {
 					return platforms.map(plat => plat.platform.name).toString();
+				};
+				let gameTag = store.game.tags;
+				const getTags = tag => {
+					return tag.map(gameTag => gameTag.name).toString();
+				};
+				let gameGenre = store.game.genres;
+				const getGenre = genre => {
+					return genre.map(gameGenre => gameGenre.name).toString();
 				};
 				fetch(`${beURL}/user/1/backlog`, {
 					method: "POST",
@@ -159,8 +149,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 						game_id: store.game.id,
 						game_name: store.game.name,
 						game_platform: getPlatforms(plat),
-						game_genre: "genre",
-						game_tags: "tags",
+						game_genre: getGenre(gameGenre),
+						game_tags: getTags(gameTag),
 						game_notes: "notes",
 						now_playing: false,
 						progress_status: "PROGRESSING"
