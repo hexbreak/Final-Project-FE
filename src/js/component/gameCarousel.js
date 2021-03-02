@@ -7,10 +7,10 @@ import PropTypes from "prop-types";
 export const GameCarousel = () => {
 	const { store, actions } = useContext(Context);
 	return (
-		<Carousel>
+		<Carousel style={{ height: "40rem" }}>
 			{store.gameList.map((value, index) => {
 				return (
-					<Carousel.Item key={index}>
+					<Carousel.Item key={index} style={{ height: "100%", width: "100%" }}>
 						<img className="d-block w-100" src={value.background_image} alt="First slide" />
 						<Carousel.Caption>
 							<h3>{value.name}</h3>

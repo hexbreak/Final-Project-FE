@@ -20,7 +20,7 @@ import PropTypes from "prop-types";
 export const SearchPage = props => {
 	const { store, actions } = useContext(Context);
 	const [gameName, setGameName] = useState("");
-	const [sortKey, setSort] = useState("name");
+	const [sortKey, setSort] = useState("metacritic");
 	const [inverted, setInverted] = useState(true);
 	const [pagination, setPagination] = useState(1);
 	const [tags, setTags] = useState(null);
