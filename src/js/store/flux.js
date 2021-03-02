@@ -1,5 +1,5 @@
 const getState = ({ getStore, getActions, setStore }) => {
-	const beURL = "https://3000-pink-quail-nf253rza.ws-us03.gitpod.io"; // Use ${beURL} to make it easier when handling the BE's constant URL changes
+	const beURL = "https://3000-bronze-earwig-hbuagomx.ws-us03.gitpod.io"; // Use ${beURL} to make it easier when handling the BE's constant URL changes
 	return {
 		store: {
 			user: {
@@ -124,7 +124,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 						console.log("Success:", response);
 						// return setStates in here to push data to BE
 					})
-					.catch(error => console.error("Error:", error));
+					.catch(error => console.error("Error:", error)); // BE RIGHT BACK <<<
 			},
 			exProfile: test => {
 				fetch(`${beURL}/user/1`)
@@ -146,6 +146,10 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 			backlogAdd: () => {
 				const store = getStore();
+				let plat = store.game.platforms;
+				const getPlatforms = platforms => {
+					return platforms.map(plat => plat.platform.name).toString();
+				};
 				fetch(`${beURL}/user/1/backlog`, {
 					method: "POST",
 					headers: {
@@ -153,10 +157,13 @@ const getState = ({ getStore, getActions, setStore }) => {
 					},
 					body: JSON.stringify({
 						game_id: store.game.id,
-						game_name: store.game.name
-						// game_platform: store.game.platforms, use if statements to push { prop { value }} with optional choices for user
-						// game_genre: store.game.genres,
-						// game_tags: store.game.tags
+						game_name: store.game.name,
+						game_platform: getPlatforms(plat),
+						game_genre: "genre",
+						game_tags: "tags",
+						game_notes: "notes",
+						now_playing: false,
+						progress_status: "PROGRESSING"
 					})
 				})
 					.then(response => {
@@ -168,7 +175,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					.then(response => {
 						console.log("Success:", response);
 						// Do stuff with the JSON
-						return setStore({ backlogPost: responseAsJson });
+						// return setStore({ backlogPost: responseAsJson });
 					})
 					.catch(error => console.error("Error:", error));
 			},
