@@ -7,6 +7,7 @@ import PropTypes from "prop-types";
 
 export const GameDetails = props => {
 	const { store, actions } = useContext(Context);
+	console.log(store.game);
 	useEffect(() => {
 		const loadGame = () => {
 			actions.loadDlcs(props.location.state);
