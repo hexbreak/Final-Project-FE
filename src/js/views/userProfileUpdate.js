@@ -76,17 +76,147 @@ export const UserProfileUpdate = props => {
 			});
 		};
 		makeTags();
+		sortedtags.sort(function(a, b) {
+			var nameA = a.name.toUpperCase();
+			var nameB = b.name.toUpperCase();
+			if (nameA < nameB) {
+				return -1;
+			}
+			if (nameA > nameB) {
+				return 1;
+			}
+
+			return 0;
+		});
 		setTags(sortedtags);
 	}, [store.tags]);
 	const handleDisliked = tag => {
 		let array = [...disliked, tag];
-		setDisliked(array);
+		array.sort(function(a, b) {
+			var nameA = a.name.toUpperCase();
+			var nameB = b.name.toUpperCase();
+			if (nameA < nameB) {
+				return -1;
+			}
+			if (nameA > nameB) {
+				return 1;
+			}
 
+			return 0;
+		});
+		setDisliked(array);
 		array = tags.filter(value => {
 			return value.id != tag.id;
 		});
+		array.sort(function(a, b) {
+			var nameA = a.name.toUpperCase();
+			var nameB = b.name.toUpperCase();
+			if (nameA < nameB) {
+				return -1;
+			}
+			if (nameA > nameB) {
+				return 1;
+			}
+
+			return 0;
+		});
 		setTags(array);
-		console.log(tags);
+	};
+	const handleLiked = tag => {
+		let array = [...liked, tag];
+		array.sort(function(a, b) {
+			var nameA = a.name.toUpperCase();
+			var nameB = b.name.toUpperCase();
+			if (nameA < nameB) {
+				return -1;
+			}
+			if (nameA > nameB) {
+				return 1;
+			}
+
+			return 0;
+		});
+		setLiked(array);
+		array = tags.filter(value => {
+			return value.id != tag.id;
+		});
+		array.sort(function(a, b) {
+			var nameA = a.name.toUpperCase();
+			var nameB = b.name.toUpperCase();
+			if (nameA < nameB) {
+				return -1;
+			}
+			if (nameA > nameB) {
+				return 1;
+			}
+
+			return 0;
+		});
+		setTags(array);
+	};
+	const handleMiddleL = tag => {
+		let array = [...tags, tag];
+		array.sort(function(a, b) {
+			var nameA = a.name.toUpperCase();
+			var nameB = b.name.toUpperCase();
+			if (nameA < nameB) {
+				return -1;
+			}
+			if (nameA > nameB) {
+				return 1;
+			}
+
+			return 0;
+		});
+		setTags(array);
+		array = liked.filter(value => {
+			return value.id != tag.id;
+		});
+		array.sort(function(a, b) {
+			var nameA = a.name.toUpperCase();
+			var nameB = b.name.toUpperCase();
+			if (nameA < nameB) {
+				return -1;
+			}
+			if (nameA > nameB) {
+				return 1;
+			}
+
+			return 0;
+		});
+		setLiked(array);
+	};
+	const handleMiddleD = tag => {
+		let array = [...tags, tag];
+		array.sort(function(a, b) {
+			var nameA = a.name.toUpperCase();
+			var nameB = b.name.toUpperCase();
+			if (nameA < nameB) {
+				return -1;
+			}
+			if (nameA > nameB) {
+				return 1;
+			}
+
+			return 0;
+		});
+		setTags(array);
+		array = disliked.filter(value => {
+			return value.id != tag.id;
+		});
+		array.sort(function(a, b) {
+			var nameA = a.name.toUpperCase();
+			var nameB = b.name.toUpperCase();
+			if (nameA < nameB) {
+				return -1;
+			}
+			if (nameA > nameB) {
+				return 1;
+			}
+
+			return 0;
+		});
+		setDisliked(array);
 	};
 	return (
 		<Container>
@@ -359,7 +489,7 @@ export const UserProfileUpdate = props => {
 							{liked.map((value, index) => {
 								return (
 									<ListGroup.Item key={index} variant="dark">
-										{value.name}
+										{value.name} <i className="far fa-circle" onClick={e => handleMiddleL(value)} />
 									</ListGroup.Item>
 								);
 							})}
@@ -373,7 +503,8 @@ export const UserProfileUpdate = props => {
 							{tags.map((value, index) => {
 								return (
 									<ListGroup.Item key={index} variant="dark">
-										{value.name} <i className="fas fa-skull" onClick={e => handleDisliked(value)} />
+										{value.name} <i className="fas fa-trophy" onClick={e => handleLiked(value)} />{" "}
+										<i className="fas fa-skull" onClick={e => handleDisliked(value)} />
 									</ListGroup.Item>
 								);
 							})}
@@ -387,7 +518,7 @@ export const UserProfileUpdate = props => {
 							{disliked.map((value, index) => {
 								return (
 									<ListGroup.Item key={index} variant="dark">
-										{value.name}
+										{value.name} <i className="far fa-circle" onClick={e => handleMiddleD(value)} />
 									</ListGroup.Item>
 								);
 							})}
