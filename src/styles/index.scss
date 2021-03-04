@@ -18,7 +18,7 @@
     flex: 0 0 auto;
 }
 body{
-    background-color: gray;
+    background-color: rgb(112, 112, 112);
     color: white;
     max-width: 100%;
     max-height: 100%;
@@ -56,10 +56,20 @@ body{
 // profile page
 .container-profile {
     max-width: 1600px;
+    background: rgb(117, 114, 114);
+    box-shadow: 0 0 20px rgba(0,0,0,0.8);
 }
 
 .card-profile {
     width: 600px;
+    border: 1px solid white;
+    background: linear-gradient(145deg, #f0f0f0, #cacaca);
+    box-shadow:  -40px 40px 80px #5f5f5f,
+             40px -40px 80px #818181;
+}
+
+.card-body {
+    background-color: rgb(75, 75, 75);
 }
 
 .user-name {
