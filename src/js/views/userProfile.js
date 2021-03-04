@@ -12,11 +12,13 @@ import PropTypes from "prop-types";
 export const UserProfile = props => {
 	const { store, actions } = useContext(Context);
 	return (
-		<Container>
+		<div className="container container-profile mt-5">
 			<div className="row row-1">
-				<div className="col col-3 mr-3">
-					<Card bg="dark">
-						<Card.Img
+				<div className="col col-">
+					<div className="card-profile">
+						<div className="user-name">{store.user.username}</div>
+						<img
+							className="profile-img"
 							src={
 								store.user.image != undefined
 									? store.user.image
@@ -24,11 +26,13 @@ export const UserProfile = props => {
 							}
 							width="100%"
 						/>
-						<Card.Footer>{store.user.username}</Card.Footer>
-					</Card>
+					</div>
 				</div>
-				<div className="col col-8">
+				<div className="col col- topcol">
 					<UserNowPlaying />
+				</div>
+				<div className="col col- topcol">
+					<UserFavoriteList />
 				</div>
 			</div>
 			<br />
@@ -40,7 +44,6 @@ export const UserProfile = props => {
 					<Link to="/editprofile">
 						<Button variant="dark">Edit Profile</Button>
 					</Link>
-					<UserFavoriteList />
 				</Col>
 				<Col md={{ span: 4, offset: 0 }}>
 					<UserBacklog />
@@ -54,6 +57,6 @@ export const UserProfile = props => {
 					<UserTags />
 				</Col>
 			</div>
-		</Container>
+		</div>
 	);
 };
