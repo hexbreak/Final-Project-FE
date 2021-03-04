@@ -41,6 +41,21 @@ export const UserProfileUpdate = props => {
 		};
 		loadSearch();
 	}, []);
+	const sort = array => {
+		array.sort(function(a, b) {
+			var nameA = a.name.toUpperCase();
+			var nameB = b.name.toUpperCase();
+			if (nameA < nameB) {
+				return -1;
+			}
+			if (nameA > nameB) {
+				return 1;
+			}
+
+			return 0;
+		});
+		return array;
+	};
 	const handleLook = gameName => {
 		setIsLooking(gameName);
 		fetch(`https://api.rawg.io/api/games?search=${gameName}&page_size=6`)
@@ -76,146 +91,47 @@ export const UserProfileUpdate = props => {
 			});
 		};
 		makeTags();
-		sortedtags.sort(function(a, b) {
-			var nameA = a.name.toUpperCase();
-			var nameB = b.name.toUpperCase();
-			if (nameA < nameB) {
-				return -1;
-			}
-			if (nameA > nameB) {
-				return 1;
-			}
-
-			return 0;
-		});
+		sortedtags = sort(sortedtags);
 		setTags(sortedtags);
 	}, [store.tags]);
 	const handleDisliked = tag => {
 		let array = [...disliked, tag];
-		array.sort(function(a, b) {
-			var nameA = a.name.toUpperCase();
-			var nameB = b.name.toUpperCase();
-			if (nameA < nameB) {
-				return -1;
-			}
-			if (nameA > nameB) {
-				return 1;
-			}
-
-			return 0;
-		});
+		array = sort(array);
 		setDisliked(array);
 		array = tags.filter(value => {
 			return value.id != tag.id;
 		});
-		array.sort(function(a, b) {
-			var nameA = a.name.toUpperCase();
-			var nameB = b.name.toUpperCase();
-			if (nameA < nameB) {
-				return -1;
-			}
-			if (nameA > nameB) {
-				return 1;
-			}
-
-			return 0;
-		});
+		array = sort(array);
 		setTags(array);
 	};
 	const handleLiked = tag => {
 		let array = [...liked, tag];
-		array.sort(function(a, b) {
-			var nameA = a.name.toUpperCase();
-			var nameB = b.name.toUpperCase();
-			if (nameA < nameB) {
-				return -1;
-			}
-			if (nameA > nameB) {
-				return 1;
-			}
-
-			return 0;
-		});
+		array = sort(array);
 		setLiked(array);
 		array = tags.filter(value => {
 			return value.id != tag.id;
 		});
-		array.sort(function(a, b) {
-			var nameA = a.name.toUpperCase();
-			var nameB = b.name.toUpperCase();
-			if (nameA < nameB) {
-				return -1;
-			}
-			if (nameA > nameB) {
-				return 1;
-			}
-
-			return 0;
-		});
+		array = sort(array);
 		setTags(array);
 	};
 	const handleMiddleL = tag => {
 		let array = [...tags, tag];
-		array.sort(function(a, b) {
-			var nameA = a.name.toUpperCase();
-			var nameB = b.name.toUpperCase();
-			if (nameA < nameB) {
-				return -1;
-			}
-			if (nameA > nameB) {
-				return 1;
-			}
-
-			return 0;
-		});
+		array = sort(array);
 		setTags(array);
 		array = liked.filter(value => {
 			return value.id != tag.id;
 		});
-		array.sort(function(a, b) {
-			var nameA = a.name.toUpperCase();
-			var nameB = b.name.toUpperCase();
-			if (nameA < nameB) {
-				return -1;
-			}
-			if (nameA > nameB) {
-				return 1;
-			}
-
-			return 0;
-		});
+		array = sort(array);
 		setLiked(array);
 	};
 	const handleMiddleD = tag => {
 		let array = [...tags, tag];
-		array.sort(function(a, b) {
-			var nameA = a.name.toUpperCase();
-			var nameB = b.name.toUpperCase();
-			if (nameA < nameB) {
-				return -1;
-			}
-			if (nameA > nameB) {
-				return 1;
-			}
-
-			return 0;
-		});
+		array = sort(array);
 		setTags(array);
 		array = disliked.filter(value => {
 			return value.id != tag.id;
 		});
-		array.sort(function(a, b) {
-			var nameA = a.name.toUpperCase();
-			var nameB = b.name.toUpperCase();
-			if (nameA < nameB) {
-				return -1;
-			}
-			if (nameA > nameB) {
-				return 1;
-			}
-
-			return 0;
-		});
+		array = sort(array);
 		setDisliked(array);
 	};
 	return (
