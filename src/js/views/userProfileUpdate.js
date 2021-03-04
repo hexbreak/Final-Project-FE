@@ -16,7 +16,8 @@ import {
 	Form,
 	Dropdown,
 	DropdownButton,
-	FormControl
+	FormControl,
+	ListGroup
 } from "react-bootstrap";
 import PropTypes from "prop-types";
 
@@ -30,6 +31,9 @@ export const UserProfileUpdate = props => {
 	const [playing3, setPlaying3] = useState(store.user.playing[2]);
 	const [isShowing, setIsShowing] = useState("");
 	const [gamesFound, setGamesFound] = useState("");
+	const [tags, setTags] = useState([]);
+	const [liked, setLiked] = useState(store.user.tags.liked);
+	const [disliked, setDisliked] = useState(store.user.tags.disliked);
 	useEffect(() => {
 		const loadSearch = () => {
 			actions.loadTags("40");
@@ -54,6 +58,35 @@ export const UserProfileUpdate = props => {
 			.catch(function(error) {
 				console.log("Looks like there was a problem: \n", error);
 			});
+	};
+	useEffect(() => {
+		let sortedtags = [];
+		const makeTags = () => {
+			sortedtags = [];
+			store.tags.forEach((value, index) => {
+				disliked.forEach(disliked => {
+					liked.forEach(liked => {
+						if (value.id != disliked.id && value.id != liked.id) {
+							if (!!value) {
+								sortedtags.push({ id: value.id, name: value.name });
+							}
+						}
+					});
+				});
+			});
+		};
+		makeTags();
+		setTags(sortedtags);
+	}, [store.tags]);
+	const handleDisliked = tag => {
+		let array = [...disliked, tag];
+		setDisliked(array);
+
+		array = tags.filter(value => {
+			return value.id != tag.id;
+		});
+		setTags(array);
+		console.log(tags);
 	};
 	return (
 		<Container>
@@ -317,6 +350,50 @@ export const UserProfileUpdate = props => {
 						</Form>
 					</Card.Body>
 				</Card>
+			</Row>
+			<Row>
+				<Col>
+					<Card bg="dark" style={{ width: "18rem", float: "left" }}>
+						<Card.Header>Liked</Card.Header>
+						<ListGroup variant="flush">
+							{liked.map((value, index) => {
+								return (
+									<ListGroup.Item key={index} variant="dark">
+										{value.name}
+									</ListGroup.Item>
+								);
+							})}
+						</ListGroup>
+					</Card>
+				</Col>
+				<Col>
+					<Card bg="dark" style={{ width: "18rem", float: "left" }}>
+						<Card.Header>Tags</Card.Header>
+						<ListGroup variant="flush">
+							{tags.map((value, index) => {
+								return (
+									<ListGroup.Item key={index} variant="dark">
+										{value.name} <i className="fas fa-skull" onClick={e => handleDisliked(value)} />
+									</ListGroup.Item>
+								);
+							})}
+						</ListGroup>
+					</Card>
+				</Col>
+				<Col>
+					<Card bg="dark" style={{ width: "18rem", float: "left" }}>
+						<Card.Header>Disliked</Card.Header>
+						<ListGroup variant="flush">
+							{disliked.map((value, index) => {
+								return (
+									<ListGroup.Item key={index} variant="dark">
+										{value.name}
+									</ListGroup.Item>
+								);
+							})}
+						</ListGroup>
+					</Card>
+				</Col>
 			</Row>
 		</Container>
 	);

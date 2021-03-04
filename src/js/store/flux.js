@@ -41,7 +41,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					{ name: "Minecraft", id: "22509", notes: "Looking for Nether Fortress" },
 					null
 				],
-				tags: { liked: [{ id: "31", name: "Singleplayer" }], disliked: [{ id: "7", name: "Multiplayer" }] },
+				tags: { liked: [{ id: 31, name: "Singleplayer" }], disliked: [{ id: 7, name: "Multiplayer" }] },
 				preference: true
 			},
 			backlogPost: [],
