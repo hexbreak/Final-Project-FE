@@ -6,11 +6,45 @@ import { UserNowPlaying } from "../component/userNowPlaying";
 import { UserFavoriteList } from "../component/userFavoriteList";
 import { UserBacklog } from "../component/userBacklog";
 import { UserTags } from "../component/userTags";
-import { Container, Row, Col, Card, CardImg, CardFooter, Form } from "react-bootstrap";
+import {
+	Container,
+	Row,
+	Col,
+	Card,
+	CardImg,
+	CardFooter,
+	Form,
+	Dropdown,
+	DropdownButton,
+	FormControl
+} from "react-bootstrap";
 import PropTypes from "prop-types";
 
 export const UserProfileUpdate = props => {
 	const { store, actions } = useContext(Context);
+	const [platform1, setPlatform1] = useState(store.user.platforms[0]);
+	const [platform2, setPlatform2] = useState(store.user.platforms[1]);
+	const [platform3, setPlatform3] = useState(store.user.platforms[2]);
+	const [isNowPlaying1, setIsNowPlaying1] = useState(store.user.playing[0]);
+	const [isNowPlaying2, setIsNowPlaying2] = useState(store.user.playing[1]);
+	const [isNowPlaying3, setIsNowPlaying3] = useState(store.user.playing[2]);
+	const [isNowLooking1, setIsNowLooking1] = useState("");
+	const [isNowLooking2, setIsNowLooking2] = useState("");
+	const [isNowLooking3, setIsNowLooking3] = useState("");
+	var gamesFound1 = null;
+	var gamesFound2 = null;
+	var gamesFound3 = null;
+	useEffect(() => {
+		const loadSearch = () => {
+			actions.loadTags("40");
+			actions.loadPlatforms("50");
+		};
+		loadSearch();
+	}, []);
+	const handleLook1 = gameName => {
+		setIsNowLooking1(gameName);
+		return (gamesFound1 = actions.looking(gameName));
+	};
 	return (
 		<Container>
 			<Row>
@@ -54,14 +88,19 @@ export const UserProfileUpdate = props => {
 					<Card.Body>
 						<Form>
 							<Form.Row>
-								<Form.Group as={Col} controlId="formGridEmail">
-									<Form.Label>Game</Form.Label>
-									<Form.Control
-										type="text"
-										placeholder="Game name..."
-										value={store.user.playing[0] != null ? store.user.playing[0].name : null}
-									/>
-								</Form.Group>
+								<Dropdown>
+									<Dropdown.Toggle variant="secondary" id="dropdown-basic">
+										{isNowPlaying1.name}
+									</Dropdown.Toggle>
+
+									<Dropdown.Menu>
+										<Dropdown.Item></Dropdown.Item>
+										{gamesFound1 != null &&
+											gamesFound1.map((value, index) => {
+												return <Dropdown.Item key={index}>{Action}</Dropdown.Item>;
+											})}
+									</Dropdown.Menu>
+								</Dropdown>
 
 								<Form.Group as={Col} controlId="formGridPassword">
 									<Form.Label>Notes</Form.Label>
@@ -78,7 +117,7 @@ export const UserProfileUpdate = props => {
 									<Form.Control
 										type="text"
 										placeholder="Game name..."
-										value={store.user.playing[1] != null ? store.user.playing[1].name : null}
+										value={isNowPlaying2.name != undefined ? isNowPlaying2.name : null}
 									/>
 								</Form.Group>
 
@@ -125,33 +164,81 @@ export const UserProfileUpdate = props => {
 								<Form.Row>
 									<Form.Group as={Col} controlId="formGridEmail">
 										<Form.Label>Plaftform 1</Form.Label>
-										<Form.Control
-											type="text"
-											placeholder="Platform you own"
-											value={
-												store.user.platforms[0] != null ? store.user.platforms[0].name : null
-											}
-										/>
+										<DropdownButton
+											id="dropdown-basic-button"
+											variant="secondary"
+											title={platform1.name}>
+											{store.platforms[0] != undefined &&
+												store.platforms.map((value, index) => {
+													if (
+														value.name != platform1.name &&
+														value.name != platform2.name &&
+														value.name != platform3.name
+													) {
+														return (
+															<Dropdown.Item
+																key={index}
+																onClick={e =>
+																	setPlatform1({ id: value.id, name: value.name })
+																}>
+																{value.name}
+															</Dropdown.Item>
+														);
+													}
+												})}
+										</DropdownButton>
 									</Form.Group>
 									<Form.Group as={Col} controlId="formGridPassword">
 										<Form.Label>Plaftform 2</Form.Label>
-										<Form.Control
-											type="text"
-											placeholder="Platform you own"
-											value={
-												store.user.platforms[1] != null ? store.user.platforms[1].name : null
-											}
-										/>
+										<DropdownButton
+											id="dropdown-basic-button"
+											variant="secondary"
+											title={platform2.name}>
+											{store.platforms[0] != undefined &&
+												store.platforms.map((value, index) => {
+													if (
+														value.name != platform1.name &&
+														value.name != platform2.name &&
+														value.name != platform3.name
+													) {
+														return (
+															<Dropdown.Item
+																key={index}
+																onClick={e =>
+																	setPlatform2({ id: value.id, name: value.name })
+																}>
+																{value.name}
+															</Dropdown.Item>
+														);
+													}
+												})}
+										</DropdownButton>
 									</Form.Group>
 									<Form.Group as={Col} controlId="formGridEmail">
 										<Form.Label>Plaftform 3</Form.Label>
-										<Form.Control
-											type="text"
-											placeholder="Platform you own"
-											value={
-												store.user.platforms[2] != null ? store.user.platforms[2].name : null
-											}
-										/>
+										<DropdownButton
+											id="dropdown-basic-button"
+											variant="secondary"
+											title={platform3.name}>
+											{store.platforms[0] != undefined &&
+												store.platforms.map((value, index) => {
+													if (
+														value.name != platform1.name &&
+														value.name != platform2.name &&
+														value.name != platform3.name
+													) {
+														return (
+															<Dropdown.Item
+																key={index}
+																onClick={e =>
+																	setPlatform3({ id: value.id, name: value.name })
+																}>
+																{value.name}
+															</Dropdown.Item>
+														);
+													}
+												})}
+										</DropdownButton>
 									</Form.Group>
 								</Form.Row>
 							</Form>

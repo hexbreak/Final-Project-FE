@@ -11,16 +11,18 @@ export const UserNowPlaying = () => {
 			<Card.Header>Is now playing!</Card.Header>
 			<ListGroup variant="flush">
 				{store.user.playing.map((value, index) => {
-					return (
-						<ListGroup.Item key={index} variant="dark">
-							<span
-								style={{ cursor: "pointer", float: "left" }}
-								onClick={e => history.push({ pathname: `/details/${value.id}`, state: value.id })}>
-								{value.name}
-							</span>
-							<span style={{ float: "right" }}>{value.notes}</span>
-						</ListGroup.Item>
-					);
+					if (value != null) {
+						return (
+							<ListGroup.Item key={index} variant="dark">
+								<span
+									style={{ cursor: "pointer", float: "left" }}
+									onClick={e => history.push({ pathname: `/details/${value.id}`, state: value.id })}>
+									{value.name}
+								</span>
+								<span style={{ float: "right" }}>{value.notes}</span>
+							</ListGroup.Item>
+						);
+					}
 				})}
 			</ListGroup>
 		</Card>

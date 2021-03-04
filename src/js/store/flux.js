@@ -17,7 +17,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				],
 				platforms: [
 					{ name: "PC", id: "4" },
-					{ name: "Playstation 4", id: "18" },
+					{ name: "PlayStation 4", id: "18" },
 					{ name: "Nintendo Switch", id: "7" }
 				],
 				game_progression: {
@@ -39,7 +39,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 				},
 				playing: [
 					{ name: "Curse of the Dead Gods", id: "387328", notes: "2 Stages Cleared!" },
-					{ name: "Minecraft", id: "22509", notes: "Looking for Nether Fortress" }
+					{ name: "Minecraft", id: "22509", notes: "Looking for Nether Fortress" },
+					null
 				],
 				tags: { liked: [{ id: "31", name: "Singleplayer" }], disliked: [{ id: "7", name: "Multiplayer" }] },
 				preference: true
@@ -64,6 +65,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			addedByPlayers: [],
 			searchBar: [],
 			superSearch: [],
+			found: [],
 			demo: [
 				{
 					title: "FIRST",
@@ -495,7 +497,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 			changePreference: () => {
 				const store = getStore();
-
 				if (store.user.preference == true) {
 					let newUser = { ...store.user, preference: false };
 					setStore({ user: newUser });
@@ -503,6 +504,23 @@ const getState = ({ getStore, getActions, setStore }) => {
 					let newUser = { ...store.user, preference: true };
 					setStore({ user: newUser });
 				}
+			},
+			looking: gameName => {
+				fetch(`https://api.rawg.io/api/games?search=${gameName}&page_size=6`)
+					.then(function(response) {
+						if (!response.ok) {
+							throw Error(response.statusText);
+						}
+						// Read the response as json.
+						return response.json();
+					})
+					.then(function(responseAsJson) {
+						// Do stuff with the JSON
+						return setStore({ found: responseAsJson.results });
+					})
+					.catch(function(error) {
+						console.log("Looks like there was a problem: \n", error);
+					});
 			}
 		}
 	};
