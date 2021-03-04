@@ -12,11 +12,13 @@ import PropTypes from "prop-types";
 export const UserProfile = props => {
 	const { store, actions } = useContext(Context);
 	return (
-		<Container>
-			<Row>
-				<Col md={{ span: 3, offset: 0 }}>
-					<Card bg="dark">
-						<Card.Img
+		<div className="container container-profile mt-5">
+			<div className="row row-1">
+				<div className="col col-">
+					<div className="card-profile">
+						<div className="user-name">{store.user.username}</div>
+						<img
+							className="profile-img"
 							src={
 								store.user.image != undefined
 									? store.user.image
@@ -24,17 +26,19 @@ export const UserProfile = props => {
 							}
 							width="100%"
 						/>
-						<Card.Footer>{store.user.username}</Card.Footer>
-					</Card>
-				</Col>
-				<Col md={{ span: 8, offset: 1 }}>
+					</div>
+				</div>
+				<div className="col col- topcol">
 					<UserNowPlaying />
-				</Col>
-			</Row>
+				</div>
+				<div className="col col- topcol">
+					<UserFavoriteList />
+				</div>
+			</div>
 			<br />
 			<br />
 			<br />
-			<Row>
+			<div className="row row-two">
 				<Col md={{ span: 3, offset: 0 }}>
 					<UserAbout />
 					<Link to="/editprofile">
@@ -44,15 +48,15 @@ export const UserProfile = props => {
 				<Col md={{ span: 4, offset: 0 }}>
 					<UserBacklog />
 				</Col>
-				<Col md={{ span: 4, offset: 1 }}>
-					<UserFavoriteList />
-				</Col>
-			</Row>
-			<Row>
+			</div>
+			<br />
+			<br />
+			<br />
+			<div className="row row-three">
 				<Col>
 					<UserTags />
 				</Col>
-			</Row>
-		</Container>
+			</div>
+		</div>
 	);
 };
