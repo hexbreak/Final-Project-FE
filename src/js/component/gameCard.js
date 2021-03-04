@@ -28,8 +28,11 @@ export const GameCard = props => {
 	};
 	return (
 		<Link to={{ pathname: `/details/${props.game.id}`, state: props.game.id }}>
-			<Card className="bg-dark text-white" border={store.user.preference == true && makeBorders()}>
+			<Card
+				className="bg-dark rounded-3 mr-3 ml-3 text-white"
+				border={store.user.preference == true && makeBorders()}>
 				<Card.Img
+					className="card-img"
 					src={
 						props.game.background_image != null
 							? props.game.background_image

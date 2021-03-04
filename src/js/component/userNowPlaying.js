@@ -7,7 +7,7 @@ export const UserNowPlaying = () => {
 	const { store, actions } = useContext(Context);
 	let history = useHistory();
 	return (
-		<Card bg="dark" style={{ width: "30rem" }}>
+		<Card bg="dark" style={{ width: "50rem" }}>
 			<Card.Header>Is now playing!</Card.Header>
 			<ListGroup variant="flush">
 				{store.user.playing.map((value, index) => {

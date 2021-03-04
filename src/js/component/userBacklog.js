@@ -9,7 +9,7 @@ export const UserBacklog = () => {
 	return (
 		<Container>
 			<h6>Highlights</h6>
-			<Table striped bordered hover variant="dark">
+			<Table striped bordered hover variant="dark" style={{ width: "50rem" }}>
 				<thead>
 					<tr>
 						<th>Platform</th>

@@ -13,8 +13,8 @@ export const UserProfile = props => {
 	const { store, actions } = useContext(Context);
 	return (
 		<Container>
-			<Row>
-				<Col md={{ span: 3, offset: 0 }}>
+			<div className="row row-1">
+				<div className="col col-3 mr-3">
 					<Card bg="dark">
 						<Card.Img
 							src={
@@ -26,33 +26,34 @@ export const UserProfile = props => {
 						/>
 						<Card.Footer>{store.user.username}</Card.Footer>
 					</Card>
-				</Col>
-				<Col md={{ span: 8, offset: 1 }}>
+				</div>
+				<div className="col col-8">
 					<UserNowPlaying />
-				</Col>
-			</Row>
+				</div>
+			</div>
 			<br />
 			<br />
 			<br />
-			<Row>
+			<div className="row row-two">
 				<Col md={{ span: 3, offset: 0 }}>
 					<UserAbout />
 					<Link to="/editprofile">
 						<Button variant="dark">Edit Profile</Button>
 					</Link>
+					<UserFavoriteList />
 				</Col>
 				<Col md={{ span: 4, offset: 0 }}>
 					<UserBacklog />
 				</Col>
-				<Col md={{ span: 4, offset: 1 }}>
-					<UserFavoriteList />
-				</Col>
-			</Row>
-			<Row>
+			</div>
+			<br />
+			<br />
+			<br />
+			<div className="row row-three">
 				<Col>
 					<UserTags />
 				</Col>
-			</Row>
+			</div>
 		</Container>
 	);
 };

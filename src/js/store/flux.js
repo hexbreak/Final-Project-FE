@@ -7,7 +7,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 				username: "99lalo",
 				password: "5468",
 				id: "1",
-				about: "I'm one the founders of this proyect, and love videogames",
+				about:
+					"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam tincidunt molestie magna, at malesuada diam blandit in. Praesent elementum mi eget pellentesque porta. Mauris quis mi nulla. Nullam odio mi.",
 				image: "https://cdn.pixabay.com/photo/2017/08/15/08/23/galaxy-2643089_960_720.jpg",
 				favorites: [
 					{ name: "The Elder Scrolls V: Skyrim", id: "5679" },
@@ -128,9 +129,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 			backlogAdd: () => {
 				const store = getStore();
-				let plat = store.game.platforms;
+				let gamePlat = store.game.platforms;
 				const getPlatforms = platforms => {
-					return platforms.map(plat => plat.platform.name).toString();
+					return platforms.map(gamePlat => gamePlat.platform.name).toString();
 				};
 				let gameTag = store.game.tags;
 				const getTags = tag => {
@@ -148,7 +149,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					body: JSON.stringify({
 						game_id: store.game.id,
 						game_name: store.game.name,
-						game_platform: getPlatforms(plat),
+						game_platform: getPlatforms(gamePlat),
 						game_genre: getGenre(gameGenre),
 						game_tags: getTags(gameTag),
 						game_notes: "notes",
