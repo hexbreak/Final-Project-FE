@@ -363,36 +363,20 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 			loadSuperSearch: (gameName, pagination, genres, tags, sort, platforms) => {
 				let get = `https://api.rawg.io/api/games`;
-				if (gameName != "" && get[29] != "?") {
-					get += `?search=${gameName}`;
-				} else if (gameName != "") {
-					get += `&search=${gameName}`;
+				let filters = {
+					search: gameName,
+					page: pagination,
+					genres: genres,
+					tags: tags,
+					ordering: sort,
+					platforms: platforms
+				};
+				for (let filter in filters) {
+					if (!!filters[filter]) {
+						get += `&${filter}=${filters[filter]}`;
+					}
 				}
-				if (pagination != null && get[29] != "?") {
-					get += `?page=${pagination}`;
-				} else if (pagination != null) {
-					get += `&page=${pagination}`;
-				}
-				if (genres != null && get[29] != "?") {
-					get += `?genres=${genres}`;
-				} else if (genres != null) {
-					get += `&genres=${genres}`;
-				}
-				if (tags != null && get[29] != "?") {
-					get += `?tags=${tags}`;
-				} else if (tags != null) {
-					get += `&tags=${tags}`;
-				}
-				if (sort != null && get[29] != "?") {
-					get += `?ordering=${sort}`;
-				} else if (sort != null) {
-					get += `&ordering=${sort}`;
-				}
-				if (platforms != null && get[29] != "?") {
-					get += `?platforms=${platforms}`;
-				} else if (platforms != null) {
-					get += `&platforms=${platforms}`;
-				}
+				get = get.replace("&", "?");
 				fetch(get)
 					.then(function(response) {
 						if (!response.ok) {
