@@ -17,23 +17,29 @@ import {
 	Dropdown,
 	DropdownButton,
 	FormControl,
-	ListGroup
+	ListGroup,
+	Button
 } from "react-bootstrap";
 import PropTypes from "prop-types";
 
 export const UserProfileUpdate = props => {
 	const { store, actions } = useContext(Context);
+	const [about, setAbout] = useState(store.user.about);
 	const [platform1, setPlatform1] = useState(store.user.platforms[0]);
 	const [platform2, setPlatform2] = useState(store.user.platforms[1]);
 	const [platform3, setPlatform3] = useState(store.user.platforms[2]);
+	const [platforms, setPlatforms] = useState({ platform1, platform2, platform3 });
 	const [playing1, setPlaying1] = useState(store.user.playing[0]);
 	const [playing2, setPlaying2] = useState(store.user.playing[1]);
 	const [playing3, setPlaying3] = useState(store.user.playing[2]);
-	const [isShowing, setIsShowing] = useState("");
 	const [gamesFound, setGamesFound] = useState("");
+	const [isLooking, setIsLooking] = useState("");
 	const [tags, setTags] = useState([]);
 	const [liked, setLiked] = useState(store.user.tags.liked);
 	const [disliked, setDisliked] = useState(store.user.tags.disliked);
+	useEffect(() => {
+		setPlatforms({ platform1, platform2, platform3 });
+	}, [platform1, platform2, platform3]);
 	useEffect(() => {
 		const loadSearch = () => {
 			actions.loadTags("40");
@@ -73,6 +79,18 @@ export const UserProfileUpdate = props => {
 			.catch(function(error) {
 				console.log("Looks like there was a problem: \n", error);
 			});
+	};
+	const handleSave = () => {
+		var user = {
+			...store.user,
+			password: store.user.password,
+			about: about,
+			image: store.user.image,
+			platforms: [platform1, platform2, platform3],
+			playing: [playing1, playing2, playing3],
+			tags: { liked: liked, disliked: disliked }
+		};
+		actions.handleSave(user);
 	};
 	useEffect(() => {
 		let sortedtags = [];
@@ -165,7 +183,8 @@ export const UserProfileUpdate = props => {
 									<Form.Control
 										type="text"
 										placeholder="About user..."
-										defaultValue={store.user.about}
+										defaultValue={about}
+										onChange={e => setAbout(e.target.value)}
 									/>
 								</Form.Group>
 							</Form.Row>
@@ -181,67 +200,128 @@ export const UserProfileUpdate = props => {
 					<Card.Body>
 						<Form>
 							<Form.Row>
-								<Dropdown>
-									<Dropdown.Toggle
-										variant="secondary"
-										id="dropdown-basic"
-										onClick={e => setIsShowing("1")}>
-										{playing1.name}
-									</Dropdown.Toggle>
-
-									{isShowing == "1" && (
+								<Form.Group as={Col} controlId="formGridEmail">
+									<Form.Label>Game</Form.Label>
+									<Dropdown>
+										<Dropdown.Toggle variant="secondary" id="dropdown-basic">
+											{!!playing1 ? playing1.name : "Select Game"}
+										</Dropdown.Toggle>
 										<Dropdown.Menu>
-											<Form.Control type="text" placeholder="About user..." />
-											{/* {gamesFound != null &&
+											<Form.Control
+												type="text"
+												placeholder="Game name..."
+												onChange={e => handleLook(e.target.value)}
+											/>
+											{!!gamesFound &&
 												gamesFound.map((value, index) => {
-													return <Dropdown.Item key={index}>{value.name}</Dropdown.Item>;
-												})} */}
+													return (
+														<Dropdown.Item
+															key={index}
+															onClick={e =>
+																setPlaying1({
+																	...playing1,
+																	name: value.name,
+																	id: value.id
+																})
+															}>
+															{value.name}
+														</Dropdown.Item>
+													);
+												})}
 										</Dropdown.Menu>
-									)}
-								</Dropdown>
-
+									</Dropdown>
+								</Form.Group>
 								<Form.Group as={Col} controlId="formGridPassword">
 									<Form.Label>Notes</Form.Label>
 									<Form.Control
 										type="text"
 										placeholder="Something about the game"
-										defaultValue={store.user.playing[0] != null ? store.user.playing[0].notes : ""}
+										defaultValue={playing1 != null ? playing1.notes : ""}
+										onChange={e => setPlaying1({ ...playing1, notes: e.target.value })}
 									/>
 								</Form.Group>
 							</Form.Row>
 							<Form.Row>
 								<Form.Group as={Col} controlId="formGridEmail">
 									<Form.Label>Game</Form.Label>
-									<Form.Control type="text" placeholder="Game name..." />
+									<Dropdown>
+										<Dropdown.Toggle variant="secondary" id="dropdown-basic">
+											{!!playing2 ? playing2.name : "Select Game"}
+										</Dropdown.Toggle>
+										<Dropdown.Menu>
+											<Form.Control
+												type="text"
+												placeholder="Game name..."
+												onChange={e => handleLook(e.target.value)}
+											/>
+											{!!gamesFound &&
+												gamesFound.map((value, index) => {
+													return (
+														<Dropdown.Item
+															key={index}
+															onClick={e =>
+																setPlaying2({
+																	...playing2,
+																	name: value.name,
+																	id: value.id
+																})
+															}>
+															{value.name}
+														</Dropdown.Item>
+													);
+												})}
+										</Dropdown.Menu>
+									</Dropdown>
 								</Form.Group>
-
 								<Form.Group as={Col} controlId="formGridPassword">
 									<Form.Label>Notes</Form.Label>
 									<Form.Control
 										type="text"
 										placeholder="Something about the game"
-										defaultValue={!!store.user.playing[1] ? store.user.playing[1].notes : ""}
+										defaultValue={playing2 != null ? playing2.notes : ""}
+										onChange={e => setPlaying2({ ...playing2, notes: e.target.value })}
 									/>
 								</Form.Group>
 							</Form.Row>
 							<Form.Row>
 								<Form.Group as={Col} controlId="formGridEmail">
 									<Form.Label>Game</Form.Label>
-									<Form.Control
-										type="text"
-										placeholder="Game name..."
-										defaultValue={store.user.playing[2] != null ? store.user.playing[2].name : null}
-									/>
+									<Dropdown>
+										<Dropdown.Toggle variant="secondary" id="dropdown-basic">
+											{!!playing3 ? playing3.name : "Select Game"}
+										</Dropdown.Toggle>
+										<Dropdown.Menu>
+											<Form.Control
+												type="text"
+												placeholder="Game name..."
+												onChange={e => handleLook(e.target.value)}
+											/>
+											{!!gamesFound &&
+												gamesFound.map((value, index) => {
+													return (
+														<Dropdown.Item
+															key={index}
+															onClick={e =>
+																setPlaying3({
+																	...playing3,
+																	name: value.name,
+																	id: value.id
+																})
+															}>
+															{value.name}
+														</Dropdown.Item>
+													);
+												})}
+										</Dropdown.Menu>
+									</Dropdown>
 								</Form.Group>
-
 								<Form.Group as={Col} controlId="formGridPassword">
 									<Form.Label>Notes</Form.Label>
 									<Form.Control
 										type="text"
 										placeholder="Something about the game"
-										defaultValue={
-											store.user.playing[2] != null ? store.user.playing[2].notes : null
-										}
+										defaultValue={playing3 != null ? playing3.notes : ""}
+										onChange={e => setPlaying3({ ...playing3, notes: e.target.value })}
 									/>
 								</Form.Group>
 							</Form.Row>
@@ -347,8 +427,10 @@ export const UserProfileUpdate = props => {
 					</Card.Header>
 					<Card.Body>
 						<Form>
-							{store.user.platforms != null &&
-								store.user.platforms.map((value, index) => {
+							{platforms[0] != null &&
+								platforms.map((value, index) => {
+									console.log(value);
+
 									return (
 										<div key={index}>
 											<h6>{value.name}</h6>
@@ -379,15 +461,36 @@ export const UserProfileUpdate = props => {
 												</Form.Group>
 												<Form.Group as={Col} controlId="formGridPassword">
 													<Form.Label>Completed</Form.Label>
-													<Form.Control
-														type="text"
-														placeholder="Game name..."
-														defaultValue={
-															store.user.game_progression[value.id].completed != null
-																? store.user.game_progression[value.id].completed.name
-																: null
-														}
-													/>
+													<Dropdown>
+														<Dropdown.Toggle variant="secondary" id="dropdown-basic">
+															{store.user.game_progression[value.id].finished != null
+																? store.user.game_progression[value.id].finished.name
+																: "Select Game"}
+														</Dropdown.Toggle>
+														<Dropdown.Menu>
+															<Form.Control
+																type="text"
+																placeholder="Game name..."
+																onChange={e => handleLook(e.target.value)}
+															/>
+															{!!gamesFound &&
+																gamesFound.map((value, index) => {
+																	return (
+																		<Dropdown.Item
+																			key={index}
+																			onClick={e =>
+																				setPlaying1({
+																					...playing1,
+																					name: value.name,
+																					id: value.id
+																				})
+																			}>
+																			{value.name}
+																		</Dropdown.Item>
+																	);
+																})}
+														</Dropdown.Menu>
+													</Dropdown>
 												</Form.Group>
 											</Form.Row>
 										</div>
@@ -441,6 +544,11 @@ export const UserProfileUpdate = props => {
 						</ListGroup>
 					</Card>
 				</Col>
+			</Row>
+			<Row>
+				<Button variant="dark" onClick={e => handleSave()}>
+					Save Changes
+				</Button>
 			</Row>
 		</Container>
 	);

@@ -505,6 +505,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 					.catch(function(error) {
 						console.log("Looks like there was a problem: \n", error);
 					});
+			},
+			handleSave: user => {
+				setStore({ user: user });
 			}
 		}
 	};
