@@ -15,8 +15,8 @@ export const UserProfile = props => {
 		<div className="container container-profile mt-5">
 			<div className="row row-1">
 				<div className="col col-">
+					<div className="user-name">{store.user.username}</div>
 					<div className="card-profile">
-						<div className="user-name">{store.user.username}</div>
 						<img
 							className="profile-img"
 							src={
@@ -26,6 +26,12 @@ export const UserProfile = props => {
 							}
 							width="100%"
 						/>
+						<div className="card-body">
+							<UserAbout />
+							<Link to="/editprofile">
+								<Button variant="dark">Edit Profile</Button>
+							</Link>
+						</div>
 					</div>
 				</div>
 				<div className="col col- topcol">
@@ -40,7 +46,6 @@ export const UserProfile = props => {
 			<br />
 			<div className="row row-two">
 				<Col md={{ span: 3, offset: 0 }}>
-					<UserAbout />
 					<Link to="/editprofile">
 						<Button variant="dark">Edit Profile</Button>
 					</Link>
