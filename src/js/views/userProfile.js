@@ -20,9 +20,9 @@ export const UserProfile = props => {
 						<img
 							className="profile-img"
 							src={
-								store.user.image != undefined
+								!!store.user.image
 									? store.user.image
-									: "https://reactstrap.github.io/assets/318x180.svg"
+									: "https://cdn.pixabay.com/photo/2017/10/25/19/45/arrow-2889040_960_720.jpg"
 							}
 							width="100%"
 						/>
