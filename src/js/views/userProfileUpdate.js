@@ -891,7 +891,7 @@ export const UserProfileUpdate = props => {
 							{disliked.map((value, index) => {
 								return (
 									<ListGroup.Item key={index} variant="dark">
-										{value.name} <i className="far fa-circle" onClick={e => handleMiddleD(value)} />
+										{value.name} <i className="far fa-circle" style={{float: "right"}} onClick={e => handleMiddleD(value)} />
 									</ListGroup.Item>
 								);
 							})}
