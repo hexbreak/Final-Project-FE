@@ -66,6 +66,11 @@ export const Navbar = () => {
 					<button className="btn btn-light">Profile</button>
 				</Link>
 			</div>
+			<div className="ml">
+				<Link to="/registration">
+					<button className="btn btn-light">Sign Up</button>
+				</Link>
+			</div>
 		</nav>
 	);
 };
