@@ -45,11 +45,6 @@ export const UserProfile = props => {
 			<br />
 			<br />
 			<div className="row row-two">
-				<Col md={{ span: 3, offset: 0 }}>
-					<Link to="/editprofile">
-						<Button variant="dark">Edit Profile</Button>
-					</Link>
-				</Col>
 				<Col md={{ span: 4, offset: 0 }}>
 					<UserBacklog />
 				</Col>

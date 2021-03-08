@@ -48,7 +48,7 @@ export const GameDetails = props => {
 				<Row>
 					<Tab.Container defaultActiveKey="details">
 						<Row>
-							<Nav variant="pills" className="flex-column">
+							<Nav style={{ marginLeft: "10rem" }} variant="pills" className="flex-column">
 								<Row>
 									<Nav.Item>
 										<Nav.Link eventKey="details">Details</Nav.Link>
@@ -272,6 +272,7 @@ export const GameDetails = props => {
 																	target="_blank"
 																	rel="noreferrer">
 																	<img
+																		className="store"
 																		src="https://d3bzyjrsc4233l.cloudfront.net/company_office/epicgames_logo.png"
 																		alt="epic store"
 																	/>
@@ -285,6 +286,7 @@ export const GameDetails = props => {
 																	target="_blank"
 																	rel="noreferrer">
 																	<img
+																		className="store"
 																		src="https://cdn4.iconfinder.com/data/icons/liu-square-blac/60/playstation-square-social-media-128.png"
 																		alt="psn"
 																	/>
@@ -298,6 +300,7 @@ export const GameDetails = props => {
 																	target="_blank"
 																	rel="noreferrer">
 																	<img
+																		className="store"
 																		src="https://cdn4.iconfinder.com/data/icons/logos-and-brands/512/387_Xbox_logo-512.png"
 																		alt="xbox store"
 																	/>
@@ -311,6 +314,7 @@ export const GameDetails = props => {
 																	target="_blank"
 																	rel="noreferrer">
 																	<img
+																		className="store"
 																		src="https://i.pinimg.com/originals/8e/14/6e/8e146e9e28baeb9b59c6004ed7b1343b.png"
 																		alt="app store"
 																	/>
@@ -324,6 +328,7 @@ export const GameDetails = props => {
 																	target="_blank"
 																	rel="noreferrer">
 																	<img
+																		className="store"
 																		src="https://cdn.iconscout.com/icon/free/png-512/gog-galaxy-555193.png"
 																		alt="gog"
 																	/>
@@ -337,6 +342,7 @@ export const GameDetails = props => {
 																	target="_blank"
 																	rel="noreferrer">
 																	<img
+																		className="store"
 																		src="https://media.pocketgamer.com/artwork/na-hois/eshop-logo.png"
 																		alt="nintendo"
 																	/>
@@ -350,6 +356,7 @@ export const GameDetails = props => {
 																	target="_blank"
 																	rel="noreferrer">
 																	<img
+																		className="store"
 																		src="https://www.freepnglogos.com/uploads/xbox-one-png-23.png"
 																		alt="xbox 360"
 																	/>
@@ -363,6 +370,7 @@ export const GameDetails = props => {
 																	target="_blank"
 																	rel="noreferrer">
 																	<img
+																		className="store"
 																		src="https://cdn3.iconfinder.com/data/icons/logos-and-brands-adobe/512/152_Google_Play-512.png"
 																		alt="google play"
 																	/>
@@ -376,6 +384,7 @@ export const GameDetails = props => {
 																	arget="_blank"
 																	rel="noreferrer">
 																	<img
+																		className="store"
 																		src="https://img.icons8.com/windows/452/itch-io.png"
 																		alt="itch io"
 																	/>
@@ -389,6 +398,7 @@ export const GameDetails = props => {
 																	target="_blank"
 																	rel="noreferrer">
 																	<img
+																		className="store"
 																		src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/83/Steam_icon_logo.svg/1024px-Steam_icon_logo.svg.png"
 																		alt="steam"
 																	/>

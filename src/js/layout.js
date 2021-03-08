@@ -13,6 +13,7 @@ import injectContext from "./store/appContext";
 import { SearchPage } from "./views/searchPage";
 import { Navbar } from "./component/navbar";
 import { Footer } from "./component/footer";
+import { UserLogin } from "./views/userLogin";
 
 //create your first component
 const Layout = () => {
@@ -40,6 +41,7 @@ const Layout = () => {
 						<Route exact path="/profile" component={UserProfile} />
 						<Route exact path="/editprofile" component={UserProfileUpdate} />
 						<Route exact path="/registration" component={UserRegistration} />
+						<Route exact path="/login" component={UserLogin} />
 						<Route>
 							<h1>Not found!</h1>
 						</Route>

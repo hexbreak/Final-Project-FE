@@ -34,13 +34,17 @@ export const Home = () => {
 							<GameCarousel />
 						</Col>
 					</Row>
-					<Row />
+					<br />
+					<br />
+					<br />
+					<br />
 					<Row>
 						<Col>
 							<h1> Games </h1>
 						</Col>
 						<Sorter setSort={setSort} sortKey={sortKey} setInverted={setInverted} inverted={inverted} />
 					</Row>
+					<br />
 					<Row>
 						<Col>
 							<h1>Sortable Games</h1>
@@ -51,6 +55,7 @@ export const Home = () => {
 							</div>
 						</Col>
 					</Row>
+					<br />
 					<Row>
 						<Col>
 							<h1>Metacritic Rating</h1>
@@ -61,6 +66,7 @@ export const Home = () => {
 							</div>
 						</Col>
 					</Row>
+					<br />
 					<Row>
 						<Col>
 							<h1>User Rating</h1>
