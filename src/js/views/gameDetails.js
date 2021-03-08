@@ -46,7 +46,7 @@ export const GameDetails = props => {
 					</Container>
 				</Jumbotron>
 				<Tab.Container defaultActiveKey="details">
-					<Nav variant="pills" bg="dark" className="flex-column">
+					<Nav variant="pills" style={{ height: "3rem" }} className="flex-column">
 						<Row>
 							<Nav.Item>
 								<Nav.Link eventKey="details">Details</Nav.Link>
@@ -144,20 +144,15 @@ export const GameDetails = props => {
 								<Col>
 									<h1>Website</h1>
 									{store.game.reddit_url != "" && (
-										<a
-											className="fab fa-reddit"
-											href={store.game.reddit_url}
-											target="_blank"
-											rel="noreferrer"
-										/>
+										<a href={store.game.reddit_url} target="_blank" rel="noreferrer">
+											<i className="fab fa-reddit website" />
+										</a>
 									)}
+
 									{store.game.website != "" && (
-										<a
-											target="_blank"
-											rel="noreferrer"
-											className="fas fa-window-restore"
-											href={store.game.website}
-										/>
+										<a target="_blank" rel="noreferrer" href={store.game.website}>
+											<i className="fas fa-window-restore website" />
+										</a>
 									)}
 								</Col>
 								<Col>
@@ -239,7 +234,7 @@ export const GameDetails = props => {
 												<Col key={index}>
 													<h1>{value.name}</h1>
 													<p>{value.description}</p>
-													<img src={value.image} alt="achievemnt" />
+													<img src={value.image} className="achivement" alt="achievemnt" />
 													<h6>%{value.percent}</h6>
 												</Col>
 											);
