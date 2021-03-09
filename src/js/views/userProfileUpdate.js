@@ -157,65 +157,27 @@ export const UserProfileUpdate = props => {
 		}
 	};
 	useEffect(() => {
-		let sortedtags = [];
-		const makeTags = () => {
-			sortedtags = [];
-			store.tags.forEach(value => {
-				disliked.forEach(disliked => {
-					liked.forEach(liked => {
-						if (value.id != disliked.id && value.id != liked.id) {
-							if (!!value) {
-								sortedtags.push({ id: value.id, name: value.name });
-							}
-						}
-					});
-				});
+		let makeTags = () => {
+			let sortedtags = [];
+			sortedtags = store.tags.map(value => {
+				return { id: value.id, name: value.name };
 			});
-		};
-		const makeDislikedTags = () => {
-			sortedtags = [];
-			store.tags.forEach(value => {
-				disliked.forEach(disliked => {
-					if (value.id != disliked.id) {
-						if (!!value) {
-							sortedtags.push({ id: value.id, name: value.name });
-						}
-					}
+			console.log(sortedtags);
+			if (liked.length > 0) {
+				liked.forEach(value => {
+					sortedtags = sortedtags.filter(tag => tag.id != value.id);
 				});
-			});
-		};
-		const makeLikedTags = () => {
-			sortedtags = [];
-			store.tags.forEach(value => {
-				liked.forEach(liked => {
-					if (value.id != liked.id) {
-						if (!!value) {
-							sortedtags.push({ id: value.id, name: value.name });
-						}
-					}
+				console.log(sortedtags);
+			}
+			if (disliked.length > 0) {
+				disliked.forEach(value => {
+					sortedtags = sortedtags.filter(tag => tag.id != value.id);
 				});
-			});
+				console.log(sortedtags);
+			}
+			setTags(sort(sortedtags));
 		};
-		if (liked.length > 0 || disliked.length > 0) {
-			makeTags();
-			sortedtags = sort(sortedtags);
-			setTags(sortedtags);
-		}
-		if (liked.length > 0 && disliked.length == 0) {
-			makeLikedTags();
-			sortedtags = sort(sortedtags);
-			setTags(sortedtags);
-		}
-		if (disliked.length > 0 && liked.length == 0) {
-			makeDislikedTags();
-			sortedtags = sort(sortedtags);
-			setTags(sortedtags);
-		}
-		if (liked.length == 0 && disliked.length == 0) {
-			sortedtags = [];
-			sortedtags = sort(store.tags);
-			setTags(sortedtags);
-		}
+		makeTags();
 	}, [store.tags]);
 	const handleDisliked = tag => {
 		let array = [...disliked, tag];
