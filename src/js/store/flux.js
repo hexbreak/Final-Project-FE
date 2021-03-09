@@ -100,6 +100,174 @@ const getState = ({ getStore, getActions, setStore }) => {
 					})
 					.catch(error => console.error("Error:", error)); // BE RIGHT BACK <<<
 			},
+			addPlatforms: () => {
+				const store = getStore();
+				fetch(`${beURL}/user/1/plat`, {
+					method: "POST",
+					headers: {
+						"Content-Type": "application/json"
+					},
+					body: JSON.stringify({
+						platform_id: store.platform.id,
+						platform_name: store.platform.name
+					})
+				})
+					.then(response => {
+						if (!response.ok) {
+							throw Error(response.statusText);
+						}
+						return response.json();
+					})
+					.then(responseAsJson => {
+						console.log("Success:", responseAsJson);
+						// Do stuff with the JSON
+						// return setStore({ : responseAsJson.results });
+					})
+					.catch(error => console.error("Error:", error));
+				// GET platform
+				fetch(`${beURL}/user/1/plat`, {
+					method: "GET",
+					headers: {
+						"Content-Type": "application/json"
+					}
+				})
+					.then(response => {
+						if (!response.ok) {
+							throw Error(response.statusText);
+						}
+						return response.json();
+					})
+					.then(responseAsJson => {
+						console.log("Success:", responseAsJson);
+						// Do stuff with the JSON
+					})
+					.catch(error => console.error("Error:", error));
+				// PUT platform
+				fetch(`${beURL}/user/1/plat`, {
+					method: "PUT",
+					headers: {
+						"Content-Type": "application/json"
+					},
+					body: JSON.stringify({
+						platform_id: store.platform.id,
+						platform_name: store.platform.name
+					})
+				})
+					.then(response => {
+						if (!response.ok) {
+							throw Error(response.statusText);
+						}
+						return response.json();
+					})
+					.then(responseAsJson => {
+						console.log("Success:", responseAsJson);
+						// Do stuff with the JSON
+						// return setStore({ : responseAsJson.results });
+					})
+					.catch(error => console.error("Error:", error));
+				// DELETE platform
+				fetch(`${beURL}/user/1/plat/` + id, {
+					method: "DELETE",
+					headers: {
+						"Content-Type": "application/json"
+					}
+				})
+					.then(response => {
+						if (!response.ok) {
+							throw Error(response.statusText);
+						}
+						return response.json();
+					})
+					.then(responseAsJson => {
+						console.log("Success:", responseAsJson);
+						// Do stuff with the JSON
+					})
+					.catch(error => console.error("Error:", error));
+			},
+			addHighlights: () => {
+				const store = getStore();
+				fetch(`${beURL}/user/1/hl`, {
+					method: "POST",
+					headers: {
+						"Content-Type": "application/json"
+					},
+					body: JSON.stringify({
+						game_id: store.game.id,
+						game_name: store.game.name
+					})
+				})
+					.then(response => {
+						if (!response.ok) {
+							throw Error(response.statusText);
+						}
+						return response.json();
+					})
+					.then(responseAsJson => {
+						console.log("Success:", responseAsJson);
+						// Do stuff with the JSON
+						// return setStore({ : responseAsJson.results });
+					})
+					.catch(error => console.error("Error:", error));
+				// GET highlight
+				fetch(`${beURL}/user/1/hl`, {
+					method: "GET",
+					headers: {
+						"Content-Type": "application/json"
+					}
+				})
+					.then(response => {
+						if (!response.ok) {
+							throw Error(response.statusText);
+						}
+						return response.json();
+					})
+					.then(responseAsJson => {
+						console.log("Success:", responseAsJson);
+						// Do stuff with the JSON
+					})
+					.catch(error => console.error("Error:", error));
+				// PUT highlight
+				fetch(`${beURL}/user/1/hl/` + id, {
+					method: "PUT",
+					headers: {
+						"Content-Type": "application/json"
+					},
+					body: JSON.stringify({
+						game_id: store.game.id,
+						game_name: store.game.name
+					})
+				})
+					.then(response => {
+						if (!response.ok) {
+							throw Error(response.statusText);
+						}
+						return response.json();
+					})
+					.then(responseAsJson => {
+						console.log("Success:", responseAsJson);
+						// Do stuff with the JSON
+						// return setStore({ : responseAsJson.results });
+					})
+					.catch(error => console.error("Error:", error));
+				// DELETE highlight
+				fetch(`${beURL}/user/1/hl/` + id, {
+					method: "DELETE",
+					headers: {
+						"Content-Type": "application/json"
+					}
+				})
+					.then(response => {
+						if (!response.ok) {
+							throw Error(response.statusText);
+						}
+						return response.json();
+					})
+					.then(responseAsJson => {
+						console.log("Success:", responseAsJson);
+						// Do stuff with the JSON
+					})
+					.catch(error => console.error("Error:", error));
+			},
 			nowPlaying: () => {
 				const store = getStore();
 				fetch(`${beURL}/user/1/nplay`, {

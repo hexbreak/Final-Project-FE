@@ -60,7 +60,7 @@ export const GameDetails = props => {
 							<Nav.Item>
 								<Nav.Link eventKey="media">Media</Nav.Link>
 							</Nav.Item>
-							<Button onClick={() => actions.addtoFavorites()}>Add to Favorites</Button>
+							{/* <Button onClick={() => actions.addtoFavorites()}>Add to Favorites</Button> */}
 						</Row>
 					</Nav>
 					<Tab.Content>
