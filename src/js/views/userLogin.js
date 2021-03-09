@@ -16,7 +16,7 @@ export const UserLogin = props => {
 			<Row>
 				<Col md={{ span: 3, offset: 0 }}>
 					<Card bg="dark" style={{ width: "50rem", height: "100%" }} className="mb-2">
-						<Card.Header>Registration</Card.Header>
+						<Card.Header>Login</Card.Header>
 						<Card.Body>
 							<Form>
 								<Form.Row>
