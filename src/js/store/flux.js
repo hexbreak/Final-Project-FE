@@ -4,9 +4,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 		store: {
 			user: {
 				// Login, Registration, Username, UserType, UserId, Token, Validation\
-				username: "99lalo",
-				password: "5468",
-				id: "1",
+				username: "",
+				password: "",
+				id: 0,
 				about: "",
 				image: "",
 				favorites: [],

@@ -29,7 +29,7 @@ export const Navbar = () => {
 					Finder
 				</span>
 			</Link>
-			<div className="">
+			<Row>
 				<div className="dropdown">
 					<input
 						type="text"
@@ -55,27 +55,28 @@ export const Navbar = () => {
 						</div>
 					)}
 				</div>
-			</div>
-			<div className="ml">
 				<Link to="/search">
 					<button className="btn btn-light">Search</button>
 				</Link>
-			</div>
-			<div className="ml">
-				<Link to="/profile">
-					<button className="btn btn-light">Profile</button>
-				</Link>
-			</div>
-			<div className="ml">
-				<Link to="/login">
-					<button className="btn btn-light">Login</button>
-				</Link>
-			</div>
-			<div className="ml">
-				<Link to="/registration">
-					<button className="btn btn-light">Sign Up</button>
-				</Link>
-			</div>
+			</Row>
+			{store.user.id > 0 ? (
+				<div className="ml">
+					<Link to="/profile">
+						<button className="btn btn-light">Profile</button>
+					</Link>
+				</div>
+			) : (
+				<div className="ml">
+					<Link to="/login">
+						<button style={{ marginRight: "1rem" }} className="btn btn-light ">
+							Login
+						</button>
+					</Link>
+					<Link to="/registration">
+						<button className="btn btn-light">Sign Up</button>
+					</Link>
+				</div>
+			)}
 		</nav>
 	);
 };
