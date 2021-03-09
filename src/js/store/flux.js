@@ -100,34 +100,16 @@ const getState = ({ getStore, getActions, setStore }) => {
 					})
 					.catch(error => console.error("Error:", error)); // BE RIGHT BACK <<<
 			},
-			backlogAdd: () => {
+			addtoFavorites: () => {
 				const store = getStore();
-				let gamePlat = store.game.platforms;
-				const getPlatforms = platforms => {
-					return platforms.map(gamePlat => gamePlat.platform.name).toString();
-				};
-				let gameTag = store.game.tags;
-				const getTags = tag => {
-					return tag.map(gameTag => gameTag.name).toString();
-				};
-				let gameGenre = store.game.genres;
-				const getGenre = genre => {
-					return genre.map(gameGenre => gameGenre.name).toString();
-				};
-				fetch(`${beURL}/user/1/backlog`, {
+				fetch(`${beURL}/user/1/fav`, {
 					method: "POST",
 					headers: {
 						"Content-Type": "application/json"
 					},
 					body: JSON.stringify({
 						game_id: store.game.id,
-						game_name: store.game.name,
-						game_platform: getPlatforms(gamePlat),
-						game_genre: getGenre(gameGenre),
-						game_tags: getTags(gameTag),
-						game_notes: "notes",
-						now_playing: false,
-						progress_status: "PROGRESSING"
+						game_name: store.game.name
 					})
 				})
 					.then(response => {
@@ -136,10 +118,72 @@ const getState = ({ getStore, getActions, setStore }) => {
 						}
 						return response.json();
 					})
-					.then(response => {
-						console.log("Success:", response);
+					.then(responseAsJson => {
+						console.log("Success:", responseAsJson);
 						// Do stuff with the JSON
-						// return setStore({ backlogPost: responseAsJson });
+						return setStore({ favorites: responseAsJson.results });
+					})
+					.catch(error => console.error("Error:", error));
+				// GET favorite
+				fetch(`${beURL}/user/1/fav`, {
+					method: "GET",
+					headers: {
+						"Content-Type": "application/json"
+					},
+					body: JSON.stringify({
+						game_id: store.game.id,
+						game_name: store.game.name
+					})
+				})
+					.then(response => {
+						if (!response.ok) {
+							throw Error(response.statusText);
+						}
+						return response.json();
+					})
+					.then(responseAsJson => {
+						console.log("Success:", responseAsJson);
+						// Do stuff with the JSON
+					})
+					.catch(error => console.error("Error:", error));
+				// PUT favorite
+				fetch(`${beURL}/user/1/fav/` + id, {
+					method: "PUT",
+					headers: {
+						"Content-Type": "application/json"
+					},
+					body: JSON.stringify({
+						game_id: store.game.id,
+						game_name: store.game.name
+					})
+				})
+					.then(response => {
+						if (!response.ok) {
+							throw Error(response.statusText);
+						}
+						return response.json();
+					})
+					.then(responseAsJson => {
+						console.log("Success:", responseAsJson);
+						// Do stuff with the JSON
+					})
+					.catch(error => console.error("Error:", error));
+				// DELETE favorite
+				fetch(`${beURL}/user/1/fav/` + id, {
+					method: "DELETE",
+					headers: {
+						"Content-Type": "application/json"
+					}
+				})
+					.then(response => {
+						if (!response.ok) {
+							throw Error(response.statusText);
+						}
+						return response.json();
+					})
+					.then(responseAsJson => {
+						console.log("Success:", responseAsJson);
+						// Do stuff with the JSON
 					})
 					.catch(error => console.error("Error:", error));
 			},
