@@ -7,6 +7,11 @@ import PropTypes from "prop-types";
 
 export const GameDetails = props => {
 	const { store, actions } = useContext(Context);
+	let rating = [];
+	const capitalize = s => {
+		if (typeof s !== "string") return "";
+		return s.charAt(0).toUpperCase() + s.slice(1);
+	};
 	useEffect(() => {
 		const loadGame = () => {
 			actions.loadDlcs(props.location.state);
@@ -26,6 +31,11 @@ export const GameDetails = props => {
 			actions.loadAddedByPlayers(store.game.added_by_status);
 		}
 	}, [store.game]);
+	if (!!store.game.rating) {
+		for (let i = 0; i < Math.floor(store.game.rating); i++) {
+			rating.push(<i className="fas fa-star" />);
+		}
+	}
 	if (store.game.id == props.location.state) {
 		return (
 			<Container fluid>
@@ -49,45 +59,59 @@ export const GameDetails = props => {
 					<Nav variant="pills" style={{ height: "3rem" }} className="flex-column">
 						<Row>
 							<Nav.Item>
-								<Nav.Link eventKey="details">Details</Nav.Link>
+								<Nav.Link eventKey="details">
+									<h1>Details</h1>
+								</Nav.Link>
 							</Nav.Item>
 							<Nav.Item>
-								<Nav.Link eventKey="statistics">Statistic</Nav.Link>
+								<Nav.Link eventKey="statistics">
+									<h1>Statistics</h1>
+								</Nav.Link>
 							</Nav.Item>
 							<Nav.Item>
-								<Nav.Link eventKey="store">Store</Nav.Link>
+								<Nav.Link eventKey="store">
+									<h1>Store</h1>
+								</Nav.Link>
 							</Nav.Item>
 							<Nav.Item>
-								<Nav.Link eventKey="media">Media</Nav.Link>
+								<Nav.Link eventKey="media">
+									<h1>Media</h1>
+								</Nav.Link>
 							</Nav.Item>
 							{/* <Button onClick={() => actions.addtoFavorites()}>Add to Favorites</Button> */}
 						</Row>
 					</Nav>
+					<br />
+					<br />
 					<Tab.Content>
 						<Tab.Pane eventKey="details">
 							<Row>
 								<Col>
 									<div>
 										<h1>Platforms</h1>
-										{store.game.platforms != null &&
-											store.game.platforms.map(value => {
-												return ` ${value.platform.name}`;
-											})}
+										<h5>
+											{store.game.platforms != null &&
+												store.game.platforms.map((value, index) => {
+													return ` ${value.platform.name}`;
+												})}
+										</h5>
 									</div>
 								</Col>
 								<Col>
 									<div>
 										<h1>Genres</h1>
-										{store.game.genres != null &&
-											store.game.genres.map(value => {
-												return ` ${value.name}`;
-											})}
+										<h5>
+											{store.game.genres != null &&
+												store.game.genres.map((value, index) => {
+													return ` ${value.name}`;
+												})}
+										</h5>
 									</div>
 								</Col>
 								<Col>
 									<div>
 										<h1>Release Date</h1>
-										{store.game.released != null && store.game.released}
+										<h5>{store.game.released != null && store.game.released}</h5>
 									</div>
 								</Col>
 							</Row>
@@ -95,26 +119,30 @@ export const GameDetails = props => {
 								<Col>
 									<div>
 										<h1>Developers</h1>
-										{store.game.developers != null &&
-											store.game.developers.map(value => {
-												return ` ${value.name}`;
-											})}
+										<h5>
+											{store.game.developers != null &&
+												store.game.developers.map((value, index) => {
+													return ` ${value.name}`;
+												})}
+										</h5>
 									</div>
 								</Col>
 								<Col>
 									<div>
 										<h1>Publishers</h1>
-										{Array.isArray(store.game.publishers) &&
-											store.game.publishers.length > 0 &&
-											store.game.publishers.map(value => {
-												return ` ${value.name}`;
-											})}
+										<h5>
+											{Array.isArray(store.game.publishers) &&
+												store.game.publishers.length > 0 &&
+												store.game.publishers.map((value, index) => {
+													return ` ${value.name}`;
+												})}
+										</h5>
 									</div>
 								</Col>
 								<Col>
 									<div>
 										<h1>Age Ranting</h1>
-										{store.game.esrb_rating != null && store.game.esrb_rating.name}
+										<h5>{store.game.esrb_rating != null && store.game.esrb_rating.name}</h5>
 									</div>
 								</Col>
 							</Row>
@@ -158,7 +186,7 @@ export const GameDetails = props => {
 								<Col>
 									<h1>Tags</h1>
 									{store.game.tags != null &&
-										store.game.tags.map(value => {
+										store.game.tags.map((value, index) => {
 											return ` ${value.name}`;
 										})}
 								</Col>
@@ -168,7 +196,7 @@ export const GameDetails = props => {
 							</Row>
 							<Row>
 								{store.game.platforms != null &&
-									store.game.platforms.map(value => {
+									store.game.platforms.forEach(value => {
 										if (value.platform.id == 4 && value.requirements != undefined) {
 											if (
 												Object.keys(value.requirements).length === 0 &&
@@ -176,7 +204,14 @@ export const GameDetails = props => {
 											) {
 												return null;
 											} else {
-												return Object.values(value.requirements);
+												let requirements = Object.values(value.requirements);
+												requirements.map((requirement, index) => {
+													return (
+														<div key={index} className="style">
+															{requirement}
+														</div>
+													);
+												});
 											}
 										} else {
 											return null;
@@ -196,29 +231,46 @@ export const GameDetails = props => {
 							<Row>
 								<Col>
 									<h1>Rating</h1>
-									{store.game.rating}
+									<div
+										className="style"
+										style={{
+											color: "red",
+											fontSize: "4rem",
+											width: "25rem",
+											textAlign: "center"
+										}}>
+										{rating.map((value, index) => {
+											return value;
+										})}
+									</div>
 								</Col>
 							</Row>
 							<Row>
 								<Col>
 									<h1>Metascore</h1>
-									{store.game.metacritic != null && store.game.metacritic}
+									<h5>{store.game.metacritic != null && store.game.metacritic}</h5>
 								</Col>
 								<Col>
 									<h1>Rating Count</h1>
-									{store.game.ratings_count}
+									<h5>{store.game.ratings_count}</h5>
 								</Col>
 								<Col>
 									<h1>Added on Players</h1>
-									{store.game.added}
+									<h5>{store.game.added}</h5>
 								</Col>
 							</Row>
 							<Row>
 								<Col>
 									<h1>Players Status</h1>
-									{store.addedByPlayers.map(value => {
-										return ` ${value}`;
-									})}
+									<div className="style">
+										{store.addedByPlayers.map((value, index) => {
+											return (
+												<div key={index}>
+													<h5 style={{ marginLeft: "1rem" }}> {capitalize(value)}</h5>
+												</div>
+											);
+										})}
+									</div>
 								</Col>
 								<Col>
 									<h1>People on Favorites</h1>
@@ -231,12 +283,24 @@ export const GameDetails = props => {
 									{store.gameAchievements != null &&
 										store.gameAchievements.map((value, index) => {
 											return (
-												<Col key={index}>
-													<h1>{value.name}</h1>
-													<p>{value.description}</p>
-													<img src={value.image} className="achivement" alt="achievemnt" />
-													<h6>%{value.percent}</h6>
-												</Col>
+												<div key={index}>
+													<br />
+													<div
+														className="style"
+														style={{
+															width: "50rem",
+															textAlign: "center"
+														}}>
+														<h1>{value.name}</h1>
+														<p>{value.description}</p>
+														<img
+															src={value.image}
+															className="achivement"
+															alt="achievement"
+														/>
+														<h6>%{value.percent}</h6>
+													</div>
+												</div>
 											);
 										})}
 								</Col>

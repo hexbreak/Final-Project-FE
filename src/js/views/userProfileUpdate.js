@@ -162,18 +162,15 @@ export const UserProfileUpdate = props => {
 			sortedtags = store.tags.map(value => {
 				return { id: value.id, name: value.name };
 			});
-			console.log(sortedtags);
 			if (liked.length > 0) {
 				liked.forEach(value => {
 					sortedtags = sortedtags.filter(tag => tag.id != value.id);
 				});
-				console.log(sortedtags);
 			}
 			if (disliked.length > 0) {
 				disliked.forEach(value => {
 					sortedtags = sortedtags.filter(tag => tag.id != value.id);
 				});
-				console.log(sortedtags);
 			}
 			setTags(sort(sortedtags));
 		};
