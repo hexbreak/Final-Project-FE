@@ -2,6 +2,7 @@
     General Styles
 */
 @import "~bootstrap/scss/bootstrap";
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP&display=swap');
 .gameimg{
     width: 50em;
     height: 30em;
@@ -11,25 +12,85 @@
 	overflow-y: hidden;
     display: flex;
     background-image: gray;
+    width: 110rem;
+    margin-left: 3rem;
+    height: 13rem;
 }
 .card{
     width: 18rem;
     height: 10rem;
     flex: 0 0 auto;
+    margin-top: 1rem;
+    &:hover{
+                transform: scale(1.05);
+    }
 }
+
+// navbar
+
+.navbar{
+    background-color: none;
+}
+
+#logo{
+    color: black;
+    transition: color 300ms ease-in-out;
+
+    &:hover {
+        color: rgb(255, 184, 4);
+        
+    }
+}
+
+#hover{
+    color: black;
+    transition: color 300ms ease-in-out;
+
+    &:hover {
+        color: rgb(255, 184, 4);
+        
+    }
+}
+
+/* Carousel  */
+
+.carousel-heading{
+    margin-bottom: -10px;
+    color: whitesmoke;
+    transition: color 300ms ease-in-out;
+
+    &:hover {
+        color: rgb(255, 184, 4);
+        
+    }
+}
+
+.carousel-image{
+    box-shadow: 0px 3px 10px rgba(0,0,0,0.15);
+
+}
+
+
+
+
+// body
+
 body{
-    background-color: rgb(112, 112, 112);
+    // background-color: rgb(24, 20, 20);
+    background-color: rgba(255, 255, 255, 0.911);
     color: white;
     max-width: 100%;
     max-height: 100%;
+    font-family: 'Noto Sans JP', sans-serif;
 }
+
 ::-webkit-scrollbar {
   width: 10px;
 }
 
 /* Track */
 ::-webkit-scrollbar-track {
-  background: rgb(70, 68, 68);
+  background: rgb(28, 34, 34);
 }
  
 /* Handle */

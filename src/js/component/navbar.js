@@ -21,11 +21,11 @@ export const Navbar = () => {
 		}
 	};
 	return (
-		<nav className="navbar navbar-dark bg-dark mb-3 container-fluid">
+		<nav className="navbar navbar-dark mb-1 mt-1 container-fluid">
 			<Link to="/">
-				<span className="navbar-brand mb-0 h1">
+				<span className="navbar-brand mb-0 h1" id="logo">
 					Game
-					<i className="fas fa-gamepad" />
+					<i className="fas fa-gamepad m-2" />
 					Finder
 				</span>
 			</Link>
@@ -56,24 +56,30 @@ export const Navbar = () => {
 					)}
 				</div>
 				<Link to="/search">
-					<button className="btn btn-light">Search</button>
+					<button className="btn btn-light ml-5 pl-4 pr-4" id="hover">
+						<i className="fas fa-search" />
+					</button>
 				</Link>
 			</Row>
 			{store.user.id > 0 ? (
 				<div className="ml">
 					<Link to="/profile">
-						<button className="btn btn-light">Profile</button>
+						<button className="btn btn-light pl-4 pr-4">
+							<span id="hover">Profile</span>
+						</button>
 					</Link>
 				</div>
 			) : (
 				<div className="ml">
 					<Link to="/login">
 						<button style={{ marginRight: "1rem" }} className="btn btn-light ">
-							Login
+							<span id="hover">Login</span>
 						</button>
 					</Link>
 					<Link to="/registration">
-						<button className="btn btn-light">Sign Up</button>
+						<button className="btn btn-light">
+							<span id="hover">Sign Up</span>
+						</button>
 					</Link>
 				</div>
 			)}

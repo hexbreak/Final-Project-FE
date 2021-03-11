@@ -30,7 +30,7 @@ export const Home = () => {
 			return (
 				<Container fluid>
 					<Row>
-						<Col>
+						<Col className="row justify-content-md-center">
 							<GameCarousel />
 						</Col>
 					</Row>
@@ -39,10 +39,9 @@ export const Home = () => {
 					<br />
 					<br />
 					<Row>
-						<Col>
-							<h1> Games </h1>
+						<Col className="row justify-content-md-center">
+							<Sorter setSort={setSort} sortKey={sortKey} setInverted={setInverted} inverted={inverted} />
 						</Col>
-						<Sorter setSort={setSort} sortKey={sortKey} setInverted={setInverted} inverted={inverted} />
 					</Row>
 					<br />
 					<Row>
@@ -70,7 +69,7 @@ export const Home = () => {
 					<Row>
 						<Col>
 							<h1>User Rating</h1>
-							<div className="scroller">
+							<div style={{ marginBottom: "5rem" }} className="scroller">
 								{store.gameRatingList.map((value, index) => {
 									return <GameCard className="card" key={index} game={value} />;
 								})}

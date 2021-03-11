@@ -8,6 +8,7 @@ import PropTypes from "prop-types";
 export const GameDetails = props => {
 	const { store, actions } = useContext(Context);
 	let rating = [];
+	var gameRequirements = [];
 	const capitalize = s => {
 		if (typeof s !== "string") return "";
 		return s.charAt(0).toUpperCase() + s.slice(1);
@@ -34,6 +35,18 @@ export const GameDetails = props => {
 	if (!!store.game.rating) {
 		for (let i = 0; i < Math.floor(store.game.rating); i++) {
 			rating.push(<i className="fas fa-star" />);
+		}
+	}
+	if (store.game.platforms != null) {
+		let pc = store.game.platforms.filter(value => {
+			return value.platform.id == 4 && value.requirements != undefined;
+		});
+		if (pc[0] != undefined) {
+			if (Object.keys(pc[0].requirements).length === 0 && pc[0].requirements.constructor === Object) {
+				return gameRequirements;
+			} else {
+				gameRequirements = Object.values(pc[0].requirements);
+			}
 		}
 	}
 	if (store.game.id == props.location.state) {
@@ -195,27 +208,9 @@ export const GameDetails = props => {
 								<h1>PC Requirements</h1>
 							</Row>
 							<Row>
-								{store.game.platforms != null &&
-									store.game.platforms.forEach(value => {
-										if (value.platform.id == 4 && value.requirements != undefined) {
-											if (
-												Object.keys(value.requirements).length === 0 &&
-												value.requirements.constructor === Object
-											) {
-												return null;
-											} else {
-												let requirements = Object.values(value.requirements);
-												requirements.map((requirement, index) => {
-													return (
-														<div key={index} className="style">
-															{requirement}
-														</div>
-													);
-												});
-											}
-										} else {
-											return null;
-										}
+								{!!gameRequirements &&
+									gameRequirements.map((value, index) => {
+										return <Col key={index}>{value}</Col>;
 									})}
 							</Row>
 							<Row>

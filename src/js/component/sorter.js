@@ -10,7 +10,7 @@ export const Sorter = props => {
 	return (
 		<Container>
 			<Row>
-				<Col>
+				<Col className="row justify-content-md-center">
 					<div style={{ float: "right" }}>
 						<Button
 							variant="primary"

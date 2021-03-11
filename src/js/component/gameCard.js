@@ -29,6 +29,7 @@ export const GameCard = props => {
 	return (
 		<Link to={{ pathname: `/details/${props.game.id}`, state: props.game.id }}>
 			<Card
+				style={{ marginBottom: "1rem" }}
 				className="bg-dark rounded-3 mr-3 ml-3 text-white"
 				border={store.user.preference == true && makeBorders()}>
 				<Card.Img
@@ -41,7 +42,7 @@ export const GameCard = props => {
 					alt="Card Image"
 				/>
 				<Card.ImgOverlay>
-					<Card.Title>{props.game.name}</Card.Title>
+					<Card.Title id="logo">{props.game.name}</Card.Title>
 				</Card.ImgOverlay>
 			</Card>
 		</Link>
