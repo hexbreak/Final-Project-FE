@@ -21,9 +21,6 @@
     height: 10rem;
     flex: 0 0 auto;
     margin-top: 1rem;
-    &:hover{
-                transform: scale(1.05);
-    }
 }
 
 // navbar
@@ -32,8 +29,8 @@
     background-color: none;
 }
 
-#logo{
-    color: black;
+#card{
+    color: rgb(252, 252, 252);
     transition: color 300ms ease-in-out;
 
     &:hover {
@@ -48,10 +45,13 @@
 
     &:hover {
         color: rgb(255, 184, 4);
-        
     }
 }
-
+.transform{
+    &:hover{
+        transform: scale(1.05);
+    }
+}
 /* Carousel  */
 
 .carousel-heading{
@@ -70,7 +70,14 @@
 
 }
 
-
+//buttons
+#btn{
+    background-color: gold;
+    border-color: goldenrod;
+    &:hover {
+        background-color: goldenrod;
+    }
+}
 
 
 // body
@@ -78,7 +85,7 @@
 body{
     // background-color: rgb(24, 20, 20);
     background-color: rgba(255, 255, 255, 0.911);
-    color: white;
+    color: black;
     max-width: 100%;
     max-height: 100%;
     font-family: 'Noto Sans JP', sans-serif;
@@ -90,17 +97,17 @@ body{
 
 /* Track */
 ::-webkit-scrollbar-track {
-  background: rgb(28, 34, 34);
+  background: rgb(155, 138, 61);
 }
  
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: rgb(34, 34, 34); 
+  background: rgb(243, 201, 63); 
 }
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-  background: rgb(0, 0, 0); 
+  background: rgb(216, 177, 47); 
 }
 .detailsImage{
     width: 50%;
@@ -129,9 +136,6 @@ body{
              40px -40px 80px #818181;
 }
 
-.card-body {
-    background-color: rgb(75, 75, 75);
-}
 
 .user-name {
     font-size: 25px;
@@ -170,8 +174,10 @@ img{
 .btn-group{
     white-space: normal;
 }
-.style{
-    background-color: black;
-	border-style: solid;
-	border-color: red;
+
+//tags
+
+#tags{
+    width: 18rem;
+     height: 100%;
 }

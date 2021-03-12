@@ -1,5 +1,6 @@
 const getState = ({ getStore, getActions, setStore }) => {
 	const beURL = "https://3000-bronze-earwig-hbuagomx.ws-us03.gitpod.io"; // Use ${beURL} to make it easier when handling the BE's constant URL changes
+	const apiKey = "33af10ad5812440abf75a35c04492e15";
 	return {
 		store: {
 			user: {
@@ -571,7 +572,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				setStore({ demo: demo });
 			},
 			loadGameList: pageNumber => {
-				fetch(`https://api.rawg.io/api/games?page=${pageNumber}`)
+				fetch(`https://api.rawg.io/api/games?key=${apiKey}&page=${pageNumber}`)
 					.then(function(response) {
 						if (!response.ok) {
 							throw Error(response.statusText);
@@ -588,7 +589,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					});
 			},
 			loadGame: gameId => {
-				fetch(`https://api.rawg.io/api/games/${gameId}`)
+				fetch(`https://api.rawg.io/api/games/${gameId}?key=${apiKey}`)
 					.then(function(response) {
 						if (!response.ok) {
 							throw Error(response.statusText);
@@ -605,7 +606,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					});
 			},
 			loadSortedGameList: (pageNumber, ordering) => {
-				fetch(`https://api.rawg.io/api/games?ordering=${ordering}&page=${pageNumber}`)
+				fetch(`https://api.rawg.io/api/games?key=${apiKey}&ordering=${ordering}&page=${pageNumber}`)
 					.then(function(response) {
 						if (!response.ok) {
 							throw Error(response.statusText);
@@ -622,7 +623,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					});
 			},
 			loadDlcs: gameId => {
-				fetch(`https://api.rawg.io/api/games/${gameId}/additions`)
+				fetch(`https://api.rawg.io/api/games/${gameId}/additions?key=${apiKey}`)
 					.then(function(response) {
 						if (!response.ok) {
 							throw Error(response.statusText);
@@ -639,7 +640,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					});
 			},
 			loadOtherGames: gameId => {
-				fetch(`https://api.rawg.io/api/games/${gameId}/game-series`)
+				fetch(`https://api.rawg.io/api/games/${gameId}/game-series?key=${apiKey}`)
 					.then(function(response) {
 						if (!response.ok) {
 							throw Error(response.statusText);
@@ -657,7 +658,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 			loadSimilarGames: genreId => {
 				if (genreId[1] != undefined) {
-					fetch(`https://api.rawg.io/api/games?genres=${genreId[1]}`)
+					fetch(`https://api.rawg.io/api/games?key=${apiKey}&genres=${genreId[1]}`)
 						.then(function(response) {
 							if (!response.ok) {
 								throw Error(response.statusText);
@@ -673,7 +674,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 							console.log("Looks like there was a problem: \n", error);
 						});
 				} else {
-					fetch(`https://api.rawg.io/api/games?genres=${genreId[0]}`)
+					fetch(`https://api.rawg.io/api/games?key=${apiKey}&genres=${genreId[0]}`)
 						.then(function(response) {
 							if (!response.ok) {
 								throw Error(response.statusText);
@@ -698,7 +699,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				return setStore({ addedByPlayers: playerlist });
 			},
 			loadLists: pageNumber => {
-				fetch(`https://api.rawg.io/api/games?ordering=-metacritic&page=${pageNumber}`)
+				fetch(`https://api.rawg.io/api/games?key=${apiKey}&ordering=-metacritic&page=${pageNumber}`)
 					.then(function(response) {
 						if (!response.ok) {
 							throw Error(response.statusText);
@@ -713,7 +714,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					.catch(function(error) {
 						console.log("Looks like there was a problem: \n", error);
 					});
-				fetch(`https://api.rawg.io/api/games?ordering=-rating&page=${pageNumber}`)
+				fetch(`https://api.rawg.io/api/games?key=${apiKey}&ordering=-rating&page=${pageNumber}`)
 					.then(function(response) {
 						if (!response.ok) {
 							throw Error(response.statusText);
@@ -730,7 +731,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					});
 			},
 			loadSearch: gameName => {
-				fetch(`https://api.rawg.io/api/games?search=${gameName}&page_size=6`)
+				fetch(`https://api.rawg.io/api/games?key=${apiKey}&search=${gameName}&page_size=6`)
 					.then(function(response) {
 						if (!response.ok) {
 							throw Error(response.statusText);
@@ -747,7 +748,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					});
 			},
 			loadSuperSearch: (gameName, pagination, genres, tags, sort, platforms) => {
-				let get = `https://api.rawg.io/api/games`;
+				let get = `https://api.rawg.io/api/games?key=${apiKey}`;
 				let filters = {
 					search: gameName,
 					page: pagination,
@@ -761,7 +762,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 						get += `&${filter}=${filters[filter]}`;
 					}
 				}
-				get = get.replace("&", "?");
 				fetch(get)
 					.then(function(response) {
 						if (!response.ok) {
@@ -779,7 +779,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					});
 			},
 			loadGameAchievements: gameId => {
-				fetch(`https://api.rawg.io/api/games/${gameId}/achievements`)
+				fetch(`https://api.rawg.io/api/games/${gameId}/achievements?key=${apiKey}`)
 					.then(function(response) {
 						if (!response.ok) {
 							throw Error(response.statusText);
@@ -796,7 +796,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					});
 			},
 			loadGameTrailers: gameId => {
-				fetch(`https://api.rawg.io/api/games/${gameId}/movies`)
+				fetch(`https://api.rawg.io/api/games/${gameId}/movies?key=${apiKey}`)
 					.then(function(response) {
 						if (!response.ok) {
 							throw Error(response.statusText);
@@ -813,7 +813,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					});
 			},
 			loadTags: pageSize => {
-				fetch(`https://api.rawg.io/api/tags?page_size=${pageSize}`)
+				fetch(`https://api.rawg.io/api/tags?key=${apiKey}&page_size=${pageSize}`)
 					.then(function(response) {
 						if (!response.ok) {
 							throw Error(response.statusText);
@@ -830,7 +830,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					});
 			},
 			loadGenres: pageSize => {
-				fetch(`https://api.rawg.io/api/genres?page_size=${pageSize}`)
+				fetch(`https://api.rawg.io/api/genres?key=${apiKey}&page_size=${pageSize}`)
 					.then(function(response) {
 						if (!response.ok) {
 							throw Error(response.statusText);
@@ -847,7 +847,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					});
 			},
 			loadPlatforms: pageSize => {
-				fetch(`https://api.rawg.io/api/platforms?page_size=${pageSize}`)
+				fetch(`https://api.rawg.io/api/platforms?key=${apiKey}&page_size=${pageSize}`)
 					.then(function(response) {
 						if (!response.ok) {
 							throw Error(response.statusText);
@@ -874,7 +874,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 			},
 			looking: gameName => {
-				fetch(`https://api.rawg.io/api/games?search=${gameName}&page_size=6`)
+				fetch(`https://api.rawg.io/api/games?key=${apiKey}&search=${gameName}&page_size=6`)
 					.then(function(response) {
 						if (!response.ok) {
 							throw Error(response.statusText);

@@ -219,7 +219,7 @@ export const UserProfileUpdate = props => {
 	return (
 		<Container>
 			<Row>
-				<Card bg="dark" style={{ width: "100%", height: "100%" }} className="mb-2">
+				<Card bg="light" style={{ width: "100%", height: "100%" }} className="mb-2">
 					<Card.Header>
 						<h5>User</h5>
 					</Card.Header>
@@ -278,7 +278,7 @@ export const UserProfileUpdate = props => {
 				</Card>
 			</Row>
 			<Row>
-				<Card bg="dark" style={{ width: "100%", height: "100%" }} className="mb-2">
+				<Card bg="light" style={{ width: "100%", height: "100%" }} className="mb-2">
 					<Card.Header>
 						<h5>Is now playing!</h5>
 					</Card.Header>
@@ -421,7 +421,7 @@ export const UserProfileUpdate = props => {
 				</Card>
 			</Row>
 			<Row>
-				<Card bg="dark" style={{ width: "100%", height: "100%" }} className="mb-2">
+				<Card bg="light" style={{ width: "100%", height: "100%" }} className="mb-2">
 					<Card.Header>
 						<h5>Platforms</h5>
 					</Card.Header>
@@ -512,7 +512,7 @@ export const UserProfileUpdate = props => {
 				</Card>
 			</Row>
 			<Row>
-				<Card bg="dark" style={{ width: "100%", height: "100%" }} className="mb-2">
+				<Card bg="light" style={{ width: "100%", height: "100%" }} className="mb-2">
 					<Card.Header>
 						<h5>Highlights</h5>
 					</Card.Header>
@@ -815,15 +815,16 @@ export const UserProfileUpdate = props => {
 			</Row>
 			<Row>
 				<Col>
-					<Card bg="dark" style={{ width: "18rem", float: "left" }}>
+					<Card bg="light" id="tags">
 						<Card.Header>Liked</Card.Header>
 						<ListGroup variant="flush">
 							{liked.map((value, index) => {
 								return (
-									<ListGroup.Item key={index} variant="dark">
+									<ListGroup.Item key={index} style={{ color: "black" }} variant="light">
 										{value.name}{" "}
 										<i
-											className="far fa-circle"
+											id="hover"
+											className="far fa-circle transform"
 											style={{ float: "right" }}
 											onClick={e => handleMiddleL(value)}
 										/>
@@ -834,20 +835,22 @@ export const UserProfileUpdate = props => {
 					</Card>
 				</Col>
 				<Col>
-					<Card bg="dark" style={{ width: "18rem", float: "left" }}>
+					<Card bg="light" id="tags">
 						<Card.Header>Tags</Card.Header>
 						<ListGroup variant="flush">
 							{tags.map((value, index) => {
 								return (
-									<ListGroup.Item key={index} variant="dark">
+									<ListGroup.Item key={index} style={{ color: "black" }} variant="light">
 										{value.name}{" "}
 										<i
-											className="fas fa-trophy"
+											id="hover"
+											className="fas fa-trophy transform"
 											style={{ float: "right" }}
 											onClick={e => handleLiked(value)}
 										/>{" "}
 										<i
-											className="fas fa-skull"
+											id="hover"
+											className="fas fa-skull transform"
 											style={{ float: "right" }}
 											onClick={e => handleDisliked(value)}
 										/>
@@ -858,15 +861,16 @@ export const UserProfileUpdate = props => {
 					</Card>
 				</Col>
 				<Col>
-					<Card bg="dark" style={{ width: "18rem", float: "left" }}>
+					<Card bg="light" id="tags" style={{ width: "18rem", height: "100%" }}>
 						<Card.Header>Disliked</Card.Header>
 						<ListGroup variant="flush">
 							{disliked.map((value, index) => {
 								return (
-									<ListGroup.Item key={index} variant="dark">
+									<ListGroup.Item key={index} style={{ color: "black" }} variant="light">
 										{value.name}{" "}
 										<i
-											className="far fa-circle"
+											id="hover"
+											className="far fa-circle transform"
 											style={{ float: "right" }}
 											onClick={e => handleMiddleD(value)}
 										/>

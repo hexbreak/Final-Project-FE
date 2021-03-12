@@ -13,6 +13,7 @@ export const Sorter = props => {
 				<Col className="row justify-content-md-center">
 					<div style={{ float: "right" }}>
 						<Button
+							id="btn"
 							variant="primary"
 							onClick={
 								props.inverted == false ? e => props.setInverted(true) : e => props.setInverted(false)

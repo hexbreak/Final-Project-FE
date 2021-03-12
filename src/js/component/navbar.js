@@ -23,7 +23,7 @@ export const Navbar = () => {
 	return (
 		<nav className="navbar navbar-dark mb-1 mt-1 container-fluid">
 			<Link to="/">
-				<span className="navbar-brand mb-0 h1" id="logo">
+				<span className="navbar-brand mb-0 h1" id="hover">
 					Game
 					<i className="fas fa-gamepad m-2" />
 					Finder
@@ -50,7 +50,14 @@ export const Navbar = () => {
 							className="dropdown-content"
 							style={{ display: "show", position: "absolute", zIndex: "300" }}>
 							{store.searchBar.map((value, index) => {
-								return <GameCard className="card" key={index} game={value} />;
+								return (
+									<GameCard
+										className="card"
+										key={index}
+										game={value}
+										cleanSearch={e => setGameName("")}
+									/>
+								);
 							})}
 						</div>
 					)}

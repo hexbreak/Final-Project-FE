@@ -6,7 +6,7 @@ export const UserTags = () => {
 	const { store, actions } = useContext(Context);
 	return (
 		<Container>
-			<Card bg="dark" style={{ width: "18rem", height: "100%", float: "left" }}>
+			<Card bg="dark" id="tags" style={{ float: "left" }}>
 				<Card.Header>Liked</Card.Header>
 				<ListGroup variant="flush">
 					{store.user.tags.liked.map((value, index) => {
@@ -18,7 +18,7 @@ export const UserTags = () => {
 					})}
 				</ListGroup>
 			</Card>
-			<Card bg="dark" style={{ width: "18rem", height: "100%", float: "right" }}>
+			<Card bg="dark" id="tags" style={{ float: "right" }}>
 				<Card.Header>Disliked</Card.Header>
 				<ListGroup variant="flush">
 					{store.user.tags.disliked.map((value, index) => {
