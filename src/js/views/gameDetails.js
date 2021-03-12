@@ -96,7 +96,7 @@ export const GameDetails = props => {
 					</Nav>
 					<br />
 					<br />
-					<Tab.Content>
+					<Tab.Content className="space">
 						<Tab.Pane eventKey="details">
 							<Row>
 								<Col>

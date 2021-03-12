@@ -217,7 +217,7 @@ export const UserProfileUpdate = props => {
 		setDisliked(array);
 	};
 	return (
-		<Container>
+		<Container className="space">
 			<Row>
 				<Card bg="light" style={{ width: "100%", height: "100%" }} className="mb-2">
 					<Card.Header>
@@ -881,7 +881,7 @@ export const UserProfileUpdate = props => {
 					</Card>
 				</Col>
 			</Row>
-			<Row>
+			<Row style={{ marginTop: "2rem" }}>
 				<Button variant="dark" onClick={e => handleSave()}>
 					Save Changes
 				</Button>

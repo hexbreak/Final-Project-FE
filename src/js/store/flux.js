@@ -699,7 +699,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				return setStore({ addedByPlayers: playerlist });
 			},
 			loadLists: pageNumber => {
-				fetch(`https://api.rawg.io/api/games?key=${apiKey}&ordering=-metacritic&page=${pageNumber}`)
+				fetch(`https://api.rawg.io/api/games?ordering=-metacritic&page=${pageNumber}`)
 					.then(function(response) {
 						if (!response.ok) {
 							throw Error(response.statusText);
@@ -748,7 +748,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					});
 			},
 			loadSuperSearch: (gameName, pagination, genres, tags, sort, platforms) => {
-				let get = `https://api.rawg.io/api/games?key=${apiKey}`;
+				let get = `https://api.rawg.io/api/games?key=${apiKey}&page_size=25`;
 				let filters = {
 					search: gameName,
 					page: pagination,

@@ -12,7 +12,7 @@ import PropTypes from "prop-types";
 export const UserProfile = props => {
 	const { store, actions } = useContext(Context);
 	return (
-		<div className="container container-profile mt-5">
+		<div className="container container-profile mt-5 space">
 			<div className="row row-1">
 				<div className="col col-">
 					<div className="user-name">{store.user.username}</div>
@@ -29,7 +29,7 @@ export const UserProfile = props => {
 						<div className="card-body">
 							<UserAbout />
 							<Link to="/editprofile">
-								<Button variant="dark">Edit Profile</Button>
+								<Button variant="light">Edit Profile</Button>
 							</Link>
 						</div>
 					</div>

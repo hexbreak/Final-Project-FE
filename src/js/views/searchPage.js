@@ -20,12 +20,17 @@ import PropTypes from "prop-types";
 export const SearchPage = props => {
 	const { store, actions } = useContext(Context);
 	const [gameName, setGameName] = useState("");
-	const [sortKey, setSort] = useState("metacritic");
+	const [sortKey, setSort] = useState("");
 	const [inverted, setInverted] = useState(true);
 	const [pagination, setPagination] = useState(1);
 	const [tags, setTags] = useState(null);
 	const [genres, setGenres] = useState(null);
 	const [platforms, setPlatforms] = useState(null);
+	const [listPart1, setListPart1] = useState([]);
+	const [listPart2, setListPart2] = useState([]);
+	const [listPart3, setListPart3] = useState([]);
+	const [listPart4, setListPart4] = useState([]);
+	const [listPart5, setListPart5] = useState([]);
 	useEffect(() => {
 		const loadSearch = () => {
 			actions.loadTags("40");
@@ -50,7 +55,7 @@ export const SearchPage = props => {
 		realSearch();
 	}, [sortKey, pagination, inverted, tags, genres, platforms, gameName]);
 	return (
-		<Container fluid>
+		<Container fluid className="space">
 			<Row>
 				<Row>
 					<Col>
@@ -132,18 +137,14 @@ export const SearchPage = props => {
 				</Col>
 				<Sorter setSort={setSort} sortKey={sortKey} setInverted={setInverted} inverted={inverted} />
 			</Row>
-			{store.superSearch[0] != undefined &&
-				store.superSearch.map((value, index) => {
-					return (
-						<Row key={index}>
-							{index < 20 && (
-								<Col>
-									<GameCard className="card" game={value} />
-								</Col>
-							)}
-						</Row>
-					);
-				})}
+			<Row>
+				{store.superSearch[0] != undefined &&
+					store.superSearch.map((value, index) => {
+						return (
+							<GameCard className="card" key={index} game={value} cleanSearch={e => setGameName("")} />
+						);
+					})}
+			</Row>
 		</Container>
 	);
 };

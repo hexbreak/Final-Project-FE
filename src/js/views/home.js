@@ -66,10 +66,10 @@ export const Home = () => {
 						</Col>
 					</Row>
 					<br />
-					<Row>
+					<Row className="space">
 						<Col>
 							<h1>User Rating</h1>
-							<div style={{ marginBottom: "5rem" }} className="scroller">
+							<div className="scroller">
 								{store.gameRatingList.map((value, index) => {
 									return <GameCard className="card" key={index} game={value} />;
 								})}

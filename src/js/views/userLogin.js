@@ -12,7 +12,7 @@ import PropTypes from "prop-types";
 export const UserLogin = props => {
 	const { store, actions } = useContext(Context);
 	return (
-		<Container>
+		<Container className="space">
 			<Row>
 				<Col md={{ span: 3, offset: 0 }}>
 					<Card bg="dark" style={{ width: "50rem", height: "100%" }} className="mb-2">

@@ -21,7 +21,7 @@ export const Navbar = () => {
 		}
 	};
 	return (
-		<nav className="navbar navbar-dark mb-1 mt-1 container-fluid">
+		<nav className="navbar mb-1 mt-1 container-fluid">
 			<Link to="/">
 				<span className="navbar-brand mb-0 h1" id="hover">
 					Game

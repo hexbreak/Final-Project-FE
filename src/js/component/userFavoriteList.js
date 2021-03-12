@@ -8,12 +8,12 @@ export const UserFavoriteList = props => {
 	const { store, actions } = useContext(Context);
 	let history = useHistory();
 	return (
-		<Card bg="dark" style={{ width: "25rem" }}>
+		<Card bg="light" style={{ width: "25rem" }}>
 			<Card.Header>Favorites</Card.Header>
-			<ListGroup variant="flush dark">
+			<ListGroup variant="flush light">
 				{store.user.favorites.map((value, index) => {
 					return (
-						<ListGroup.Item variant="dark" key={index}>
+						<ListGroup.Item variant="light" key={index}>
 							<span
 								onClick={e => history.push({ pathname: `/details/${value.id}`, state: value.id })}
 								style={{ cursor: "pointer" }}>
