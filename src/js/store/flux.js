@@ -1,5 +1,5 @@
 const getState = ({ getStore, getActions, setStore }) => {
-	const beURL = "https://3000-bronze-earwig-hbuagomx.ws-us03.gitpod.io"; // Use ${beURL} to make it easier when handling the BE's constant URL changes
+	const beURL = "http://3000-bronze-earwig-hbuagomx.ws-us03.gitpod.io/"; // Use ${beURL} to make it easier when handling the BE's constant URL changes
 	const apiKey = "33af10ad5812440abf75a35c04492e15";
 	return {
 		store: {
@@ -77,17 +77,14 @@ const getState = ({ getStore, getActions, setStore }) => {
 					})
 					.catch(error => console.error("Error:", error));
 			},
-			// Login Account // incomplete code until JWT integration
-			loginUser: user => {
+			// Login & generate token
+			loginUser: login_user => {
 				fetch(`${beURL}/user/` + id, {
 					method: "POST",
 					headers: {
 						"Content-Type": "application/json"
 					},
-					body: JSON.stringify({
-						username: username,
-						password: password
-					})
+					body: JSON.stringify(login_user) // converting in string for the backend
 				})
 					.then(response => {
 						if (!response.ok) {
