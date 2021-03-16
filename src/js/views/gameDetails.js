@@ -111,7 +111,7 @@ export const GameDetails = props => {
 					<br />
 					<Tab.Content className="space">
 						<Tab.Pane eventKey="details">
-							<Row>
+							<Row className="center detailspace">
 								<Col>
 									<div>
 										<h3>Platforms</h3>
@@ -141,7 +141,7 @@ export const GameDetails = props => {
 									</div>
 								</Col>
 							</Row>
-							<Row>
+							<Row className="center detailspace">
 								<Col>
 									<div>
 										<h3>Developers</h3>
@@ -172,7 +172,7 @@ export const GameDetails = props => {
 									</div>
 								</Col>
 							</Row>
-							<Row>
+							<Row className="center detailspace">
 								<Col>
 									<h3> Downloadable Content </h3>
 									<Row id="detailsGameCardsRow">
@@ -190,7 +190,7 @@ export const GameDetails = props => {
 									</Row>
 								</Col>
 							</Row>
-							<Row>
+							<Row className="center detailspace">
 								<Col>
 									<h3> Game Series </h3>
 									<Row id="detailsGameCardsRow">
@@ -208,7 +208,7 @@ export const GameDetails = props => {
 									</Row>
 								</Col>
 							</Row>
-							<Row>
+							<Row className="center detailspace">
 								<Col>
 									<h3>Website</h3>
 									{store.game.reddit_url != "" && (
@@ -231,16 +231,16 @@ export const GameDetails = props => {
 										})}
 								</Col>
 							</Row>
-							<Row>
-								<h3>PC Requirements</h3>
+							<Row className="center detailspace">
+								<h3 className="center">PC Requirements</h3>
 							</Row>
-							<Row>
+							<Row className="detailspace">
 								{!!gameRequirements &&
 									gameRequirements.map((value, index) => {
 										return <Col key={index}>{value}</Col>;
 									})}
 							</Row>
-							<Row>
+							<Row className="center detailspace">
 								<Col>
 									<h3>Similar Games</h3>
 									<Row id="detailsGameCardsRow">
@@ -259,7 +259,7 @@ export const GameDetails = props => {
 							</Row>
 						</Tab.Pane>
 						<Tab.Pane eventKey="statistics">
-							<Row className="center">
+							<Row className="center detailspace">
 								<Col>
 									<h1>Rating</h1>
 									<Row>
@@ -269,7 +269,7 @@ export const GameDetails = props => {
 									</Row>
 								</Col>
 							</Row>
-							<Row className="center">
+							<Row className="center detailspace">
 								<Col>
 									<h3>Metascore</h3>
 									<h5 className="detailsbox center detailsNumbers">
@@ -285,7 +285,7 @@ export const GameDetails = props => {
 									<h5 className="detailsbox center detailsNumbers">{store.game.added}</h5>
 								</Col>
 							</Row>
-							<Row className="center">
+							<Row className="center detailspace">
 								<Col>
 									<h3>Players Status</h3>
 									<div className="detailsbox center" style={{ height: "fit-content" }}>
@@ -303,7 +303,7 @@ export const GameDetails = props => {
 									{}
 								</Col>
 							</Row>
-							<Row className="center">
+							<Row className="center detailspace">
 								<Col>
 									<h3>Achivements</h3>
 									{store.gameAchievements != null && (
@@ -336,10 +336,10 @@ export const GameDetails = props => {
 							</Row>
 						</Tab.Pane>
 						<Tab.Pane eventKey="store">
-							<Row>
+							<Row className="center detailspace">
 								<Col>
-									<h3>Stores</h3>
-									<div>
+									<h1>Stores</h1>
+									<div className="detailspace">
 										{store.game.stores.map((value, index) => {
 											if (value.store.id == 11 && value.store.url != "") {
 												return (
@@ -448,23 +448,25 @@ export const GameDetails = props => {
 							</Row>
 						</Tab.Pane>
 						<Tab.Pane eventKey="media">
-							<Row>
+							<Row className="center">
 								<Col>
-									<h3>Media</h3>
-									{store.gameTrailers != null &&
-										store.gameTrailers.map((value, index) => {
-											return (
-												<div key={index}>
-													<h3>{value.name}</h3>
-													<video width="400" poster={value.preview} controls>
-														<source src={value.data.max} type="video/mp4" />
-														Your browser does not support HTML video.
-													</video>
-												</div>
-											);
-										})}
+									<h1>Media</h1>
+									<Row style={{ maxWidth: "100rem" }} className="center">
+										{store.gameTrailers != null &&
+											store.gameTrailers.map((value, index) => {
+												return (
+													<div className="center" style={{ marginTop: "3rem" }} key={index}>
+														<h3>{value.name}</h3>
+														<video width="500" poster={value.preview} controls>
+															<source src={value.data.max} type="video/mp4" />
+															Your browser does not support HTML video.
+														</video>
+													</div>
+												);
+											})}
+									</Row>
 									{store.game.clip != null && (
-										<div>
+										<div className="center">
 											<h3>Gameplay</h3>
 											<video width="400" controls>
 												<source src={store.game.clip.clip} type="video/mp4" />

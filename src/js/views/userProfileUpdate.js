@@ -24,57 +24,56 @@ import PropTypes from "prop-types";
 
 export const UserProfileUpdate = props => {
 	const { store, actions } = useContext(Context);
-	const [about, setAbout] = useState(store.user.about);
-	const [image, setImage] = useState(store.user.image);
+	const [about, setAbout] = useState(store.user[0].about);
+	const [image, setImage] = useState(store.user[0].image);
 	const [newPassword, setNewPassword] = useState("");
 	const [confirmPassword, setConfirmPassword] = useState("");
 	const [platform1, setPlatform1] = useState(
-		!!store.user.platforms[0] ? store.user.platforms[0] : { name: null, id: null }
+		!!store.user[0].platforms[0] ? store.user[0].platforms[0] : { name: null, id: null }
 	);
 	const [platform2, setPlatform2] = useState(
-		!!store.user.platforms[1] ? store.user.platforms[1] : { name: null, id: null }
+		!!store.user[0].platforms[1] ? store.user[0].platforms[1] : { name: null, id: null }
 	);
 	const [platform3, setPlatform3] = useState(
-		!!store.user.platforms[2] ? store.user.platforms[2] : { name: null, id: null }
+		!!store.user[0].platforms[2] ? store.user[0].platforms[2] : { name: null, id: null }
 	);
-	const [playing1, setPlaying1] = useState(store.user.playing[0]);
-	const [playing2, setPlaying2] = useState(store.user.playing[1]);
-	const [playing3, setPlaying3] = useState(store.user.playing[2]);
+	const [playing1, setPlaying1] = useState(store.user[0].playing[0]);
+	const [playing2, setPlaying2] = useState(store.user[0].playing[1]);
+	const [playing3, setPlaying3] = useState(store.user[0].playing[2]);
 	const [startedP1, setStartedP1] = useState(
-		!!store.user.game_progression[0] ? store.user.game_progression[0][0] : null
+		!!store.user[0].game_progression[0] ? store.user[0].game_progression[0][0] : null
 	);
 	const [finishedP1, setFinishedP1] = useState(
-		!!store.user.game_progression[0] ? store.user.game_progression[0][1] : null
+		!!store.user[0].game_progression[0] ? store.user[0].game_progression[0][1] : null
 	);
 	const [completedP1, setCompletedP1] = useState(
-		!!store.user.game_progression[0] ? store.user.game_progression[0][2] : null
+		!!store.user[0].game_progression[0] ? store.user[0].game_progression[0][2] : null
 	);
 	const [startedP2, setStartedP2] = useState(
-		!!store.user.game_progression[1] ? store.user.game_progression[1][0] : null
+		!!store.user[0].game_progression[1] ? store.user[0].game_progression[1][0] : null
 	);
 	const [finishedP2, setFinishedP2] = useState(
-		!!store.user.game_progression[1] ? store.user.game_progression[1][1] : null
+		!!store.user[0].game_progression[1] ? store.user[0].game_progression[1][1] : null
 	);
 	const [completedP2, setCompletedP2] = useState(
-		!!store.user.game_progression[1] ? store.user.game_progression[1][2] : null
+		!!store.user[0].game_progression[1] ? store.user[0].game_progression[1][2] : null
 	);
 	const [startedP3, setStartedP3] = useState(
-		!!store.user.game_progression[2] ? store.user.game_progression[2][0] : null
+		!!store.user[0].game_progression[2] ? store.user[0].game_progression[2][0] : null
 	);
 	const [finishedP3, setFinishedP3] = useState(
-		!!store.user.game_progression[2] ? store.user.game_progression[2][1] : null
+		!!store.user[0].game_progression[2] ? store.user[0].game_progression[2][1] : null
 	);
 	const [completedP3, setCompletedP3] = useState(
-		!!store.user.game_progression[2] ? store.user.game_progression[2][2] : null
+		!!store.user[0].game_progression[2] ? store.user[0].game_progression[2][2] : null
 	);
 	const [gamesFound, setGamesFound] = useState("");
 	const [isLooking, setIsLooking] = useState("");
 	const [tags, setTags] = useState([]);
-	const [liked, setLiked] = useState(store.user.tags.liked);
-	const [disliked, setDisliked] = useState(store.user.tags.disliked);
+	const [liked, setLiked] = useState(store.user[0].tags.liked);
+	const [disliked, setDisliked] = useState(store.user[0].tags.disliked);
 	let history = useHistory();
 	useEffect(() => {
-		console.log();
 		const loadSearch = () => {
 			actions.loadTags("40");
 			actions.loadPlatforms("50");
@@ -134,27 +133,29 @@ export const UserProfileUpdate = props => {
 	};
 	const handleSave = () => {
 		if (confirmPassword === newPassword) {
-			var user = {
-				...store.user,
-				password: !!confirmPassword ? newPassword : store.user.password,
-				about: about,
-				image: image,
-				platforms: [platform1, platform2, platform3],
-				playing: [playing1, playing2, playing3],
-				tags: { liked: liked, disliked: disliked },
-				game_progression: [
-					[startedP1, finishedP1, completedP1],
-					[startedP2, finishedP2, completedP2],
-					[startedP3, finishedP3, completedP3]
-				]
-			};
+			var user = [
+				{
+					...store.user[0],
+					password: !!confirmPassword ? newPassword : store.user.password,
+					about: about,
+					image: image,
+					platforms: [platform1, platform2, platform3],
+					playing: [playing1, playing2, playing3],
+					tags: { liked: liked, disliked: disliked },
+					game_progression: [
+						[startedP1, finishedP1, completedP1],
+						[startedP2, finishedP2, completedP2],
+						[startedP3, finishedP3, completedP3]
+					]
+				}
+			];
 			actions.handleSave(user);
 			console.log(user);
 			history.push("/profile");
 		} else {
-			alert("Confirm Password and Password dont Match");
 			setNewPassword("");
 			setConfirmPassword("");
+			alert("Confirm Password and Password dont Match");
 		}
 	};
 	useEffect(() => {

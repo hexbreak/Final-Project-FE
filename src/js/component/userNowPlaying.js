@@ -10,7 +10,7 @@ export const UserNowPlaying = () => {
 		<Card bg="light" style={{ width: "30rem" }}>
 			<Card.Header>Is now playing!</Card.Header>
 			<ListGroup variant="flush">
-				{store.user.playing.map((value, index) => {
+				{store.user[0].playing.map((value, index) => {
 					if (value != null) {
 						return (
 							<ListGroup.Item key={index} variant="light">
