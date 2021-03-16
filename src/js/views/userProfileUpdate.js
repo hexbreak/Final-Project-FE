@@ -149,6 +149,7 @@ export const UserProfileUpdate = props => {
 				]
 			};
 			actions.handleSave(user);
+			console.log(user);
 			history.push("/profile");
 		} else {
 			alert("Confirm Password and Password dont Match");
@@ -433,19 +434,22 @@ export const UserProfileUpdate = props => {
 									<DropdownButton
 										id="dropdown-basic-button"
 										variant="secondary"
-										title={!!platform1.name ? platform1.name : "Select Platform"}>
+										title={!!platform1.platform_name ? platform1.platform_name : "Select Platform"}>
 										{store.platforms[0] != undefined &&
 											store.platforms.map((value, index) => {
 												if (
-													value.name != platform1.name &&
-													value.name != platform2.name &&
-													value.name != platform3.name
+													value.name != platform1.platform_name &&
+													value.name != platform2.platform_name &&
+													value.name != platform3.platform_name
 												) {
 													return (
 														<Dropdown.Item
 															key={index}
 															onClick={e =>
-																setPlatform1({ id: value.id, name: value.name })
+																setPlatform1({
+																	platform_id: value.id,
+																	platform_name: value.name
+																})
 															}>
 															{value.name}
 														</Dropdown.Item>
@@ -459,19 +463,22 @@ export const UserProfileUpdate = props => {
 									<DropdownButton
 										id="dropdown-basic-button"
 										variant="secondary"
-										title={!!platform2.name ? platform2.name : "Select Platform"}>
+										title={!!platform2.platform_name ? platform2.platform_name : "Select Platform"}>
 										{store.platforms[0] != undefined &&
 											store.platforms.map((value, index) => {
 												if (
-													value.name != platform1.name &&
-													value.name != platform2.name &&
-													value.name != platform3.name
+													value.name != platform1.platform_name &&
+													value.name != platform2.platform_name &&
+													value.name != platform3.platform_name
 												) {
 													return (
 														<Dropdown.Item
 															key={index}
 															onClick={e =>
-																setPlatform2({ id: value.id, name: value.name })
+																setPlatform2({
+																	platform_id: value.id,
+																	platform_name: value.name
+																})
 															}>
 															{value.name}
 														</Dropdown.Item>
@@ -485,19 +492,22 @@ export const UserProfileUpdate = props => {
 									<DropdownButton
 										id="dropdown-basic-button"
 										variant="secondary"
-										title={!!platform3.name ? platform3.name : "Select Platform"}>
+										title={!!platform3.platform_name ? platform3.platform_name : "Select Platform"}>
 										{store.platforms[0] != undefined &&
 											store.platforms.map((value, index) => {
 												if (
-													value.name != platform1.name &&
-													value.name != platform2.name &&
-													value.name != platform3.name
+													value.name != platform1.platform_name &&
+													value.name != platform2.platform_name &&
+													value.name != platform3.platform_name
 												) {
 													return (
 														<Dropdown.Item
 															key={index}
 															onClick={e =>
-																setPlatform3({ id: value.id, name: value.name })
+																setPlatform3({
+																	platform_id: value.id,
+																	platform_name: value.name
+																})
 															}>
 															{value.name}
 														</Dropdown.Item>
@@ -518,9 +528,9 @@ export const UserProfileUpdate = props => {
 					</Card.Header>
 					<Card.Body>
 						<Form>
-							{!!platform1.name && (
+							{!!platform1.platform_name && (
 								<div>
-									<h6>{platform1.name}</h6>
+									<h6>{platform1.platform_name}</h6>
 									<Form.Row>
 										<Form.Group as={Col} controlId="formGridEmail">
 											<Form.Label>Started</Form.Label>
@@ -532,7 +542,9 @@ export const UserProfileUpdate = props => {
 													<Form.Control
 														type="text"
 														placeholder="Game name..."
-														onChange={e => handleHiglights(e.target.value, platform1.id)}
+														onChange={e =>
+															handleHiglights(e.target.value, platform1.platform_id)
+														}
 													/>
 													{!!gamesFound &&
 														gamesFound.map((value, index) => {
@@ -562,7 +574,9 @@ export const UserProfileUpdate = props => {
 													<Form.Control
 														type="text"
 														placeholder="Game name..."
-														onChange={e => handleHiglights(e.target.value, platform1.id)}
+														onChange={e =>
+															handleHiglights(e.target.value, platform1.platform_id)
+														}
 													/>
 													{!!gamesFound &&
 														gamesFound.map((value, index) => {
@@ -592,7 +606,9 @@ export const UserProfileUpdate = props => {
 													<Form.Control
 														type="text"
 														placeholder="Game name..."
-														onChange={e => handleHiglights(e.target.value, platform1.id)}
+														onChange={e =>
+															handleHiglights(e.target.value, platform1.platform_id)
+														}
 													/>
 													{!!gamesFound &&
 														gamesFound.map((value, index) => {
@@ -615,9 +631,9 @@ export const UserProfileUpdate = props => {
 									</Form.Row>
 								</div>
 							)}
-							{!!platform2.name && (
+							{!!platform2.platform_name && (
 								<div>
-									<h6>{platform2.name}</h6>
+									<h6>{platform2.platform_name}</h6>
 									<Form.Row>
 										<Form.Group as={Col} controlId="formGridEmail">
 											<Form.Label>Started</Form.Label>
@@ -629,7 +645,9 @@ export const UserProfileUpdate = props => {
 													<Form.Control
 														type="text"
 														placeholder="Game name..."
-														onChange={e => handleHiglights(e.target.value, platform2.id)}
+														onChange={e =>
+															handleHiglights(e.target.value, platform2.platform_id)
+														}
 													/>
 													{!!gamesFound &&
 														gamesFound.map((value, index) => {
@@ -659,7 +677,9 @@ export const UserProfileUpdate = props => {
 													<Form.Control
 														type="text"
 														placeholder="Game name..."
-														onChange={e => handleHiglights(e.target.value, platform2.id)}
+														onChange={e =>
+															handleHiglights(e.target.value, platform2.platform_id)
+														}
 													/>
 													{!!gamesFound &&
 														gamesFound.map((value, index) => {
@@ -689,7 +709,9 @@ export const UserProfileUpdate = props => {
 													<Form.Control
 														type="text"
 														placeholder="Game name..."
-														onChange={e => handleHiglights(e.target.value, platform2.id)}
+														onChange={e =>
+															handleHiglights(e.target.value, platform2.platform_id)
+														}
 													/>
 													{!!gamesFound &&
 														gamesFound.map((value, index) => {
@@ -712,9 +734,9 @@ export const UserProfileUpdate = props => {
 									</Form.Row>
 								</div>
 							)}
-							{!!platform3.name && (
+							{!!platform3.platform_name && (
 								<div>
-									<h6>{platform3.name}</h6>
+									<h6>{platform3.platform_name}</h6>
 									<Form.Row>
 										<Form.Group as={Col} controlId="formGridEmail">
 											<Form.Label>Started</Form.Label>
@@ -726,7 +748,9 @@ export const UserProfileUpdate = props => {
 													<Form.Control
 														type="text"
 														placeholder="Game name..."
-														onChange={e => handleHiglights(e.target.value, platform3.id)}
+														onChange={e =>
+															handleHiglights(e.target.value, platform3.platform_id)
+														}
 													/>
 													{!!gamesFound &&
 														gamesFound.map((value, index) => {
@@ -756,7 +780,9 @@ export const UserProfileUpdate = props => {
 													<Form.Control
 														type="text"
 														placeholder="Game name..."
-														onChange={e => handleHiglights(e.target.value, platform3.id)}
+														onChange={e =>
+															handleHiglights(e.target.value, platform3.platform_id)
+														}
 													/>
 													{!!gamesFound &&
 														gamesFound.map((value, index) => {
@@ -786,7 +812,9 @@ export const UserProfileUpdate = props => {
 													<Form.Control
 														type="text"
 														placeholder="Game name..."
-														onChange={e => handleHiglights(e.target.value, platform3.id)}
+														onChange={e =>
+															handleHiglights(e.target.value, platform3.platform_id)
+														}
 													/>
 													{!!gamesFound &&
 														gamesFound.map((value, index) => {

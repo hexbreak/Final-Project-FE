@@ -1,5 +1,5 @@
 const getState = ({ getStore, getActions, setStore }) => {
-	const beURL = "http://3000-bronze-earwig-hbuagomx.ws-us03.gitpod.io/"; // Use ${beURL} to make it easier when handling the BE's constant URL changes
+	const beURL = "https://3000-bronze-earwig-hbuagomx.ws-us03.gitpod.io/"; // Use ${beURL} to make it easier when handling the BE's constant URL changes
 	const apiKey = "33af10ad5812440abf75a35c04492e15";
 	return {
 		store: {
@@ -7,7 +7,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				// Login, Registration, Username, UserType, UserId, Token, Validation\
 				username: "",
 				password: "",
-				id: 1,
+				id: "",
 				about: "",
 				image: "",
 				favorites: [],
@@ -516,7 +516,26 @@ const getState = ({ getStore, getActions, setStore }) => {
 					});
 			},
 			handleSave: user => {
-				setStore({ user: { 0: user } });
+				fetch(`${beURL}user/1`, {
+					method: "POST",
+					headers: {
+						"Content-Type": "application/json"
+					},
+					body: JSON.stringify(user)
+				})
+					.then(response => {
+						if (!response.ok) {
+							throw Error(response.statusText);
+						}
+						return response.json();
+					})
+					.then(response => {
+						console.log("Success:", response);
+						// Here we work with JSON
+						return setStore({ user: user });
+					});
+				setStore({ user: user }); // OLD setStore
+				// setStore({ user: { 0: user } }); // NEW setStore
 			}
 		}
 	};
