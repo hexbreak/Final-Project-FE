@@ -26,11 +26,6 @@ export const SearchPage = props => {
 	const [tags, setTags] = useState(null);
 	const [genres, setGenres] = useState(null);
 	const [platforms, setPlatforms] = useState(null);
-	const [listPart1, setListPart1] = useState([]);
-	const [listPart2, setListPart2] = useState([]);
-	const [listPart3, setListPart3] = useState([]);
-	const [listPart4, setListPart4] = useState([]);
-	const [listPart5, setListPart5] = useState([]);
 	useEffect(() => {
 		const loadSearch = () => {
 			actions.loadTags("40");
@@ -144,6 +139,16 @@ export const SearchPage = props => {
 							<GameCard className="card" key={index} game={value} cleanSearch={e => setGameName("")} />
 						);
 					})}
+			</Row>
+			<Row className="center">
+				{pagination > 1 && (
+					<Button className="center" variant="dark" onClick={e => setPagination(pagination - 1)}>
+						Previous Page
+					</Button>
+				)}
+				<Button className="center" variant="dark" onClick={e => setPagination(pagination + 1)}>
+					Next Page
+				</Button>
 			</Row>
 		</Container>
 	);

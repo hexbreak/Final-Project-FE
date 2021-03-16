@@ -606,7 +606,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					});
 			},
 			loadSortedGameList: (pageNumber, ordering) => {
-				fetch(`https://api.rawg.io/api/games?key=${apiKey}&ordering=${ordering}&page=${pageNumber}`)
+				fetch(`https://api.rawg.io/api/games?key=${apiKey}&ordering=${ordering}&page=${pageNumber}&page_size=8`)
 					.then(function(response) {
 						if (!response.ok) {
 							throw Error(response.statusText);
@@ -699,7 +699,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				return setStore({ addedByPlayers: playerlist });
 			},
 			loadLists: pageNumber => {
-				fetch(`https://api.rawg.io/api/games?ordering=-metacritic&page=${pageNumber}`)
+				fetch(`https://api.rawg.io/api/games?ordering=-metacritic&page=${pageNumber}&page_size=8`)
 					.then(function(response) {
 						if (!response.ok) {
 							throw Error(response.statusText);
@@ -714,7 +714,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					.catch(function(error) {
 						console.log("Looks like there was a problem: \n", error);
 					});
-				fetch(`https://api.rawg.io/api/games?key=${apiKey}&ordering=-rating&page=${pageNumber}`)
+				fetch(`https://api.rawg.io/api/games?key=${apiKey}&ordering=-rating&page=${pageNumber}&page_size=8`)
 					.then(function(response) {
 						if (!response.ok) {
 							throw Error(response.statusText);
@@ -891,7 +891,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					});
 			},
 			handleSave: user => {
-				setStore({ user: user });
+				setStore({ user: { 0: user } });
 			}
 		}
 	};

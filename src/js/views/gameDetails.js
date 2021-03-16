@@ -34,7 +34,17 @@ export const GameDetails = props => {
 	}, [store.game]);
 	if (!!store.game.rating) {
 		for (let i = 0; i < Math.floor(store.game.rating); i++) {
-			rating.push(<i className="fas fa-star" />);
+			rating.push(
+				<img
+					className="center"
+					src="https://icons.iconarchive.com/icons/goodstuff-no-nonsense/free-space/1024/space-invader-icon.png"
+					alt={i}
+					style={{
+						height: "5rem",
+						width: "auto"
+					}}
+				/>
+			);
 		}
 	}
 	if (store.game.platforms != null) {
@@ -52,10 +62,11 @@ export const GameDetails = props => {
 	if (store.game.id == props.location.state) {
 		return (
 			<Container fluid>
-				<Jumbotron className="text-dark">
+				<Jumbotron className="text-dark" style={{ backgroundColor: "white" }}>
 					<Container>
 						<div>
 							<img
+								className="rounded"
 								src={
 									store.game.background_image != null
 										? store.game.background_image
@@ -64,34 +75,36 @@ export const GameDetails = props => {
 								alt="First slide"
 							/>
 						</div>
-						<h1>{store.game.name}</h1>
-						<p>{store.game.description_raw}</p>
+						<h1 style={{ margin: "1.5rem 0 1.5rem 0" }}>{store.game.name}</h1>
+						<p style={{ lineHeight: "1.8rem" }}>{store.game.description_raw}</p>
 					</Container>
 				</Jumbotron>
 				<Tab.Container defaultActiveKey="details">
 					<Nav variant="pills" style={{ height: "3rem" }} className="flex-column">
 						<Row>
 							<Nav.Item>
-								<Nav.Link eventKey="details">
-									<h1>Details</h1>
+								<Nav.Link bg="light" variant="light" eventKey="details">
+									<h4>Details</h4>
 								</Nav.Link>
 							</Nav.Item>
 							<Nav.Item>
 								<Nav.Link eventKey="statistics">
-									<h1>Statistics</h1>
+									<h4>Statistics</h4>
 								</Nav.Link>
 							</Nav.Item>
 							<Nav.Item>
 								<Nav.Link eventKey="store">
-									<h1>Store</h1>
+									<h4>Store</h4>
 								</Nav.Link>
 							</Nav.Item>
 							<Nav.Item>
 								<Nav.Link eventKey="media">
-									<h1>Media</h1>
+									<h4>Media</h4>
 								</Nav.Link>
 							</Nav.Item>
-							{/* <Button onClick={() => actions.addtoFavorites()}>Add to Favorites</Button> */}
+							<Button variant="danger" onClick={() => actions.addtoFavorites()}>
+								Add to Favorites
+							</Button>
 						</Row>
 					</Nav>
 					<br />
@@ -101,7 +114,7 @@ export const GameDetails = props => {
 							<Row>
 								<Col>
 									<div>
-										<h1>Platforms</h1>
+										<h3>Platforms</h3>
 										<h5>
 											{store.game.platforms != null &&
 												store.game.platforms.map((value, index) => {
@@ -112,7 +125,7 @@ export const GameDetails = props => {
 								</Col>
 								<Col>
 									<div>
-										<h1>Genres</h1>
+										<h3>Genres</h3>
 										<h5>
 											{store.game.genres != null &&
 												store.game.genres.map((value, index) => {
@@ -123,7 +136,7 @@ export const GameDetails = props => {
 								</Col>
 								<Col>
 									<div>
-										<h1>Release Date</h1>
+										<h3>Release Date</h3>
 										<h5>{store.game.released != null && store.game.released}</h5>
 									</div>
 								</Col>
@@ -131,7 +144,7 @@ export const GameDetails = props => {
 							<Row>
 								<Col>
 									<div>
-										<h1>Developers</h1>
+										<h3>Developers</h3>
 										<h5>
 											{store.game.developers != null &&
 												store.game.developers.map((value, index) => {
@@ -142,7 +155,7 @@ export const GameDetails = props => {
 								</Col>
 								<Col>
 									<div>
-										<h1>Publishers</h1>
+										<h3>Publishers</h3>
 										<h5>
 											{Array.isArray(store.game.publishers) &&
 												store.game.publishers.length > 0 &&
@@ -154,36 +167,50 @@ export const GameDetails = props => {
 								</Col>
 								<Col>
 									<div>
-										<h1>Age Ranting</h1>
+										<h3>Age Ranting</h3>
 										<h5>{store.game.esrb_rating != null && store.game.esrb_rating.name}</h5>
 									</div>
 								</Col>
 							</Row>
 							<Row>
 								<Col>
-									<h1> Downloadable Content </h1>
-									<div className="scroller">
+									<h3> Downloadable Content </h3>
+									<Row id="detailsGameCardsRow">
 										{store.dlcsList != null &&
 											store.dlcsList.map((value, index) => {
-												return <GameCard className="card" key={index} game={value} />;
+												return (
+													<GameCard
+														id={"detailsCard"}
+														className="card"
+														key={index}
+														game={value}
+													/>
+												);
 											})}
-									</div>
+									</Row>
 								</Col>
 							</Row>
 							<Row>
 								<Col>
-									<h1> Game Series </h1>
-									<div className="scroller">
+									<h3> Game Series </h3>
+									<Row id="detailsGameCardsRow">
 										{store.otherGamesList != null &&
 											store.otherGamesList.map((value, index) => {
-												return <GameCard className="card" key={index} game={value} />;
+												return (
+													<GameCard
+														id={"detailsCard"}
+														className="card"
+														key={index}
+														game={value}
+													/>
+												);
 											})}
-									</div>
+									</Row>
 								</Col>
 							</Row>
 							<Row>
 								<Col>
-									<h1>Website</h1>
+									<h3>Website</h3>
 									{store.game.reddit_url != "" && (
 										<a href={store.game.reddit_url} target="_blank" rel="noreferrer">
 											<i className="fab fa-reddit website" />
@@ -197,7 +224,7 @@ export const GameDetails = props => {
 									)}
 								</Col>
 								<Col>
-									<h1>Tags</h1>
+									<h3>Tags</h3>
 									{store.game.tags != null &&
 										store.game.tags.map((value, index) => {
 											return ` ${value.name}`;
@@ -205,7 +232,7 @@ export const GameDetails = props => {
 								</Col>
 							</Row>
 							<Row>
-								<h1>PC Requirements</h1>
+								<h3>PC Requirements</h3>
 							</Row>
 							<Row>
 								{!!gameRequirements &&
@@ -214,77 +241,83 @@ export const GameDetails = props => {
 									})}
 							</Row>
 							<Row>
-								<h1>Similar Games</h1>
-								<div className="scroller">
-									{store.similarGamesList.map((value, index) => {
-										return <GameCard className="card" key={index} game={value} />;
-									})}
-								</div>
+								<Col>
+									<h3>Similar Games</h3>
+									<Row id="detailsGameCardsRow">
+										{store.similarGamesList.map((value, index) => {
+											return (
+												<GameCard
+													id={"detailsCard"}
+													className="card"
+													key={index}
+													game={value}
+												/>
+											);
+										})}
+									</Row>
+								</Col>
 							</Row>
 						</Tab.Pane>
 						<Tab.Pane eventKey="statistics">
-							<Row>
+							<Row className="center">
 								<Col>
 									<h1>Rating</h1>
-									<div
-										className="style"
-										style={{
-											color: "red",
-											fontSize: "4rem",
-											width: "25rem",
-											textAlign: "center"
-										}}>
+									<Row>
 										{rating.map((value, index) => {
 											return value;
 										})}
-									</div>
+									</Row>
 								</Col>
 							</Row>
-							<Row>
+							<Row className="center">
 								<Col>
-									<h1>Metascore</h1>
-									<h5>{store.game.metacritic != null && store.game.metacritic}</h5>
+									<h3>Metascore</h3>
+									<h5 className="detailsbox center detailsNumbers">
+										{store.game.metacritic != null && store.game.metacritic}
+									</h5>
 								</Col>
 								<Col>
-									<h1>Rating Count</h1>
-									<h5>{store.game.ratings_count}</h5>
+									<h3>Rating Count</h3>
+									<h5 className="detailsbox center detailsNumbers">{store.game.ratings_count}</h5>
 								</Col>
 								<Col>
-									<h1>Added on Players</h1>
-									<h5>{store.game.added}</h5>
+									<h3>Added on Players</h3>
+									<h5 className="detailsbox center detailsNumbers">{store.game.added}</h5>
 								</Col>
 							</Row>
-							<Row>
+							<Row className="center">
 								<Col>
-									<h1>Players Status</h1>
-									<div className="style">
+									<h3>Players Status</h3>
+									<div className="detailsbox center" style={{ height: "fit-content" }}>
 										{store.addedByPlayers.map((value, index) => {
 											return (
 												<div key={index}>
-													<h5 style={{ marginLeft: "1rem" }}> {capitalize(value)}</h5>
+													<h5> {capitalize(value)}</h5>
 												</div>
 											);
 										})}
 									</div>
 								</Col>
 								<Col>
-									<h1>People on Favorites</h1>
+									<h3>People on Favorites</h3>
 									{}
 								</Col>
 							</Row>
-							<Row>
+							<Row className="center">
 								<Col>
-									<h1>Achivements</h1>
-									{store.gameAchievements != null &&
-										store.gameAchievements.map((value, index) => {
-											return (
-												<div key={index}>
-													<br />
+									<h3>Achivements</h3>
+									{store.gameAchievements != null && (
+										<Row style={{ maxWidth: "85rem" }} className="center">
+											{store.gameAchievements.map((value, index) => {
+												return (
 													<div
-														className="style"
+														key={index}
+														className="center detailsbox fit"
 														style={{
-															width: "50rem",
-															textAlign: "center"
+															width: "40rem",
+															textAlign: "center",
+															height: "fit-content",
+															margin: "1rem"
 														}}>
 														<h1>{value.name}</h1>
 														<p>{value.description}</p>
@@ -295,16 +328,17 @@ export const GameDetails = props => {
 														/>
 														<h6>%{value.percent}</h6>
 													</div>
-												</div>
-											);
-										})}
+												);
+											})}
+										</Row>
+									)}
 								</Col>
 							</Row>
 						</Tab.Pane>
 						<Tab.Pane eventKey="store">
 							<Row>
 								<Col>
-									<h1>Stores</h1>
+									<h3>Stores</h3>
 									<div>
 										{store.game.stores.map((value, index) => {
 											if (value.store.id == 11 && value.store.url != "") {
@@ -416,7 +450,7 @@ export const GameDetails = props => {
 						<Tab.Pane eventKey="media">
 							<Row>
 								<Col>
-									<h1>Media</h1>
+									<h3>Media</h3>
 									{store.gameTrailers != null &&
 										store.gameTrailers.map((value, index) => {
 											return (

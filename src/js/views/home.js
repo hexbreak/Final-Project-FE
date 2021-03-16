@@ -28,55 +28,72 @@ export const Home = () => {
 	if (store.sortedGameList[0] != undefined) {
 		if (store.sortedGameList[0].name != undefined) {
 			return (
-				<Container fluid>
-					<Row>
-						<Col className="row justify-content-md-center">
-							<GameCarousel />
-						</Col>
-					</Row>
-					<br />
-					<br />
-					<br />
-					<br />
-					<Row>
-						<Col className="row justify-content-md-center">
-							<Sorter setSort={setSort} sortKey={sortKey} setInverted={setInverted} inverted={inverted} />
-						</Col>
-					</Row>
-					<br />
-					<Row>
-						<Col>
-							<h1>Sortable Games</h1>
-							<div className="scroller">
-								{store.sortedGameList.map((value, index) => {
-									return <GameCard className="card" key={index} game={value} />;
-								})}
-							</div>
-						</Col>
-					</Row>
-					<br />
-					<Row>
-						<Col>
-							<h1>Metacritic Rating</h1>
-							<div className="scroller">
-								{store.gameMetacriticList.map((value, index) => {
-									return <GameCard className="card" key={index} game={value} />;
-								})}
-							</div>
-						</Col>
-					</Row>
-					<br />
-					<Row className="space">
-						<Col>
-							<h1>User Rating</h1>
-							<div className="scroller">
-								{store.gameRatingList.map((value, index) => {
-									return <GameCard className="card" key={index} game={value} />;
-								})}
-							</div>
-						</Col>
-					</Row>
-				</Container>
+				<>
+					<div className="header">
+						<p id="banner-font">A place to find games you love...</p>
+					</div>
+					<Container fluid style={{ marginTop: " -1.5rem" }}>
+						<Row style={{ marginTop: "45px" }}>
+							<Col className="row justify-content-md-center">
+								<GameCarousel />
+							</Col>
+						</Row>
+						<Row style={{ marginTop: "13rem" }} className="spacing">
+							<Col className="center">
+								<h2 className="subtitle center">Sortable Games</h2>
+								<div className="center content">
+									<Sorter
+										setSort={setSort}
+										sortKey={sortKey}
+										setInverted={setInverted}
+										inverted={inverted}
+									/>
+								</div>
+								<Row className="scroller fit center" style={{ marginTop: "1rem" }}>
+									{store.sortedGameList.map((value, index) => {
+										return <GameCard className="card" key={index} game={value} />;
+									})}
+								</Row>
+								<Row className="center">
+									{pagination > 1 && (
+										<Button
+											className="center"
+											variant="dark"
+											onClick={e => setPagination(pagination - 1)}>
+											Previous Page
+										</Button>
+									)}
+									<Button
+										className="center"
+										variant="dark"
+										onClick={e => setPagination(pagination + 1)}>
+										Next Page
+									</Button>
+								</Row>
+							</Col>
+						</Row>
+						<Row className="spacing">
+							<Col>
+								<h2 className="subtitle center">Metacritic Rating</h2>
+								<Row className="scroller fit center content">
+									{store.gameMetacriticList.map((value, index) => {
+										return <GameCard className="card" key={index} game={value} />;
+									})}
+								</Row>
+							</Col>
+						</Row>
+						<Row className="space" style={{ marginTop: "10rem" }}>
+							<Col>
+								<h2 className="subtitle center">User Rating</h2>
+								<Row className="scroller fit center" style={{ marginTop: "3rem" }}>
+									{store.gameRatingList.map((value, index) => {
+										return <GameCard className="card" key={index} game={value} />;
+									})}
+								</Row>
+							</Col>
+						</Row>
+					</Container>
+				</>
 			);
 		} else {
 			return <h1>Loading...</h1>;

@@ -3,29 +3,49 @@
 */
 @import "~bootstrap/scss/bootstrap";
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Fira+Sans:ital@1&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cabin&display=swap');
+
 .gameimg{
     width: 50em;
     height: 30em;
 }
 .scroller{
-    overflow-x: scroll;
-	overflow-y: hidden;
     display: flex;
     background-image: gray;
-    width: 110rem;
-    margin-left: 3rem;
+    width: 91rem;
     height: 13rem;
+    overflow: visible;
 }
 .card{
-    width: 18rem;
-    height: 10rem;
+    width: 20rem;
+    height: 20rem;
     flex: 0 0 auto;
     margin-top: 1rem;
 }
-
+//navbar cards
+#navCard{
+    width: 18rem;
+    height: 10rem;
+}
+//centering
+.center{
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
+//make divs fit content
+.fit{
+    height: fit-content;
+}
+//space in between landing page
+.spacing{
+    margin-top: 14rem;
+}
 //space before footer
 .space{
-    margin-bottom: 5rem
+    margin-bottom: 5rem;
 }
 // navbar
 
@@ -40,6 +60,16 @@
     &:hover {
         color: rgb(255, 184, 4);
         
+    }
+}
+
+#hover-logo{
+    color: black;
+    transition: color 300ms ease-in-out;
+
+    &:hover {
+        color: white;
+        //color: rgb(255, 184, 4);
     }
 }
 
@@ -69,10 +99,10 @@
     }
 }
 
-.carousel-image{
-    box-shadow: 0px 3px 10px rgba(0,0,0,0.15);
+// .carousel-image{
+//     box-shadow: 0px 3px 10px rgba(0,0,0,0.15);
 
-}
+// }
 
 //buttons
 #btn{
@@ -83,16 +113,34 @@
     }
 }
 
+//h2 
+h2{
+    font-size: 2.1875rem;
+    font-weight: 600;
+    font-family: 'Bebas Neue', cursive;
+}
+
+//banner
+#banner-font{
+    margin-bottom: 0;
+    margin-top: 0.3125rem;
+}
 
 // body
 
 body{
     // background-color: rgb(24, 20, 20);
-    background-color: rgba(255, 255, 255, 0.911);
+    // background: rgb(222,188,15);
+    // background: rgb(255,255,255);
+    background: linear-gradient(0deg, rgba(255,255,255,1) 0%, rgba(255,255,251,1) 14%, rgba(255,255,193,1) 28%, rgba(255,255,165,1) 45%, rgba(255,255,137,1) 60%, rgba(255,230,110,1) 76%, rgba(242,202,83,1) 88%, rgba(212,175,55,1) 100%);
     color: black;
     max-width: 100%;
     max-height: 100%;
+    background-repeat: no-repeat;
+    background-position: 0px 0px;
+    background-size: auto;
     font-family: 'Noto Sans JP', sans-serif;
+    overflow-x: hidden;
 }
 
 ::-webkit-scrollbar {
@@ -106,12 +154,12 @@ body{
  
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: rgb(243, 201, 63); 
+    background: rgb(243, 201, 63); 
 }
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-  background: rgb(216, 177, 47); 
+    background: rgb(216, 177, 47); 
 }
 .detailsImage{
     width: 50%;
@@ -165,6 +213,7 @@ img{
 .store {
     width: 10rem;
     height: 10rem;
+    margin-left: 1rem;
 }
 .achivement {
     width: 5rem;
@@ -173,7 +222,7 @@ img{
 .website {
     font-size: 5rem;
     margin-left: 1rem;
-    color: lightgray
+    color: lightgray;
 }
 .btn-group{
     white-space: normal;
@@ -183,5 +232,46 @@ img{
 
 #tags{
     width: 18rem;
-     height: 100%;
+    height: 100%;
+}
+//header
+.header {
+    text-align: center;
+    color: white;
+    font-size: 30px;
+    font-family: 'Bebas Neue', cursive;
+font-family: 'Fira Sans', sans-serif;
+}
+.row{
+    margin-left: auto;
+    margin-right: auto;
+}
+.content{
+    margin-top: 3rem
+}
+#detailsCard{
+    width: 13rem;
+    height: 13rem;
+}
+
+//detailsPage
+#detailsGameCardsRow{
+    overflow: auto;
+    width: 95em;
+    height: 15rem;
+}
+.detailsbox{
+    font-family: 'Cabin', sans-serif;
+    border-width: 3px;
+    border-color: green;
+    border-style: solid;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    height: 3rem;
+    width: fit-content;
+    padding: 1em;
+    padding-bottom: 2em
+}
+.detailsNumbers{
+    font-size: 3rem;
+    border-radius: 50%;
 }

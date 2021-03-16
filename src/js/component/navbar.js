@@ -23,7 +23,7 @@ export const Navbar = () => {
 	return (
 		<nav className="navbar mb-1 mt-1 container-fluid">
 			<Link to="/">
-				<span className="navbar-brand mb-0 h1" id="hover">
+				<span className="navbar-brand mb-0 h1" id="hover-logo">
 					Game
 					<i className="fas fa-gamepad m-2" />
 					Finder
@@ -40,7 +40,7 @@ export const Navbar = () => {
 						value={gameName}
 						aria-haspopup="true"
 						aria-expanded="false"
-						style={{ width: "50em" }}
+						style={{ width: "50rem" }}
 					/>
 					{gameName != "" && <i className="fas fa-times float-right" onClick={e => setGameName("")} />}
 					{store.searchBar[0] != undefined && gameName != "" && (
@@ -52,6 +52,7 @@ export const Navbar = () => {
 							{store.searchBar.map((value, index) => {
 								return (
 									<GameCard
+										id={"navCard"}
 										className="card"
 										key={index}
 										game={value}
