@@ -7,11 +7,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				// Login, Registration, Username, UserType, UserId, Token, Validation\
 				username: "",
 				password: "",
-<<<<<<< HEAD
 				id: 1,
-=======
-				id: "",
->>>>>>> 5d26219100c560813f7a304a01bb8fe3aef316ba
 				about: "",
 				image: "",
 				favorites: [],

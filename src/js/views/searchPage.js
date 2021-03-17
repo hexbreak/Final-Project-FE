@@ -53,7 +53,10 @@ export const SearchPage = props => {
 		realSearch();
 	}, [sortKey, pagination, inverted, tags, genres, platforms, gameName]);
 	return (
-		<Container fluid className="space center">
+		<Container
+			fluid
+			style={{ background: "radial-gradient(circle, rgba(174,238,205,1) 0%, rgba(148,187,233,1) 100%)" }}
+			className="space center">
 			<Row className="search-margin center">
 				<Col>
 					{store.genres != null && (
