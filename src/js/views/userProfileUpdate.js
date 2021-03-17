@@ -148,6 +148,7 @@ export const UserProfileUpdate = props => {
 				]
 			};
 			actions.handleSave(user);
+			console.log(user);
 			history.push("/profile");
 		} else {
 			setNewPassword("");
@@ -288,7 +289,7 @@ export const UserProfileUpdate = props => {
 									<Form.Label>Game</Form.Label>
 									<Dropdown onToggle={e => setIsLooking}>
 										<Dropdown.Toggle variant="secondary" id="dropdown-basic">
-											{!!playing1 ? playing1.name : "Select Game"}
+											{!!playing1 ? playing1.game_name : "Select Game"}
 										</Dropdown.Toggle>
 										<Dropdown.Menu>
 											<Form.Control
@@ -304,8 +305,8 @@ export const UserProfileUpdate = props => {
 															onClick={e =>
 																setPlaying1({
 																	...playing1,
-																	name: value.name,
-																	id: value.id
+																	game_name: value.name,
+																	game_id: value.id
 																})
 															}>
 															{value.name}
@@ -332,7 +333,7 @@ export const UserProfileUpdate = props => {
 									<Form.Label>Game</Form.Label>
 									<Dropdown>
 										<Dropdown.Toggle variant="secondary" id="dropdown-basic">
-											{!!playing2 ? playing2.name : "Select Game"}
+											{!!playing2 ? playing2.game_name : "Select Game"}
 										</Dropdown.Toggle>
 										<Dropdown.Menu>
 											<Form.Control
@@ -348,8 +349,8 @@ export const UserProfileUpdate = props => {
 															onClick={e =>
 																setPlaying2({
 																	...playing2,
-																	name: value.name,
-																	id: value.id
+																	game_name: value.name,
+																	game_id: value.id
 																})
 															}>
 															{value.name}
@@ -376,7 +377,7 @@ export const UserProfileUpdate = props => {
 									<Form.Label>Game</Form.Label>
 									<Dropdown>
 										<Dropdown.Toggle variant="secondary" id="dropdown-basic">
-											{!!playing3 ? playing3.name : "Select Game"}
+											{!!playing3 ? playing3.game_name : "Select Game"}
 										</Dropdown.Toggle>
 										<Dropdown.Menu>
 											<Form.Control
@@ -392,8 +393,8 @@ export const UserProfileUpdate = props => {
 															onClick={e =>
 																setPlaying3({
 																	...playing3,
-																	name: value.name,
-																	id: value.id
+																	game_name: value.name,
+																	game_id: value.id
 																})
 															}>
 															{value.name}
@@ -432,19 +433,22 @@ export const UserProfileUpdate = props => {
 									<DropdownButton
 										id="dropdown-basic-button"
 										variant="secondary"
-										title={!!platform1.name ? platform1.name : "Select Platform"}>
+										title={!!platform1.platform_name ? platform1.platform_name : "Select Platform"}>
 										{store.platforms[0] != undefined &&
 											store.platforms.map((value, index) => {
 												if (
-													value.name != platform1.name &&
-													value.name != platform2.name &&
-													value.name != platform3.name
+													value.name != platform1.platform_name &&
+													value.name != platform2.platform_name &&
+													value.name != platform3.platform_name
 												) {
 													return (
 														<Dropdown.Item
 															key={index}
 															onClick={e =>
-																setPlatform1({ id: value.id, name: value.name })
+																setPlatform1({
+																	platform_id: value.id,
+																	platform_name: value.name
+																})
 															}>
 															{value.name}
 														</Dropdown.Item>
@@ -458,19 +462,22 @@ export const UserProfileUpdate = props => {
 									<DropdownButton
 										id="dropdown-basic-button"
 										variant="secondary"
-										title={!!platform2.name ? platform2.name : "Select Platform"}>
+										title={!!platform2.platform_name ? platform2.platform_name : "Select Platform"}>
 										{store.platforms[0] != undefined &&
 											store.platforms.map((value, index) => {
 												if (
-													value.name != platform1.name &&
-													value.name != platform2.name &&
-													value.name != platform3.name
+													value.name != platform1.platform_name &&
+													value.name != platform2.platform_name &&
+													value.name != platform3.platform_name
 												) {
 													return (
 														<Dropdown.Item
 															key={index}
 															onClick={e =>
-																setPlatform2({ id: value.id, name: value.name })
+																setPlatform2({
+																	platform_id: value.id,
+																	platform_name: value.name
+																})
 															}>
 															{value.name}
 														</Dropdown.Item>
@@ -484,19 +491,22 @@ export const UserProfileUpdate = props => {
 									<DropdownButton
 										id="dropdown-basic-button"
 										variant="secondary"
-										title={!!platform3.name ? platform3.name : "Select Platform"}>
+										title={!!platform3.platform_name ? platform3.platform_name : "Select Platform"}>
 										{store.platforms[0] != undefined &&
 											store.platforms.map((value, index) => {
 												if (
-													value.name != platform1.name &&
-													value.name != platform2.name &&
-													value.name != platform3.name
+													value.name != platform1.platform_name &&
+													value.name != platform2.platform_name &&
+													value.name != platform3.platform_name
 												) {
 													return (
 														<Dropdown.Item
 															key={index}
 															onClick={e =>
-																setPlatform3({ id: value.id, name: value.name })
+																setPlatform3({
+																	platform_id: value.id,
+																	platform_name: value.name
+																})
 															}>
 															{value.name}
 														</Dropdown.Item>
@@ -517,21 +527,23 @@ export const UserProfileUpdate = props => {
 					</Card.Header>
 					<Card.Body>
 						<Form>
-							{!!platform1.name && (
+							{!!platform1.platform_name && (
 								<div>
-									<h6>{platform1.name}</h6>
+									<h6>{platform1.platform_name}</h6>
 									<Form.Row>
 										<Form.Group as={Col} controlId="formGridEmail">
 											<Form.Label>Started</Form.Label>
 											<Dropdown>
 												<Dropdown.Toggle variant="secondary" id="dropdown-basic">
-													{!!startedP1 ? startedP1.name : "Select Game"}
+													{!!startedP1 ? startedP1.started_name : "Select Game"}
 												</Dropdown.Toggle>
 												<Dropdown.Menu>
 													<Form.Control
 														type="text"
 														placeholder="Game name..."
-														onChange={e => handleHiglights(e.target.value, platform1.id)}
+														onChange={e =>
+															handleHiglights(e.target.value, platform1.platform_id)
+														}
 													/>
 													{!!gamesFound &&
 														gamesFound.map((value, index) => {
@@ -540,8 +552,8 @@ export const UserProfileUpdate = props => {
 																	key={index}
 																	onClick={e =>
 																		setStartedP1({
-																			name: value.name,
-																			id: value.id
+																			started_name: value.name,
+																			started_id: value.id
 																		})
 																	}>
 																	{value.name}
@@ -555,13 +567,15 @@ export const UserProfileUpdate = props => {
 											<Form.Label>Finished</Form.Label>
 											<Dropdown>
 												<Dropdown.Toggle variant="secondary" id="dropdown-basic">
-													{!!finishedP1 ? finishedP1.name : "Select Game"}
+													{!!finishedP1 ? finishedP1.finished_name : "Select Game"}
 												</Dropdown.Toggle>
 												<Dropdown.Menu>
 													<Form.Control
 														type="text"
 														placeholder="Game name..."
-														onChange={e => handleHiglights(e.target.value, platform1.id)}
+														onChange={e =>
+															handleHiglights(e.target.value, platform1.platform_id)
+														}
 													/>
 													{!!gamesFound &&
 														gamesFound.map((value, index) => {
@@ -570,8 +584,8 @@ export const UserProfileUpdate = props => {
 																	key={index}
 																	onClick={e =>
 																		setFinishedP1({
-																			name: value.name,
-																			id: value.id
+																			finished_name: value.name,
+																			finished_id: value.id
 																		})
 																	}>
 																	{value.name}
@@ -585,13 +599,15 @@ export const UserProfileUpdate = props => {
 											<Form.Label>Completed</Form.Label>
 											<Dropdown>
 												<Dropdown.Toggle variant="secondary" id="dropdown-basic">
-													{!!completedP1 ? completedP1.name : "Select Game"}
+													{!!completedP1 ? completedP1.completed_name : "Select Game"}
 												</Dropdown.Toggle>
 												<Dropdown.Menu>
 													<Form.Control
 														type="text"
 														placeholder="Game name..."
-														onChange={e => handleHiglights(e.target.value, platform1.id)}
+														onChange={e =>
+															handleHiglights(e.target.value, platform1.platform_id)
+														}
 													/>
 													{!!gamesFound &&
 														gamesFound.map((value, index) => {
@@ -600,8 +616,8 @@ export const UserProfileUpdate = props => {
 																	key={index}
 																	onClick={e =>
 																		setCompletedP1({
-																			name: value.name,
-																			id: value.id
+																			completed_name: value.name,
+																			completed_id: value.id
 																		})
 																	}>
 																	{value.name}
@@ -614,21 +630,23 @@ export const UserProfileUpdate = props => {
 									</Form.Row>
 								</div>
 							)}
-							{!!platform2.name && (
+							{!!platform2.platform_name && (
 								<div>
-									<h6>{platform2.name}</h6>
+									<h6>{platform2.platform_name}</h6>
 									<Form.Row>
 										<Form.Group as={Col} controlId="formGridEmail">
 											<Form.Label>Started</Form.Label>
 											<Dropdown>
 												<Dropdown.Toggle variant="secondary" id="dropdown-basic">
-													{!!startedP2 ? startedP2.name : "Select Game"}
+													{!!startedP2 ? startedP2.started_name : "Select Game"}
 												</Dropdown.Toggle>
 												<Dropdown.Menu>
 													<Form.Control
 														type="text"
 														placeholder="Game name..."
-														onChange={e => handleHiglights(e.target.value, platform2.id)}
+														onChange={e =>
+															handleHiglights(e.target.value, platform2.platform_id)
+														}
 													/>
 													{!!gamesFound &&
 														gamesFound.map((value, index) => {
@@ -637,8 +655,8 @@ export const UserProfileUpdate = props => {
 																	key={index}
 																	onClick={e =>
 																		setStartedP2({
-																			name: value.name,
-																			id: value.id
+																			started_name: value.name,
+																			started_id: value.id
 																		})
 																	}>
 																	{value.name}
@@ -652,13 +670,15 @@ export const UserProfileUpdate = props => {
 											<Form.Label>Finished</Form.Label>
 											<Dropdown>
 												<Dropdown.Toggle variant="secondary" id="dropdown-basic">
-													{!!finishedP2 ? finishedP2.name : "Select Game"}
+													{!!finishedP2 ? finishedP2.game_name : "Select Game"}
 												</Dropdown.Toggle>
 												<Dropdown.Menu>
 													<Form.Control
 														type="text"
 														placeholder="Game name..."
-														onChange={e => handleHiglights(e.target.value, platform2.id)}
+														onChange={e =>
+															handleHiglights(e.target.value, platform2.platform_id)
+														}
 													/>
 													{!!gamesFound &&
 														gamesFound.map((value, index) => {
@@ -667,8 +687,8 @@ export const UserProfileUpdate = props => {
 																	key={index}
 																	onClick={e =>
 																		setFinishedP2({
-																			name: value.name,
-																			id: value.id
+																			game_name: value.name,
+																			game_id: value.id
 																		})
 																	}>
 																	{value.name}
@@ -682,13 +702,15 @@ export const UserProfileUpdate = props => {
 											<Form.Label>Completed</Form.Label>
 											<Dropdown>
 												<Dropdown.Toggle variant="secondary" id="dropdown-basic">
-													{!!completedP2 ? completedP2.name : "Select Game"}
+													{!!completedP2 ? completedP2.completed_name : "Select Game"}
 												</Dropdown.Toggle>
 												<Dropdown.Menu>
 													<Form.Control
 														type="text"
 														placeholder="Game name..."
-														onChange={e => handleHiglights(e.target.value, platform2.id)}
+														onChange={e =>
+															handleHiglights(e.target.value, platform2.platform_id)
+														}
 													/>
 													{!!gamesFound &&
 														gamesFound.map((value, index) => {
@@ -697,8 +719,8 @@ export const UserProfileUpdate = props => {
 																	key={index}
 																	onClick={e =>
 																		setCompletedP2({
-																			name: value.name,
-																			id: value.id
+																			completed_name: value.name,
+																			completed_id: value.id
 																		})
 																	}>
 																	{value.name}
@@ -711,21 +733,23 @@ export const UserProfileUpdate = props => {
 									</Form.Row>
 								</div>
 							)}
-							{!!platform3.name && (
+							{!!platform3.platform_name && (
 								<div>
-									<h6>{platform3.name}</h6>
+									<h6>{platform3.platform_name}</h6>
 									<Form.Row>
 										<Form.Group as={Col} controlId="formGridEmail">
 											<Form.Label>Started</Form.Label>
 											<Dropdown>
 												<Dropdown.Toggle variant="secondary" id="dropdown-basic">
-													{!!startedP3 ? startedP3.name : "Select Game"}
+													{!!startedP3 ? startedP3.started_name : "Select Game"}
 												</Dropdown.Toggle>
 												<Dropdown.Menu>
 													<Form.Control
 														type="text"
 														placeholder="Game name..."
-														onChange={e => handleHiglights(e.target.value, platform3.id)}
+														onChange={e =>
+															handleHiglights(e.target.value, platform3.platform_id)
+														}
 													/>
 													{!!gamesFound &&
 														gamesFound.map((value, index) => {
@@ -734,8 +758,8 @@ export const UserProfileUpdate = props => {
 																	key={index}
 																	onClick={e =>
 																		setStartedP3({
-																			name: value.name,
-																			id: value.id
+																			started_name: value.name,
+																			started_id: value.id
 																		})
 																	}>
 																	{value.name}
@@ -749,13 +773,15 @@ export const UserProfileUpdate = props => {
 											<Form.Label>Finished</Form.Label>
 											<Dropdown>
 												<Dropdown.Toggle variant="secondary" id="dropdown-basic">
-													{!!finishedP3 ? finishedP3.name : "Select Game"}
+													{!!finishedP3 ? finishedP3.finished_name : "Select Game"}
 												</Dropdown.Toggle>
 												<Dropdown.Menu>
 													<Form.Control
 														type="text"
 														placeholder="Game name..."
-														onChange={e => handleHiglights(e.target.value, platform3.id)}
+														onChange={e =>
+															handleHiglights(e.target.value, platform3.platform_id)
+														}
 													/>
 													{!!gamesFound &&
 														gamesFound.map((value, index) => {
@@ -764,8 +790,8 @@ export const UserProfileUpdate = props => {
 																	key={index}
 																	onClick={e =>
 																		setFinishedP3({
-																			name: value.name,
-																			id: value.id
+																			finished_name: value.name,
+																			finished_id: value.id
 																		})
 																	}>
 																	{value.name}
@@ -779,13 +805,15 @@ export const UserProfileUpdate = props => {
 											<Form.Label>Completed</Form.Label>
 											<Dropdown>
 												<Dropdown.Toggle variant="secondary" id="dropdown-basic">
-													{!!completedP3 ? completedP3.name : "Select Game"}
+													{!!completedP3 ? completedP3.completed_name : "Select Game"}
 												</Dropdown.Toggle>
 												<Dropdown.Menu>
 													<Form.Control
 														type="text"
 														placeholder="Game name..."
-														onChange={e => handleHiglights(e.target.value, platform3.id)}
+														onChange={e =>
+															handleHiglights(e.target.value, platform3.platform_id)
+														}
 													/>
 													{!!gamesFound &&
 														gamesFound.map((value, index) => {
@@ -794,8 +822,8 @@ export const UserProfileUpdate = props => {
 																	key={index}
 																	onClick={e =>
 																		setCompletedP3({
-																			name: value.name,
-																			id: value.id
+																			completed_name: value.name,
+																			completed_id: value.id
 																		})
 																	}>
 																	{value.name}

@@ -7,6 +7,11 @@ import PropTypes from "prop-types";
 export const UserFavoriteList = props => {
 	const { store, actions } = useContext(Context);
 	let history = useHistory();
+<<<<<<< HEAD
+=======
+	console.log(store.user.favorites);
+
+>>>>>>> 5d26219100c560813f7a304a01bb8fe3aef316ba
 	return (
 		<Card bg="light" className="profileCard" style={{ maxWidth: "25rem" }}>
 			<Card.Header>Favorites</Card.Header>
