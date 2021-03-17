@@ -9,7 +9,7 @@ export const UserTags = () => {
 			<Card bg="light" id="tags" style={{ float: "left" }}>
 				<Card.Header>Liked</Card.Header>
 				<ListGroup variant="flush">
-					{store.user[0].tags.liked.map((value, index) => {
+					{store.user.tags.liked.map((value, index) => {
 						return (
 							<ListGroup.Item key={index} variant="light">
 								{value.name}
@@ -21,7 +21,7 @@ export const UserTags = () => {
 			<Card bg="light" id="tags" style={{ float: "right" }}>
 				<Card.Header>Disliked</Card.Header>
 				<ListGroup variant="flush">
-					{store.user[0].tags.disliked.map((value, index) => {
+					{store.user.tags.disliked.map((value, index) => {
 						return (
 							<ListGroup.Item key={index} variant="light">
 								{value.name}

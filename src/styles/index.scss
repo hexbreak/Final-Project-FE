@@ -56,9 +56,9 @@
 #card{
     color: rgb(252, 252, 252);
     transition: color 300ms ease-in-out;
-
+    
     &:hover {
-        color: rgb(255, 184, 4);
+        color: rgb(153, 255, 179);
         
     }
 }
@@ -78,7 +78,7 @@
     transition: color 300ms ease-in-out;
 
     &:hover {
-        color: rgb(255, 184, 4);
+        color: rgb(153, 255, 179);
     }
 }
 .transform{
@@ -94,8 +94,7 @@
     transition: color 300ms ease-in-out;
 
     &:hover {
-        color: rgb(255, 184, 4);
-        
+        color: rgb(153, 255, 179);
     }
 }
 
@@ -105,12 +104,143 @@
 // }
 
 //buttons
-#btn{
-    background-color: gold;
-    border-color: goldenrod;
+#toggletags{
+    margin-left: 1rem;
+    background: transparent;
+    border: 10px solid;
+    border-image-slice: 1;
+    border-width: 5px;
+    border-image-source: linear-gradient(180deg, rgba(89,123,255,1) 0%, rgba(122,255,180,1) 100%);
+    color: rgb(58, 66, 141);
+    box-shadow: 5px 5px 5px grey !important;
     &:hover {
-        background-color: goldenrod;
+        background: rgb(122,255,180);
+        background: linear-gradient(277deg, rgb(68, 163, 109) 0%, rgb(77, 60, 168) 100%);
+        transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+        color: white;
+        border: hidden;
+        padding: 0.7rem 1rem 0.7rem 1rem;
     }
+    &:focus{
+        background: rgb(122,255,180);
+        background: linear-gradient(277deg, rgb(68, 163, 109) 0%, rgb(77, 60, 168) 100%);
+        color: white;
+        border: hidden;
+        padding: 0.7rem 1rem 0.7rem 1rem;
+    }
+    &:active{
+        background: rgb(122,255,180);
+        background: linear-gradient(277deg, rgb(68, 163, 109) 0%, rgb(77, 60, 168) 100%);
+        color: white;
+        border: hidden;
+        padding: 0.7rem 1rem 0.7rem 1rem;
+    }
+}
+#viewmore{
+    background: rgb(0,85,37);
+    background: radial-gradient(circle, rgba(0,85,37,1) 0%, rgba(0,13,93,1) 100%);
+    border-color: transparent !important;
+    color: white ;
+    box-shadow:  -40px 40px 80px #5f5f5f ,
+    40px -40px 80px #818181 !important;
+    &:hover {
+        background: rgb(37,255,132);
+        background: radial-gradient(circle, rgba(37,255,132,1) 0%, rgba(60,88,255,1) 100%);
+        transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+        color: rgb(82, 94, 252)
+    }
+    &:focus{
+        box-shadow: 5px 10px 18px #888888 !important;
+    }
+    &:active{
+        box-shadow: 5px 10px 18px #888888 !important;
+    }
+}
+#ascendingbtn{
+    background: transparent;
+    border: 10px solid;
+    border-image-slice: 1;
+    border-width: 5px;
+    border-image-source: linear-gradient(90deg, rgba(150,255,201,1) 0%, rgba(170,225,255,1) 100%);
+    box-shadow: 5px 5px 5px grey !important;
+    color: rgb(58, 66, 141);
+    &:hover {
+        color: white;
+        background: rgb(170,225,255);
+        background: linear-gradient(90deg, rgb(83, 121, 141) 0%, rgb(89, 153, 120)100%);
+        transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+        border: hidden;
+        padding: 0.7rem 1rem 0.7rem 1rem;
+    }
+    &:focus{
+        color: white;
+        background: rgb(170,225,255);
+        background: linear-gradient(90deg, rgb(83, 121, 141) 0%, rgb(89, 153, 120)100%);
+        border: hidden;
+        padding: 0.7rem 1rem 0.7rem 1rem;
+    }
+    &:active{
+        color: white;
+        background: rgb(170,225,255);
+        background: linear-gradient(90deg, rgb(83, 121, 141) 0%, rgb(89, 153, 120)100%);
+        border: hidden;
+        padding: 0.7rem 1rem 0.7rem 1rem;
+    }
+}
+.btn-dark{
+    color: rgb(58, 66, 141);
+    background-color: rgb(106,255,179);
+    background: radial-gradient(circle, rgb(150, 247, 197) 0%, rgb(157, 201, 255) 100%);
+    border-color: transparent !important;
+    box-shadow: 5px 5px 5px grey !important;
+    &:hover{
+        background-color: rgb(92,235,161);
+        background: radial-gradient(circle, rgba(92,235,161,1) 0%, rgba(16,53,97,1) 100%);
+        transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+    }
+    &:focus{
+        background-color: rgb(92,235,161);
+        background: radial-gradient(circle, rgba(92,235,161,1) 0%, rgba(16,53,97,1) 100%);
+    }
+    &:active{
+        background-color: rgb(92,235,161);
+        background: radial-gradient(circle, rgba(92,235,161,1) 0%, rgba(16,53,97,1) 100%);
+    }
+}
+.btn-success{
+    color: rgb(58, 66, 141);
+    background: transparent;
+    border: 10px solid;
+    border-image-slice: 1;
+    border-width: 5px;
+    border-image-source: radial-gradient(circle, rgb(150, 247, 197) 0%, rgb(157, 201, 255) 100%);
+    box-shadow: 5px 5px 5px grey !important;
+    &:hover{
+        background-color: rgb(92,235,161);
+        background: radial-gradient(circle, rgba(92,235,161,1) 0%, rgba(16,53,97,1) 100%);
+        transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+        border: hidden;
+        padding: 0.7rem 1rem 0.7rem 1rem;
+    }
+    &:focus{
+        background-color: rgb(92,235,161);
+        background: radial-gradient(circle, rgba(92,235,161,1) 0%, rgba(16,53,97,1) 100%);
+        border: hidden;
+        padding: 0.7rem 1rem 0.7rem 1rem;
+    }
+    &:active{
+        background-color: rgb(92,235,161);
+        background: radial-gradient(circle, rgba(92,235,161,1) 0%, rgba(16,53,97,1) 100%);
+        border: hidden;
+        padding: 0.7rem 1rem 0.7rem 1rem;
+    }
+}
+.btn-success:not(:disabled):not(.disabled):active, .btn-success:not(:disabled):not(.disabled).active, .show > .btn-success.dropdown-toggle {
+    color: #fff;
+    background-color: rgb(92,235,161);
+    background: radial-gradient(circle, rgba(92,235,161,1) 0%, rgba(16,53,97,1) 100%);
+    border: hidden;
+    padding: 0.7rem 1rem 0.7rem 1rem;
 }
 
 //h2 
@@ -121,6 +251,7 @@ h2{
       background: -webkit-linear-gradient(45deg, #09009f, #00ff95 80%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+  filter: drop-shadow(2px 2px #333);
   
 }
 
@@ -133,9 +264,7 @@ h2{
 // body
 
 body{
-    // background: rgb(255,255,255);
-    // background: linear-gradient(0deg, rgba(255,255,255,1) 0%, rgba(255,255,251,1) 14%, rgba(255,255,193,1) 28%, rgba(255,255,165,1) 45%, rgba(255,255,137,1) 60%, rgba(255,230,110,1) 76%, rgba(242,202,83,1) 88%, rgba(212,175,55,1) 100%);
-    
+
 background: rgb(174,238,205);
 background: radial-gradient(circle, rgba(174,238,205,1) 0%, rgba(148,187,233,1) 100%);
     color: black;
@@ -179,24 +308,6 @@ background: radial-gradient(circle, rgba(174,238,205,1) 0%, rgba(148,187,233,1) 
 }
 
 // profile page
-.container-profile {
-    width: 1600px;
-    background: rgb(117, 114, 114);
-    box-shadow: 0 0 20px rgba(0,0,0,0.8);
-}
-
-.card-profile {
-    width: 600px;
-    border: 1px solid white;
-    background: linear-gradient(145deg, #f0f0f0, #cacaca);
-    box-shadow:  -40px 40px 80px #5f5f5f,
-             40px -40px 80px #818181;
-}
-
-
-.user-name {
-    font-size: 25px;
-}
 
 .topcol {
     margin-top: 37px;
@@ -294,4 +405,35 @@ font-family: 'Fira Sans', sans-serif;
       &:hover{
         -webkit-text-fill-color: rgb(59, 41, 163)
     }
+}
+//searchPage
+.search-margin{
+    margin-top: 2rem;
+}
+.search-box{
+    background-color: white;
+    box-shadow: 5px 5px 5px grey;
+}
+
+//profilePage
+.container-profile {
+    width: 1600px;
+    background: rgb(241, 255, 245);
+    box-shadow: 0 0 20px rgba(0,0,0,0.8);
+}
+
+.card-profile {
+    width: 600px;
+    border: 1px solid white;
+    background: linear-gradient(145deg, #f0f0f0, #cacaca);
+}
+
+.profileCard {
+    width: auto;
+    height: auto;
+    max-width: 50rem;
+    max-height: 100%;
+}
+.user-name {
+    font-size: 25px;
 }

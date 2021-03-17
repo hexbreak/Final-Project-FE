@@ -3,22 +3,20 @@ const getState = ({ getStore, getActions, setStore }) => {
 	const apiKey = "33af10ad5812440abf75a35c04492e15";
 	return {
 		store: {
-			user: [
-				{
-					// Login, Registration, Username, UserType, UserId, Token, Validation\
-					username: "",
-					password: "",
-					id: 1,
-					about: "",
-					image: "",
-					favorites: [],
-					platforms: [null, null, null],
-					game_progression: [null, null, null],
-					playing: [null, null, null],
-					tags: { liked: [], disliked: [] },
-					preference: false
-				}
-			],
+			user: {
+				// Login, Registration, Username, UserType, UserId, Token, Validation\
+				username: "",
+				password: "",
+				id: 1,
+				about: "",
+				image: "",
+				favorites: [],
+				platforms: [null, null, null],
+				game_progression: [null, null, null],
+				playing: [null, null, null],
+				tags: { liked: [], disliked: [] },
+				preference: false
+			},
 			backlogPost: [],
 			backlogGet: [],
 			gameList: [],
@@ -375,7 +373,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					});
 			},
 			loadSuperSearch: (gameName, pagination, genres, tags, sort, platforms) => {
-				let get = `https://api.rawg.io/api/games?key=${apiKey}&page_size=25`;
+				let get = `https://api.rawg.io/api/games?key=${apiKey}&page_size=20`;
 				let filters = {
 					search: gameName,
 					page: pagination,

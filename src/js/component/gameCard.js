@@ -47,8 +47,8 @@ export const GameCard = props => {
 				}
 				alt="Card Image"
 			/>
-			<Card.ImgOverlay>
-				<Card.Title id="card">{props.game.name}</Card.Title>
+			<Card.ImgOverlay id="card">
+				<Card.Title>{props.game.name}</Card.Title>
 			</Card.ImgOverlay>
 		</Card>
 	);

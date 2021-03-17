@@ -58,14 +58,14 @@ export const Home = () => {
 									{pagination > 1 && (
 										<Button
 											className="center"
-											variant="dark"
+											variant="success"
 											onClick={e => setPagination(pagination - 1)}>
 											Previous Page
 										</Button>
 									)}
 									<Button
 										className="center"
-										variant="dark"
+										variant="success"
 										onClick={e => setPagination(pagination + 1)}>
 										Next Page
 									</Button>

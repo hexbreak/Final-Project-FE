@@ -12,7 +12,7 @@ export const Sorter = props => {
 			<Row>
 				<div className="center">
 					<Button
-						id="btn"
+						id="ascendingbtn"
 						variant="primary"
 						onClick={
 							props.inverted == false ? e => props.setInverted(true) : e => props.setInverted(false)
@@ -23,7 +23,7 @@ export const Sorter = props => {
 							<i className="fas fa-sort-down" />
 						)}
 					</Button>
-					<Button variant="secondary" onClick={e => actions.changePreference()}>
+					<Button id="toggletags" variant="secondary" onClick={e => actions.changePreference()}>
 						{store.user.preference == false ? (
 							<i className="fas fa-chess-pawn" />
 						) : (
@@ -33,7 +33,7 @@ export const Sorter = props => {
 				</div>
 				<DropdownButton
 					className="center"
-					variant="dark"
+					variant="success"
 					title={props.sortKey.charAt(0).toUpperCase() + props.sortKey.slice(1)}>
 					<Dropdown.Item variant="dark" onClick={e => props.setSort("name")}>
 						Name

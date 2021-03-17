@@ -43,7 +43,7 @@ export const Navbar = () => {
 						style={{ width: "50rem" }}
 					/>
 					{gameName != "" && <i className="fas fa-times float-right" onClick={e => setGameName("")} />}
-					{store.searchBar[0] != undefined && gameName != "" && (
+					{store.searchBar != undefined && gameName != "" && (
 						<div
 							id="myDropdown"
 							aria-labelledby="dropdownMenuButton"
@@ -69,7 +69,7 @@ export const Navbar = () => {
 					</button>
 				</Link>
 			</Row>
-			{store.user[0].id > 0 ? (
+			{store.user.id > 0 ? (
 				<div className="ml">
 					<Link to="/profile">
 						<button className="btn btn-light pl-4 pr-4">

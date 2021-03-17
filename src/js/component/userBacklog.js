@@ -19,52 +19,52 @@ export const UserBacklog = () => {
 					</tr>
 				</thead>
 				<tbody>
-					{store.user[0].platforms.map((value, index) => {
+					{store.user.platforms.map((value, index) => {
 						if (!!value) {
 							if (!!value.name) {
 								return (
 									<tr key={index}>
 										<td>{value.name}</td>
 
-										{store.user[0].game_progression[index][0] != null && (
+										{store.user.game_progression[index] != null && (
 											<td>
 												<span
 													onClick={e =>
 														history.push({
-															pathname: `/details/${store.user[0].game_progression[index][0].id}`,
-															state: store.user[0].game_progression[index][0].id
+															pathname: `/details/${store.user.game_progression[index][0].id}`,
+															state: store.user.game_progression[index][0].id
 														})
 													}
 													style={{ cursor: "pointer" }}>
-													{store.user[0].game_progression[index][0].name}
+													{store.user.game_progression[index][0].name}
 												</span>
 											</td>
 										)}
-										{store.user[0].game_progression[index][1] != null && (
+										{store.user.game_progression[index][1] != null && (
 											<td>
 												<span
 													onClick={e =>
 														history.push({
-															pathname: `/details/${store.user[0].game_progression[index][1].id}`,
-															state: store.user[0].game_progression[index][1].id
+															pathname: `/details/${store.user.game_progression[index][1].id}`,
+															state: store.user.game_progression[index][1].id
 														})
 													}
 													style={{ cursor: "pointer" }}>
-													{store.user[0].game_progression[index][1].name}
+													{store.user.game_progression[index][1].name}
 												</span>
 											</td>
 										)}
-										{store.user[0].game_progression[index][2] != null && (
+										{store.user.game_progression[index][2] != null && (
 											<td>
 												<span
 													onClick={e =>
 														history.push({
-															pathname: `/details/${store.user[0].game_progression[index][2].id}`,
-															state: store.user[0].game_progression[index][2].id
+															pathname: `/details/${store.user.game_progression[index][2].id}`,
+															state: store.user.game_progression[index][2].id
 														})
 													}
 													style={{ cursor: "pointer" }}>
-													{store.user[0].game_progression[index][2].name}
+													{store.user.game_progression[index][2].name}
 												</span>
 											</td>
 										)}

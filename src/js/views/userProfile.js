@@ -14,7 +14,7 @@ export const UserProfile = props => {
 	return (
 		<div className="container container-profile mt-5 space">
 			<div className="row row-1">
-				<div className="col col-">
+				<div className="col col- search-margin">
 					<div className="user-name">{store.user.username}</div>
 					<div className="card-profile">
 						<img
@@ -52,7 +52,7 @@ export const UserProfile = props => {
 			<br />
 			<br />
 			<br />
-			<div className="row row-three">
+			<div className="row space row-three">
 				<Col>
 					<UserTags />
 				</Col>
