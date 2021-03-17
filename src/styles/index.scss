@@ -242,7 +242,31 @@
     border: hidden;
     padding: 0.7rem 1rem 0.7rem 1rem;
 }
-
+.btn-danger{
+    color: rgb(58, 66, 141);
+    background: transparent;
+    border: 10px solid;
+    border-image-slice: 1;
+    border-width: 5px;
+    border-image-source: linear-gradient(90deg, rgba(131,58,180,1) 0%, rgba(253,29,29,1) 50%, rgba(252,176,69,1) 100%);
+    box-shadow: 5px 5px 5px grey !important;
+    &:hover{
+        background: linear-gradient(90deg, rgba(85,40,116,1) 0%, rgba(159,32,32,1) 50%, rgba(130,91,37,1) 100%);
+        transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+        border: hidden;
+        padding: 0.7rem 1rem 0.7rem 1rem;
+    }
+    &:focus{
+        background: linear-gradient(90deg, rgba(85,40,116,1) 0%, rgba(159,32,32,1) 50%, rgba(130,91,37,1) 100%);
+        border: hidden;
+        padding: 0.7rem 1rem 0.7rem 1rem;
+    }
+    &:active{
+        background: linear-gradient(90deg, rgba(85,40,116,1) 0%, rgba(159,32,32,1) 50%, rgba(130,91,37,1) 100%);
+        border: hidden;
+        padding: 0.7rem 1rem 0.7rem 1rem;
+    }
+}
 //h2 
 h2{
     font-size: 2.1875rem;
@@ -264,9 +288,7 @@ h2{
 // body
 
 body{
-
-background: rgb(174,238,205);
-background: radial-gradient(circle, rgba(174,238,205,1) 0%, rgba(148,187,233,1) 100%);
+    background: radial-gradient(circle, rgba(174,238,205,1) 0%, rgba(148,187,233,1) 100%);
     color: black;
     max-width: 100%;
     max-height: 100%;

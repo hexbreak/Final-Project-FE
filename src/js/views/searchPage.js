@@ -55,7 +55,10 @@ export const SearchPage = props => {
 	return (
 		<Container
 			fluid
-			style={{ background: "radial-gradient(circle, rgba(174,238,205,1) 0%, rgba(148,187,233,1) 100%)" }}
+			style={{
+				background: "radial-gradient(circle, rgba(174,238,205,1) 0%, rgba(148,187,233,1) 100%)",
+				paddingBottom: "3rem"
+			}}
 			className="space center">
 			<Row className="search-margin center">
 				<Col>

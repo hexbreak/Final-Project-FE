@@ -25,12 +25,7 @@ export const UserBacklog = () => {
 								return (
 									<tr key={index}>
 										<td>{value.name}</td>
-
-<<<<<<< HEAD
 										{store.user.game_progression[index] != null && (
-=======
-										{store.user.game_progression[index][0] != null && (
->>>>>>> 5d26219100c560813f7a304a01bb8fe3aef316ba
 											<td>
 												<span
 													onClick={e =>
