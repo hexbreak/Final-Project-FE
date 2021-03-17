@@ -516,25 +516,25 @@ const getState = ({ getStore, getActions, setStore }) => {
 					});
 			},
 			handleSave: user => {
-				// fetch(`${beURL}user/1`, {
-				// 	method: "POST",
-				// 	headers: {
-				// 		"Content-Type": "application/json"
-				// 	},
-				// 	body: JSON.stringify(user)
-				// })
-				// 	.then(response => {
-				// 		if (!response.ok) {
-				// 			throw Error(response.statusText);
-				// 		}
-				// 		return response.json();
-				// 	})
-				// 	.then(response => {
-				// 		console.log("Success:", response);
-				// 		// Here we work with JSON
-				// 		return setStore({ user: user });
-				// 	});
-				setStore({ user: user }); // OLD setStore
+				fetch(`${beURL}user/1`, {
+					method: "POST",
+					headers: {
+						"Content-Type": "application/json"
+					},
+					body: JSON.stringify(user)
+				})
+					.then(response => {
+						if (!response.ok) {
+							throw Error(response.statusText);
+						}
+						return response.json();
+					})
+					.then(response => {
+						console.log("Success:", response);
+						// Here we work with JSON
+						return setStore({ user: user });
+					});
+				// setStore({ user: user }); // OLD setStore
 				// setStore({ user: { 0: user } }); // NEW setStore
 			}
 		}

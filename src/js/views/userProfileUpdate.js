@@ -535,7 +535,7 @@ export const UserProfileUpdate = props => {
 											<Form.Label>Started</Form.Label>
 											<Dropdown>
 												<Dropdown.Toggle variant="secondary" id="dropdown-basic">
-													{!!startedP1 ? startedP1.started : "Select Game"}
+													{!!startedP1 ? startedP1.started_name : "Select Game"}
 												</Dropdown.Toggle>
 												<Dropdown.Menu>
 													<Form.Control
@@ -552,8 +552,8 @@ export const UserProfileUpdate = props => {
 																	key={index}
 																	onClick={e =>
 																		setStartedP1({
-																			game_name: value.name,
-																			game_id: value.id
+																			started_name: value.name,
+																			started_id: value.id
 																		})
 																	}>
 																	{value.name}
@@ -567,7 +567,7 @@ export const UserProfileUpdate = props => {
 											<Form.Label>Finished</Form.Label>
 											<Dropdown>
 												<Dropdown.Toggle variant="secondary" id="dropdown-basic">
-													{!!finishedP1 ? finishedP1.game_name : "Select Game"}
+													{!!finishedP1 ? finishedP1.finished_name : "Select Game"}
 												</Dropdown.Toggle>
 												<Dropdown.Menu>
 													<Form.Control
@@ -584,8 +584,8 @@ export const UserProfileUpdate = props => {
 																	key={index}
 																	onClick={e =>
 																		setFinishedP1({
-																			game_name: value.name,
-																			game_id: value.id
+																			finished_name: value.name,
+																			finished_id: value.id
 																		})
 																	}>
 																	{value.name}
@@ -599,7 +599,7 @@ export const UserProfileUpdate = props => {
 											<Form.Label>Completed</Form.Label>
 											<Dropdown>
 												<Dropdown.Toggle variant="secondary" id="dropdown-basic">
-													{!!completedP1 ? completedP1.game_name : "Select Game"}
+													{!!completedP1 ? completedP1.completed_name : "Select Game"}
 												</Dropdown.Toggle>
 												<Dropdown.Menu>
 													<Form.Control
@@ -616,8 +616,8 @@ export const UserProfileUpdate = props => {
 																	key={index}
 																	onClick={e =>
 																		setCompletedP1({
-																			game_name: value.name,
-																			game_id: value.id
+																			completed_name: value.name,
+																			completed_id: value.id
 																		})
 																	}>
 																	{value.name}
@@ -638,7 +638,7 @@ export const UserProfileUpdate = props => {
 											<Form.Label>Started</Form.Label>
 											<Dropdown>
 												<Dropdown.Toggle variant="secondary" id="dropdown-basic">
-													{!!startedP2 ? startedP2.game_name : "Select Game"}
+													{!!startedP2 ? startedP2.started_name : "Select Game"}
 												</Dropdown.Toggle>
 												<Dropdown.Menu>
 													<Form.Control
@@ -655,8 +655,8 @@ export const UserProfileUpdate = props => {
 																	key={index}
 																	onClick={e =>
 																		setStartedP2({
-																			game_name: value.name,
-																			game_id: value.id
+																			started_name: value.name,
+																			started_id: value.id
 																		})
 																	}>
 																	{value.name}
@@ -702,7 +702,7 @@ export const UserProfileUpdate = props => {
 											<Form.Label>Completed</Form.Label>
 											<Dropdown>
 												<Dropdown.Toggle variant="secondary" id="dropdown-basic">
-													{!!completedP2 ? completedP2.game_name : "Select Game"}
+													{!!completedP2 ? completedP2.completed_name : "Select Game"}
 												</Dropdown.Toggle>
 												<Dropdown.Menu>
 													<Form.Control
@@ -719,8 +719,8 @@ export const UserProfileUpdate = props => {
 																	key={index}
 																	onClick={e =>
 																		setCompletedP2({
-																			game_name: value.name,
-																			game_id: value.id
+																			completed_name: value.name,
+																			completed_id: value.id
 																		})
 																	}>
 																	{value.name}
@@ -741,7 +741,7 @@ export const UserProfileUpdate = props => {
 											<Form.Label>Started</Form.Label>
 											<Dropdown>
 												<Dropdown.Toggle variant="secondary" id="dropdown-basic">
-													{!!startedP3 ? startedP3.game_name : "Select Game"}
+													{!!startedP3 ? startedP3.started_name : "Select Game"}
 												</Dropdown.Toggle>
 												<Dropdown.Menu>
 													<Form.Control
@@ -758,8 +758,8 @@ export const UserProfileUpdate = props => {
 																	key={index}
 																	onClick={e =>
 																		setStartedP3({
-																			game_name: value.name,
-																			game_id: value.id
+																			started_name: value.name,
+																			started_id: value.id
 																		})
 																	}>
 																	{value.name}
@@ -773,7 +773,7 @@ export const UserProfileUpdate = props => {
 											<Form.Label>Finished</Form.Label>
 											<Dropdown>
 												<Dropdown.Toggle variant="secondary" id="dropdown-basic">
-													{!!finishedP3 ? finishedP3.game_name : "Select Game"}
+													{!!finishedP3 ? finishedP3.finished_name : "Select Game"}
 												</Dropdown.Toggle>
 												<Dropdown.Menu>
 													<Form.Control
@@ -790,8 +790,8 @@ export const UserProfileUpdate = props => {
 																	key={index}
 																	onClick={e =>
 																		setFinishedP3({
-																			game_name: value.name,
-																			game_id: value.id
+																			finished_name: value.name,
+																			finished_id: value.id
 																		})
 																	}>
 																	{value.name}
@@ -805,7 +805,7 @@ export const UserProfileUpdate = props => {
 											<Form.Label>Completed</Form.Label>
 											<Dropdown>
 												<Dropdown.Toggle variant="secondary" id="dropdown-basic">
-													{!!completedP3 ? completedP3.game_name : "Select Game"}
+													{!!completedP3 ? completedP3.completed_name : "Select Game"}
 												</Dropdown.Toggle>
 												<Dropdown.Menu>
 													<Form.Control
@@ -822,8 +822,8 @@ export const UserProfileUpdate = props => {
 																	key={index}
 																	onClick={e =>
 																		setCompletedP3({
-																			game_name: value.name,
-																			game_id: value.id
+																			completed_name: value.name,
+																			completed_id: value.id
 																		})
 																	}>
 																	{value.name}
