@@ -7,13 +7,13 @@ import PropTypes from "prop-types";
 export const UserFavoriteList = props => {
 	const { store, actions } = useContext(Context);
 	let history = useHistory();
-	console.log(store.user[0].favorites);
+	console.log(store.user.favorites);
 
 	return (
 		<Card bg="light" style={{ width: "25rem" }}>
 			<Card.Header>Favorites</Card.Header>
 			<ListGroup variant="flush light">
-				{store.user[0].favorites.map((value, index) => {
+				{store.user.favorites.map((value, index) => {
 					return (
 						<ListGroup.Item variant="light" key={index}>
 							<span
