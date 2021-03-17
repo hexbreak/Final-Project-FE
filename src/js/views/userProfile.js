@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { UserAbout } from "../component/userAbout.js";
 import { UserNowPlaying } from "../component/userNowPlaying";
 import { UserFavoriteList } from "../component/userFavoriteList";
-import { UserBacklog } from "../component/userBacklog";
+import { UserHighlights } from "../component/userHighlights";
 import { UserTags } from "../component/userTags";
 import { Container, Row, Col, Card, CardImg, CardFooter, Button } from "react-bootstrap";
 import PropTypes from "prop-types";
@@ -36,7 +36,7 @@ export const UserProfile = props => {
 							<div className="card-body">
 								<UserAbout />
 								<Link to="/editprofile">
-									<Button variant="light">Edit Profile</Button>
+									<Button variant="success">Edit Profile</Button>
 								</Link>
 							</div>
 						</div>
@@ -53,7 +53,7 @@ export const UserProfile = props => {
 				<br />
 				<div className="row row-two">
 					<Col md={{ span: 4, offset: 0 }}>
-						<UserBacklog />
+						<UserHighlights />
 					</Col>
 				</div>
 				<br />

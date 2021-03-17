@@ -122,24 +122,26 @@ export const SearchPage = props => {
 									);
 								})}
 						</Row>
-						<Row className="center search-margin">
-							{pagination > 1 && (
+						{store.superSearch.length >= 20 && (
+							<Row className="center search-margin">
+								{pagination > 1 && (
+									<Button
+										style={{ marginBottom: "2rem" }}
+										className="center"
+										variant="success"
+										onClick={e => setPagination(pagination - 1)}>
+										Previous Page
+									</Button>
+								)}
 								<Button
 									style={{ marginBottom: "2rem" }}
 									className="center"
 									variant="success"
-									onClick={e => setPagination(pagination - 1)}>
-									Previous Page
+									onClick={e => setPagination(pagination + 1)}>
+									Next Page
 								</Button>
-							)}
-							<Button
-								style={{ marginBottom: "2rem" }}
-								className="center"
-								variant="success"
-								onClick={e => setPagination(pagination + 1)}>
-								Next Page
-							</Button>
-						</Row>
+							</Row>
+						)}
 					</Col>
 				</Col>
 				<Col sm={2}>
@@ -152,7 +154,7 @@ export const SearchPage = props => {
 											return (
 												<Button
 													key={index}
-													onChange={
+													onClick={
 														tags == value.id ? e => setTags(null) : e => setTags(value.id)
 													}
 													value={value.id}
@@ -164,7 +166,7 @@ export const SearchPage = props => {
 											return (
 												<Button
 													key={index}
-													onChange={
+													onClick={
 														tags == value.id ? e => setTags(null) : e => setTags(value.id)
 													}
 													value={value.id}
@@ -174,9 +176,13 @@ export const SearchPage = props => {
 											);
 										}
 									})}
-									{showMoreTags == false && (
+									{showMoreTags == false ? (
 										<Button id="viewmore" onClick={e => setShowMoreTags(true)}>
 											Show More
+										</Button>
+									) : (
+										<Button id="viewmore" onClick={e => setShowMoreTags(false)}>
+											Show Less
 										</Button>
 									)}
 								</ButtonGroup>
@@ -189,11 +195,10 @@ export const SearchPage = props => {
 								<ButtonGroup value={platforms} type="checkbox" className="mb-2" vertical>
 									{store.platforms.map((value, index) => {
 										if (index <= 5 && showMorePlatforms == false) {
-											console.log(index);
 											return (
 												<Button
 													key={index}
-													onChange={
+													onClick={
 														platforms == value.id
 															? e => setPlatforms(null)
 															: e => setPlatforms(value.id)
@@ -207,7 +212,7 @@ export const SearchPage = props => {
 											return (
 												<Button
 													key={index}
-													onChange={
+													onClick={
 														platforms == value.id
 															? e => setPlatforms(null)
 															: e => setPlatforms(value.id)
@@ -219,9 +224,13 @@ export const SearchPage = props => {
 											);
 										}
 									})}
-									{showMorePlatforms == false && (
+									{showMorePlatforms == false ? (
 										<Button id="viewmore" onClick={e => setShowMorePlatforms(true)}>
 											Show More
+										</Button>
+									) : (
+										<Button id="viewmore" onClick={e => setShowMoreTags(false)}>
+											Show Less
 										</Button>
 									)}
 								</ButtonGroup>

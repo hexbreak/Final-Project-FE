@@ -8,8 +8,8 @@ export const UserFavoriteList = props => {
 	const { store, actions } = useContext(Context);
 	let history = useHistory();
 	return (
-		<Card bg="light" className="profileCard" style={{ maxWidth: "25rem" }}>
-			<Card.Header>Favorites</Card.Header>
+		<Card bg="light" className="profileCard profileCardBackground" style={{ maxWidth: "25rem" }}>
+			<Card.Header className="profileCardHeader">Favorites</Card.Header>
 			<ListGroup variant="flush light">
 				{store.user.favorites.map((value, index) => {
 					return (

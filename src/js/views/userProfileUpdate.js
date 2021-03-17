@@ -4,7 +4,7 @@ import { useHistory } from "react-router-dom";
 import { UserAbout } from "../component/userAbout.js";
 import { UserNowPlaying } from "../component/userNowPlaying";
 import { UserFavoriteList } from "../component/userFavoriteList";
-import { UserBacklog } from "../component/userBacklog";
+import { UserBacklog } from "../component/userHighlights";
 import { UserTags } from "../component/userTags";
 import {
 	Container,
@@ -909,7 +909,7 @@ export const UserProfileUpdate = props => {
 				</Col>
 			</Row>
 			<Row style={{ marginTop: "2rem" }}>
-				<Button variant="dark" onClick={e => handleSave()}>
+				<Button variant="success" onClick={e => handleSave()}>
 					Save Changes
 				</Button>
 			</Row>

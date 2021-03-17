@@ -2,13 +2,12 @@ import React, { useState, useEffect, useContext } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { Context } from "../store/appContext";
 import { Carousel, Card, Container, Row, Col, Dropdown, DropdownButton, Button, Table } from "react-bootstrap";
-export const UserBacklog = () => {
+export const UserHighlights = () => {
 	const { store, actions } = useContext(Context);
 	let history = useHistory();
-
 	return (
 		<Container>
-			<h6>Highlights</h6>
+			<h6 className="profileHighlights">Highlights</h6>
 			<Table striped bordered hover variant="light" style={{ width: "50rem" }}>
 				<thead>
 					<tr>

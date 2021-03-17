@@ -6,6 +6,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Fira+Sans:ital@1&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Cabin&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@400;700&display=swap');
 
 .gameimg{
     max-width: 50em;
@@ -300,22 +301,23 @@ body{
 }
 
 ::-webkit-scrollbar {
-  width: 10px;
+    width: 10px;
 }
 
 /* Track */
 ::-webkit-scrollbar-track {
-  background: rgb(155, 138, 61);
+    background: transparent;
 }
- 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-    background: rgb(243, 201, 63); 
-}
+    background-image: linear-gradient(62deg, #8EC5FC 0%, #E0C3FC 100%);
 
+}
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-    background: rgb(216, 177, 47); 
+    background-image: linear-gradient(160deg, #0093E9 0%, #80D0C7 100%);
+
+
 }
 .detailsImage{
     max-width: 50%;
@@ -440,14 +442,15 @@ font-family: 'Fira Sans', sans-serif;
 //profilePage
 .container-profile {
     width: 1600px;
-    background: rgb(241, 255, 245);
+    background: rgb(255, 255, 255);
     box-shadow: 0 0 20px rgba(0,0,0,0.8);
 }
 
 .card-profile {
     width: 600px;
     border: 1px solid white;
-    background: linear-gradient(145deg, #f0f0f0, #cacaca);
+    background-image: linear-gradient(62deg, #e2f0ff 0%, #ffe5ce 100%);
+
 }
 
 .profileCard {
@@ -455,6 +458,23 @@ font-family: 'Fira Sans', sans-serif;
     height: auto;
     max-width: 50rem;
     max-height: 100%;
+}
+.profileCardBackground{
+    background-image: linear-gradient(19deg, #3EECAC 0%, #EE74E1 100%) !important;
+    color: white !important;
+    font-family: 'Roboto Condensed', sans-serif !important;
+}
+.profileCardHeader{
+    font-size: 1.3rem;
+}
+.profileHighlights{
+    font-size: 1.3rem;
+    margin-bottom: 1rem;
+    background: -webkit-linear-gradient(
+45deg
+, #09009f, #00ff95 80%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
 .user-name {
     font-size: 25px;
