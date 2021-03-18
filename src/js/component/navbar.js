@@ -16,7 +16,7 @@ export const Navbar = () => {
 	}, [gameName]);
 	const handleKeyDown = e => {
 		if (e.keyCode == 13 && gameName != "") {
-			history.push({ pathname: "/search", state: gameName });
+			history.push({ pathname: "/search", state: { gameName: gameName } });
 			setGameName("");
 		}
 	};

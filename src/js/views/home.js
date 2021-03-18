@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Carousel, Card, Container, Row, Col, Dropdown, DropdownButton, Button } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { Context } from "../store/appContext";
 import PropTypes from "prop-types";
 import "../../styles/home.scss";
@@ -12,6 +12,7 @@ export const Home = () => {
 	const [sortKey, setSort] = useState("name");
 	const [inverted, setInverted] = useState(true);
 	const [pagination, setPagination] = useState(1);
+	let history = useHistory();
 	useEffect(() => {
 		actions.loadGameList(1);
 		actions.loadLists(1);
@@ -54,7 +55,7 @@ export const Home = () => {
 										return <GameCard className="card" key={index} game={value} />;
 									})}
 								</Row>
-								<Row className="center">
+								<Row className="center search-margin">
 									{pagination > 1 && (
 										<Button
 											className="center"
@@ -63,6 +64,17 @@ export const Home = () => {
 											Previous Page
 										</Button>
 									)}
+									<Button
+										className="center"
+										variant="success"
+										onClick={e =>
+											history.push({
+												pathname: "/search",
+												state: { sort: sortKey, pagination: pagination, inverted: inverted }
+											})
+										}>
+										View More
+									</Button>
 									<Button
 										className="center"
 										variant="success"
@@ -80,6 +92,16 @@ export const Home = () => {
 										return <GameCard className="card" key={index} game={value} />;
 									})}
 								</Row>
+								<Row className="center search-margin">
+									<Button
+										className="center"
+										variant="success"
+										onClick={e =>
+											history.push({ pathname: "/search", state: { sort: "metacritic" } })
+										}>
+										View More
+									</Button>
+								</Row>
 							</Col>
 						</Row>
 						<Row className="space" style={{ marginTop: "10rem" }}>
@@ -89,6 +111,14 @@ export const Home = () => {
 									{store.gameRatingList.map((value, index) => {
 										return <GameCard className="card" key={index} game={value} />;
 									})}
+								</Row>
+								<Row className="center">
+									<Button
+										className="center search-margin"
+										variant="success"
+										onClick={e => history.push({ pathname: "/search", state: { sort: "rating" } })}>
+										View More
+									</Button>
 								</Row>
 							</Col>
 						</Row>

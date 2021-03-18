@@ -7,7 +7,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				// Login, Registration, Username, UserType, UserId, Token, Validation\
 				username: "",
 				password: "",
-				id: 1,
+				id: 0,
 				about: "",
 				image: "",
 				favorites: [],
@@ -324,7 +324,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 				return setStore({ addedByPlayers: playerlist });
 			},
 			loadLists: pageNumber => {
-				fetch(`https://api.rawg.io/api/games?ordering=-metacritic&page=${pageNumber}&page_size=8`)
+				fetch(
+					`https://api.rawg.io/api/games??key=${apiKey}&ordering=-metacritic&page=${pageNumber}&page_size=8`
+				)
 					.then(function(response) {
 						if (!response.ok) {
 							throw Error(response.statusText);
