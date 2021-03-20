@@ -240,7 +240,7 @@ export const SearchPage = props => {
 											Show More
 										</Button>
 									) : (
-										<Button id="viewmore" onClick={e => setShowMoreTags(false)}>
+										<Button id="viewmore" onClick={e => setShowMorePlatforms(false)}>
 											Show Less
 										</Button>
 									)}

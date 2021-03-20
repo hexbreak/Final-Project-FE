@@ -272,23 +272,29 @@ export const GameDetails = props => {
 							<Row className="center detailspace">
 								<Col>
 									<h3>Metascore</h3>
-									<h5 className="detailsbox center detailsNumbers">
-										{store.game.metacritic != null && store.game.metacritic}
-									</h5>
+									<div className="detailsbackground center detailsNumbers">
+										<h5 className="detailsbox center detailsNumbers">
+											{store.game.metacritic != null && store.game.metacritic}
+										</h5>
+									</div>
 								</Col>
 								<Col>
 									<h3>Rating Count</h3>
-									<h5 className="detailsbox center detailsNumbers">{store.game.ratings_count}</h5>
+									<div className="detailsbackground center detailsNumbers">
+										<h5 className="detailsbox center detailsNumbers">{store.game.ratings_count}</h5>
+									</div>
 								</Col>
 								<Col>
 									<h3>Added on Players</h3>
-									<h5 className="detailsbox center detailsNumbers">{store.game.added}</h5>
+									<div className="detailsbackground center detailsNumbers">
+										<h5 className="detailsbox center detailsNumbers">{store.game.added}</h5>
+									</div>
 								</Col>
 							</Row>
 							<Row className="center detailspace">
 								<Col>
 									<h3>Players Status</h3>
-									<div className="detailsbox center" style={{ height: "fit-content" }}>
+									<div className="detailsbox detailsborders center" style={{ height: "fit-content" }}>
 										{store.addedByPlayers.map((value, index) => {
 											return (
 												<div key={index}>
@@ -312,7 +318,7 @@ export const GameDetails = props => {
 												return (
 													<div
 														key={index}
-														className="center detailsbox fit"
+														className="center detailsbox  detailsborders fit"
 														style={{
 															width: "40rem",
 															textAlign: "center",

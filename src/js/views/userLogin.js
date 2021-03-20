@@ -43,6 +43,9 @@ export const UserLogin = props => {
 							</Button>
 						</Form>
 					</Container>
+					<div style={{ marginTop: "2rem" }} className="center">
+						<a href="/registration">Don&apos;t have an account?</a>
+					</div>
 				</Col>
 			</Row>
 		</Container>
