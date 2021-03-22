@@ -14,7 +14,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 				platforms: [null, null, null],
 				game_progression: [null, null, null],
 				playing: [null, null, null],
-				tags: { liked: [], disliked: [] },
+                liked: [], 
+                disliked: [],
 				preference: false
 			},
 			backlogPost: [],
