@@ -13,15 +13,16 @@ export const GameCard = props => {
 	};
 	const makeBorders = () => {
 		let cardBorder = null;
-		props.game.tags.forEach(value => {
-			store.user.tags.liked.forEach(tags => {
+		let tags = [store.user.liked, store.user.disliked];
+		tags.forEach(value => {
+			store.user.liked.forEach(tags => {
 				if (value.id == tags.id && cardBorder != null) {
 					cardBorder = "warning";
 				} else if (value.id == tags.id) {
 					cardBorder = "success";
 				}
 			});
-			store.user.tags.disliked.forEach(tags => {
+			store.user.disliked.forEach(tags => {
 				if (value.id == tags.id && cardBorder != null) {
 					cardBorder = "warning";
 				} else if (value.id == tags.id) {
