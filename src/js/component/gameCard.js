@@ -12,16 +12,17 @@ export const GameCard = props => {
 		history.push({ pathname: `/details/${props.game.id}`, state: props.game.id });
 	};
 	const makeBorders = () => {
-		let cardBorder = null;
-		props.game.tags.forEach(value => {
-			store.user.tags.liked.forEach(tags => {
+        let cardBorder = null;
+        let tags = {liked: store.user.liked, disliked: store.user.disliked};
+		tags.forEach(value => {
+			store.user.liked.forEach(tags => {
 				if (value.id == tags.id && cardBorder != null) {
 					cardBorder = "warning";
 				} else if (value.id == tags.id) {
 					cardBorder = "success";
 				}
 			});
-			store.user.tags.disliked.forEach(tags => {
+			store.user.disliked.forEach(tags => {
 				if (value.id == tags.id && cardBorder != null) {
 					cardBorder = "warning";
 				} else if (value.id == tags.id) {
