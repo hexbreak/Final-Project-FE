@@ -142,8 +142,8 @@ export const UserProfileUpdate = props => {
 				image: image,
 				platforms: [platform1, platform2, platform3],
 				playing: [playing1, playing2, playing3],
-                liked: liked, 
-                disliked: disliked,
+				liked: liked,
+				disliked: disliked,
 				game_progression: [
 					startedP1,
 					finishedP1,

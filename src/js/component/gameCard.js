@@ -12,8 +12,8 @@ export const GameCard = props => {
 		history.push({ pathname: `/details/${props.game.id}`, state: props.game.id });
 	};
 	const makeBorders = () => {
-        let cardBorder = null;
-        let tags = {liked: store.user.liked, disliked: store.user.disliked};
+		let cardBorder = null;
+		let tags = [store.user.liked, store.user.disliked];
 		tags.forEach(value => {
 			store.user.liked.forEach(tags => {
 				if (value.id == tags.id && cardBorder != null) {
