@@ -900,7 +900,8 @@ export const UserProfileUpdate = props => {
 							{disliked.map((value, index) => {
 								return (
 									<ListGroup.Item key={index} style={{ color: "black" }} variant="light">
-										{value.name}{" "}
+										{value.name}
+										{""}
 										<i
 											id="hover"
 											className="far fa-circle transform"
