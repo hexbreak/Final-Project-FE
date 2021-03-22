@@ -18,7 +18,9 @@ import {
 	DropdownButton,
 	FormControl,
 	ListGroup,
-	Button
+	Button,
+	Tooltip,
+	OverlayTrigger
 } from "react-bootstrap";
 import PropTypes from "prop-types";
 
@@ -222,6 +224,21 @@ export const UserProfileUpdate = props => {
 		array = sort(array);
 		setDisliked(array);
 	};
+	const renderStarted = props => (
+		<Tooltip id="button-tooltip" {...props}>
+			Games that you just started!
+		</Tooltip>
+	);
+	const renderFinished = props => (
+		<Tooltip id="button-tooltip" {...props}>
+			Games that you finished!
+		</Tooltip>
+	);
+	const renderCompleted = props => (
+		<Tooltip id="button-tooltip" {...props}>
+			Games that you finished and completed all achivements/content!
+		</Tooltip>
+	);
 	return (
 		<Container style={{ backgroundSize: "cover" }} className="space">
 			<Row>
@@ -538,7 +555,14 @@ export const UserProfileUpdate = props => {
 									<h6>{platform1.platform_name}</h6>
 									<Form.Row>
 										<Form.Group as={Col} controlId="formGridEmail">
-											<Form.Label>Started</Form.Label>
+											<Form.Label>
+												<OverlayTrigger
+													placement="top"
+													delay={{ show: 250, hide: 400 }}
+													overlay={renderStarted}>
+													<span>Started</span>
+												</OverlayTrigger>
+											</Form.Label>
 											<Dropdown>
 												<Dropdown.Toggle variant="secondary" id="dropdown-basic">
 													{!!startedP1 ? startedP1.game_name : "Select Game"}
@@ -570,7 +594,14 @@ export const UserProfileUpdate = props => {
 											</Dropdown>
 										</Form.Group>
 										<Form.Group as={Col} controlId="formGridEmail">
-											<Form.Label>Finished</Form.Label>
+											<Form.Label>
+												<OverlayTrigger
+													placement="top"
+													delay={{ show: 250, hide: 400 }}
+													overlay={renderFinished}>
+													<span>Finished</span>
+												</OverlayTrigger>
+											</Form.Label>
 											<Dropdown>
 												<Dropdown.Toggle variant="secondary" id="dropdown-basic">
 													{!!finishedP1 ? finishedP1.game_name : "Select Game"}
@@ -602,7 +633,14 @@ export const UserProfileUpdate = props => {
 											</Dropdown>
 										</Form.Group>
 										<Form.Group as={Col} controlId="formGridEmail">
-											<Form.Label>Completed</Form.Label>
+											<Form.Label>
+												<OverlayTrigger
+													placement="top"
+													delay={{ show: 250, hide: 400 }}
+													overlay={renderCompleted}>
+													<span>Completed</span>
+												</OverlayTrigger>
+											</Form.Label>
 											<Dropdown>
 												<Dropdown.Toggle variant="secondary" id="dropdown-basic">
 													{!!completedP1 ? completedP1.game_name : "Select Game"}
@@ -641,7 +679,14 @@ export const UserProfileUpdate = props => {
 									<h6>{platform2.platform_name}</h6>
 									<Form.Row>
 										<Form.Group as={Col} controlId="formGridEmail">
-											<Form.Label>Started</Form.Label>
+											<Form.Label>
+												<OverlayTrigger
+													placement="top"
+													delay={{ show: 250, hide: 400 }}
+													overlay={renderStarted}>
+													<span>Started</span>
+												</OverlayTrigger>
+											</Form.Label>
 											<Dropdown>
 												<Dropdown.Toggle variant="secondary" id="dropdown-basic">
 													{!!startedP2 ? startedP2.game_name : "Select Game"}
@@ -673,7 +718,14 @@ export const UserProfileUpdate = props => {
 											</Dropdown>
 										</Form.Group>
 										<Form.Group as={Col} controlId="formGridEmail">
-											<Form.Label>Finished</Form.Label>
+											<Form.Label>
+												<OverlayTrigger
+													placement="top"
+													delay={{ show: 250, hide: 400 }}
+													overlay={renderFinished}>
+													<span>Finished</span>
+												</OverlayTrigger>
+											</Form.Label>
 											<Dropdown>
 												<Dropdown.Toggle variant="secondary" id="dropdown-basic">
 													{!!finishedP2 ? finishedP2.game_name : "Select Game"}
@@ -705,7 +757,14 @@ export const UserProfileUpdate = props => {
 											</Dropdown>
 										</Form.Group>
 										<Form.Group as={Col} controlId="formGridEmail">
-											<Form.Label>Completed</Form.Label>
+											<Form.Label>
+												<OverlayTrigger
+													placement="top"
+													delay={{ show: 250, hide: 400 }}
+													overlay={renderCompleted}>
+													<span>Completed</span>
+												</OverlayTrigger>
+											</Form.Label>
 											<Dropdown>
 												<Dropdown.Toggle variant="secondary" id="dropdown-basic">
 													{!!completedP2 ? completedP2.game_name : "Select Game"}
@@ -744,7 +803,14 @@ export const UserProfileUpdate = props => {
 									<h6>{platform3.platform_name}</h6>
 									<Form.Row>
 										<Form.Group as={Col} controlId="formGridEmail">
-											<Form.Label>Started</Form.Label>
+											<Form.Label>
+												<OverlayTrigger
+													placement="top"
+													delay={{ show: 250, hide: 400 }}
+													overlay={renderStarted}>
+													<span>Started</span>
+												</OverlayTrigger>
+											</Form.Label>
 											<Dropdown>
 												<Dropdown.Toggle variant="secondary" id="dropdown-basic">
 													{!!startedP3 ? startedP3.game_name : "Select Game"}
@@ -776,7 +842,14 @@ export const UserProfileUpdate = props => {
 											</Dropdown>
 										</Form.Group>
 										<Form.Group as={Col} controlId="formGridEmail">
-											<Form.Label>Finished</Form.Label>
+											<Form.Label>
+												<OverlayTrigger
+													placement="top"
+													delay={{ show: 250, hide: 400 }}
+													overlay={renderFinished}>
+													<span>Finished</span>
+												</OverlayTrigger>
+											</Form.Label>
 											<Dropdown>
 												<Dropdown.Toggle variant="secondary" id="dropdown-basic">
 													{!!finishedP3 ? finishedP3.game_name : "Select Game"}
@@ -808,7 +881,14 @@ export const UserProfileUpdate = props => {
 											</Dropdown>
 										</Form.Group>
 										<Form.Group as={Col} controlId="formGridEmail">
-											<Form.Label>Completed</Form.Label>
+											<Form.Label>
+												<OverlayTrigger
+													placement="top"
+													delay={{ show: 250, hide: 400 }}
+													overlay={renderCompleted}>
+													<span>Completed</span>
+												</OverlayTrigger>
+											</Form.Label>
 											<Dropdown>
 												<Dropdown.Toggle variant="secondary" id="dropdown-basic">
 													{!!completedP3 ? completedP3.game_name : "Select Game"}

@@ -19,11 +19,11 @@ export const UserProfile = props => {
 				paddingBottom: "3rem"
 			}}
 			className="space">
-			<div className="container container-profile mt-5">
-				<div className="row row-1">
-					<div className="col col- search-margin">
+			<Container className="container-profile">
+				<Row>
+					<Col className="search-margin">
 						<div className="user-name">{store.user.username}</div>
-						<div className="card-profile">
+						<div className="card-profile shadow">
 							<img
 								className="profile-img"
 								src={
@@ -40,31 +40,27 @@ export const UserProfile = props => {
 								</Link>
 							</div>
 						</div>
-					</div>
-					<div className="col col- topcol">
-						<UserNowPlaying />
-					</div>
-					<div className="col col- topcol">
-						<UserFavoriteList />
-					</div>
-				</div>
-				<br />
-				<br />
-				<br />
-				<div className="row row-two">
-					<Col md={{ span: 4, offset: 0 }}>
+					</Col>
+					<Col className="search-margin">
+						<Row>
+							<UserNowPlaying />
+						</Row>
+						<Row>
+							<UserFavoriteList />
+						</Row>
+					</Col>
+				</Row>
+				<Row className="search-margin">
+					<Col>
 						<UserHighlights />
 					</Col>
-				</div>
-				<br />
-				<br />
-				<br />
-				<div className="row space row-three">
+				</Row>
+				<Row className="search-margin">
 					<Col className="space">
 						<UserTags />
 					</Col>
-				</div>
-			</div>
+				</Row>
+			</Container>
 		</Container>
 	);
 };

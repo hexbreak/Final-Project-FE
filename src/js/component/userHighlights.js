@@ -7,8 +7,7 @@ export const UserHighlights = () => {
 	let history = useHistory();
 	return (
 		<Container>
-			<h6 className="profileHighlights">Highlights</h6>
-			<Table striped bordered hover variant="light" style={{ width: "50rem" }}>
+			<Table style={{ width: "50rem" }}>
 				<thead>
 					<tr>
 						<th>Platform</th>

@@ -21,7 +21,7 @@ import PropTypes from "prop-types";
 export const SearchPage = props => {
 	const { store, actions } = useContext(Context);
 	const [gameName, setGameName] = useState("");
-	const [sortKey, setSort] = useState("Rating");
+	const [sortKey, setSort] = useState("metacritic");
 	const [inverted, setInverted] = useState(true);
 	const [pagination, setPagination] = useState(1);
 	const [tags, setTags] = useState(null);
@@ -35,7 +35,18 @@ export const SearchPage = props => {
 			actions.loadGenres("40");
 			actions.loadPlatforms("50");
 			if (props.location.state != undefined) {
-				setGameName(props.location.state);
+				if (props.location.state.gameName != undefined) {
+					setGameName(props.location.state.gameName);
+				}
+				if (props.location.state.inverted != undefined) {
+					setInverted(props.location.state.inverted);
+				}
+				if (props.location.state.pagination != undefined) {
+					setPagination(props.location.state.pagination);
+				}
+				if (props.location.state.sort != undefined) {
+					setSort(props.location.state.sort);
+				}
 			}
 		};
 		loadSearch();
@@ -229,7 +240,7 @@ export const SearchPage = props => {
 											Show More
 										</Button>
 									) : (
-										<Button id="viewmore" onClick={e => setShowMoreTags(false)}>
+										<Button id="viewmore" onClick={e => setShowMorePlatforms(false)}>
 											Show Less
 										</Button>
 									)}
