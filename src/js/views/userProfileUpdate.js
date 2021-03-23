@@ -145,9 +145,15 @@ export const UserProfileUpdate = props => {
 				liked: liked,
 				disliked: disliked,
 				game_progression: [
-					[startedP1, finishedP1, completedP1],
-					[startedP2, finishedP2, completedP2],
-					[startedP3, finishedP3, completedP3]
+					startedP1,
+					finishedP1,
+					completedP1,
+					startedP2,
+					finishedP2,
+					completedP2,
+					startedP3,
+					finishedP3,
+					completedP3
 				]
 			};
 			actions.handleSave(user);
