@@ -7,12 +7,17 @@ const getState = ({ getStore, getActions, setStore }) => {
 				// Login, Registration, Username, UserType, UserId, Token, Validation\
 				username: "",
 				password: "",
+				email: "",
 				id: 1,
 				about: "",
 				image: "",
 				favorites: [],
 				platforms: [null, null, null],
-				game_progression: [null, null, null],
+				game_progression: [
+					[null, null, null],
+					[null, null, null],
+					[null, null, null]
+				],
 				playing: [null, null, null],
 				liked: [],
 				disliked: [],
@@ -539,6 +544,12 @@ const getState = ({ getStore, getActions, setStore }) => {
 					});
 				// setStore({ user: user }); // OLD setStore
 				// setStore({ user: { 0: user } }); // NEW setStore
+			},
+			handlePicture: image => {
+				const store = getStore();
+				let newUser = store.user;
+				newUser = { ...user, image: image };
+				setStore({ user: newUser });
 			}
 		}
 	};

@@ -19,6 +19,12 @@ export const UserNowPlaying = () => {
 									onClick={e => history.push({ pathname: `/details/${value.id}`, state: value.id })}>
 									{value.name}
 								</span>
+								<Button
+									id="ascendingbtn"
+									variant="primary"
+									onClick={e => actions.handlePicture(value.image)}>
+									<i className="fas fa-portrait" />
+								</Button>
 								<span style={{ float: "right" }}>{value.notes}</span>
 							</ListGroup.Item>
 						);

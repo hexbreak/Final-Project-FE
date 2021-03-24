@@ -330,7 +330,8 @@ export const UserProfileUpdate = props => {
 																setPlaying1({
 																	...playing1,
 																	game_name: value.name,
-																	game_id: value.id
+																	game_id: value.id,
+																	game_image: value.background_image
 																})
 															}>
 															{value.name}
@@ -374,7 +375,8 @@ export const UserProfileUpdate = props => {
 																setPlaying2({
 																	...playing2,
 																	game_name: value.name,
-																	game_id: value.id
+																	game_id: value.id,
+																	game_image: value.background_image
 																})
 															}>
 															{value.name}
@@ -418,7 +420,8 @@ export const UserProfileUpdate = props => {
 																setPlaying3({
 																	...playing3,
 																	game_name: value.name,
-																	game_id: value.id
+																	game_id: value.id,
+																	game_image: value.background_image
 																})
 															}>
 															{value.name}
