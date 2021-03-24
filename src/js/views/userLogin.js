@@ -38,7 +38,11 @@ export const UserLogin = props => {
 									/>
 								</Form.Group>
 							</Form.Row>
-							<Button variant="success" className="input-space" type="submit">
+							<Button
+								onClick={() => actions.loginUser(this.state.password, this.state.email)}
+								variant="success"
+								className="input-space"
+								type="submit">
 								Submit
 							</Button>
 						</Form>

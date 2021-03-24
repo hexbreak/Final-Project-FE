@@ -3,6 +3,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 	const apiKey = "33af10ad5812440abf75a35c04492e15";
 	return {
 		store: {
+			token: null,
 			user: {
 				// Login, Registration, Username, UserType, UserId, Token, Validation\
 				username: "",
@@ -54,6 +55,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 			]
 		},
 		actions: {
+			logout: () => {
+				setStore({ token: null });
+			},
 			// Use getActions to call a function within a fuction
 			exampleFunction: () => {
 				getActions().changeColor(0, "green");
@@ -80,29 +84,29 @@ const getState = ({ getStore, getActions, setStore }) => {
 					.catch(error => console.error("Error:", error));
 			},
 			// Login & generate token
-			loginUser: login_user => {
-				fetch(`${beURL}/user/` + id, {
+			loginUser: (password, email) => {
+				fetch(`${beURL}/login`, {
 					method: "POST",
 					headers: {
 						"Content-Type": "application/json"
 					},
-					body: JSON.stringify(login_user) // converting in string for the backend
+					body: JSON.stringify({
+						email: email,
+						password: password
+					})
 				})
-					.then(response => {
-						if (!response.ok) {
-							throw Error(response.statusText);
+					.then(response => response.json())
+					.then(token => {
+						if (typeof token.msg != "undefined") {
+							// Notify.error(token.msg)
+						} else {
+							setStore({ token: token });
 						}
-						return response.json();
-					})
-					.then(response => {
-						console.log("Success:", response);
-						// return setStates in here to push data to BE
-					})
-					.catch(error => console.error("Error:", error)); // BE RIGHT BACK <<<
+					});
 			},
 			addtoFavorites: () => {
 				const store = getStore();
-				fetch(`${beURL}/user/1/fav`, {
+				fetch(`${beURL}user/1/fav`, {
 					method: "POST",
 					headers: {
 						"Content-Type": "application/json"
@@ -121,66 +125,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					.then(responseAsJson => {
 						console.log("Success:", responseAsJson);
 						// Do stuff with the JSON
-						return setStore({ favorites: responseAsJson.results });
-					})
-					.catch(error => console.error("Error:", error));
-				// GET favorite
-				fetch(`${beURL}/user/1/fav`, {
-					method: "GET",
-					headers: {
-						"Content-Type": "application/json"
-					}
-				})
-					.then(response => {
-						if (!response.ok) {
-							throw Error(response.statusText);
-						}
-						return response.json();
-					})
-					.then(responseAsJson => {
-						console.log("Success:", responseAsJson);
-						// Do stuff with the JSON
-					})
-					.catch(error => console.error("Error:", error));
-				// PUT favorite
-				fetch(`${beURL}/user/1/fav/` + id, {
-					method: "PUT",
-					headers: {
-						"Content-Type": "application/json"
-					},
-					body: JSON.stringify({
-						game_id: store.game.id,
-						game_name: store.game.name
-					})
-				})
-					.then(response => {
-						if (!response.ok) {
-							throw Error(response.statusText);
-						}
-						return response.json();
-					})
-					.then(responseAsJson => {
-						console.log("Success:", responseAsJson);
-						// Do stuff with the JSON
-						// return setStore({ : responseAsJson.results });
-					})
-					.catch(error => console.error("Error:", error));
-				// DELETE favorite
-				fetch(`${beURL}/user/1/fav/` + id, {
-					method: "DELETE",
-					headers: {
-						"Content-Type": "application/json"
-					}
-				})
-					.then(response => {
-						if (!response.ok) {
-							throw Error(response.statusText);
-						}
-						return response.json();
-					})
-					.then(responseAsJson => {
-						console.log("Success:", responseAsJson);
-						// Do stuff with the JSON
+						return setStore({ user: favorites });
 					})
 					.catch(error => console.error("Error:", error));
 			},
