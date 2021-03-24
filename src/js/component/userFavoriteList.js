@@ -11,17 +11,28 @@ export const UserFavoriteList = props => {
 		<Card bg="light" className="profileCard profileCardBackground shadow" style={{ maxWidth: "25rem" }}>
 			<Card.Header className="profileCardHeader">Favorites</Card.Header>
 			<ListGroup variant="flush light">
-				{store.user.favorites.map((value, index) => {
-					return (
-						<ListGroup.Item variant="light" key={index}>
-							<span
-								onClick={e => history.push({ pathname: `/details/${value.id}`, state: value.id })}
-								style={{ cursor: "pointer" }}>
-								{value.name}
-							</span>
-						</ListGroup.Item>
-					);
+				{store.favorites.map((value, index) => {
+					if (index < 3) {
+						return (
+							<ListGroup.Item variant="light" key={index}>
+								<span
+									onClick={e =>
+										history.push({ pathname: `/details/${value.game_id}`, state: value.game_id })
+									}
+									style={{ cursor: "pointer" }}>
+									{value.game_name}
+								</span>
+							</ListGroup.Item>
+						);
+					}
 				})}
+				{store.favorites.length > 3 && (
+					<ListGroup.Item variant="light">
+						<Button onClick={e => history.push("/favorites")} id="viewmore">
+							View More
+						</Button>
+					</ListGroup.Item>
+				)}
 			</ListGroup>
 		</Card>
 	);

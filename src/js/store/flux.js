@@ -1,5 +1,5 @@
 const getState = ({ getStore, getActions, setStore }) => {
-	const beURL = "https://3000-bronze-earwig-hbuagomx.ws-us03.gitpod.io/"; // Use ${beURL} to make it easier when handling the BE's constant URL changes
+	const beURL = "https://3000-bronze-earwig-hbuagomx.ws-us03.gitpod.io"; // Use ${beURL} to make it easier when handling the BE's constant URL changes
 	const apiKey = "33af10ad5812440abf75a35c04492e15";
 	return {
 		store: {
@@ -11,7 +11,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 				id: 1,
 				about: "",
 				image: "",
-				favorites: [],
 				platforms: [null, null, null],
 				game_progression: [null, null, null, null, null, null, null, null, null],
 				playing: [null, null, null],
@@ -546,6 +545,23 @@ const getState = ({ getStore, getActions, setStore }) => {
 				let newUser = store.user;
 				newUser = { ...user, image: image };
 				setStore({ user: newUser });
+			},
+			getFavorites: userId => {
+				fetch(`${beURL}/user/${userId}/fav`)
+					.then(function(response) {
+						if (!response.ok) {
+							throw Error(response.statusText);
+						}
+						// Read the response as json.
+						return response.json();
+					})
+					.then(function(responseAsJson) {
+						// Do stuff with the JSON
+						return setStore({ favorites: responseAsJson });
+					})
+					.catch(function(error) {
+						console.log("Looks like there was a problem: \n", error);
+					});
 			}
 		}
 	};
