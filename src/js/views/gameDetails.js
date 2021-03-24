@@ -59,6 +59,7 @@ export const GameDetails = props => {
 			}
 		}
 	}
+	console.log(store.game);
 	if (store.game.id == props.location.state) {
 		return (
 			<Container fluid>

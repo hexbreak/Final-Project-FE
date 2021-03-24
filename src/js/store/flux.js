@@ -13,11 +13,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				image: "",
 				favorites: [],
 				platforms: [null, null, null],
-				game_progression: [
-					[null, null, null],
-					[null, null, null],
-					[null, null, null]
-				],
+				game_progression: [null, null, null, null, null, null, null, null, null],
 				playing: [null, null, null],
 				liked: [],
 				disliked: [],

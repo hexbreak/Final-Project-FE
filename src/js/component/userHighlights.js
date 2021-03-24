@@ -20,53 +20,153 @@ export const UserHighlights = () => {
 					{store.user.platforms.map((value, index) => {
 						if (!!value) {
 							if (!!value.name) {
-								return (
-									<tr key={index}>
-										<td>{value.name}</td>
-										{store.user.game_progression[index] != null && (
-											<td>
-												<span
-													onClick={e =>
-														history.push({
-															pathname: `/details/${store.user.game_progression[index][0].id}`,
-															state: store.user.game_progression[index][0].id
-														})
-													}
-													style={{ cursor: "pointer" }}>
-													{store.user.game_progression[index][0].name}
-												</span>
-											</td>
-										)}
-										{store.user.game_progression[index][1] != null && (
-											<td>
-												<span
-													onClick={e =>
-														history.push({
-															pathname: `/details/${store.user.game_progression[index][1].id}`,
-															state: store.user.game_progression[index][1].id
-														})
-													}
-													style={{ cursor: "pointer" }}>
-													{store.user.game_progression[index][1].name}
-												</span>
-											</td>
-										)}
-										{store.user.game_progression[index][2] != null && (
-											<td>
-												<span
-													onClick={e =>
-														history.push({
-															pathname: `/details/${store.user.game_progression[index][2].id}`,
-															state: store.user.game_progression[index][2].id
-														})
-													}
-													style={{ cursor: "pointer" }}>
-													{store.user.game_progression[index][2].name}
-												</span>
-											</td>
-										)}
-									</tr>
-								);
+								if (index == 0) {
+									return (
+										<tr key={index}>
+											<td>{value.name}</td>
+											{store.user.game_progression[0] != null && (
+												<td>
+													<span
+														onClick={e =>
+															history.push({
+																pathname: `/details/${store.user.game_progression[0].id}`,
+																state: store.user.game_progression[0].id
+															})
+														}
+														style={{ cursor: "pointer" }}>
+														{store.user.game_progression[0].name}
+													</span>
+												</td>
+											)}
+											{store.user.game_progression[1] != null && (
+												<td>
+													<span
+														onClick={e =>
+															history.push({
+																pathname: `/details/${store.user.game_progression[1].id}`,
+																state: store.user.game_progression[1].id
+															})
+														}
+														style={{ cursor: "pointer" }}>
+														{store.user.game_progression[1].name}
+													</span>
+												</td>
+											)}
+											{store.user.game_progression[2] != null && (
+												<td>
+													<span
+														onClick={e =>
+															history.push({
+																pathname: `/details/${store.user.game_progression[2].id}`,
+																state: store.user.game_progression[2].id
+															})
+														}
+														style={{ cursor: "pointer" }}>
+														{store.user.game_progression[2].name}
+													</span>
+												</td>
+											)}
+										</tr>
+									);
+								}
+								if (index == 1) {
+									return (
+										<tr key={index}>
+											<td>{value.name}</td>
+											{store.user.game_progression[3] != null && (
+												<td>
+													<span
+														onClick={e =>
+															history.push({
+																pathname: `/details/${store.user.game_progression[3].id}`,
+																state: store.user.game_progression[3].id
+															})
+														}
+														style={{ cursor: "pointer" }}>
+														{store.user.game_progression[3].name}
+													</span>
+												</td>
+											)}
+											{store.user.game_progression[4] != null && (
+												<td>
+													<span
+														onClick={e =>
+															history.push({
+																pathname: `/details/${store.user.game_progression[4].id}`,
+																state: store.user.game_progression[4].id
+															})
+														}
+														style={{ cursor: "pointer" }}>
+														{store.user.game_progression[4].name}
+													</span>
+												</td>
+											)}
+											{store.user.game_progression[5] != null && (
+												<td>
+													<span
+														onClick={e =>
+															history.push({
+																pathname: `/details/${store.user.game_progression[5].id}`,
+																state: store.user.game_progression[5].id
+															})
+														}
+														style={{ cursor: "pointer" }}>
+														{store.user.game_progression[5].name}
+													</span>
+												</td>
+											)}
+										</tr>
+									);
+								}
+								if (index == 2) {
+									return (
+										<tr key={index}>
+											<td>{value.name}</td>
+											{store.user.game_progression[6] != null && (
+												<td>
+													<span
+														onClick={e =>
+															history.push({
+																pathname: `/details/${store.user.game_progression[6].id}`,
+																state: store.user.game_progression[6].id
+															})
+														}
+														style={{ cursor: "pointer" }}>
+														{store.user.game_progression[6].name}
+													</span>
+												</td>
+											)}
+											{store.user.game_progression[1] != null && (
+												<td>
+													<span
+														onClick={e =>
+															history.push({
+																pathname: `/details/${store.user.game_progression[7].id}`,
+																state: store.user.game_progression[7].id
+															})
+														}
+														style={{ cursor: "pointer" }}>
+														{store.user.game_progression[7].name}
+													</span>
+												</td>
+											)}
+											{store.user.game_progression[8] != null && (
+												<td>
+													<span
+														onClick={e =>
+															history.push({
+																pathname: `/details/${store.user.game_progression[8].id}`,
+																state: store.user.game_progression[8].id
+															})
+														}
+														style={{ cursor: "pointer" }}>
+														{store.user.game_progression[8].name}
+													</span>
+												</td>
+											)}
+										</tr>
+									);
+								}
 							}
 						}
 					})}

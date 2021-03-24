@@ -162,7 +162,7 @@ export const UserProfileUpdate = props => {
 		} else {
 			setNewPassword("");
 			setConfirmPassword("");
-			alert("Confirm Password and Password dont Match");
+			alert("Confirm Password and Password don't match");
 		}
 	};
 	useEffect(() => {
