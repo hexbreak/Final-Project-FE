@@ -11,6 +11,13 @@ import PropTypes from "prop-types";
 
 export const UserProfile = props => {
 	const { store, actions } = useContext(Context);
+	useEffect(() => {
+		const loadFavorites = () => {
+			actions.getFavorites(store.user.id);
+		};
+		loadFavorites();
+		console.log(store.favorites);
+	}, []);
 	return (
 		<Container
 			fluid
