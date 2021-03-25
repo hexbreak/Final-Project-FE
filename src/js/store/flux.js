@@ -106,7 +106,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 			addtoFavorites: () => {
 				const store = getStore();
-				fetch(`${beURL}user/1/fav`, {
+				fetch(`${beURL}/user/${store.user.id}/fav`, {
 					method: "POST",
 					headers: {
 						"Content-Type": "application/json"
@@ -125,7 +125,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 					})
 					.then(responseAsJson => {
 						console.log("Success:", responseAsJson);
-<<<<<<< HEAD
 						setStore({ favorites: responseAsJson });
 						fetch(`${beURL}/user/${store.user.id}/fav`, {
 							method: "GET",
@@ -147,12 +146,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 					})
 					.catch(error => console.error("Error:", error));
 				// GET favorite
-=======
-						// Do stuff with the JSON
-						return setStore({ user: favorites });
-					})
-					.catch(error => console.error("Error:", error));
->>>>>>> a5ae169ba11dc18d8e15c75dc4643845f7e0bfdc
 			},
 			changeColor: (index, color) => {
 				//get the store
@@ -490,7 +483,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					});
 			},
 			handleSave: user => {
-				fetch(`${beURL}user/1`, {
+				fetch(`${beURL}/user/1`, {
 					method: "POST",
 					headers: {
 						"Content-Type": "application/json"
