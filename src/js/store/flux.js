@@ -9,7 +9,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				username: "",
 				password: "",
 				email: "",
-				id: 0,
+				id: 1,
 				about: "",
 				image: "",
 				platforms: [null, null, null],
@@ -106,7 +106,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 			addtoFavorites: () => {
 				const store = getStore();
-				fetch(`${beURL}user/1/fav`, {
+				fetch(`${beURL}/user/1/fav`, {
 					method: "POST",
 					headers: {
 						"Content-Type": "application/json"
@@ -124,9 +124,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 						return response.json();
 					})
 					.then(responseAsJson => {
-						console.log("Success:", responseAsJson);
-<<<<<<< HEAD
-						setStore({ favorites: responseAsJson });
 						fetch(`${beURL}/user/${store.user.id}/fav`, {
 							method: "GET",
 							headers: {
@@ -140,19 +137,12 @@ const getState = ({ getStore, getActions, setStore }) => {
 								return response.json();
 							})
 							.then(responseAsJson => {
-								console.log("Success:", responseAsJson);
-								// Do stuff with the JSON
+								setStore({ favorites: responseAsJson });
 							})
 							.catch(error => console.error("Error:", error));
 					})
 					.catch(error => console.error("Error:", error));
 				// GET favorite
-=======
-						// Do stuff with the JSON
-						return setStore({ user: favorites });
-					})
-					.catch(error => console.error("Error:", error));
->>>>>>> a5ae169ba11dc18d8e15c75dc4643845f7e0bfdc
 			},
 			changeColor: (index, color) => {
 				//get the store
