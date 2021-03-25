@@ -566,7 +566,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			deleteFromFavorites: gameId => {
 				const store = getStore();
 				let game = store.user.favorite.filter(value => gameId == value.game_id);
-				fetch(`${beURL}/user/${store.user.id}/fav/` + game[0].id, {
+				fetch(`${beURL}/user/${store.user.id}/delfav/` + game[0].id, {
 					method: "DELETE",
 					headers: {
 						"Content-Type": "application/json"
