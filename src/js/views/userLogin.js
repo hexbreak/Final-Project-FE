@@ -11,6 +11,8 @@ import PropTypes from "prop-types";
 
 export const UserLogin = props => {
 	const { store, actions } = useContext(Context);
+	const [logUsername, setLogUsername] = useState("");
+	const [logPassword, setLogPassword] = useState("");
 	return (
 		<Container className="space blue">
 			<Row>
@@ -22,6 +24,7 @@ export const UserLogin = props => {
 								<Form.Group as={Col} controlId="Username">
 									<Form.Label className="input-space">Username</Form.Label>
 									<Form.Control
+										onChange={e => setLogUsername(e.target.value)}
 										className="input-space input-shadow"
 										type="text"
 										placeholder="Username"
@@ -32,13 +35,18 @@ export const UserLogin = props => {
 								<Form.Group as={Col} controlId="formGridPassword">
 									<Form.Label className="input-space">Password</Form.Label>
 									<Form.Control
+										onChange={e => setLogPassword(e.target.value)}
 										className="input-space input-shadow"
 										type="password"
 										placeholder="Password"
 									/>
 								</Form.Group>
 							</Form.Row>
-							<Button variant="success" className="input-space" type="submit">
+							<Button
+								onClick={() => actions.loginUser(logPassword, logUsername)}
+								variant="success"
+								className="input-space"
+								type="button">
 								Submit
 							</Button>
 						</Form>

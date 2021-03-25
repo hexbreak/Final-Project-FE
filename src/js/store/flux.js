@@ -3,12 +3,13 @@ const getState = ({ getStore, getActions, setStore }) => {
 	const apiKey = "33af10ad5812440abf75a35c04492e15";
 	return {
 		store: {
+			token: null,
 			user: {
 				// Login, Registration, Username, UserType, UserId, Token, Validation\
 				username: "",
 				password: "",
 				email: "",
-				id: 1,
+				id: 0,
 				about: "",
 				image: "",
 				platforms: [null, null, null],
@@ -54,6 +55,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 			]
 		},
 		actions: {
+			logout: () => {
+				setStore({ token: null });
+			},
 			// Use getActions to call a function within a fuction
 			exampleFunction: () => {
 				getActions().changeColor(0, "green");
@@ -80,29 +84,29 @@ const getState = ({ getStore, getActions, setStore }) => {
 					.catch(error => console.error("Error:", error));
 			},
 			// Login & generate token
-			loginUser: login_user => {
-				fetch(`${beURL}/user/` + id, {
+			loginUser: (password, username) => {
+				fetch(`${beURL}/login`, {
 					method: "POST",
 					headers: {
 						"Content-Type": "application/json"
 					},
-					body: JSON.stringify(login_user) // converting in string for the backend
+					body: JSON.stringify({
+						username: username,
+						password: password
+					})
 				})
-					.then(response => {
-						if (!response.ok) {
-							throw Error(response.statusText);
+					.then(response => response.json())
+					.then(data => {
+						if (typeof data.msg != "undefined") {
+							// Notify.error(token.msg)
+						} else {
+							setStore({ token: data.token, user: { ...getStore().user, id: data.user_id } });
 						}
-						return response.json();
-					})
-					.then(response => {
-						console.log("Success:", response);
-						// return setStates in here to push data to BE
-					})
-					.catch(error => console.error("Error:", error)); // BE RIGHT BACK <<<
+					});
 			},
 			addtoFavorites: () => {
 				const store = getStore();
-				fetch(`${beURL}/user/1/fav`, {
+				fetch(`${beURL}user/1/fav`, {
 					method: "POST",
 					headers: {
 						"Content-Type": "application/json"
@@ -121,6 +125,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					})
 					.then(responseAsJson => {
 						console.log("Success:", responseAsJson);
+<<<<<<< HEAD
 						setStore({ favorites: responseAsJson });
 						fetch(`${beURL}/user/${store.user.id}/fav`, {
 							method: "GET",
@@ -142,6 +147,12 @@ const getState = ({ getStore, getActions, setStore }) => {
 					})
 					.catch(error => console.error("Error:", error));
 				// GET favorite
+=======
+						// Do stuff with the JSON
+						return setStore({ user: favorites });
+					})
+					.catch(error => console.error("Error:", error));
+>>>>>>> a5ae169ba11dc18d8e15c75dc4643845f7e0bfdc
 			},
 			changeColor: (index, color) => {
 				//get the store
