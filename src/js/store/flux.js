@@ -9,7 +9,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				username: "",
 				password: "",
 				email: "",
-				id: 1,
+				id: "",
 				about: "",
 				image: "",
 				platforms: [null, null, null],
@@ -482,7 +482,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					});
 			},
 			handleSave: user => {
-				fetch(`${beURL}/user/1`, {
+				fetch(`${beURL}/user/${store.user.id}`, {
 					method: "POST",
 					headers: {
 						"Content-Type": "application/json"
