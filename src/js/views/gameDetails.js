@@ -39,36 +39,34 @@ export const GameDetails = props => {
 			actions.checkFavorites(store.game.id);
 		};
 		checkFavorites();
-	}, [store.favorites]);
-
-	if (!!store.game.rating) {
-		for (let i = 0; i < Math.floor(store.game.rating); i++) {
-			rating.push(
-				<img
-					className="center"
-					src="https://icons.iconarchive.com/icons/goodstuff-no-nonsense/free-space/1024/space-invader-icon.png"
-					alt={i}
-					style={{
-						height: "5rem",
-						width: "auto"
-					}}
-				/>
-			);
-		}
-	}
-	if (store.game.platforms != null) {
-		let pc = store.game.platforms.filter(value => {
-			return value.platform.id == 4 && value.requirements != undefined;
-		});
-		if (pc[0] != undefined) {
-			if (Object.keys(pc[0].requirements).length === 0 && pc[0].requirements.constructor === Object) {
-				return gameRequirements;
-			} else {
-				gameRequirements = Object.values(pc[0].requirements);
+	}, [store.user.favorites]);
+	if (store.game.id == props.location.state) {
+		if (store.game.platforms != null) {
+			let pc = store.game.platforms.filter(value => {
+				return value.platform.id == 4 && value.requirements != undefined;
+			});
+			if (pc[0] != undefined) {
+				if (Object.keys(pc[0].requirements).length === 0 && pc[0].requirements.constructor === Object) {
+				} else {
+					gameRequirements = Object.values(pc[0].requirements);
+				}
 			}
 		}
-	}
-	if (store.game.id == props.location.state) {
+		if (!!store.game.rating) {
+			for (let i = 0; i < Math.floor(store.game.rating); i++) {
+				rating.push(
+					<img
+						className="center"
+						src="https://icons.iconarchive.com/icons/goodstuff-no-nonsense/free-space/1024/space-invader-icon.png"
+						alt={i}
+						style={{
+							height: "5rem",
+							width: "auto"
+						}}
+					/>
+				);
+			}
+		}
 		return (
 			<Container fluid>
 				<Jumbotron className="text-dark" style={{ backgroundColor: "white" }}>
@@ -256,7 +254,7 @@ export const GameDetails = props => {
 								<h3 className="center">PC Requirements</h3>
 							</Row>
 							<Row className="detailspace">
-								{!!gameRequirements &&
+								{gameRequirements.length > 0 &&
 									gameRequirements.map((value, index) => {
 										return <Col key={index}>{value}</Col>;
 									})}

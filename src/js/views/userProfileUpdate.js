@@ -936,7 +936,7 @@ export const UserProfileUpdate = props => {
 				<Col>
 					<Card bg="light" id="tags">
 						<Card.Header>Liked</Card.Header>
-						<ListGroup variant="flush">
+						<ListGroup id="tagsContent" variant="flush">
 							{liked.map((value, index) => {
 								return (
 									<ListGroup.Item key={index} style={{ color: "black" }} variant="light">
@@ -954,19 +954,19 @@ export const UserProfileUpdate = props => {
 					</Card>
 				</Col>
 				<Col>
-					<Card bg="light" id="tags">
+					<Card id="tags" bg="light">
 						<Card.Header>Tags</Card.Header>
-						<ListGroup variant="flush">
+						<ListGroup id="tagsContent" variant="flush">
 							{tags.map((value, index) => {
 								return (
 									<ListGroup.Item key={index} style={{ color: "black" }} variant="light">
-										{value.name}{" "}
+										{value.name}
 										<i
 											id="hover"
 											className="fas fa-trophy transform"
 											style={{ float: "right" }}
 											onClick={e => handleLiked(value)}
-										/>{" "}
+										/>
 										<i
 											id="hover"
 											className="fas fa-skull transform"
@@ -980,9 +980,9 @@ export const UserProfileUpdate = props => {
 					</Card>
 				</Col>
 				<Col>
-					<Card bg="light" id="tags" style={{ width: "18rem", height: "100%" }}>
+					<Card bg="light" id="tags">
 						<Card.Header>Disliked</Card.Header>
-						<ListGroup variant="flush">
+						<ListGroup id="tagsContent" variant="flush">
 							{disliked.map((value, index) => {
 								return (
 									<ListGroup.Item key={index} style={{ color: "black" }} variant="light">

@@ -1,3 +1,5 @@
+import { UserTags } from "../component/userTags";
+
 const getState = ({ getStore, getActions, setStore }) => {
 	const beURL = "https://3000-bronze-earwig-hbuagomx.ws-us03.gitpod.io"; // Use ${beURL} to make it easier when handling the BE's constant URL changes
 	const apiKey = "33af10ad5812440abf75a35c04492e15";
@@ -9,7 +11,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				username: "",
 				password: "",
 				email: "",
-				id: "",
+				id: 1,
 				about: "",
 				image: "",
 				platforms: [null, null, null],
@@ -17,7 +19,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 				playing: [null, null, null],
 				liked: [],
 				disliked: [],
-				preference: false
+				preference: false,
+				favorites: []
 			},
 			backlogPost: [],
 			backlogGet: [],
@@ -132,23 +135,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 					})
 					.then(responseAsJson => {
 						console.log("Success:", responseAsJson);
-						setStore({ favorites: responseAsJson });
-						// fetch(`${beURL}/user/${store.user.id}/fav`, {
-						// 	method: "GET",
-						// 	headers: {
-						// 		"Content-Type": "application/json"
-						// 	}
-						// })
-						// 	.then(response => {
-						// 		if (!response.ok) {
-						// 			throw Error(response.statusText);
-						// 		}
-						// 		return response.json();
-						// 	})
-						// 	.then(responseAsJson => {
-						// 		return setStore({ favorites: responseAsJson });
-						// 	})
-						// 	.catch(error => console.error("Error:", error));
+						let newUser = { ...user, favorites: responseAsJson };
+						return setStore({ user: newUser });
 					})
 					.catch(error => console.error("Error:", error));
 				// GET favorite
@@ -548,7 +536,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 					})
 					.then(function(responseAsJson) {
 						// Do stuff with the JSON
-						return setStore({ favorites: responseAsJson });
+						let newUser = { ...user, favorites: responseAsJson };
+						return setStore({ user: newUser });
 					})
 					.catch(function(error) {
 						console.log("Looks like there was a problem: \n", error);
@@ -556,7 +545,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 			checkFavorites: gameId => {
 				const store = getStore();
-				let check = store.user.favorite.filter(value => gameId == value.game_id);
+				let check = store.user.favorites.filter(value => gameId == value.game_id);
 				if (check.length > 0) {
 					setStore({ check: true });
 				} else {
@@ -593,7 +582,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 								return response.json();
 							})
 							.then(responseAsJson => {
-								return setStore({ favorites: responseAsJson });
+								let newUser = { ...user, favorites: responseAsJson };
+								return setStore({ user: newUser });
 							})
 							.catch(error => console.error("Error:", error));
 					})

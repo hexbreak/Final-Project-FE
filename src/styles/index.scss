@@ -374,7 +374,11 @@ img{
 
 #tags{
     width: 18rem;
-    height: 100%;
+    height: 40rem;
+}
+#tagsContent{
+    overflow-x: hidden;
+    overflow-y: auto;
 }
 //header
 .header {
