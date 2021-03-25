@@ -35,9 +35,9 @@ export const UserFavorites = props => {
 			}}
 			className="space center">
 			<Row className="search-margin center">
-				<Col sm={11}>
+				<Col className="center search-margin search-box" sm={11}>
 					<Row className="search-margin">
-						{store.superSearch[0] != undefined &&
+						{store.favorites.length > 0 &&
 							store.favorites.map((value, index) => {
 								let game = {
 									id: value.game_id,

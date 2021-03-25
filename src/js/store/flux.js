@@ -9,7 +9,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				username: "",
 				password: "",
 				email: "",
-				id: 0,
+				id: 1,
 				about: "",
 				image: "",
 				platforms: [null, null, null],
@@ -139,8 +139,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 								return response.json();
 							})
 							.then(responseAsJson => {
-								console.log("Success:", responseAsJson);
-								// Do stuff with the JSON
+								return setStore({ favorites: responseAsJson });
 							})
 							.catch(error => console.error("Error:", error));
 					})
@@ -566,8 +565,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 								return response.json();
 							})
 							.then(responseAsJson => {
-								console.log("Success:", responseAsJson);
-								// Do stuff with the JSON
+								return setStore({ favorites: responseAsJson });
 							})
 							.catch(error => console.error("Error:", error));
 					})
