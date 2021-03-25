@@ -17,7 +17,7 @@ export const UserNowPlaying = () => {
 								<span
 									style={{ cursor: "pointer", float: "left" }}
 									onClick={e => history.push({ pathname: `/details/${value.id}`, state: value.id })}>
-									{value.name}
+									{value.game_name}
 								</span>
 								<Button
 									id="ascendingbtn"

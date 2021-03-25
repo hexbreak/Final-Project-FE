@@ -85,6 +85,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 			// Login & generate token
 			loginUser: (password, username) => {
+				const actions = getActions();
+				const store = getStore();
 				fetch(`${beURL}/login`, {
 					method: "POST",
 					headers: {
@@ -101,6 +103,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 							// Notify.error(token.msg)
 						} else {
 							setStore({ token: data.token, user: { ...getStore().user, id: data.user_id } });
+							actions.getUserProfile(store.user.id);
 						}
 					});
 			},
@@ -482,6 +485,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 					});
 			},
 			handleSave: user => {
+				const actions = getActions();
+				const store = getStore();
 				fetch(`${beURL}/user/${store.user.id}`, {
 					method: "POST",
 					headers: {
@@ -498,10 +503,29 @@ const getState = ({ getStore, getActions, setStore }) => {
 					.then(response => {
 						console.log("Success:", response);
 						// Here we work with JSON
+						actions.getUserProfile(store.user.id);
 						return setStore({ user: user });
 					});
 				// setStore({ user: user }); // OLD setStore
 				// setStore({ user: { 0: user } }); // NEW setStore
+			},
+			getUserProfile: user => {
+				const store = getStore();
+				fetch(`${beURL}/user/${store.user.id}`, {
+					method: "GET"
+				})
+					.then(response => {
+						if (!response.ok) {
+							throw Error(response.statusText);
+						}
+						return response.json();
+					})
+					.then(
+						data =>
+							setStore({ user: { ...getStore().user, ...data } }) ||
+							console.log("data front, get userprofile", data)
+					)
+					.catch(error => console.log(error));
 			},
 			handlePicture: image => {
 				const store = getStore();

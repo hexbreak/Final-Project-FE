@@ -158,6 +158,8 @@ export const UserProfileUpdate = props => {
 			};
 			actions.handleSave(user);
 			console.log(user);
+			console.log("platform1 check", platform1);
+			console.log("platform1 check", platform2);
 			history.push("/profile");
 		} else {
 			setNewPassword("");

@@ -19,11 +19,11 @@ export const UserHighlights = () => {
 				<tbody>
 					{store.user.platforms.map((value, index) => {
 						if (!!value) {
-							if (!!value.name) {
+							if (!!value.platform_name) {
 								if (index == 0) {
 									return (
 										<tr key={index}>
-											<td>{value.name}</td>
+											<td>{value.platform_name}</td>
 											{store.user.game_progression[0] != null && (
 												<td>
 													<span
@@ -34,7 +34,7 @@ export const UserHighlights = () => {
 															})
 														}
 														style={{ cursor: "pointer" }}>
-														{store.user.game_progression[0].name}
+														{store.user.game_progression[0].game_name}
 													</span>
 												</td>
 											)}
@@ -48,7 +48,7 @@ export const UserHighlights = () => {
 															})
 														}
 														style={{ cursor: "pointer" }}>
-														{store.user.game_progression[1].name}
+														{store.user.game_progression[1].game_name}
 													</span>
 												</td>
 											)}
@@ -62,7 +62,7 @@ export const UserHighlights = () => {
 															})
 														}
 														style={{ cursor: "pointer" }}>
-														{store.user.game_progression[2].name}
+														{store.user.game_progression[2].game_name}
 													</span>
 												</td>
 											)}
@@ -72,7 +72,7 @@ export const UserHighlights = () => {
 								if (index == 1) {
 									return (
 										<tr key={index}>
-											<td>{value.name}</td>
+											<td>{value.platform_name}</td>
 											{store.user.game_progression[3] != null && (
 												<td>
 													<span
@@ -83,7 +83,7 @@ export const UserHighlights = () => {
 															})
 														}
 														style={{ cursor: "pointer" }}>
-														{store.user.game_progression[3].name}
+														{store.user.game_progression[3].game_name}
 													</span>
 												</td>
 											)}
@@ -97,7 +97,7 @@ export const UserHighlights = () => {
 															})
 														}
 														style={{ cursor: "pointer" }}>
-														{store.user.game_progression[4].name}
+														{store.user.game_progression[4].game_name}
 													</span>
 												</td>
 											)}
@@ -111,7 +111,7 @@ export const UserHighlights = () => {
 															})
 														}
 														style={{ cursor: "pointer" }}>
-														{store.user.game_progression[5].name}
+														{store.user.game_progression[5].game_name}
 													</span>
 												</td>
 											)}
@@ -121,7 +121,7 @@ export const UserHighlights = () => {
 								if (index == 2) {
 									return (
 										<tr key={index}>
-											<td>{value.name}</td>
+											<td>{value.platform_name}</td>
 											{store.user.game_progression[6] != null && (
 												<td>
 													<span
@@ -132,7 +132,7 @@ export const UserHighlights = () => {
 															})
 														}
 														style={{ cursor: "pointer" }}>
-														{store.user.game_progression[6].name}
+														{store.user.game_progression[6].game_name}
 													</span>
 												</td>
 											)}
@@ -146,7 +146,7 @@ export const UserHighlights = () => {
 															})
 														}
 														style={{ cursor: "pointer" }}>
-														{store.user.game_progression[7].name}
+														{store.user.game_progression[7].game_name}
 													</span>
 												</td>
 											)}
@@ -160,7 +160,7 @@ export const UserHighlights = () => {
 															})
 														}
 														style={{ cursor: "pointer" }}>
-														{store.user.game_progression[8].name}
+														{store.user.game_progression[8].game_name}
 													</span>
 												</td>
 											)}
