@@ -5,7 +5,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 		store: {
 			token: null,
 			user: {
-				// Login, Registration, Username, UserType, UserId, Token, Validation\
+				// change to null after pitch day for code clean up
 				username: "",
 				password: "",
 				email: "",
@@ -64,12 +64,16 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 			// User Registration // incomplete code until JWT integration
 			registerUser: user => {
-				fetch(`${beURL}/user` + id, {
+				fetch(`${beURL}/register`, {
 					method: "POST",
 					headers: {
 						"Content-Type": "application/json"
 					},
-					body: JSON.stringify(user)
+					body: JSON.stringify({
+						username: username,
+						email: email,
+						password: password
+					})
 				})
 					.then(response => {
 						if (!response.ok) {
@@ -129,22 +133,22 @@ const getState = ({ getStore, getActions, setStore }) => {
 					.then(responseAsJson => {
 						console.log("Success:", responseAsJson);
 						setStore({ favorites: responseAsJson });
-						fetch(`${beURL}/user/${store.user.id}/fav`, {
-							method: "GET",
-							headers: {
-								"Content-Type": "application/json"
-							}
-						})
-							.then(response => {
-								if (!response.ok) {
-									throw Error(response.statusText);
-								}
-								return response.json();
-							})
-							.then(responseAsJson => {
-								return setStore({ favorites: responseAsJson });
-							})
-							.catch(error => console.error("Error:", error));
+						// fetch(`${beURL}/user/${store.user.id}/fav`, {
+						// 	method: "GET",
+						// 	headers: {
+						// 		"Content-Type": "application/json"
+						// 	}
+						// })
+						// 	.then(response => {
+						// 		if (!response.ok) {
+						// 			throw Error(response.statusText);
+						// 		}
+						// 		return response.json();
+						// 	})
+						// 	.then(responseAsJson => {
+						// 		return setStore({ favorites: responseAsJson });
+						// 	})
+						// 	.catch(error => console.error("Error:", error));
 					})
 					.catch(error => console.error("Error:", error));
 				// GET favorite

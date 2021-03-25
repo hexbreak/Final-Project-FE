@@ -11,6 +11,9 @@ import PropTypes from "prop-types";
 
 export const UserRegistration = props => {
 	const { store, actions } = useContext(Context);
+	const [newUsername, setNewUserName] = useState("");
+	const [newEmail, setNewEmail] = useState("");
+	const [newPassword, setNewPassword] = useState("");
 	return (
 		<Container className="space blue">
 			<Row>
@@ -22,6 +25,7 @@ export const UserRegistration = props => {
 								<Form.Group as={Col} controlId="Username">
 									<Form.Label className="input-space">Username</Form.Label>
 									<Form.Control
+										onChange={e => setNewUserName(e.target.value)}
 										className="input-space input-shadow"
 										type="text"
 										placeholder="Username"
@@ -32,6 +36,7 @@ export const UserRegistration = props => {
 								<Form.Group as={Col} controlId="Email">
 									<Form.Label className="input-space">Email</Form.Label>
 									<Form.Control
+										onChange={e => setNewEmail(e.target.value)}
 										className="input-space input-shadow"
 										type="email"
 										placeholder="Email"
@@ -51,6 +56,7 @@ export const UserRegistration = props => {
 								<Form.Group as={Col} controlId="formGridEmail">
 									<Form.Label className="input-space">Confirm Password</Form.Label>
 									<Form.Control
+										onChange={e => setNewPassword(e.target.value)}
 										className="input-space input-shadow"
 										type="password"
 										placeholder="Confirm Password"
@@ -58,7 +64,11 @@ export const UserRegistration = props => {
 								</Form.Group>
 							</Form.Row>
 
-							<Button variant="success" className="input-space" type="submit">
+							<Button
+								onClick={() => actions.registerUser(newUsername, newEmail, newPassword)}
+								variant="success"
+								className="input-space"
+								type="submit">
 								Submit
 							</Button>
 						</Form>
