@@ -9,7 +9,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				username: "",
 				password: "",
 				email: "",
-				id: 1,
+				id: 0,
 				about: "",
 				image: "",
 				platforms: [null, null, null],
@@ -83,23 +83,23 @@ const getState = ({ getStore, getActions, setStore }) => {
 					.catch(error => console.error("Error:", error));
 			},
 			// Login & generate token
-			loginUser: (password, email) => {
+			loginUser: (password, username) => {
 				fetch(`${beURL}/login`, {
 					method: "POST",
 					headers: {
 						"Content-Type": "application/json"
 					},
 					body: JSON.stringify({
-						email: email,
+						username: username,
 						password: password
 					})
 				})
 					.then(response => response.json())
-					.then(token => {
-						if (typeof token.msg != "undefined") {
+					.then(data => {
+						if (typeof data.msg != "undefined") {
 							// Notify.error(token.msg)
 						} else {
-							setStore({ token: token });
+							setStore({ token: data.token, user: { ...getStore().user, id: data.user_id } });
 						}
 					});
 			},
