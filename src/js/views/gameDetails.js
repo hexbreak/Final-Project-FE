@@ -20,6 +20,7 @@ export const GameDetails = props => {
 			actions.loadGame(props.location.state);
 			actions.loadGameAchievements(props.location.state);
 			actions.loadGameTrailers(props.location.state);
+			actions.getFavorites(store.user.id);
 		};
 		loadGame();
 	}, [props.location.state]);
@@ -30,8 +31,16 @@ export const GameDetails = props => {
 			});
 			actions.loadSimilarGames(genreId);
 			actions.loadAddedByPlayers(store.game.added_by_status);
+			actions.checkFavorites(store.game.id);
 		}
 	}, [store.game]);
+	useEffect(() => {
+		const checkFavorites = () => {
+			actions.checkFavorites(store.game.id);
+		};
+		checkFavorites();
+	}, [store.favorites]);
+
 	if (!!store.game.rating) {
 		for (let i = 0; i < Math.floor(store.game.rating); i++) {
 			rating.push(
@@ -59,7 +68,6 @@ export const GameDetails = props => {
 			}
 		}
 	}
-	console.log(store.game);
 	if (store.game.id == props.location.state) {
 		return (
 			<Container fluid>
@@ -103,9 +111,21 @@ export const GameDetails = props => {
 									<h4>Media</h4>
 								</Nav.Link>
 							</Nav.Item>
-							<Button variant="danger" onClick={() => actions.addtoFavorites()}>
-								Add to Favorites
-							</Button>
+							{store.user.id > 0 && (
+								<div>
+									{store.check == true ? (
+										<Button
+											variant="danger"
+											onClick={() => actions.deleteFromFavorites(store.game.id)}>
+											Delete from Favorites
+										</Button>
+									) : (
+										<Button variant="danger" onClick={() => actions.addtoFavorites()}>
+											Add to Favorites
+										</Button>
+									)}
+								</div>
+							)}
 						</Row>
 					</Nav>
 					<br />

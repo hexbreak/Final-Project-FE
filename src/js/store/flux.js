@@ -39,6 +39,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			searchBar: [],
 			superSearch: [],
 			found: [],
+			check: [],
 			demo: [
 				{
 					title: "FIRST",
@@ -108,7 +109,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 					},
 					body: JSON.stringify({
 						game_id: store.game.id,
-						game_name: store.game.name
+						game_name: store.game.name,
+						game_image: store.game.background_image
 					})
 				})
 					.then(response => {
@@ -119,69 +121,27 @@ const getState = ({ getStore, getActions, setStore }) => {
 					})
 					.then(responseAsJson => {
 						console.log("Success:", responseAsJson);
-						// Do stuff with the JSON
-						return setStore({ favorites: responseAsJson.results });
+						setStore({ favorites: responseAsJson });
+						fetch(`${beURL}/user/${store.user.id}/fav`, {
+							method: "GET",
+							headers: {
+								"Content-Type": "application/json"
+							}
+						})
+							.then(response => {
+								if (!response.ok) {
+									throw Error(response.statusText);
+								}
+								return response.json();
+							})
+							.then(responseAsJson => {
+								console.log("Success:", responseAsJson);
+								// Do stuff with the JSON
+							})
+							.catch(error => console.error("Error:", error));
 					})
 					.catch(error => console.error("Error:", error));
 				// GET favorite
-				fetch(`${beURL}/user/1/fav`, {
-					method: "GET",
-					headers: {
-						"Content-Type": "application/json"
-					}
-				})
-					.then(response => {
-						if (!response.ok) {
-							throw Error(response.statusText);
-						}
-						return response.json();
-					})
-					.then(responseAsJson => {
-						console.log("Success:", responseAsJson);
-						// Do stuff with the JSON
-					})
-					.catch(error => console.error("Error:", error));
-				// PUT favorite
-				fetch(`${beURL}/user/1/fav/` + id, {
-					method: "PUT",
-					headers: {
-						"Content-Type": "application/json"
-					},
-					body: JSON.stringify({
-						game_id: store.game.id,
-						game_name: store.game.name
-					})
-				})
-					.then(response => {
-						if (!response.ok) {
-							throw Error(response.statusText);
-						}
-						return response.json();
-					})
-					.then(responseAsJson => {
-						console.log("Success:", responseAsJson);
-						// Do stuff with the JSON
-						// return setStore({ : responseAsJson.results });
-					})
-					.catch(error => console.error("Error:", error));
-				// DELETE favorite
-				fetch(`${beURL}/user/1/fav/` + id, {
-					method: "DELETE",
-					headers: {
-						"Content-Type": "application/json"
-					}
-				})
-					.then(response => {
-						if (!response.ok) {
-							throw Error(response.statusText);
-						}
-						return response.json();
-					})
-					.then(responseAsJson => {
-						console.log("Success:", responseAsJson);
-						// Do stuff with the JSON
-					})
-					.catch(error => console.error("Error:", error));
 			},
 			changeColor: (index, color) => {
 				//get the store
@@ -562,6 +522,52 @@ const getState = ({ getStore, getActions, setStore }) => {
 					.catch(function(error) {
 						console.log("Looks like there was a problem: \n", error);
 					});
+			},
+			checkFavorites: gameId => {
+				const store = getStore();
+				let check = store.favorites.filter(value => gameId == value.game_id);
+				if (check.length > 0) {
+					setStore({ check: true });
+				} else {
+					setStore({ check: false });
+				}
+			},
+			deleteFromFavorites: gameId => {
+				const store = getStore();
+				let game = store.favorites.filter(value => gameId == value.game_id);
+				fetch(`${beURL}/user/${store.user.id}/fav/` + game[0].id, {
+					method: "DELETE",
+					headers: {
+						"Content-Type": "application/json"
+					}
+				})
+					.then(response => {
+						if (!response.ok) {
+							throw Error(response.statusText);
+						}
+						return response.json();
+					})
+					.then(responseAsJson => {
+						console.log("Success:", responseAsJson);
+						fetch(`${beURL}/user/${store.user.id}/fav`, {
+							method: "GET",
+							headers: {
+								"Content-Type": "application/json"
+							}
+						})
+							.then(response => {
+								if (!response.ok) {
+									throw Error(response.statusText);
+								}
+								return response.json();
+							})
+							.then(responseAsJson => {
+								console.log("Success:", responseAsJson);
+								// Do stuff with the JSON
+							})
+							.catch(error => console.error("Error:", error));
+					})
+					.catch(error => console.error("Error:", error));
 			}
 		}
 	};

@@ -39,7 +39,12 @@ export const UserFavorites = props => {
 					<Row className="search-margin">
 						{store.superSearch[0] != undefined &&
 							store.favorites.map((value, index) => {
-								return <GameCard className="card" key={index} game={value} />;
+								let game = {
+									id: value.game_id,
+									name: value.game_name,
+									background_image: value.game_image
+								};
+								return <GameCard className="card" key={index} game={game} />;
 							})}
 					</Row>
 				</Col>
