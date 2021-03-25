@@ -479,27 +479,26 @@ const getState = ({ getStore, getActions, setStore }) => {
 			handleSave: user => {
 				const actions = getActions();
 				const store = getStore();
-				fetch(`${beURL}/user/${store.user.id}`, {
-					method: "POST",
-					headers: {
-						"Content-Type": "application/json"
-					},
-					body: JSON.stringify(user)
-				})
-					.then(response => {
-						if (!response.ok) {
-							throw Error(response.statusText);
-						}
-						return response.json();
-					})
-					.then(response => {
-						console.log("Success:", response);
-						// Here we work with JSON
-						actions.getUserProfile(store.user.id);
-						return setStore({ user: user });
-					});
-				// setStore({ user: user }); // OLD setStore
-				// setStore({ user: { 0: user } }); // NEW setStore
+				return setStore({ user: user });
+				// fetch(`${beURL}/user/${store.user.id}`, {
+				// 	method: "POST",
+				// 	headers: {
+				// 		"Content-Type": "application/json"
+				// 	},
+				// 	body: JSON.stringify(user)
+				// })
+				// 	.then(response => {
+				// 		if (!response.ok) {
+				// 			throw Error(response.statusText);
+				// 		}
+				// 		return response.json();
+				// 	})
+				// 	.then(response => {
+				// 		console.log("Success:", response);
+				// 		// Here we work with JSON
+				// 		actions.getUserProfile(store.user.id);
+				// 		return setStore({ user: user });
+				// 	});
 			},
 			getUserProfile: user => {
 				const store = getStore();
@@ -521,9 +520,11 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 			handlePicture: image => {
 				const store = getStore();
-				let newUser = store.user;
-				newUser = { ...user, image: image };
-				setStore({ user: newUser });
+				console.log(image);
+
+				let newUser = { ...store.user, image: image };
+				console.log(newUser);
+				return setStore({ user: newUser });
 			},
 			getFavorites: userId => {
 				fetch(`${beURL}/user/${userId}/fav`)

@@ -6,30 +6,42 @@ export const UserTags = () => {
 	const { store, actions } = useContext(Context);
 	return (
 		<Container>
-			<Card className="profileCardBackground shadow" id="tags" style={{ float: "left" }}>
-				<Card.Header className="profileCardHeader">Liked</Card.Header>
-				<ListGroup variant="flush">
-					{store.user.liked.map((value, index) => {
-						return (
-							<ListGroup.Item key={index} variant="light">
-								{value.name}
-							</ListGroup.Item>
-						);
-					})}
-				</ListGroup>
-			</Card>
-			<Card className="profileCardBackground shadow" id="tags" style={{ float: "right" }}>
-				<Card.Header className="profileCardHeader">Disliked</Card.Header>
-				<ListGroup variant="flush">
-					{store.user.disliked.map((value, index) => {
-						return (
-							<ListGroup.Item key={index} variant="light">
-								{value.name}
-							</ListGroup.Item>
-						);
-					})}
-				</ListGroup>
-			</Card>
+			<Row className="search-margin">
+				<Col sm={11}>
+					{store.user.liked.length > 0 && (
+						<Card id="profile-tags" className="profileCardBackground">
+							<Card.Header className="profileCardHeader centerText">Liked</Card.Header>
+							<Card.Text id="profile-tagsBackground" className="centerText">
+								{store.user.liked.map((value, index) => {
+									if (index != store.user.liked.length - 1) {
+										return `${value.name}, `;
+									} else {
+										return `${value.name}`;
+									}
+								})}
+							</Card.Text>
+						</Card>
+					)}
+				</Col>
+			</Row>
+			<Row>
+				<Col className="search-margin" sm={11}>
+					{store.user.disliked.length > 0 && (
+						<Card id="profile-tags" className="profileCardBackground">
+							<Card.Header className="profileCardHeader centerText">Disliked</Card.Header>
+							<Card.Text id="profile-tagsBackground" className="centerText">
+								{store.user.disliked.map((value, index) => {
+									if (index != store.user.disliked.length - 1) {
+										return `${value.name}, `;
+									} else {
+										return `${value.name}`;
+									}
+								})}
+							</Card.Text>
+						</Card>
+					)}
+				</Col>
+			</Row>
 		</Container>
 	);
 };

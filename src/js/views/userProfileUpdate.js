@@ -943,7 +943,7 @@ export const UserProfileUpdate = props => {
 										{value.name}{" "}
 										<i
 											id="hover"
-											className="far fa-circle transform"
+											className="far fa-circle transform mouse"
 											style={{ float: "right" }}
 											onClick={e => handleMiddleL(value)}
 										/>
@@ -963,13 +963,13 @@ export const UserProfileUpdate = props => {
 										{value.name}
 										<i
 											id="hover"
-											className="fas fa-trophy transform"
+											className="fas fa-trophy transform mouse"
 											style={{ float: "right" }}
 											onClick={e => handleLiked(value)}
 										/>
 										<i
 											id="hover"
-											className="fas fa-skull transform"
+											className="fas fa-skull transform mouse"
 											style={{ float: "right" }}
 											onClick={e => handleDisliked(value)}
 										/>
@@ -987,10 +987,9 @@ export const UserProfileUpdate = props => {
 								return (
 									<ListGroup.Item key={index} style={{ color: "black" }} variant="light">
 										{value.name}
-										{""}
 										<i
 											id="hover"
-											className="far fa-circle transform"
+											className="far fa-circle transform mouse"
 											style={{ float: "right" }}
 											onClick={e => handleMiddleD(value)}
 										/>

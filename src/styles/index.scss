@@ -470,7 +470,14 @@ font-family: 'Fira Sans', sans-serif;
 
     box-shadow: 0 0 20px rgba(0,0,0,0.8);
 }
-
+#profile-tags{
+    width: 60rem;
+    height: 100%;
+}
+#profile-tagsBackground{
+    background: #eaeffc;
+    color: rgb(58, 66, 141);
+}
 .card-profile {
     width: 600px;
     border: 1px solid white;
@@ -559,4 +566,10 @@ th {
 
 .tooltip:hover .tooltiptext {
   visibility: visible;
+}
+.centerText{
+    text-align: center;
+}
+.mouse{
+    cursor: pointer;
 }

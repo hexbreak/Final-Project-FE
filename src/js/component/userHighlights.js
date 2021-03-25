@@ -29,8 +29,8 @@ export const UserHighlights = () => {
 													<span
 														onClick={e =>
 															history.push({
-																pathname: `/details/${store.user.game_progression[0].id}`,
-																state: store.user.game_progression[0].id
+																pathname: `/details/${store.user.game_progression[0].game_id}`,
+																state: store.user.game_progression[0].game_id
 															})
 														}
 														style={{ cursor: "pointer" }}>
@@ -43,8 +43,8 @@ export const UserHighlights = () => {
 													<span
 														onClick={e =>
 															history.push({
-																pathname: `/details/${store.user.game_progression[1].id}`,
-																state: store.user.game_progression[1].id
+																pathname: `/details/${store.user.game_progression[1].game_id}`,
+																state: store.user.game_progression[1].game_id
 															})
 														}
 														style={{ cursor: "pointer" }}>
@@ -57,8 +57,8 @@ export const UserHighlights = () => {
 													<span
 														onClick={e =>
 															history.push({
-																pathname: `/details/${store.user.game_progression[2].id}`,
-																state: store.user.game_progression[2].id
+																pathname: `/details/${store.user.game_progression[2].game_id}`,
+																state: store.user.game_progression[2].game_id
 															})
 														}
 														style={{ cursor: "pointer" }}>
@@ -78,8 +78,8 @@ export const UserHighlights = () => {
 													<span
 														onClick={e =>
 															history.push({
-																pathname: `/details/${store.user.game_progression[3].id}`,
-																state: store.user.game_progression[3].id
+																pathname: `/details/${store.user.game_progression[3].game_id}`,
+																state: store.user.game_progression[3].game_id
 															})
 														}
 														style={{ cursor: "pointer" }}>
@@ -92,8 +92,8 @@ export const UserHighlights = () => {
 													<span
 														onClick={e =>
 															history.push({
-																pathname: `/details/${store.user.game_progression[4].id}`,
-																state: store.user.game_progression[4].id
+																pathname: `/details/${store.user.game_progression[4].game_id}`,
+																state: store.user.game_progression[4].game_id
 															})
 														}
 														style={{ cursor: "pointer" }}>
@@ -106,8 +106,8 @@ export const UserHighlights = () => {
 													<span
 														onClick={e =>
 															history.push({
-																pathname: `/details/${store.user.game_progression[5].id}`,
-																state: store.user.game_progression[5].id
+																pathname: `/details/${store.user.game_progression[5].game_id}`,
+																state: store.user.game_progression[5].game_id
 															})
 														}
 														style={{ cursor: "pointer" }}>
@@ -127,8 +127,8 @@ export const UserHighlights = () => {
 													<span
 														onClick={e =>
 															history.push({
-																pathname: `/details/${store.user.game_progression[6].id}`,
-																state: store.user.game_progression[6].id
+																pathname: `/details/${store.user.game_progression[6].game_id}`,
+																state: store.user.game_progression[6].game_id
 															})
 														}
 														style={{ cursor: "pointer" }}>
@@ -141,8 +141,8 @@ export const UserHighlights = () => {
 													<span
 														onClick={e =>
 															history.push({
-																pathname: `/details/${store.user.game_progression[7].id}`,
-																state: store.user.game_progression[7].id
+																pathname: `/details/${store.user.game_progression[7].game_id}`,
+																state: store.user.game_progression[7].game_id
 															})
 														}
 														style={{ cursor: "pointer" }}>
@@ -155,8 +155,8 @@ export const UserHighlights = () => {
 													<span
 														onClick={e =>
 															history.push({
-																pathname: `/details/${store.user.game_progression[8].id}`,
-																state: store.user.game_progression[8].id
+																pathname: `/details/${store.user.game_progression[8].game_id}`,
+																state: store.user.game_progression[8].game_id
 															})
 														}
 														style={{ cursor: "pointer" }}>

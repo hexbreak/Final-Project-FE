@@ -16,16 +16,18 @@ export const UserNowPlaying = () => {
 							<ListGroup.Item key={index} variant="light">
 								<span
 									style={{ cursor: "pointer", float: "left" }}
-									onClick={e => history.push({ pathname: `/details/${value.id}`, state: value.id })}>
+									onClick={e =>
+										history.push({ pathname: `/details/${value.game_id}`, state: value.game_id })
+									}>
 									{value.game_name}
 								</span>
-								<Button
-									id="ascendingbtn"
-									variant="primary"
-									onClick={e => actions.handlePicture(value.image)}>
-									<i className="fas fa-portrait" />
-								</Button>
-								<span style={{ float: "right" }}>{value.notes}</span>
+								<i
+									id="hover"
+									className="fas fa-portrait transform mouse"
+									style={{ float: "right", marginLeft: "1rem" }}
+									onClick={e => actions.handlePicture(value.game_image)}
+								/>
+								<span style={{ float: "right", marginLeft: "1rem" }}>{value.notes}</span>
 							</ListGroup.Item>
 						);
 					}

@@ -43,7 +43,9 @@ export const UserProfile = props => {
 							<div className="card-body">
 								<UserAbout />
 								<Link to="/editprofile">
-									<Button variant="success">Edit Profile</Button>
+									<Button className="search-margin" variant="success">
+										Edit Profile
+									</Button>
 								</Link>
 							</div>
 						</div>
