@@ -11,7 +11,7 @@ export const UserFavoriteList = props => {
 		<Card bg="light" className="profileCard profileCardBackground shadow" style={{ maxWidth: "25rem" }}>
 			<Card.Header className="profileCardHeader">Favorites</Card.Header>
 			<ListGroup variant="flush light">
-				{store.favorites.map((value, index) => {
+				{store.user.favorite.map((value, index) => {
 					if (index < 3) {
 						return (
 							<ListGroup.Item variant="light" key={index}>

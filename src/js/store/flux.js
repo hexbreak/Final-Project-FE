@@ -556,7 +556,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 			checkFavorites: gameId => {
 				const store = getStore();
-				let check = store.favorites.filter(value => gameId == value.game_id);
+				let check = store.user.favorite.filter(value => gameId == value.game_id);
 				if (check.length > 0) {
 					setStore({ check: true });
 				} else {
@@ -565,7 +565,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 			deleteFromFavorites: gameId => {
 				const store = getStore();
-				let game = store.favorites.filter(value => gameId == value.game_id);
+				let game = store.user.favorite.filter(value => gameId == value.game_id);
 				fetch(`${beURL}/user/${store.user.id}/fav/` + game[0].id, {
 					method: "DELETE",
 					headers: {
