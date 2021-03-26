@@ -520,10 +520,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 			handlePicture: image => {
 				const store = getStore();
-				console.log(image);
-
 				let newUser = { ...store.user, image: image };
-				console.log(newUser);
 				return setStore({ user: newUser });
 			},
 			getFavorites: userId => {
