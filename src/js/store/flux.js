@@ -134,9 +134,22 @@ const getState = ({ getStore, getActions, setStore }) => {
 						return response.json();
 					})
 					.then(responseAsJson => {
-						console.log("Success:", responseAsJson);
-						let newUser = { ...user, favorites: responseAsJson };
-						return setStore({ user: newUser });
+						fetch(`${beURL}/user/${store.user.id}/fav`)
+							.then(function(response) {
+								if (!response.ok) {
+									throw Error(response.statusText);
+								}
+								// Read the response as json.
+								return response.json();
+							})
+							.then(function(responseAsJson) {
+								// Do stuff with the JSON
+								let newUser = { ...store.user, favorites: responseAsJson };
+								return setStore({ user: newUser });
+							})
+							.catch(function(error) {
+								console.log("Looks like there was a problem: \n", error);
+							});
 					})
 					.catch(error => console.error("Error:", error));
 				// GET favorite
@@ -524,6 +537,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				return setStore({ user: newUser });
 			},
 			getFavorites: userId => {
+				const store = getStore();
 				fetch(`${beURL}/user/${userId}/fav`)
 					.then(function(response) {
 						if (!response.ok) {
@@ -534,7 +548,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					})
 					.then(function(responseAsJson) {
 						// Do stuff with the JSON
-						let newUser = { ...user, favorites: responseAsJson };
+						let newUser = { ...store.user, favorites: responseAsJson };
 						return setStore({ user: newUser });
 					})
 					.catch(function(error) {
@@ -552,7 +566,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 			deleteFromFavorites: gameId => {
 				const store = getStore();
-				let game = store.user.favorite.filter(value => gameId == value.game_id);
+				let game = store.user.favorites.filter(value => gameId == value.game_id);
 				fetch(`${beURL}/user/${store.user.id}/delfav/` + game[0].id, {
 					method: "DELETE",
 					headers: {
@@ -567,23 +581,22 @@ const getState = ({ getStore, getActions, setStore }) => {
 					})
 					.then(responseAsJson => {
 						console.log("Success:", responseAsJson);
-						fetch(`${beURL}/user/${store.user.id}/fav`, {
-							method: "GET",
-							headers: {
-								"Content-Type": "application/json"
-							}
-						})
-							.then(response => {
+						fetch(`${beURL}/user/${store.user.id}/fav`)
+							.then(function(response) {
 								if (!response.ok) {
 									throw Error(response.statusText);
 								}
+								// Read the response as json.
 								return response.json();
 							})
-							.then(responseAsJson => {
-								let newUser = { ...user, favorites: responseAsJson };
+							.then(function(responseAsJson) {
+								// Do stuff with the JSON
+								let newUser = { ...store.user, favorites: responseAsJson };
 								return setStore({ user: newUser });
 							})
-							.catch(error => console.error("Error:", error));
+							.catch(function(error) {
+								console.log("Looks like there was a problem: \n", error);
+							});
 					})
 					.catch(error => console.error("Error:", error));
 			}
