@@ -43,31 +43,31 @@ export const UserProfileUpdate = props => {
 	const [playing2, setPlaying2] = useState(store.user.playing[1]);
 	const [playing3, setPlaying3] = useState(store.user.playing[2]);
 	const [startedP1, setStartedP1] = useState(
-		!!store.user.game_progression[0] ? store.user.game_progression[0][0] : null
+		!!store.user.game_progression[0] ? store.user.game_progression[0] : null
 	);
 	const [finishedP1, setFinishedP1] = useState(
-		!!store.user.game_progression[0] ? store.user.game_progression[0][1] : null
+		!!store.user.game_progression[1] ? store.user.game_progression[1] : null
 	);
 	const [completedP1, setCompletedP1] = useState(
-		!!store.user.game_progression[0] ? store.user.game_progression[0][2] : null
+		!!store.user.game_progression[2] ? store.user.game_progression[2] : null
 	);
 	const [startedP2, setStartedP2] = useState(
-		!!store.user.game_progression[1] ? store.user.game_progression[1][0] : null
+		!!store.user.game_progression[3] ? store.user.game_progression[3] : null
 	);
 	const [finishedP2, setFinishedP2] = useState(
-		!!store.user.game_progression[1] ? store.user.game_progression[1][1] : null
+		!!store.user.game_progression[4] ? store.user.game_progression[4] : null
 	);
 	const [completedP2, setCompletedP2] = useState(
-		!!store.user.game_progression[1] ? store.user.game_progression[1][2] : null
+		!!store.user.game_progression[5] ? store.user.game_progression[5] : null
 	);
 	const [startedP3, setStartedP3] = useState(
-		!!store.user.game_progression[2] ? store.user.game_progression[2][0] : null
+		!!store.user.game_progression[6] ? store.user.game_progression[6] : null
 	);
 	const [finishedP3, setFinishedP3] = useState(
-		!!store.user.game_progression[2] ? store.user.game_progression[2][1] : null
+		!!store.user.game_progression[7] ? store.user.game_progression[7] : null
 	);
 	const [completedP3, setCompletedP3] = useState(
-		!!store.user.game_progression[2] ? store.user.game_progression[2][2] : null
+		!!store.user.game_progression[8] ? store.user.game_progression[8] : null
 	);
 	const [gamesFound, setGamesFound] = useState("");
 	const [isLooking, setIsLooking] = useState("");

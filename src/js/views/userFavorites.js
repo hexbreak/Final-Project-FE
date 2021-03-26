@@ -37,8 +37,8 @@ export const UserFavorites = props => {
 			<Row className="search-margin center">
 				<Col className="center search-margin search-box" sm={11}>
 					<Row className="search-margin">
-						{store.favorites.length > 0 &&
-							store.favorites.map((value, index) => {
+						{store.user.favorites.length > 0 &&
+							store.user.favorites.map((value, index) => {
 								let game = {
 									id: value.game_id,
 									name: value.game_name,

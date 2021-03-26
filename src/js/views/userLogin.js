@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Context } from "../store/appContext";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { UserAbout } from "../component/userAbout.js";
 import { UserNowPlaying } from "../component/userNowPlaying";
 import { UserFavoriteList } from "../component/userFavoriteList";
@@ -13,6 +13,11 @@ export const UserLogin = props => {
 	const { store, actions } = useContext(Context);
 	const [logUsername, setLogUsername] = useState("");
 	const [logPassword, setLogPassword] = useState("");
+	let history = useHistory();
+	const handleSubmit = e => {
+		actions.loginUser(logPassword, logUsername);
+		history.push("/home");
+	};
 	return (
 		<Container className="space blue">
 			<Row>
@@ -43,7 +48,7 @@ export const UserLogin = props => {
 								</Form.Group>
 							</Form.Row>
 							<Button
-								onClick={() => actions.loginUser(logPassword, logUsername)}
+								onClick={e => handleSubmit(e)}
 								variant="success"
 								className="input-space"
 								type="button">

@@ -1,5 +1,4 @@
 import { UserTags } from "../component/userTags";
-
 const getState = ({ getStore, getActions, setStore }) => {
 	const beURL = "https://3000-bronze-earwig-hbuagomx.ws-us03.gitpod.io"; // Use ${beURL} to make it easier when handling the BE's constant URL changes
 	const apiKey = "33af10ad5812440abf75a35c04492e15";
@@ -11,7 +10,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				username: "",
 				password: "",
 				email: "",
-				id: 1,
+				id: "",
 				about: "",
 				image: "",
 				platforms: [null, null, null],
@@ -492,26 +491,25 @@ const getState = ({ getStore, getActions, setStore }) => {
 			handleSave: user => {
 				const actions = getActions();
 				const store = getStore();
-				return setStore({ user: user });
-				// fetch(`${beURL}/user/${store.user.id}`, {
-				// 	method: "POST",
-				// 	headers: {
-				// 		"Content-Type": "application/json"
-				// 	},
-				// 	body: JSON.stringify(user)
-				// })
-				// 	.then(response => {
-				// 		if (!response.ok) {
-				// 			throw Error(response.statusText);
-				// 		}
-				// 		return response.json();
-				// 	})
-				// 	.then(response => {
-				// 		console.log("Success:", response);
-				// 		// Here we work with JSON
-				// 		actions.getUserProfile(store.user.id);
-				// 		return setStore({ user: user });
-				// 	});
+				fetch(`${beURL}/user/${store.user.id}`, {
+					method: "POST",
+					headers: {
+						"Content-Type": "application/json"
+					},
+					body: JSON.stringify(user)
+				})
+					.then(response => {
+						if (!response.ok) {
+							throw Error(response.statusText);
+						}
+						return response.json();
+					})
+					.then(response => {
+						console.log("Success:", response);
+						// Here we work with JSON
+						actions.getUserProfile(store.user.id);
+						return setStore({ user: user });
+					});
 			},
 			getUserProfile: user => {
 				const store = getStore();

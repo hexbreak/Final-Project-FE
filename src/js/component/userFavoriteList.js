@@ -26,7 +26,7 @@ export const UserFavoriteList = props => {
 						);
 					}
 				})}
-				{store.favorites.length > 3 && (
+				{store.user.favorites.length > 3 && (
 					<ListGroup.Item variant="light">
 						<Button onClick={e => history.push("/favorites")} id="viewmore">
 							View More
