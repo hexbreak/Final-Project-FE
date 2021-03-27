@@ -7,7 +7,7 @@ export const UserHighlights = () => {
 	let history = useHistory();
 	return (
 		<Container>
-			<Table style={{ width: "50rem" }}>
+			<Table className="center" style={{ width: "50rem" }}>
 				<thead>
 					<tr>
 						<th>Platform</th>

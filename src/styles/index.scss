@@ -464,7 +464,9 @@ font-family: 'Fira Sans', sans-serif;
 
 //profilePage
 .container-profile {
-    width: 1600px;
+    margin-top: 1rem;
+    width: 80rem;
+    max-width: 80rem;
     background: linear-gradient(90deg, rgba(238,255,240,1) 0%, rgba(233,236,255,1) 100%);
 
     box-shadow: 0 0 20px rgba(0,0,0,0.8);
@@ -478,12 +480,15 @@ font-family: 'Fira Sans', sans-serif;
     color: rgb(58, 66, 141);
 }
 .card-profile {
-    width: 600px;
     border: 1px solid white;
     background-image: linear-gradient(62deg, #e2f0ff 0%, #ffe5ce 100%);
-
+    width: 900px;
+    max-width: 900px;
 }
-
+.profile-img{
+    height: 600px;
+    max-height: 600px;
+}
 .profileCard {
     width: auto;
     height: auto;

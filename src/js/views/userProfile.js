@@ -27,10 +27,10 @@ export const UserProfile = props => {
 			}}
 			className="space">
 			<Container className="container-profile">
-				<Row>
-					<Col className="search-margin">
-						<div className="user-name">{store.user.username}</div>
-						<div className="card-profile shadow">
+				<Row className="search-margin">
+					<Col>
+						<div className="user-name center">{store.user.username}</div>
+						<div className="card-profile shadow center search-margin">
 							<img
 								className="profile-img"
 								src={
@@ -43,20 +43,18 @@ export const UserProfile = props => {
 							<div className="card-body">
 								<UserAbout />
 								<Link to="/editprofile">
-									<Button className="search-margin" variant="success">
-										Edit Profile
-									</Button>
+									<Button variant="success">Edit Profile</Button>
 								</Link>
 							</div>
 						</div>
 					</Col>
-					<Col className="search-margin">
-						<Row>
-							<UserNowPlaying />
-						</Row>
-						<Row>
-							<UserFavoriteList />
-						</Row>
+				</Row>
+				<Row className="search-margin">
+					<Col sm={6}>
+						<UserNowPlaying />
+					</Col>
+					<Col sm={6}>
+						<UserFavoriteList />
 					</Col>
 				</Row>
 				<Row className="search-margin">
