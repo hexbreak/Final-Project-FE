@@ -10,7 +10,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				username: "",
 				password: "",
 				email: "",
-				id: 1,
+				id: "",
 				about: "",
 				image: "",
 				platforms: [null, null, null],

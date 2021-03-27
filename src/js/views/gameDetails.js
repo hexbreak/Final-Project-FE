@@ -73,7 +73,7 @@ export const GameDetails = props => {
 					<Container>
 						<div>
 							<img
-								className="rounded"
+								className="rounded details-image"
 								src={
 									store.game.background_image != null
 										? store.game.background_image
