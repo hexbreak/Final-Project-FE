@@ -204,7 +204,6 @@ export const UserProfileUpdate = props => {
 		array = tags.filter(value => {
 			return value.id != tag.id;
 		});
-		console.log(array);
 		array = sort(array);
 		setTags(array);
 	};
@@ -329,14 +328,16 @@ export const UserProfileUpdate = props => {
 													return (
 														<Dropdown.Item
 															key={index}
-															onClick={e =>
+															onClick={e => {
 																setPlaying1({
 																	...playing1,
 																	game_name: value.name,
 																	game_id: value.id,
 																	game_image: value.background_image
-																})
-															}>
+																});
+																setGamesFound("");
+																setIsLooking("");
+															}}>
 															{value.name}
 														</Dropdown.Item>
 													);
@@ -351,7 +352,11 @@ export const UserProfileUpdate = props => {
 											type="text"
 											placeholder="Something about the game"
 											defaultValue={playing1 != null ? playing1.notes : ""}
-											onChange={e => setPlaying1({ ...playing1, notes: e.target.value })}
+											onChange={e => {
+												setPlaying1({ ...playing1, notes: e.target.value });
+												setGamesFound("");
+												setIsLooking("");
+											}}
 										/>
 									</Form.Group>
 								)}
@@ -374,14 +379,16 @@ export const UserProfileUpdate = props => {
 													return (
 														<Dropdown.Item
 															key={index}
-															onClick={e =>
+															onClick={e => {
 																setPlaying2({
 																	...playing2,
 																	game_name: value.name,
 																	game_id: value.id,
 																	game_image: value.background_image
-																})
-															}>
+																});
+																setGamesFound("");
+																setIsLooking("");
+															}}>
 															{value.name}
 														</Dropdown.Item>
 													);
@@ -419,14 +426,16 @@ export const UserProfileUpdate = props => {
 													return (
 														<Dropdown.Item
 															key={index}
-															onClick={e =>
+															onClick={e => {
 																setPlaying3({
 																	...playing3,
 																	game_name: value.name,
 																	game_id: value.id,
 																	game_image: value.background_image
-																})
-															}>
+																});
+																setGamesFound("");
+																setIsLooking("");
+															}}>
 															{value.name}
 														</Dropdown.Item>
 													);
@@ -617,21 +626,23 @@ export const UserProfileUpdate = props => {
 													<Form.Control
 														type="text"
 														placeholder="Game name..."
-														onChange={e =>
-															handleHiglights(e.target.value, platform1.platform_id)
-														}
+														onChange={e => {
+															handleHiglights(e.target.value, platform1.platform_id);
+														}}
 													/>
 													{!!gamesFound &&
 														gamesFound.map((value, index) => {
 															return (
 																<Dropdown.Item
 																	key={index}
-																	onClick={e =>
+																	onClick={e => {
 																		setFinishedP1({
 																			game_name: value.name,
 																			game_id: value.id
-																		})
-																	}>
+																		});
+																		setGamesFound("");
+																		setIsLooking("");
+																	}}>
 																	{value.name}
 																</Dropdown.Item>
 															);
@@ -665,12 +676,14 @@ export const UserProfileUpdate = props => {
 															return (
 																<Dropdown.Item
 																	key={index}
-																	onClick={e =>
+																	onClick={e => {
 																		setCompletedP1({
 																			game_name: value.name,
 																			game_id: value.id
-																		})
-																	}>
+																		});
+																		setGamesFound("");
+																		setIsLooking("");
+																	}}>
 																	{value.name}
 																</Dropdown.Item>
 															);
@@ -711,12 +724,14 @@ export const UserProfileUpdate = props => {
 															return (
 																<Dropdown.Item
 																	key={index}
-																	onClick={e =>
+																	onClick={e => {
 																		setStartedP2({
 																			game_name: value.name,
 																			game_id: value.id
-																		})
-																	}>
+																		});
+																		setGamesFound("");
+																		setIsLooking("");
+																	}}>
 																	{value.name}
 																</Dropdown.Item>
 															);
@@ -750,12 +765,14 @@ export const UserProfileUpdate = props => {
 															return (
 																<Dropdown.Item
 																	key={index}
-																	onClick={e =>
+																	onClick={e => {
 																		setFinishedP2({
 																			game_name: value.name,
 																			game_id: value.id
-																		})
-																	}>
+																		});
+																		setGamesFound("");
+																		setIsLooking("");
+																	}}>
 																	{value.name}
 																</Dropdown.Item>
 															);
@@ -789,12 +806,14 @@ export const UserProfileUpdate = props => {
 															return (
 																<Dropdown.Item
 																	key={index}
-																	onClick={e =>
+																	onClick={e => {
 																		setCompletedP2({
 																			game_name: value.name,
 																			game_id: value.id
-																		})
-																	}>
+																		});
+																		setGamesFound("");
+																		setIsLooking("");
+																	}}>
 																	{value.name}
 																</Dropdown.Item>
 															);
@@ -835,12 +854,14 @@ export const UserProfileUpdate = props => {
 															return (
 																<Dropdown.Item
 																	key={index}
-																	onClick={e =>
+																	onClick={e => {
 																		setStartedP3({
 																			game_name: value.name,
 																			game_id: value.id
-																		})
-																	}>
+																		});
+																		setGamesFound("");
+																		setIsLooking("");
+																	}}>
 																	{value.name}
 																</Dropdown.Item>
 															);
@@ -874,12 +895,14 @@ export const UserProfileUpdate = props => {
 															return (
 																<Dropdown.Item
 																	key={index}
-																	onClick={e =>
+																	onClick={e => {
 																		setFinishedP3({
 																			game_name: value.name,
 																			game_id: value.id
-																		})
-																	}>
+																		});
+																		setGamesFound("");
+																		setIsLooking("");
+																	}}>
 																	{value.name}
 																</Dropdown.Item>
 															);
@@ -913,12 +936,14 @@ export const UserProfileUpdate = props => {
 															return (
 																<Dropdown.Item
 																	key={index}
-																	onClick={e =>
+																	onClick={e => {
 																		setCompletedP3({
 																			game_name: value.name,
 																			game_id: value.id
-																		})
-																	}>
+																		});
+																		setGamesFound("");
+																		setIsLooking("");
+																	}}>
 																	{value.name}
 																</Dropdown.Item>
 															);
