@@ -505,8 +505,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 						return response.json();
 					})
 					.then(response => {
-						console.log("Success:", response);
-						// Here we work with JSON
 						actions.getUserProfile(store.user.id);
 						return setStore({ user: user });
 					});

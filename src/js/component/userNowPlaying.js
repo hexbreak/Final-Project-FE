@@ -24,7 +24,7 @@ export const UserNowPlaying = () => {
 								<i
 									id="hover"
 									className="fas fa-portrait transform mouse"
-									style={{ float: "right", marginLeft: "1rem" }}
+									style={{ float: "left", marginLeft: "1rem" }}
 									onClick={e => actions.handlePicture(value.game_image)}
 								/>
 								<span style={{ float: "right", marginLeft: "1rem" }}>{value.notes}</span>

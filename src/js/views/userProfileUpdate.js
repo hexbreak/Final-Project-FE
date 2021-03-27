@@ -175,12 +175,12 @@ export const UserProfileUpdate = props => {
 			});
 			if (liked.length > 0) {
 				liked.forEach(value => {
-					sortedtags = sortedtags.filter(tag => tag.id != value.id);
+					sortedtags = sortedtags.filter(tag => tag.id != value.tag_id);
 				});
 			}
 			if (disliked.length > 0) {
 				disliked.forEach(value => {
-					sortedtags = sortedtags.filter(tag => tag.id != value.id);
+					sortedtags = sortedtags.filter(tag => tag.id != value.tag_id);
 				});
 			}
 			setTags(sort(sortedtags));
@@ -188,7 +188,7 @@ export const UserProfileUpdate = props => {
 		makeTags();
 	}, [store.tags]);
 	const handleDisliked = tag => {
-		let array = [...disliked, tag];
+		let array = [...disliked, { name: tag.name, tag_id: tag.id }];
 		array = sort(array);
 		setDisliked(array);
 		array = tags.filter(value => {
@@ -198,12 +198,13 @@ export const UserProfileUpdate = props => {
 		setTags(array);
 	};
 	const handleLiked = tag => {
-		let array = [...liked, tag];
+		let array = [...liked, { name: tag.name, tag_id: tag.id }];
 		array = sort(array);
 		setLiked(array);
 		array = tags.filter(value => {
 			return value.id != tag.id;
 		});
+		console.log(array);
 		array = sort(array);
 		setTags(array);
 	};
@@ -212,7 +213,7 @@ export const UserProfileUpdate = props => {
 		array = sort(array);
 		setTags(array);
 		array = liked.filter(value => {
-			return value.id != tag.id;
+			return value.tag_id != tag.tag_id;
 		});
 		array = sort(array);
 		setLiked(array);
@@ -222,7 +223,7 @@ export const UserProfileUpdate = props => {
 		array = sort(array);
 		setTags(array);
 		array = disliked.filter(value => {
-			return value.id != tag.id;
+			return value.tag_id != tag.tag_id;
 		});
 		array = sort(array);
 		setDisliked(array);
