@@ -492,7 +492,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				const actions = getActions();
 				const store = getStore();
 				fetch(`${beURL}/user/${store.user.id}`, {
-					method: "POST",
+					method: "PUT",
 					headers: {
 						"Content-Type": "application/json"
 					},
