@@ -18,9 +18,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 				playing: [null, null, null],
 				liked: [],
 				disliked: [],
-				preference: false,
 				favorites: []
 			},
+			preference: false,
 			backlogPost: [],
 			backlogGet: [],
 			gameList: [],
@@ -463,12 +463,10 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 			changePreference: () => {
 				const store = getStore();
-				if (store.user.preference == true) {
-					let newUser = { ...store.user, preference: false };
-					setStore({ user: newUser });
+				if (store.preference == true) {
+					setStore({ preference: false });
 				} else {
-					let newUser = { ...store.user, preference: true };
-					setStore({ user: newUser });
+					setStore({ preference: true });
 				}
 			},
 			looking: gameName => {

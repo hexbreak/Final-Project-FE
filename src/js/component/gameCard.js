@@ -13,19 +13,19 @@ export const GameCard = props => {
 	};
 	const makeBorders = () => {
 		let cardBorder = null;
-		let tags = [store.user.liked, store.user.disliked];
-		tags.forEach(value => {
+		props.game.tags.forEach(value => {
 			store.user.liked.forEach(tags => {
-				if (value.id == tags.id && cardBorder != null) {
+				if (value.id == tags.tag_id && cardBorder != null) {
 					cardBorder = "warning";
-				} else if (value.id == tags.id) {
+					console.log(value);
+				} else if (value.id == tags.tag_id) {
 					cardBorder = "success";
 				}
 			});
 			store.user.disliked.forEach(tags => {
-				if (value.id == tags.id && cardBorder != null) {
+				if (value.id == tags.tag_id && cardBorder != null) {
 					cardBorder = "warning";
-				} else if (value.id == tags.id) {
+				} else if (value.id == tags.tag_id) {
 					cardBorder = "danger";
 				}
 			});
@@ -37,7 +37,7 @@ export const GameCard = props => {
 			id={props.id}
 			style={{ marginBottom: "1rem", cursor: "pointer" }}
 			className="bg-dark rounded-3 mr-3 ml-3 text-white transform"
-			border={store.user.preference == true && makeBorders()}
+			border={store.preference == true && makeBorders()}
 			onClick={e => handleClick(e)}>
 			<Card.Img
 				className="card-img"

@@ -339,11 +339,6 @@ body{
 .detail{
     text-align: center;
 }
-// game card image resize for landing
-.card-img {
-    border-radius: 10px;
-}
-
 // profile page
 
 .topcol {
@@ -524,7 +519,7 @@ font-family: 'Fira Sans', sans-serif;
     -webkit-text-fill-color: transparent;
 }
 .user-name {
-    font-size: 25px;
+    font-size: 50px;
 }
 //table
 table {
@@ -587,4 +582,20 @@ th {
 }
 .mouse{
     cursor: pointer;
+}
+.border-danger{
+    border-width: 7px;
+    border-image: linear-gradient(147deg, #fa8a56 0%, #FF2525 85%);
+    border-image-slice: 1;
+}
+.border-success{
+    border-width: 7px;
+    border-image: linear-gradient(0deg, #08AEEA 0%, #2AF598 100%);
+    border-image-slice: 1;
+}
+.border-warning{
+    border-width: 7px;
+    border-image: linear-gradient(62deg, #FBAB7E 0%, #F7CE68 100%);
+
+    border-image-slice: 1;
 }
