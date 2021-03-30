@@ -26,11 +26,6 @@
     flex: 0 0 auto;
     margin-top: 1rem;
 }
-//navbar cards
-#navCard{
-    max-width: 18rem;
-    max-height: 10rem;
-}
 //centering
 .center{
     margin-left: auto;
@@ -49,11 +44,23 @@
 .space{
     margin-bottom: 5rem;
 }
+
 // navbar
 
 .navbar{
     background-color: none;
 }
+#navCard{
+    max-width: 18rem;
+    max-height: 10rem;
+}
+.navButton{
+    width: 8rem !important;
+}
+.searchButton{
+    width: 6rem !important;
+}
+
 
 #card{
     color: rgb(252, 252, 252);

@@ -64,7 +64,7 @@ export const Navbar = () => {
 					)}
 				</div>
 				<Link to="/search">
-					<button className="btn btn-light ml-5 pl-4 pr-4" id="hover">
+					<button className="btn btn-light ml-5 pl-4 pr-4 searchButton" id="hover">
 						<i className="fas fa-search" />
 					</button>
 				</Link>
@@ -72,21 +72,21 @@ export const Navbar = () => {
 			{store.user.id > 0 ? (
 				<div className="ml">
 					<Link to="/profile">
-						<button className="btn btn-light pl-4 pr-4">
-							<span id="hover">Profile</span>
+						<button className="btn btn-light pl-4 pr-4 navButton" id="hover">
+							<span>Profile</span>
 						</button>
 					</Link>
 				</div>
 			) : (
 				<div className="ml">
 					<Link to="/login">
-						<button style={{ marginRight: "1rem" }} className="btn btn-light ">
-							<span id="hover">Login</span>
+						<button style={{ marginRight: "1rem" }} className="btn btn-light navButton" id="hover">
+							<span>Login</span>
 						</button>
 					</Link>
 					<Link to="/registration">
-						<button className="btn btn-light">
-							<span id="hover">Sign Up</span>
+						<button className="btn btn-light navButton" id="hover">
+							<span>Sign Up</span>
 						</button>
 					</Link>
 				</div>
