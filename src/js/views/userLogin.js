@@ -22,8 +22,8 @@ export const UserLogin = props => {
 		<Container className="space blue">
 			<Row>
 				<Col>
-					<Container style={{ width: "20rem", marginTop: "5rem" }} className="center">
-						<h3>Login</h3>
+					<Container id="userForm" style={{ width: "40rem" }} className="center">
+						<h3 className="formTitle">Login</h3>
 						<Form className="search-margin">
 							<Form.Row>
 								<Form.Group as={Col} controlId="Username">

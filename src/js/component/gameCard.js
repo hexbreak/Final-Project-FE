@@ -12,6 +12,7 @@ export const GameCard = props => {
 			props.cleanSearch();
 		}
 		history.push({ pathname: `/details/${props.game.id}`, state: props.game.id });
+		window.scrollTo(0, 0);
 	};
 	const makeBorders = () => {
 		let cardBorder = null;

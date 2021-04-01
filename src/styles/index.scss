@@ -8,6 +8,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Cabin&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@400;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap');
 
 .gameimg{
     max-width: 50em;
@@ -347,7 +348,6 @@ body{
 footer {
     position: relative;
     max-width: 100%;
-
 }
 img{
     width: 100%;
@@ -598,4 +598,22 @@ th {
     border-image: linear-gradient(62deg, #FBAB7E 0%, #F7CE68 100%);
 
     border-image-slice: 1;
+}
+#middleLine{
+    background :linear-gradient(#c3f8ff, #6882ff) no-repeat center/2px 100%;
+}
+#userForm{
+    margin-top: 5rem;
+    border: 10px solid;
+    border-image-slice: 1;
+    border-width: 1rem;
+    border-image-source: radial-gradient(circle, #2dff93 0%, #867fec 100%);
+    box-shadow: 5px 5px 5px grey !important;
+    background-color: #fbfbfb;
+    padding: 3rem;
+    font-size: 18px;
+}
+.formTitle{
+    font-family: 'Roboto', sans-serif;
+    font-size: 2.3rem
 }

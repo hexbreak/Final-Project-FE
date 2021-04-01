@@ -18,8 +18,8 @@ export const UserRegistration = props => {
 		<Container className="space blue">
 			<Row>
 				<Col>
-					<Container style={{ width: "30rem", marginTop: "5rem" }} className="center">
-						<h3>Registration</h3>
+					<Container id="userForm" style={{ width: "50rem", marginTop: "5rem" }} className="center">
+						<h3 className="formTitle">Registration</h3>
 						<Form className="search-margin">
 							<Form.Row>
 								<Form.Group as={Col} controlId="Username">
