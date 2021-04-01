@@ -602,7 +602,7 @@ export const UserProfileUpdate = props => {
 											</Form.Label>
 											<Dropdown>
 												<Dropdown.Toggle variant="secondary" id="dropdown-basic">
-													{!!startedP1 ? startedP1.game_name : "Select Game"}
+													{!!startedP1.game_name ? startedP1.game_name : "Select Game"}
 												</Dropdown.Toggle>
 												<Dropdown.Menu>
 													<Form.Control
@@ -649,7 +649,7 @@ export const UserProfileUpdate = props => {
 											</Form.Label>
 											<Dropdown>
 												<Dropdown.Toggle variant="secondary" id="dropdown-basic">
-													{!!finishedP1 ? finishedP1.game_name : "Select Game"}
+													{!!finishedP1.game_name ? finishedP1.game_name : "Select Game"}
 												</Dropdown.Toggle>
 												<Dropdown.Menu>
 													<Form.Control
@@ -696,7 +696,7 @@ export const UserProfileUpdate = props => {
 											</Form.Label>
 											<Dropdown>
 												<Dropdown.Toggle variant="secondary" id="dropdown-basic">
-													{!!completedP1 ? completedP1.game_name : "Select Game"}
+													{!!completedP1.game_name ? completedP1.game_name : "Select Game"}
 												</Dropdown.Toggle>
 												<Dropdown.Menu>
 													<Form.Control
@@ -750,7 +750,7 @@ export const UserProfileUpdate = props => {
 											</Form.Label>
 											<Dropdown>
 												<Dropdown.Toggle variant="secondary" id="dropdown-basic">
-													{!!startedP2 ? startedP2.game_name : "Select Game"}
+													{!!startedP2.game_name ? startedP2.game_name : "Select Game"}
 												</Dropdown.Toggle>
 												<Dropdown.Menu>
 													<Form.Control
@@ -797,7 +797,7 @@ export const UserProfileUpdate = props => {
 											</Form.Label>
 											<Dropdown>
 												<Dropdown.Toggle variant="secondary" id="dropdown-basic">
-													{!!finishedP2 ? finishedP2.game_name : "Select Game"}
+													{!!finishedP2.game_name ? finishedP2.game_name : "Select Game"}
 												</Dropdown.Toggle>
 												<Dropdown.Menu>
 													<Form.Control
@@ -844,7 +844,7 @@ export const UserProfileUpdate = props => {
 											</Form.Label>
 											<Dropdown>
 												<Dropdown.Toggle variant="secondary" id="dropdown-basic">
-													{!!completedP2 ? completedP2.game_name : "Select Game"}
+													{!!completedP2.game_name ? completedP2.game_name : "Select Game"}
 												</Dropdown.Toggle>
 												<Dropdown.Menu>
 													<Form.Control
@@ -898,7 +898,7 @@ export const UserProfileUpdate = props => {
 											</Form.Label>
 											<Dropdown>
 												<Dropdown.Toggle variant="secondary" id="dropdown-basic">
-													{!!startedP3 ? startedP3.game_name : "Select Game"}
+													{!!startedP3.game_name ? startedP3.game_name : "Select Game"}
 												</Dropdown.Toggle>
 												<Dropdown.Menu>
 													<Form.Control
@@ -945,7 +945,7 @@ export const UserProfileUpdate = props => {
 											</Form.Label>
 											<Dropdown>
 												<Dropdown.Toggle variant="secondary" id="dropdown-basic">
-													{!!finishedP3 ? finishedP3.game_name : "Select Game"}
+													{!!finishedP3.game_name ? finishedP3.game_name : "Select Game"}
 												</Dropdown.Toggle>
 												<Dropdown.Menu>
 													<Form.Control
@@ -992,7 +992,7 @@ export const UserProfileUpdate = props => {
 											</Form.Label>
 											<Dropdown>
 												<Dropdown.Toggle variant="secondary" id="dropdown-basic">
-													{!!completedP3 ? completedP3.game_name : "Select Game"}
+													{!!completedP3.game_name ? completedP3.game_name : "Select Game"}
 												</Dropdown.Toggle>
 												<Dropdown.Menu>
 													<Form.Control
