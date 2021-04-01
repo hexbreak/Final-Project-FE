@@ -43,31 +43,31 @@ export const UserProfileUpdate = props => {
 	const [playing2, setPlaying2] = useState(!!store.user.playing[1] ? store.user.playing[1] : { game_name: null });
 	const [playing3, setPlaying3] = useState(!!store.user.playing[2] ? store.user.playing[2] : { game_name: null });
 	const [startedP1, setStartedP1] = useState(
-		!!store.user.game_progression[0] ? store.user.game_progression[0] : null
+		!!store.user.game_progression[0] ? store.user.game_progression[0] : { game_name: null }
 	);
 	const [finishedP1, setFinishedP1] = useState(
-		!!store.user.game_progression[1] ? store.user.game_progression[1] : null
+		!!store.user.game_progression[1] ? store.user.game_progression[1] : { game_name: null }
 	);
 	const [completedP1, setCompletedP1] = useState(
-		!!store.user.game_progression[2] ? store.user.game_progression[2] : null
+		!!store.user.game_progression[2] ? store.user.game_progression[2] : { game_name: null }
 	);
 	const [startedP2, setStartedP2] = useState(
-		!!store.user.game_progression[3] ? store.user.game_progression[3] : null
+		!!store.user.game_progression[3] ? store.user.game_progression[3] : { game_name: null }
 	);
 	const [finishedP2, setFinishedP2] = useState(
-		!!store.user.game_progression[4] ? store.user.game_progression[4] : null
+		!!store.user.game_progression[4] ? store.user.game_progression[4] : { game_name: null }
 	);
 	const [completedP2, setCompletedP2] = useState(
-		!!store.user.game_progression[5] ? store.user.game_progression[5] : null
+		!!store.user.game_progression[5] ? store.user.game_progression[5] : { game_name: null }
 	);
 	const [startedP3, setStartedP3] = useState(
-		!!store.user.game_progression[6] ? store.user.game_progression[6] : null
+		!!store.user.game_progression[6] ? store.user.game_progression[6] : { game_name: null }
 	);
 	const [finishedP3, setFinishedP3] = useState(
-		!!store.user.game_progression[7] ? store.user.game_progression[7] : null
+		!!store.user.game_progression[7] ? store.user.game_progression[7] : { game_name: null }
 	);
 	const [completedP3, setCompletedP3] = useState(
-		!!store.user.game_progression[8] ? store.user.game_progression[8] : null
+		!!store.user.game_progression[8] ? store.user.game_progression[8] : { game_name: null }
 	);
 	const [gamesFound, setGamesFound] = useState("");
 	const [isLooking, setIsLooking] = useState("");
