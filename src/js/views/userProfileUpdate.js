@@ -39,9 +39,9 @@ export const UserProfileUpdate = props => {
 	const [platform3, setPlatform3] = useState(
 		!!store.user.platforms[2] ? store.user.platforms[2] : { name: null, id: null }
 	);
-	const [playing1, setPlaying1] = useState(store.user.playing[0]);
-	const [playing2, setPlaying2] = useState(store.user.playing[1]);
-	const [playing3, setPlaying3] = useState(store.user.playing[2]);
+	const [playing1, setPlaying1] = useState(!!store.user.playing[0] ? store.user.playing[0] : { game_name: null });
+	const [playing2, setPlaying2] = useState(!!store.user.playing[1] ? store.user.playing[1] : { game_name: null });
+	const [playing3, setPlaying3] = useState(!!store.user.playing[2] ? store.user.playing[2] : { game_name: null });
 	const [startedP1, setStartedP1] = useState(
 		!!store.user.game_progression[0] ? store.user.game_progression[0] : null
 	);
@@ -242,6 +242,11 @@ export const UserProfileUpdate = props => {
 			Games that you finished and completed all achivements/content!
 		</Tooltip>
 	);
+	const handleSelect = setMethod => {
+		setMethod;
+		setGamesFound("");
+		setIsLooking("");
+	};
 	return (
 		<Container style={{ backgroundSize: "cover" }} className="space">
 			<Row>
@@ -315,7 +320,7 @@ export const UserProfileUpdate = props => {
 									<Form.Label>Game</Form.Label>
 									<Dropdown onToggle={e => setIsLooking}>
 										<Dropdown.Toggle variant="secondary" id="dropdown-basic">
-											{!!playing1 ? playing1.game_name : "Select Game"}
+											{!!playing1.game_name ? playing1.game_name : "Select Game"}
 										</Dropdown.Toggle>
 										<Dropdown.Menu>
 											<Form.Control
@@ -325,27 +330,33 @@ export const UserProfileUpdate = props => {
 											/>
 											{!!gamesFound &&
 												gamesFound.map((value, index) => {
-													return (
-														<Dropdown.Item
-															key={index}
-															onClick={e => {
-																setPlaying1({
-																	...playing1,
-																	game_name: value.name,
-																	game_id: value.id,
-																	game_image: value.background_image
-																});
-																setGamesFound("");
-																setIsLooking("");
-															}}>
-															{value.name}
-														</Dropdown.Item>
-													);
+													if (
+														value.name != playing1.game_name &&
+														value.name != playing2.game_name &&
+														value.name != playing3.game_name
+													) {
+														return (
+															<Dropdown.Item
+																key={index}
+																onClick={e =>
+																	handleSelect(
+																		setPlaying1({
+																			...playing1,
+																			game_name: value.name,
+																			game_id: value.id,
+																			game_image: value.background_image
+																		})
+																	)
+																}>
+																{value.name}
+															</Dropdown.Item>
+														);
+													}
 												})}
 										</Dropdown.Menu>
 									</Dropdown>
 								</Form.Group>
-								{!!playing1 && (
+								{!!playing1.game_name && (
 									<Form.Group as={Col} controlId="formGridPassword">
 										<Form.Label>Notes</Form.Label>
 										<Form.Control
@@ -354,8 +365,6 @@ export const UserProfileUpdate = props => {
 											defaultValue={playing1 != null ? playing1.notes : ""}
 											onChange={e => {
 												setPlaying1({ ...playing1, notes: e.target.value });
-												setGamesFound("");
-												setIsLooking("");
 											}}
 										/>
 									</Form.Group>
@@ -366,7 +375,7 @@ export const UserProfileUpdate = props => {
 									<Form.Label>Game</Form.Label>
 									<Dropdown>
 										<Dropdown.Toggle variant="secondary" id="dropdown-basic">
-											{!!playing2 ? playing2.game_name : "Select Game"}
+											{!!playing2.game_name ? playing2.game_name : "Select Game"}
 										</Dropdown.Toggle>
 										<Dropdown.Menu>
 											<Form.Control
@@ -376,27 +385,33 @@ export const UserProfileUpdate = props => {
 											/>
 											{!!gamesFound &&
 												gamesFound.map((value, index) => {
-													return (
-														<Dropdown.Item
-															key={index}
-															onClick={e => {
-																setPlaying2({
-																	...playing2,
-																	game_name: value.name,
-																	game_id: value.id,
-																	game_image: value.background_image
-																});
-																setGamesFound("");
-																setIsLooking("");
-															}}>
-															{value.name}
-														</Dropdown.Item>
-													);
+													if (
+														value.name != playing1.game_name &&
+														value.name != playing2.game_name &&
+														value.name != playing3.game_name
+													) {
+														return (
+															<Dropdown.Item
+																key={index}
+																onClick={e =>
+																	handleSelect(
+																		setPlaying2({
+																			...playing2,
+																			game_name: value.name,
+																			game_id: value.id,
+																			game_image: value.background_image
+																		})
+																	)
+																}>
+																{value.name}
+															</Dropdown.Item>
+														);
+													}
 												})}
 										</Dropdown.Menu>
 									</Dropdown>
 								</Form.Group>
-								{!!playing2 && (
+								{!!playing2.game_name && (
 									<Form.Group as={Col} controlId="formGridPassword">
 										<Form.Label>Notes</Form.Label>
 										<Form.Control
@@ -413,7 +428,7 @@ export const UserProfileUpdate = props => {
 									<Form.Label>Game</Form.Label>
 									<Dropdown>
 										<Dropdown.Toggle variant="secondary" id="dropdown-basic">
-											{!!playing3 ? playing3.game_name : "Select Game"}
+											{!!playing3.game_name ? playing3.game_name : "Select Game"}
 										</Dropdown.Toggle>
 										<Dropdown.Menu>
 											<Form.Control
@@ -423,27 +438,33 @@ export const UserProfileUpdate = props => {
 											/>
 											{!!gamesFound &&
 												gamesFound.map((value, index) => {
-													return (
-														<Dropdown.Item
-															key={index}
-															onClick={e => {
-																setPlaying3({
-																	...playing3,
-																	game_name: value.name,
-																	game_id: value.id,
-																	game_image: value.background_image
-																});
-																setGamesFound("");
-																setIsLooking("");
-															}}>
-															{value.name}
-														</Dropdown.Item>
-													);
+													if (
+														value.name != playing1.game_name &&
+														value.name != playing2.game_name &&
+														value.name != playing3.game_name
+													) {
+														return (
+															<Dropdown.Item
+																key={index}
+																onClick={e =>
+																	handleSelect(
+																		setPlaying3({
+																			...playing3,
+																			game_name: value.name,
+																			game_id: value.id,
+																			game_image: value.background_image
+																		})
+																	)
+																}>
+																{value.name}
+															</Dropdown.Item>
+														);
+													}
 												})}
 										</Dropdown.Menu>
 									</Dropdown>
 								</Form.Group>
-								{!!playing3 && (
+								{!!playing3.game_name && (
 									<Form.Group as={Col} controlId="formGridPassword">
 										<Form.Label>Notes</Form.Label>
 										<Form.Control
@@ -593,18 +614,26 @@ export const UserProfileUpdate = props => {
 													/>
 													{!!gamesFound &&
 														gamesFound.map((value, index) => {
-															return (
-																<Dropdown.Item
-																	key={index}
-																	onClick={e =>
-																		setStartedP1({
-																			game_name: value.name,
-																			game_id: value.id
-																		})
-																	}>
-																	{value.name}
-																</Dropdown.Item>
-															);
+															if (
+																value.name != startedP1.game_name &&
+																value.name != finishedP1.game_name &&
+																value.name != completedP1.game_name
+															) {
+																return (
+																	<Dropdown.Item
+																		key={index}
+																		onClick={e =>
+																			handleSelect(
+																				setStartedP1({
+																					game_name: value.name,
+																					game_id: value.id
+																				})
+																			)
+																		}>
+																		{value.name}
+																	</Dropdown.Item>
+																);
+															}
 														})}
 												</Dropdown.Menu>
 											</Dropdown>
@@ -632,20 +661,26 @@ export const UserProfileUpdate = props => {
 													/>
 													{!!gamesFound &&
 														gamesFound.map((value, index) => {
-															return (
-																<Dropdown.Item
-																	key={index}
-																	onClick={e => {
-																		setFinishedP1({
-																			game_name: value.name,
-																			game_id: value.id
-																		});
-																		setGamesFound("");
-																		setIsLooking("");
-																	}}>
-																	{value.name}
-																</Dropdown.Item>
-															);
+															if (
+																value.name != startedP1.game_name &&
+																value.name != finishedP1.game_name &&
+																value.name != completedP1.game_name
+															) {
+																return (
+																	<Dropdown.Item
+																		key={index}
+																		onClick={e =>
+																			handleSelect(
+																				setFinishedP1({
+																					game_name: value.name,
+																					game_id: value.id
+																				})
+																			)
+																		}>
+																		{value.name}
+																	</Dropdown.Item>
+																);
+															}
 														})}
 												</Dropdown.Menu>
 											</Dropdown>
@@ -673,20 +708,26 @@ export const UserProfileUpdate = props => {
 													/>
 													{!!gamesFound &&
 														gamesFound.map((value, index) => {
-															return (
-																<Dropdown.Item
-																	key={index}
-																	onClick={e => {
-																		setCompletedP1({
-																			game_name: value.name,
-																			game_id: value.id
-																		});
-																		setGamesFound("");
-																		setIsLooking("");
-																	}}>
-																	{value.name}
-																</Dropdown.Item>
-															);
+															if (
+																value.name != startedP1.game_name &&
+																value.name != finishedP1.game_name &&
+																value.name != completedP1.game_name
+															) {
+																return (
+																	<Dropdown.Item
+																		key={index}
+																		onClick={e =>
+																			handleSelect(
+																				setCompletedP1({
+																					game_name: value.name,
+																					game_id: value.id
+																				})
+																			)
+																		}>
+																		{value.name}
+																	</Dropdown.Item>
+																);
+															}
 														})}
 												</Dropdown.Menu>
 											</Dropdown>
@@ -721,20 +762,26 @@ export const UserProfileUpdate = props => {
 													/>
 													{!!gamesFound &&
 														gamesFound.map((value, index) => {
-															return (
-																<Dropdown.Item
-																	key={index}
-																	onClick={e => {
-																		setStartedP2({
-																			game_name: value.name,
-																			game_id: value.id
-																		});
-																		setGamesFound("");
-																		setIsLooking("");
-																	}}>
-																	{value.name}
-																</Dropdown.Item>
-															);
+															if (
+																value.name != startedP2.game_name &&
+																value.name != finishedP2.game_name &&
+																value.name != completedP2.game_name
+															) {
+																return (
+																	<Dropdown.Item
+																		key={index}
+																		onClick={e =>
+																			handleSelect(
+																				setStartedP2({
+																					game_name: value.name,
+																					game_id: value.id
+																				})
+																			)
+																		}>
+																		{value.name}
+																	</Dropdown.Item>
+																);
+															}
 														})}
 												</Dropdown.Menu>
 											</Dropdown>
@@ -762,20 +809,26 @@ export const UserProfileUpdate = props => {
 													/>
 													{!!gamesFound &&
 														gamesFound.map((value, index) => {
-															return (
-																<Dropdown.Item
-																	key={index}
-																	onClick={e => {
-																		setFinishedP2({
-																			game_name: value.name,
-																			game_id: value.id
-																		});
-																		setGamesFound("");
-																		setIsLooking("");
-																	}}>
-																	{value.name}
-																</Dropdown.Item>
-															);
+															if (
+																value.name != startedP2.game_name &&
+																value.name != finishedP2.game_name &&
+																value.name != completedP2.game_name
+															) {
+																return (
+																	<Dropdown.Item
+																		key={index}
+																		onClick={e =>
+																			handleSelect(
+																				setFinishedP2({
+																					game_name: value.name,
+																					game_id: value.id
+																				})
+																			)
+																		}>
+																		{value.name}
+																	</Dropdown.Item>
+																);
+															}
 														})}
 												</Dropdown.Menu>
 											</Dropdown>
@@ -803,20 +856,26 @@ export const UserProfileUpdate = props => {
 													/>
 													{!!gamesFound &&
 														gamesFound.map((value, index) => {
-															return (
-																<Dropdown.Item
-																	key={index}
-																	onClick={e => {
-																		setCompletedP2({
-																			game_name: value.name,
-																			game_id: value.id
-																		});
-																		setGamesFound("");
-																		setIsLooking("");
-																	}}>
-																	{value.name}
-																</Dropdown.Item>
-															);
+															if (
+																value.name != startedP2.game_name &&
+																value.name != finishedP2.game_name &&
+																value.name != completedP2.game_name
+															) {
+																return (
+																	<Dropdown.Item
+																		key={index}
+																		onClick={e =>
+																			handleSelect(
+																				setCompletedP2({
+																					game_name: value.name,
+																					game_id: value.id
+																				})
+																			)
+																		}>
+																		{value.name}
+																	</Dropdown.Item>
+																);
+															}
 														})}
 												</Dropdown.Menu>
 											</Dropdown>
@@ -851,20 +910,26 @@ export const UserProfileUpdate = props => {
 													/>
 													{!!gamesFound &&
 														gamesFound.map((value, index) => {
-															return (
-																<Dropdown.Item
-																	key={index}
-																	onClick={e => {
-																		setStartedP3({
-																			game_name: value.name,
-																			game_id: value.id
-																		});
-																		setGamesFound("");
-																		setIsLooking("");
-																	}}>
-																	{value.name}
-																</Dropdown.Item>
-															);
+															if (
+																value.name != startedP3.game_name &&
+																value.name != finishedP3.game_name &&
+																value.name != completedP3.game_name
+															) {
+																return (
+																	<Dropdown.Item
+																		key={index}
+																		onClick={e =>
+																			handleSelect(
+																				setStartedP3({
+																					game_name: value.name,
+																					game_id: value.id
+																				})
+																			)
+																		}>
+																		{value.name}
+																	</Dropdown.Item>
+																);
+															}
 														})}
 												</Dropdown.Menu>
 											</Dropdown>
@@ -892,20 +957,26 @@ export const UserProfileUpdate = props => {
 													/>
 													{!!gamesFound &&
 														gamesFound.map((value, index) => {
-															return (
-																<Dropdown.Item
-																	key={index}
-																	onClick={e => {
-																		setFinishedP3({
-																			game_name: value.name,
-																			game_id: value.id
-																		});
-																		setGamesFound("");
-																		setIsLooking("");
-																	}}>
-																	{value.name}
-																</Dropdown.Item>
-															);
+															if (
+																value.name != startedP3.game_name &&
+																value.name != finishedP3.game_name &&
+																value.name != completedP3.game_name
+															) {
+																return (
+																	<Dropdown.Item
+																		key={index}
+																		onClick={e =>
+																			handleSelect(
+																				setFinishedP3({
+																					game_name: value.name,
+																					game_id: value.id
+																				})
+																			)
+																		}>
+																		{value.name}
+																	</Dropdown.Item>
+																);
+															}
 														})}
 												</Dropdown.Menu>
 											</Dropdown>
@@ -933,20 +1004,26 @@ export const UserProfileUpdate = props => {
 													/>
 													{!!gamesFound &&
 														gamesFound.map((value, index) => {
-															return (
-																<Dropdown.Item
-																	key={index}
-																	onClick={e => {
-																		setCompletedP3({
-																			game_name: value.name,
-																			game_id: value.id
-																		});
-																		setGamesFound("");
-																		setIsLooking("");
-																	}}>
-																	{value.name}
-																</Dropdown.Item>
-															);
+															if (
+																value.name != startedP3.game_name &&
+																value.name != finishedP3.game_name &&
+																value.name != completedP3.game_name
+															) {
+																return (
+																	<Dropdown.Item
+																		key={index}
+																		onClick={e =>
+																			handleSelect(
+																				setCompletedP3({
+																					game_name: value.name,
+																					game_id: value.id
+																				})
+																			)
+																		}>
+																		{value.name}
+																	</Dropdown.Item>
+																);
+															}
 														})}
 												</Dropdown.Menu>
 											</Dropdown>
@@ -966,7 +1043,7 @@ export const UserProfileUpdate = props => {
 							{liked.map((value, index) => {
 								return (
 									<ListGroup.Item key={index} style={{ color: "black" }} variant="light">
-										{value.name}{" "}
+										{value.name}
 										<i
 											id="hover"
 											className="far fa-circle transform mouse"

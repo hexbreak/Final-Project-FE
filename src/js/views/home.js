@@ -48,6 +48,7 @@ export const Home = () => {
 										sortKey={sortKey}
 										setInverted={setInverted}
 										inverted={inverted}
+										setPagination={setPagination}
 									/>
 								</div>
 								<Row className="scroller fit center" style={{ marginTop: "1rem" }}>

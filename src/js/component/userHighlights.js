@@ -1,19 +1,58 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { Context } from "../store/appContext";
-import { Carousel, Card, Container, Row, Col, Dropdown, DropdownButton, Button, Table } from "react-bootstrap";
+import {
+	Carousel,
+	Card,
+	Container,
+	Row,
+	Col,
+	Dropdown,
+	DropdownButton,
+	Button,
+	Table,
+	Tooltip,
+	OverlayTrigger
+} from "react-bootstrap";
 export const UserHighlights = () => {
 	const { store, actions } = useContext(Context);
 	let history = useHistory();
+	const renderStarted = props => (
+		<Tooltip id="button-tooltip" {...props}>
+			Games that you just started!
+		</Tooltip>
+	);
+	const renderFinished = props => (
+		<Tooltip id="button-tooltip" {...props}>
+			Games that you finished!
+		</Tooltip>
+	);
+	const renderCompleted = props => (
+		<Tooltip id="button-tooltip" {...props}>
+			Games that you finished and completed all achivements/content!
+		</Tooltip>
+	);
 	return (
 		<Container>
 			<Table className="center" style={{ width: "50rem" }}>
 				<thead>
 					<tr>
 						<th>Platform</th>
-						<th>Started</th>
-						<th>Finished</th>
-						<th>Completed</th>
+						<th>
+							<OverlayTrigger placement="top" delay={{ show: 250, hide: 400 }} overlay={renderStarted}>
+								<span>Started</span>
+							</OverlayTrigger>
+						</th>
+						<th>
+							<OverlayTrigger placement="top" delay={{ show: 250, hide: 400 }} overlay={renderFinished}>
+								<span>Finished</span>
+							</OverlayTrigger>
+						</th>
+						<th>
+							<OverlayTrigger placement="top" delay={{ show: 250, hide: 400 }} overlay={renderCompleted}>
+								<span>Completed</span>
+							</OverlayTrigger>
+						</th>
 					</tr>
 				</thead>
 				<tbody>

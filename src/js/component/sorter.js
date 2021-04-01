@@ -7,6 +7,10 @@ import PropTypes from "prop-types";
 
 export const Sorter = props => {
 	const { store, actions } = useContext(Context);
+	const handleSort = sorted => {
+		props.setSort(sorted);
+		props.setPagination(1);
+	};
 	return (
 		<Container>
 			<Row>
@@ -37,25 +41,25 @@ export const Sorter = props => {
 					className="center"
 					variant="success"
 					title={props.sortKey.charAt(0).toUpperCase() + props.sortKey.slice(1)}>
-					<Dropdown.Item variant="dark" onClick={e => props.setSort("name")}>
+					<Dropdown.Item variant="dark" onClick={e => handleSort("name")}>
 						Name
 					</Dropdown.Item>
-					<Dropdown.Item variant="dark" onClick={e => props.setSort("released")}>
+					<Dropdown.Item variant="dark" onClick={e => handleSort("released")}>
 						Released
 					</Dropdown.Item>
-					<Dropdown.Item variant="dark" onClick={e => props.setSort("added")}>
+					<Dropdown.Item variant="dark" onClick={e => handleSort("added")}>
 						Added
 					</Dropdown.Item>
-					<Dropdown.Item variant="dark" onClick={e => props.setSort("created")}>
+					<Dropdown.Item variant="dark" onClick={e => handleSort("created")}>
 						Created
 					</Dropdown.Item>
-					<Dropdown.Item variant="dark" onClick={e => props.setSort("updated")}>
+					<Dropdown.Item variant="dark" onClick={e => handleSort("updated")}>
 						Updated
 					</Dropdown.Item>
-					<Dropdown.Item variant="dark" onClick={e => props.setSort("rating")}>
+					<Dropdown.Item variant="dark" onClick={e => handleSort("rating")}>
 						Rating
 					</Dropdown.Item>
-					<Dropdown.Item variant="dark" onClick={e => props.setSort("metacritic")}>
+					<Dropdown.Item variant="dark" onClick={e => handleSort("metacritic")}>
 						Metacritic
 					</Dropdown.Item>
 				</DropdownButton>
@@ -67,5 +71,6 @@ Sorter.propTypes = {
 	setSort: PropTypes.func,
 	setInverted: PropTypes.func,
 	inverted: PropTypes.bool,
-	sortKey: PropTypes.string
+	sortKey: PropTypes.string,
+	setPagination: PropTypes.func
 };

@@ -117,6 +117,7 @@ export const SearchPage = props => {
 									sortKey={sortKey}
 									setInverted={setInverted}
 									inverted={inverted}
+									setPagination={setPagination}
 								/>
 							</Col>
 						</Row>
