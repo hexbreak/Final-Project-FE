@@ -330,7 +330,7 @@ export const GameDetails = props => {
 							</Row>
 							<Row className="center detailspace">
 								<Col>
-									<h3>Achivements</h3>
+									<h3>Achievements</h3>
 									{store.gameAchievements != null && (
 										<Row style={{ maxWidth: "85rem" }} className="center">
 											{store.gameAchievements.map((value, index) => {
@@ -351,7 +351,7 @@ export const GameDetails = props => {
 															className="achivement"
 															alt="achievement"
 														/>
-														<h6>%{value.percent}</h6>
+														<h6>{value.percent}%</h6>
 													</div>
 												);
 											})}

@@ -8,7 +8,9 @@ export const GameCard = props => {
 	const { store, actions } = useContext(Context);
 	let history = useHistory();
 	const handleClick = e => {
-		props.cleanSearch;
+		if (props.cleanSearch != undefined) {
+			props.cleanSearch();
+		}
 		history.push({ pathname: `/details/${props.game.id}`, state: props.game.id });
 	};
 	const makeBorders = () => {
@@ -17,7 +19,6 @@ export const GameCard = props => {
 			store.user.liked.forEach(tags => {
 				if (value.id == tags.tag_id && cardBorder != null) {
 					cardBorder = "warning";
-					console.log(value);
 				} else if (value.id == tags.tag_id) {
 					cardBorder = "success";
 				}
