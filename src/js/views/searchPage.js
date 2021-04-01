@@ -20,9 +20,21 @@ import PropTypes from "prop-types";
 
 export const SearchPage = props => {
 	const { store, actions } = useContext(Context);
-	const [gameName, setGameName] = useState("");
-	const [sortKey, setSort] = useState("metacritic");
-	const [inverted, setInverted] = useState(true);
+	const [gameName, setGameName] = useState(
+		props.location.state.gameName != undefined && props.location.state != undefined
+			? props.location.state.gameName
+			: ""
+	);
+	const [sortKey, setSort] = useState(
+		props.location.state.sort != undefined && props.location.state != undefined
+			? props.location.state.sort
+			: "metacritics"
+	);
+	const [inverted, setInverted] = useState(
+		props.location.state.inverted != undefined && props.location.state != undefined
+			? props.location.state.inverted
+			: true
+	);
 	const [pagination, setPagination] = useState(1);
 	const [tags, setTags] = useState(null);
 	const [genres, setGenres] = useState(null);
@@ -34,20 +46,6 @@ export const SearchPage = props => {
 			actions.loadTags("40");
 			actions.loadGenres("40");
 			actions.loadPlatforms("50");
-			if (props.location.state != undefined) {
-				if (props.location.state.gameName != undefined) {
-					setGameName(props.location.state.gameName);
-				}
-				if (props.location.state.inverted != undefined) {
-					setInverted(props.location.state.inverted);
-				}
-				if (props.location.state.pagination != undefined) {
-					setPagination(props.location.state.pagination);
-				}
-				if (props.location.state.sort != undefined) {
-					setSort(props.location.state.sort);
-				}
-			}
 		};
 		loadSearch();
 	}, []);

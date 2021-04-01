@@ -13,6 +13,10 @@ export const Home = () => {
 	const [inverted, setInverted] = useState(true);
 	const [pagination, setPagination] = useState(1);
 	let history = useHistory();
+	const handleViewMore = viewMore => {
+		viewMore;
+		window.scrollTo(0, 0);
+	};
 	useEffect(() => {
 		actions.loadGameList(1);
 		actions.loadLists(1);
@@ -69,10 +73,12 @@ export const Home = () => {
 										className="center"
 										variant="success"
 										onClick={e =>
-											history.push({
-												pathname: "/search",
-												state: { sort: sortKey, pagination: pagination, inverted: inverted }
-											})
+											handleViewMore(
+												history.push({
+													pathname: "/search",
+													state: { sort: sortKey, pagination: pagination, inverted: inverted }
+												})
+											)
 										}>
 										View More
 									</Button>
@@ -98,7 +104,9 @@ export const Home = () => {
 										className="center"
 										variant="success"
 										onClick={e =>
-											history.push({ pathname: "/search", state: { sort: "metacritic" } })
+											handleViewMore(
+												history.push({ pathname: "/search", state: { sort: "metacritic" } })
+											)
 										}>
 										View More
 									</Button>
@@ -117,7 +125,11 @@ export const Home = () => {
 									<Button
 										className="center search-margin"
 										variant="success"
-										onClick={e => history.push({ pathname: "/search", state: { sort: "rating" } })}>
+										onClick={e =>
+											handleViewMore(
+												history.push({ pathname: "/search", state: { sort: "rating" } })
+											)
+										}>
 										View More
 									</Button>
 								</Row>
