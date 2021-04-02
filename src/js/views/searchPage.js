@@ -21,19 +21,25 @@ import PropTypes from "prop-types";
 export const SearchPage = props => {
 	const { store, actions } = useContext(Context);
 	const [gameName, setGameName] = useState(
-		props.location.state.gameName != undefined && props.location.state != undefined
-			? props.location.state.gameName
-			: ""
+		props.location.state == undefined
+			? ""
+			: props.location.state.gameName == undefined
+			? ""
+			: props.location.state.gameName
 	);
 	const [sortKey, setSort] = useState(
-		props.location.state.sort != undefined && props.location.state != undefined
-			? props.location.state.sort
-			: "metacritics"
+		props.location.state == undefined
+			? "metacritics"
+			: props.location.state.sort == undefined
+			? "metacritics"
+			: props.location.state.sort
 	);
 	const [inverted, setInverted] = useState(
-		props.location.state.inverted != undefined && props.location.state != undefined
-			? props.location.state.inverted
-			: true
+		props.location.state == undefined
+			? true
+			: props.location.state.inverted == undefined
+			? true
+			: props.location.state.inverted
 	);
 	const [pagination, setPagination] = useState(1);
 	const [tags, setTags] = useState(null);
