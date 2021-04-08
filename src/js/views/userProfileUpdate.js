@@ -161,6 +161,7 @@ export const UserProfileUpdate = props => {
 			console.log("platform1 check", platform1);
 			console.log("platform1 check", platform2);
 			history.push("/profile");
+			window.scrollTo(0, 0);
 		} else {
 			setNewPassword("");
 			setConfirmPassword("");

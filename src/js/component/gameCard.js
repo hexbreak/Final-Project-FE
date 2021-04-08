@@ -6,14 +6,16 @@ import PropTypes from "prop-types";
 
 export const GameCard = props => {
 	const { store, actions } = useContext(Context);
-	let history = useHistory();
+    let history = useHistory();
+    //Clean searchbar and takes you to details
 	const handleClick = e => {
 		if (props.cleanSearch != undefined) {
 			props.cleanSearch();
 		}
 		history.push({ pathname: `/details/${props.game.id}`, state: props.game.id });
 		window.scrollTo(0, 0);
-	};
+    };
+    //Make Borders from tag ids
 	const makeBorders = () => {
 		let cardBorder = null;
 		props.game.tags.forEach(value => {

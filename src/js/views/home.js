@@ -10,7 +10,7 @@ import { Sorter } from "../component/sorter";
 export const Home = () => {
 	const { store, actions } = useContext(Context);
 	const [sortKey, setSort] = useState("name");
-	const [inverted, setInverted] = useState(true);
+	const [inverted, setInverted] = useState(false);
 	const [pagination, setPagination] = useState(1);
 	let history = useHistory();
 	const handleViewMore = viewMore => {
