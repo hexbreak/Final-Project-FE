@@ -1,28 +1,19 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Context } from "../store/appContext";
 import { useHistory } from "react-router-dom";
-import { UserAbout } from "../component/userAbout.js";
-import { UserNowPlaying } from "../component/userNowPlaying";
-import { UserFavoriteList } from "../component/userFavoriteList";
-import { UserBacklog } from "../component/userHighlights";
-import { UserTags } from "../component/userTags";
 import {
 	Container,
 	Row,
 	Col,
 	Card,
-	CardImg,
-	CardFooter,
 	Form,
 	Dropdown,
 	DropdownButton,
-	FormControl,
 	ListGroup,
 	Button,
 	Tooltip,
 	OverlayTrigger
 } from "react-bootstrap";
-import PropTypes from "prop-types";
 
 export const UserProfileUpdate = props => {
 	const { store, actions } = useContext(Context);
