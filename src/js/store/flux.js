@@ -65,7 +65,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				getActions().changeColor(0, "green");
 			},
 			// User Registration // incomplete code until JWT integration
-			registerUser: user => {
+			registerUser: (username, email, password) => {
 				fetch(`${beURL}/register`, {
 					method: "POST",
 					headers: {
@@ -85,7 +85,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 					})
 					.then(response => {
 						console.log("Success:", response);
-						// return setStates in here to push data to BE
 					})
 					.catch(error => console.error("Error:", error));
 			},
