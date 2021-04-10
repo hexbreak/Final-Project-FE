@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Context } from "../store/appContext";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { UserAbout } from "../component/userAbout.js";
 import { UserNowPlaying } from "../component/userNowPlaying";
 import { UserFavoriteList } from "../component/userFavoriteList";
@@ -11,6 +11,12 @@ import PropTypes from "prop-types";
 
 export const UserProfile = props => {
 	const { store, actions } = useContext(Context);
+	let history = useHistory();
+	const handleLogout = e => {
+		actions.logout();
+		history.push("/home");
+		window.location.reload();
+	};
 	useEffect(() => {
 		const loadFavorites = () => {
 			actions.getFavorites(store.user.id);
@@ -40,10 +46,16 @@ export const UserProfile = props => {
 								width="100%"
 							/>
 							<div className="card-body">
-								<UserAbout />
 								<Link to="/editprofile">
 									<Button variant="success" onClick={e => window.scrollTo(0, 0)}>
 										Edit Profile
+									</Button>
+								</Link>
+							</div>
+							<div className="card-body">
+								<Link to="/home">
+									<Button variant="success" onClick={e => handleLogout(e)}>
+										Logout
 									</Button>
 								</Link>
 							</div>
