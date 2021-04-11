@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Context } from "../store/appContext";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { Container, Row, Col, Card, CardImg, CardFooter, Form, Button } from "react-bootstrap";
 import PropTypes from "prop-types";
 
@@ -9,6 +9,11 @@ export const UserRegistration = props => {
 	const [newUsername, setNewUserName] = useState("");
 	const [newEmail, setNewEmail] = useState("");
 	const [newPassword, setNewPassword] = useState("");
+	let history = useHistory();
+	const handleSubmit = e => {
+		actions.registerUser(newUsername, newEmail, newPassword);
+		history.push("/login");
+	};
 	return (
 		<Container className="space blue">
 			<Row>
@@ -42,25 +47,16 @@ export const UserRegistration = props => {
 								<Form.Group as={Col} controlId="formGridPassword">
 									<Form.Label className="input-space">Password</Form.Label>
 									<Form.Control
+										onChange={e => setNewPassword(e.target.value)}
 										className="input-space input-shadow"
 										type="password"
 										placeholder="Password"
 									/>
 								</Form.Group>
-
-								<Form.Group as={Col} controlId="formGridEmail">
-									<Form.Label className="input-space">Confirm Password</Form.Label>
-									<Form.Control
-										onChange={e => setNewPassword(e.target.value)}
-										className="input-space input-shadow"
-										type="password"
-										placeholder="Confirm Password"
-									/>
-								</Form.Group>
 							</Form.Row>
 
 							<Button
-								onClick={() => actions.registerUser(newUsername, newEmail, newPassword)}
+								onClick={e => handleSubmit(e)}
 								variant="success"
 								className="input-space"
 								type="submit">

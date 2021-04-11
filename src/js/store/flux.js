@@ -53,15 +53,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 			]
 		},
 		actions: {
-			logout: () => {
-				setStore({ token: null });
-			},
-			// Use getActions to call a function within a fuction
-			exampleFunction: () => {
-				getActions().changeColor(0, "green");
-			},
-			// User Registration // incomplete code until JWT integration
-			registerUser: user => {
+			// new user registration
+			registerUser: (username, email, password) => {
 				fetch(`${beURL}/register`, {
 					method: "POST",
 					headers: {
@@ -81,11 +74,10 @@ const getState = ({ getStore, getActions, setStore }) => {
 					})
 					.then(response => {
 						console.log("Success:", response);
-						// return setStates in here to push data to BE
 					})
 					.catch(error => console.error("Error:", error));
 			},
-			// Login & generate token
+			// login & generate token
 			loginUser: (password, username) => {
 				const actions = getActions();
 				const store = getStore();
@@ -108,6 +100,11 @@ const getState = ({ getStore, getActions, setStore }) => {
 							actions.getUserProfile(store.id);
 						}
 					});
+			},
+			// logout from account
+			logout: () => {
+				const store = getStore();
+				setStore({ token: null });
 			},
 			addtoFavorites: () => {
 				const store = getStore();
