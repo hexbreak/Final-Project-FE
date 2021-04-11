@@ -10,7 +10,7 @@ export const UserFavorites = props => {
 	const { store, actions } = useContext(Context);
 	useEffect(() => {
 		const loadFavorites = () => {
-			actions.getFavorites(store.user.id);
+			actions.getFavorites(store.id);
 		};
 		loadFavorites();
 	}, []);
@@ -57,6 +57,16 @@ export const UserFavorites = props => {
 								</Nav.Link>
 							</Nav.Item>
 							<Nav.Item>
+								<Nav.Link bg="light" variant="light" eventKey="favorites">
+									<h4>Favorites</h4>
+								</Nav.Link>
+							</Nav.Item>
+							<Nav.Item>
+								<Nav.Link bg="light" variant="light" eventKey="dropped">
+									<h4>Dropped</h4>
+								</Nav.Link>
+							</Nav.Item>
+							<Nav.Item>
 								<Nav.Link bg="light" variant="light" eventKey="wishlist">
 									<h4>Wishlist</h4>
 								</Nav.Link>
@@ -68,8 +78,8 @@ export const UserFavorites = props => {
 							<Row className="search-margin center">
 								<Col className="center search-margin search-box" sm={11}>
 									<Row className="search-margin">
-										{store.user.favorites.length > 0 &&
-											store.user.favorites.map((value, index) => {
+										{store.user_games.length > 0 &&
+											store.user_games.map((value, index) => {
 												let game = {
 													id: value.game_id,
 													name: value.game_name,
@@ -85,8 +95,8 @@ export const UserFavorites = props => {
 							<Row className="search-margin center">
 								<Col className="center search-margin search-box" sm={11}>
 									<Row className="search-margin">
-										{store.user.favorites.length > 0 &&
-											store.user.favorites.map((value, index) => {
+										{store.user_games.length > 0 &&
+											store.user_games.map((value, index) => {
 												if (value.status == "new") {
 													let game = {
 														id: value.game_id,
@@ -104,8 +114,8 @@ export const UserFavorites = props => {
 							<Row className="search-margin center">
 								<Col className="center search-margin search-box" sm={11}>
 									<Row className="search-margin">
-										{store.user.favorites.length > 0 &&
-											store.user.favorites.map((value, index) => {
+										{store.user_games.length > 0 &&
+											store.user_games.map((value, index) => {
 												if (value.status == "progress") {
 													let game = {
 														id: value.game_id,
@@ -123,8 +133,8 @@ export const UserFavorites = props => {
 							<Row className="search-margin center">
 								<Col className="center search-margin search-box" sm={11}>
 									<Row className="search-margin">
-										{store.user.favorites.length > 0 &&
-											store.user.favorites.map((value, index) => {
+										{store.user_games.length > 0 &&
+											store.user_games.map((value, index) => {
 												if (value.status == "finished") {
 													let game = {
 														id: value.game_id,
@@ -142,9 +152,47 @@ export const UserFavorites = props => {
 							<Row className="search-margin center">
 								<Col className="center search-margin search-box" sm={11}>
 									<Row className="search-margin">
-										{store.user.favorites.length > 0 &&
-											store.user.favorites.map((value, index) => {
+										{store.user_games.length > 0 &&
+											store.user_games.map((value, index) => {
 												if (value.status == "completed") {
+													let game = {
+														id: value.game_id,
+														name: value.game_name,
+														background_image: value.game_image
+													};
+													return <GameCard className="card" key={index} game={game} />;
+												}
+											})}
+									</Row>
+								</Col>
+							</Row>
+						</Tab.Pane>
+						<Tab.Pane eventKey="favorites">
+							<Row className="search-margin center">
+								<Col className="center search-margin search-box" sm={11}>
+									<Row className="search-margin">
+										{store.user_games.length > 0 &&
+											store.user_games.map((value, index) => {
+												if (value.status == "favorites") {
+													let game = {
+														id: value.game_id,
+														name: value.game_name,
+														background_image: value.game_image
+													};
+													return <GameCard className="card" key={index} game={game} />;
+												}
+											})}
+									</Row>
+								</Col>
+							</Row>
+						</Tab.Pane>
+						<Tab.Pane eventKey="dropped">
+							<Row className="search-margin center">
+								<Col className="center search-margin search-box" sm={11}>
+									<Row className="search-margin">
+										{store.user_games.length > 0 &&
+											store.user_games.map((value, index) => {
+												if (value.status == "dropped") {
 													let game = {
 														id: value.game_id,
 														name: value.game_name,
@@ -161,8 +209,8 @@ export const UserFavorites = props => {
 							<Row className="search-margin center">
 								<Col className="center search-margin search-box" sm={11}>
 									<Row className="search-margin">
-										{store.user.favorites.length > 0 &&
-											store.user.favorites.map((value, index) => {
+										{store.user_games.length > 0 &&
+											store.user_games.map((value, index) => {
 												if (value.status == "wishlist") {
 													let game = {
 														id: value.game_id,
