@@ -19,7 +19,7 @@ export const GameCard = props => {
 	const checkPlatform = () => {
 		let platformColor = "text-light";
 		props.game.platforms.forEach(value => {
-			store.user.platform.forEach(platform => {
+			store.user_platforms.forEach(platform => {
 				if (value.platform.id == platform.platform_id) {
 					platformColor = "text-success";
 				}
@@ -30,14 +30,14 @@ export const GameCard = props => {
 	const checkGenre = () => {
 		let genreColor = "text-light";
 		props.game.genres.forEach(value => {
-			store.user.genres_liked.forEach(genre => {
+			store.genres_liked.forEach(genre => {
 				if (value.id == genre.genre_id && genreColor != "text-light") {
 					genreColor = "text-warning";
 				} else if (value.id == genre.genre_id) {
 					genreColor = "text-success";
 				}
 			});
-			store.user.genres_disliked.forEach(genre => {
+			store.genres_disliked.forEach(genre => {
 				if (value.id == genre.genre_id && genreColor != "text-light") {
 					genreColor = "text-warning";
 				} else if (value.id == genre.genre_id) {
@@ -50,14 +50,14 @@ export const GameCard = props => {
 	const checkTags = () => {
 		let tagColor = "text-light";
 		props.game.tags.forEach(value => {
-			store.user.tags_liked.forEach(tags => {
+			store.tags_liked.forEach(tags => {
 				if (value.id == tags.tag_id && tagColor != "text-light") {
 					tagColor = "text-warning";
 				} else if (value.id == tags.tag_id) {
 					tagColor = "text-success";
 				}
 			});
-			store.user.tags_disliked.forEach(tags => {
+			store.tags_disliked.forEach(tags => {
 				if (value.id == tags.tag_id && tagColor != "text-light") {
 					tagColor = "text-warning";
 				} else if (value.id == tags.tag_id) {

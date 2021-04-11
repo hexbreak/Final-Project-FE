@@ -13,7 +13,7 @@ export const Footer = () => {
 						<a href="http://www.4geeksacademy.com"> Regem Ludus</a>
 					</p>
 				</Col>
-				{store.user.id <= 0 && (
+				{store.id <= 0 && (
 					<>
 						<Col id="middleLine"></Col>
 						<Col>

@@ -7,7 +7,7 @@ import { Demo } from "./views/demo";
 import { Single } from "./views/single";
 import { GameDetails } from "./views/gameDetails";
 import { UserProfile } from "./views/userProfile";
-import { UserProfileUpdate } from "./views/userProfileUpdate";
+import { UserPreferenceUpdate } from "./views/userPreferenceUpdate";
 import { UserRegistration } from "./views/userRegistration";
 import injectContext from "./store/appContext";
 import { SearchPage } from "./views/searchPage";
@@ -37,7 +37,7 @@ const Layout = () => {
 						<Route exact path="/details/:id" component={GameDetails} />
 						<Route exact path="/search" component={SearchPage} />
 						<Route exact path="/profile" component={UserProfile} />
-						<Route exact path="/editprofile" component={UserProfileUpdate} />
+						<Route exact path="/editpreference" component={UserPreferenceUpdate} />
 						<Route exact path="/registration" component={UserRegistration} />
 						<Route exact path="/login" component={UserLogin} />
 						<Route exact path="/favorites" component={UserFavorites} />

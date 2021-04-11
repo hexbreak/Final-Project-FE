@@ -1,11 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Context } from "../store/appContext";
 import { Link } from "react-router-dom";
-import { UserAbout } from "../component/userAbout.js";
-import { UserNowPlaying } from "../component/userNowPlaying";
-import { UserFavoriteList } from "../component/userFavoriteList";
-import { UserHighlights } from "../component/userHighlights";
-import { UserTags } from "../component/userTags";
 import { Container, Row, Col, Card, CardImg, CardFooter, Form, Button } from "react-bootstrap";
 import PropTypes from "prop-types";
 

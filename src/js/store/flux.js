@@ -5,21 +5,17 @@ const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
 			token: null,
-			user: {
-				// change to null after pitch day for code clean up
-				username: "",
-				password: "",
-				email: "",
-				id: "",
-				about: "",
-				image: "",
-				platforms: [null, null, null],
-				game_progression: [null, null, null, null, null, null, null, null, null],
-				playing: [null, null, null],
-				liked: [],
-				disliked: [],
-				favorites: []
-			},
+			// change to null after pitch day for code clean up
+			username: "",
+			password: "",
+			email: "",
+			id: "",
+			user_platforms: [],
+			tags_liked: [],
+			tags_disliked: [],
+			genres_liked: [],
+			genres_disliked: [],
+			favorites: [],
 			preference: false,
 			backlogPost: [],
 			backlogGet: [],
@@ -109,13 +105,13 @@ const getState = ({ getStore, getActions, setStore }) => {
 							// Notify.error(token.msg)
 						} else {
 							setStore({ token: data.token, user: { ...getStore().user, id: data.user_id } });
-							actions.getUserProfile(store.user.id);
+							actions.getUserProfile(store.id);
 						}
 					});
 			},
 			addtoFavorites: () => {
 				const store = getStore();
-				fetch(`${beURL}/user/${store.user.id}/fav`, {
+				fetch(`${beURL}/user/${store.id}/fav`, {
 					method: "POST",
 					headers: {
 						"Content-Type": "application/json"
@@ -133,7 +129,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 						return response.json();
 					})
 					.then(responseAsJson => {
-						fetch(`${beURL}/user/${store.user.id}/fav`)
+						fetch(`${beURL}/user/${store.id}/fav`)
 							.then(function(response) {
 								if (!response.ok) {
 									throw Error(response.statusText);
@@ -489,7 +485,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			handleSave: user => {
 				const actions = getActions();
 				const store = getStore();
-				fetch(`${beURL}/user/${store.user.id}`, {
+				fetch(`${beURL}/user/${store.id}`, {
 					method: "PUT",
 					headers: {
 						"Content-Type": "application/json"
@@ -503,13 +499,13 @@ const getState = ({ getStore, getActions, setStore }) => {
 						return response.json();
 					})
 					.then(response => {
-						actions.getUserProfile(store.user.id);
+						actions.getUserProfile(store.id);
 						return setStore({ user: user });
 					});
 			},
 			getUserProfile: user => {
 				const store = getStore();
-				fetch(`${beURL}/user/${store.user.id}`, {
+				fetch(`${beURL}/user/${store.id}`, {
 					method: "GET"
 				})
 					.then(response => {
@@ -551,7 +547,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 			checkFavorites: gameId => {
 				const store = getStore();
-				let check = store.user.favorites.filter(value => gameId == value.game_id);
+				let check = store.favorites.filter(value => gameId == value.game_id);
 				if (check.length > 0) {
 					setStore({ check: true });
 				} else {
@@ -560,8 +556,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 			deleteFromFavorites: gameId => {
 				const store = getStore();
-				let game = store.user.favorites.filter(value => gameId == value.game_id);
-				fetch(`${beURL}/user/${store.user.id}/delfav/` + game[0].id, {
+				let game = store.favorites.filter(value => gameId == value.game_id);
+				fetch(`${beURL}/user/${store.id}/delfav/` + game[0].id, {
 					method: "DELETE",
 					headers: {
 						"Content-Type": "application/json"
@@ -575,7 +571,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					})
 					.then(responseAsJson => {
 						console.log("Success:", responseAsJson);
-						fetch(`${beURL}/user/${store.user.id}/fav`)
+						fetch(`${beURL}/user/${store.id}/fav`)
 							.then(function(response) {
 								if (!response.ok) {
 									throw Error(response.statusText);
