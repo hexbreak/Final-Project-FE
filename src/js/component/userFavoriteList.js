@@ -11,7 +11,7 @@ export const UserFavoriteList = props => {
 		<Card bg="light" className="profileCard profileCardBackground shadow center" style={{ maxWidth: "25rem" }}>
 			<Card.Header className="profileCardHeader">Favorites</Card.Header>
 			<ListGroup variant="flush light">
-				{store.user.favorites.map((value, index) => {
+				{store.favorites.map((value, index) => {
 					if (index < 3) {
 						return (
 							<ListGroup.Item variant="light" key={index}>
@@ -26,7 +26,7 @@ export const UserFavoriteList = props => {
 						);
 					}
 				})}
-				{store.user.favorites.length > 3 && (
+				{store.favorites.length > 3 && (
 					<ListGroup.Item variant="light">
 						<Button onClick={e => history.push("/favorites")} id="viewmore">
 							View More

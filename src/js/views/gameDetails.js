@@ -20,7 +20,7 @@ export const GameDetails = props => {
 			actions.loadGame(props.location.state);
 			actions.loadGameAchievements(props.location.state);
 			actions.loadGameTrailers(props.location.state);
-			actions.getFavorites(store.user.id);
+			actions.getFavorites(store.id);
 		};
 		loadGame();
 	}, [props.location.state]);
@@ -39,7 +39,7 @@ export const GameDetails = props => {
 			actions.checkFavorites(store.game.id);
 		};
 		checkFavorites();
-	}, [store.user.favorites]);
+	}, [store.favorites]);
 	if (store.game.id == props.location.state) {
 		if (store.game.platforms != null) {
 			let pc = store.game.platforms.filter(value => {
@@ -109,7 +109,7 @@ export const GameDetails = props => {
 									<h4>Media</h4>
 								</Nav.Link>
 							</Nav.Item>
-							{store.user.id > 0 && (
+							{store.id > 0 && (
 								<div>
 									{store.check == true ? (
 										<Button
@@ -360,7 +360,7 @@ export const GameDetails = props => {
 								</Col>
 							</Row>
 						</Tab.Pane>
-						<Tab.Pane eventKey="store">
+						{/* <Tab.Pane eventKey="store">
 							<Row className="center detailspace">
 								<Col>
 									<h1>Stores</h1>
@@ -471,7 +471,7 @@ export const GameDetails = props => {
 									</div>
 								</Col>
 							</Row>
-						</Tab.Pane>
+						</Tab.Pane> */}
 						<Tab.Pane eventKey="media">
 							<Row className="center">
 								<Col>

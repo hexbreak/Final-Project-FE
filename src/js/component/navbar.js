@@ -69,11 +69,11 @@ export const Navbar = () => {
 					</button>
 				</Link>
 			</Row>
-			{store.user.id > 0 ? (
+			{store.id > 0 ? (
 				<div className="ml">
-					<Link to="/profile">
+					<Link to="/editpreference">
 						<button className="btn btn-light pl-4 pr-4 navButton" id="hover">
-							<span>Profile</span>
+							<span>Preferences</span>
 						</button>
 					</Link>
 				</div>
