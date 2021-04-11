@@ -20,7 +20,7 @@ export const GameDetails = props => {
 			actions.loadGame(props.location.state);
 			actions.loadGameAchievements(props.location.state);
 			actions.loadGameTrailers(props.location.state);
-			actions.getFavorites(store.id);
+			actions.getUserGames(store.id);
 		};
 		loadGame();
 	}, [props.location.state]);
@@ -31,15 +31,15 @@ export const GameDetails = props => {
 			});
 			actions.loadSimilarGames(genreId);
 			actions.loadAddedByPlayers(store.game.added_by_status);
-			actions.checkFavorites(store.game.id);
+			actions.checkUserGames(store.game.id);
 		}
 	}, [store.game]);
 	useEffect(() => {
-		const checkFavorites = () => {
-			actions.checkFavorites(store.game.id);
+		const checkUserGames = () => {
+			actions.checkUserGames(store.game.id);
 		};
-		checkFavorites();
-	}, [store.favorites]);
+		checkUserGames();
+	}, [store.user_games]);
 	if (store.game.id == props.location.state) {
 		if (store.game.platforms != null) {
 			let pc = store.game.platforms.filter(value => {
@@ -111,23 +111,94 @@ export const GameDetails = props => {
 							</Nav.Item>
 							{store.id > 0 && (
 								<div>
-									{store.check == true ? (
+									{store.check.length > 0 ? (
 										<Button
 											variant="danger"
-											onClick={() => actions.deleteFromFavorites(store.game.id)}>
-											Delete from Favorites
+											onClick={() => actions.deleteFromUserGames(store.game.id)}>
+											<i className="fas fa-trash" />
 										</Button>
 									) : (
-										<Button variant="danger" onClick={() => actions.addtoFavorites()}>
-											Add to Favorites
+										<Button variant="danger" onClick={() => actions.addtoUserGames()}>
+											<i className="fas fa-gamepad" />
 										</Button>
 									)}
 								</div>
 							)}
 						</Row>
 					</Nav>
-					<br />
-					<br />
+					{store.check > 0 && (
+						<Row>
+							<Col>
+								{store.check[0].status == "new" ? <Button>&#9733;</Button> : <Button>&#9734;</Button>}
+							</Col>
+							<Col>
+								{store.check[0].status == "progress" ? (
+									<Button>
+										<i className="fas fa-wrench" />
+									</Button>
+								) : (
+									<Button>
+										<i className="fas fa-screwdriver" />
+									</Button>
+								)}
+							</Col>
+							<Col>
+								{store.check[0].status == "finished" ? (
+									<Button>
+										<i className="fas fa-check-square" />
+									</Button>
+								) : (
+									<Button>
+										<i className="far fa-check-square" />
+									</Button>
+								)}
+							</Col>
+							<Col>
+								{store.check[0].status == "finished" ? (
+									<Button>
+										<i className="fas fa-trophy" />
+									</Button>
+								) : (
+									<Button>
+										<i className="fas fa-medal" />
+									</Button>
+								)}
+							</Col>
+							<Col>
+								{store.check[0].status == "completed" ? (
+									<Button>
+										<i className="fas fa-heart" />
+									</Button>
+								) : (
+									<Button>
+										<i className="far fa-heart" />
+									</Button>
+								)}
+							</Col>
+							<Col>
+								{store.check[0].status == "dropped" ? (
+									<Button>
+										<i className="fas fa-thumbs-down" />
+									</Button>
+								) : (
+									<Button>
+										<i className="far fa-thumbs-down" />
+									</Button>
+								)}
+							</Col>
+							<Col>
+								{store.check[0].status == "wishlist" ? (
+									<Button>
+										<i className="fas fa-hand-holding-usd" />
+									</Button>
+								) : (
+									<Button>
+										<i className="fas fa-dollar-sign" />
+									</Button>
+								)}
+							</Col>
+						</Row>
+					)}
 					<Tab.Content className="space">
 						<Tab.Pane eventKey="details">
 							<Row className="center detailspace">
@@ -324,7 +395,7 @@ export const GameDetails = props => {
 									</div>
 								</Col>
 								<Col>
-									<h3>People on Favorites</h3>
+									<h3>People with Game</h3>
 									{}
 								</Col>
 							</Row>

@@ -15,7 +15,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			tags_disliked: [],
 			genres_liked: [],
 			genres_disliked: [],
-			favorites: [],
+			user_games: [],
 			preference: false,
 			backlogPost: [],
 			backlogGet: [],
@@ -30,7 +30,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 			otherGamesList: [],
 			dlcsList: [],
 			gameTitle: [],
-			favorites: [],
 			tags: [],
 			genres: [],
 			platforms: [],
@@ -38,19 +37,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			searchBar: [],
 			superSearch: [],
 			found: [],
-			check: [],
-			demo: [
-				{
-					title: "FIRST",
-					background: "white",
-					initial: "white"
-				},
-				{
-					title: "SECOND",
-					background: "white",
-					initial: "white"
-				}
-			]
+			check: []
 		},
 		actions: {
 			// new user registration
@@ -106,7 +93,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				const store = getStore();
 				setStore({ token: null });
 			},
-			addtoFavorites: () => {
+			addtoUserGames: () => {
 				const store = getStore();
 				fetch(`${beURL}/user/${store.id}/fav`, {
 					method: "POST",
@@ -136,8 +123,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 							})
 							.then(function(responseAsJson) {
 								// Do stuff with the JSON
-								let newUser = { ...store.user, favorites: responseAsJson };
-								return setStore({ user: newUser });
+								return setStore({ user_games: responseAsJson });
 							})
 							.catch(function(error) {
 								console.log("Looks like there was a problem: \n", error);
@@ -523,7 +509,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				let newUser = { ...store.user, image: image };
 				return setStore({ user: newUser });
 			},
-			getFavorites: userId => {
+			getUserGames: userId => {
 				const store = getStore();
 				fetch(`${beURL}/user/${userId}/fav`)
 					.then(function(response) {
@@ -535,25 +521,20 @@ const getState = ({ getStore, getActions, setStore }) => {
 					})
 					.then(function(responseAsJson) {
 						// Do stuff with the JSON
-						let newUser = { ...store.user, favorites: responseAsJson };
-						return setStore({ user: newUser });
+						return setStore({ user_games: responseAsJson });
 					})
 					.catch(function(error) {
 						console.log("Looks like there was a problem: \n", error);
 					});
 			},
-			checkFavorites: gameId => {
+			checkUserGames: gameId => {
 				const store = getStore();
-				let check = store.favorites.filter(value => gameId == value.game_id);
-				if (check.length > 0) {
-					setStore({ check: true });
-				} else {
-					setStore({ check: false });
-				}
+				let check = store.user_games.filter(value => gameId == value.game_id);
+				setStore({ check: check });
 			},
-			deleteFromFavorites: gameId => {
+			deleteFromUserGames: gameId => {
 				const store = getStore();
-				let game = store.favorites.filter(value => gameId == value.game_id);
+				let game = store.user_games.filter(value => gameId == value.game_id);
 				fetch(`${beURL}/user/${store.id}/delfav/` + game[0].id, {
 					method: "DELETE",
 					headers: {
@@ -578,8 +559,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 							})
 							.then(function(responseAsJson) {
 								// Do stuff with the JSON
-								let newUser = { ...store.user, favorites: responseAsJson };
-								return setStore({ user: newUser });
+								return setStore({ user_games: responseAsJson });
 							})
 							.catch(function(error) {
 								console.log("Looks like there was a problem: \n", error);
