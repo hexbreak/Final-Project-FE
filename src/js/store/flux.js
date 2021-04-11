@@ -38,19 +38,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			searchBar: [],
 			superSearch: [],
 			found: [],
-			check: [],
-			demo: [
-				{
-					title: "FIRST",
-					background: "white",
-					initial: "white"
-				},
-				{
-					title: "SECOND",
-					background: "white",
-					initial: "white"
-				}
-			]
+			check: []
 		},
 		actions: {
 			// new user registration

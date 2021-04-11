@@ -126,8 +126,6 @@ export const GameDetails = props => {
 							)}
 						</Row>
 					</Nav>
-					<br />
-					<br />
 					<Tab.Content className="space">
 						<Tab.Pane eventKey="details">
 							<Row className="center detailspace">
