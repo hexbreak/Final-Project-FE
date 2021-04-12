@@ -3,16 +3,15 @@ import { Link } from "react-router-dom";
 import { Card, Container, Row, Col, Nav, Tab, Sonnet, Button } from "react-bootstrap";
 import { Context } from "../store/appContext";
 import { GameCard } from "../component/gameCard";
-import { Sorter } from "../component/sorter";
 import PropTypes from "prop-types";
 
-export const UserFavorites = props => {
+export const UserGames = props => {
 	const { store, actions } = useContext(Context);
 	useEffect(() => {
-		const loadFavorites = () => {
-			actions.getFavorites(store.id);
+		const loadUserGames = () => {
+			actions.getUserGames(store.id);
 		};
-		loadFavorites();
+		loadUserGames();
 	}, []);
 	return (
 		<Container
@@ -173,7 +172,7 @@ export const UserFavorites = props => {
 									<Row className="search-margin">
 										{store.user_games.length > 0 &&
 											store.user_games.map((value, index) => {
-												if (value.status == "favorites") {
+												if (value.status == "favorite") {
 													let game = {
 														id: value.game_id,
 														name: value.game_name,
@@ -231,6 +230,6 @@ export const UserFavorites = props => {
 	);
 };
 
-UserFavorites.propTypes = {
+UserGames.propTypes = {
 	location: PropTypes.object
 };

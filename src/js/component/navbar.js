@@ -71,6 +71,14 @@ export const Navbar = () => {
 			</Row>
 			{store.id > 0 ? (
 				<div className="ml">
+					<Link to="/usergames">
+						<button
+							style={{ marginRight: "1rem" }}
+							className="btn btn-light pl-4 pr-4 navButton"
+							id="hover">
+							<span>My Games</span>
+						</button>
+					</Link>
 					<Link to="/editpreference">
 						<button className="btn btn-light pl-4 pr-4 navButton" id="hover">
 							<span>Preferences</span>

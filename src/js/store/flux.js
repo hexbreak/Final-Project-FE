@@ -130,7 +130,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 							});
 					})
 					.catch(error => console.error("Error:", error));
-				// GET favorite
 			},
 			changeColor: (index, color) => {
 				//get the store

@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
-import { Jumbotron, Card, Container, Row, Col, Nav, Tab, Sonnet, Button } from "react-bootstrap";
+import { Jumbotron, OverlayTrigger, Container, Row, Col, Nav, Tab, Tooltip, Button } from "react-bootstrap";
 import { Context } from "../store/appContext";
 import { GameCard } from "../component/gameCard";
 import PropTypes from "prop-types";
@@ -67,6 +67,46 @@ export const GameDetails = props => {
 				);
 			}
 		}
+		const renderUserGames = props => (
+			<Tooltip id="button-tooltip" {...props}>
+				{store.check.length > 0 ? "Delete from your games." : "Add to your games."}
+			</Tooltip>
+		);
+		const renderNew = props => (
+			<Tooltip id="button-tooltip" {...props}>
+				Add to new games!
+			</Tooltip>
+		);
+		const renderProgress = props => (
+			<Tooltip id="button-tooltip" {...props}>
+				Add to games on progress!
+			</Tooltip>
+		);
+		const renderFinished = props => (
+			<Tooltip id="button-tooltip" {...props}>
+				Add to finished games!
+			</Tooltip>
+		);
+		const renderCompleted = props => (
+			<Tooltip id="button-tooltip" {...props}>
+				Add to completed games!
+			</Tooltip>
+		);
+		const renderFavorite = props => (
+			<Tooltip id="button-tooltip" {...props}>
+				Add to favorite games!
+			</Tooltip>
+		);
+		const renderDropped = props => (
+			<Tooltip id="button-tooltip" {...props}>
+				Add to dropped games!
+			</Tooltip>
+		);
+		const renderWishlist = props => (
+			<Tooltip id="button-tooltip" {...props}>
+				Add to games on your wishlist!
+			</Tooltip>
+		);
 		return (
 			<Container fluid>
 				<Jumbotron className="text-dark" style={{ backgroundColor: "white" }}>
@@ -112,15 +152,25 @@ export const GameDetails = props => {
 							{store.id > 0 && (
 								<div>
 									{store.check.length > 0 ? (
-										<Button
-											variant="danger"
-											onClick={() => actions.deleteFromUserGames(store.game.id)}>
-											<i className="fas fa-trash" />
-										</Button>
+										<OverlayTrigger
+											placement="top"
+											delay={{ show: 250, hide: 400 }}
+											overlay={renderUserGames}>
+											<Button
+												variant="danger"
+												onClick={() => actions.deleteFromUserGames(store.game.id)}>
+												<i className="fas fa-trash" />
+											</Button>
+										</OverlayTrigger>
 									) : (
-										<Button variant="danger" onClick={() => actions.addtoUserGames()}>
-											<i className="fas fa-gamepad" />
-										</Button>
+										<OverlayTrigger
+											placement="top"
+											delay={{ show: 250, hide: 400 }}
+											overlay={renderUserGames}>
+											<Button variant="danger" onClick={() => actions.addtoUserGames()}>
+												<i className="fas fa-gamepad" />
+											</Button>
+										</OverlayTrigger>
 									)}
 								</div>
 							)}
@@ -129,73 +179,109 @@ export const GameDetails = props => {
 					{store.check > 0 && (
 						<Row>
 							<Col>
-								{store.check[0].status == "new" ? <Button>&#9733;</Button> : <Button>&#9734;</Button>}
+								<OverlayTrigger placement="top" delay={{ show: 250, hide: 400 }} overlay={renderNew}>
+									{store.check[0].status == "new" ? (
+										<Button>&#9733;</Button>
+									) : (
+										<Button>&#9734;</Button>
+									)}
+								</OverlayTrigger>
 							</Col>
 							<Col>
-								{store.check[0].status == "progress" ? (
-									<Button>
-										<i className="fas fa-wrench" />
-									</Button>
-								) : (
-									<Button>
-										<i className="fas fa-screwdriver" />
-									</Button>
-								)}
+								<OverlayTrigger
+									placement="top"
+									delay={{ show: 250, hide: 400 }}
+									overlay={renderProgress}>
+									{store.check[0].status == "progress" ? (
+										<Button>
+											<i className="fas fa-wrench" />
+										</Button>
+									) : (
+										<Button>
+											<i className="fas fa-screwdriver" />
+										</Button>
+									)}
+								</OverlayTrigger>
 							</Col>
 							<Col>
-								{store.check[0].status == "finished" ? (
-									<Button>
-										<i className="fas fa-check-square" />
-									</Button>
-								) : (
-									<Button>
-										<i className="far fa-check-square" />
-									</Button>
-								)}
+								<OverlayTrigger
+									placement="top"
+									delay={{ show: 250, hide: 400 }}
+									overlay={renderFinished}>
+									{store.check[0].status == "finished" ? (
+										<Button>
+											<i className="fas fa-check-square" />
+										</Button>
+									) : (
+										<Button>
+											<i className="far fa-check-square" />
+										</Button>
+									)}
+								</OverlayTrigger>
 							</Col>
 							<Col>
-								{store.check[0].status == "finished" ? (
-									<Button>
-										<i className="fas fa-trophy" />
-									</Button>
-								) : (
-									<Button>
-										<i className="fas fa-medal" />
-									</Button>
-								)}
+								<OverlayTrigger
+									placement="top"
+									delay={{ show: 250, hide: 400 }}
+									overlay={renderCompleted}>
+									{store.check[0].status == "completed" ? (
+										<Button>
+											<i className="fas fa-trophy" />
+										</Button>
+									) : (
+										<Button>
+											<i className="fas fa-medal" />
+										</Button>
+									)}
+								</OverlayTrigger>
 							</Col>
 							<Col>
-								{store.check[0].status == "completed" ? (
-									<Button>
-										<i className="fas fa-heart" />
-									</Button>
-								) : (
-									<Button>
-										<i className="far fa-heart" />
-									</Button>
-								)}
+								<OverlayTrigger
+									placement="top"
+									delay={{ show: 250, hide: 400 }}
+									overlay={renderFavorite}>
+									{store.check[0].status == "favorite" ? (
+										<Button>
+											<i className="fas fa-heart" />
+										</Button>
+									) : (
+										<Button>
+											<i className="far fa-heart" />
+										</Button>
+									)}
+								</OverlayTrigger>
 							</Col>
 							<Col>
-								{store.check[0].status == "dropped" ? (
-									<Button>
-										<i className="fas fa-thumbs-down" />
-									</Button>
-								) : (
-									<Button>
-										<i className="far fa-thumbs-down" />
-									</Button>
-								)}
+								<OverlayTrigger
+									placement="top"
+									delay={{ show: 250, hide: 400 }}
+									overlay={renderDropped}>
+									{store.check[0].status == "dropped" ? (
+										<Button>
+											<i className="fas fa-thumbs-down" />
+										</Button>
+									) : (
+										<Button>
+											<i className="far fa-thumbs-down" />
+										</Button>
+									)}
+								</OverlayTrigger>
 							</Col>
 							<Col>
-								{store.check[0].status == "wishlist" ? (
-									<Button>
-										<i className="fas fa-hand-holding-usd" />
-									</Button>
-								) : (
-									<Button>
-										<i className="fas fa-dollar-sign" />
-									</Button>
-								)}
+								<OverlayTrigger
+									placement="top"
+									delay={{ show: 250, hide: 400 }}
+									overlay={renderWishlist}>
+									{store.check[0].status == "wishlist" ? (
+										<Button>
+											<i className="fas fa-hand-holding-usd" />
+										</Button>
+									) : (
+										<Button>
+											<i className="fas fa-dollar-sign" />
+										</Button>
+									)}
+								</OverlayTrigger>
 							</Col>
 						</Row>
 					)}
