@@ -14,7 +14,7 @@ import { SearchPage } from "./views/searchPage";
 import { Navbar } from "./component/navbar";
 import { Footer } from "./component/footer";
 import { UserLogin } from "./views/userLogin";
-import { UserFavorites } from "./views/userFavorites";
+import { UserGames } from "./views/userGames";
 //create your first component
 const Layout = () => {
 	//the basename is used when your project is published in a subdirectory and not in the root of the domain
@@ -40,7 +40,7 @@ const Layout = () => {
 						<Route exact path="/editpreference" component={UserPreferenceUpdate} />
 						<Route exact path="/registration" component={UserRegistration} />
 						<Route exact path="/login" component={UserLogin} />
-						<Route exact path="/favorites" component={UserFavorites} />
+						<Route exact path="/usergames" component={UserGames} />
 						<Route>
 							<h1>Not found!</h1>
 						</Route>

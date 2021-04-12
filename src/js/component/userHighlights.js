@@ -2,36 +2,13 @@ import React, { useState, useEffect, useContext } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { Context } from "../store/appContext";
 import {
-	Carousel,
-	Card,
 	Container,
-	Row,
-	Col,
-	Dropdown,
-	DropdownButton,
-	Button,
 	Table,
-	Tooltip,
 	OverlayTrigger
 } from "react-bootstrap";
 export const UserHighlights = () => {
 	const { store, actions } = useContext(Context);
 	let history = useHistory();
-	const renderStarted = props => (
-		<Tooltip id="button-tooltip" {...props}>
-			Games that you just started!
-		</Tooltip>
-	);
-	const renderFinished = props => (
-		<Tooltip id="button-tooltip" {...props}>
-			Games that you finished!
-		</Tooltip>
-	);
-	const renderCompleted = props => (
-		<Tooltip id="button-tooltip" {...props}>
-			Games that you finished and completed all achivements/content!
-		</Tooltip>
-	);
 	return (
 		<Container>
 			<Table className="center" style={{ width: "50rem" }}>
