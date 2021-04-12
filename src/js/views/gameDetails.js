@@ -126,398 +126,406 @@ export const GameDetails = props => {
 						<p style={{ lineHeight: "1.8rem" }}>{store.game.description_raw}</p>
 					</Container>
 				</Jumbotron>
-				<Tab.Container defaultActiveKey="details">
-					<Nav variant="pills" style={{ height: "3rem" }} className="flex-column">
-						<Row>
-							<Nav.Item>
-								<Nav.Link bg="light" variant="light" eventKey="details">
-									<h4>Details</h4>
-								</Nav.Link>
-							</Nav.Item>
-							<Nav.Item>
-								<Nav.Link eventKey="statistics">
-									<h4>Statistics</h4>
-								</Nav.Link>
-							</Nav.Item>
-							<Nav.Item>
+				<Container fluid className="white">
+					<Tab.Container defaultActiveKey="details">
+						<Nav variant="pills" style={{ height: "3rem" }} className="flex-column">
+							<Row style={{ marginTop: "1rem" }}>
+								<Nav.Item>
+									<Nav.Link bg="light" variant="light" eventKey="details">
+										<h4>Details</h4>
+									</Nav.Link>
+								</Nav.Item>
+								<Nav.Item>
+									<Nav.Link eventKey="statistics">
+										<h4>Statistics</h4>
+									</Nav.Link>
+								</Nav.Item>
+								{/* <Nav.Item>
 								<Nav.Link eventKey="store">
 									<h4>Store</h4>
 								</Nav.Link>
-							</Nav.Item>
-							<Nav.Item>
-								<Nav.Link eventKey="media">
-									<h4>Media</h4>
-								</Nav.Link>
-							</Nav.Item>
-							{store.id > 0 && (
-								<div>
-									{store.check.length > 0 ? (
-										<OverlayTrigger
-											placement="top"
-											delay={{ show: 250, hide: 400 }}
-											overlay={renderUserGames}>
-											<Button
-												variant="danger"
-												onClick={() => actions.deleteFromUserGames(store.game.id)}>
-												<i className="fas fa-trash" />
+							</Nav.Item> */}
+								<Nav.Item>
+									<Nav.Link eventKey="media">
+										<h4>Media</h4>
+									</Nav.Link>
+								</Nav.Item>
+								{store.id > 0 && (
+									<div>
+										{store.check.length > 0 ? (
+											<OverlayTrigger
+												placement="top"
+												delay={{ show: 250, hide: 400 }}
+												overlay={renderUserGames}>
+												<Button
+													variant="danger"
+													onClick={() => actions.deleteFromUserGames(store.game.id)}>
+													<i className="fas fa-trash" />
+												</Button>
+											</OverlayTrigger>
+										) : (
+											<OverlayTrigger
+												placement="top"
+												delay={{ show: 250, hide: 400 }}
+												overlay={renderUserGames}>
+												<Button variant="danger" onClick={() => actions.addtoUserGames()}>
+													<i className="fas fa-gamepad" />
+												</Button>
+											</OverlayTrigger>
+										)}
+									</div>
+								)}
+							</Row>
+						</Nav>
+						{store.check > 0 && (
+							<Row>
+								<Col>
+									<OverlayTrigger
+										placement="top"
+										delay={{ show: 250, hide: 400 }}
+										overlay={renderNew}>
+										{store.check[0].status == "new" ? (
+											<Button>&#9733;</Button>
+										) : (
+											<Button>&#9734;</Button>
+										)}
+									</OverlayTrigger>
+								</Col>
+								<Col>
+									<OverlayTrigger
+										placement="top"
+										delay={{ show: 250, hide: 400 }}
+										overlay={renderProgress}>
+										{store.check[0].status == "progress" ? (
+											<Button>
+												<i className="fas fa-wrench" />
 											</Button>
-										</OverlayTrigger>
-									) : (
-										<OverlayTrigger
-											placement="top"
-											delay={{ show: 250, hide: 400 }}
-											overlay={renderUserGames}>
-											<Button variant="danger" onClick={() => actions.addtoUserGames()}>
-												<i className="fas fa-gamepad" />
+										) : (
+											<Button>
+												<i className="fas fa-screwdriver" />
 											</Button>
-										</OverlayTrigger>
-									)}
-								</div>
-							)}
-						</Row>
-					</Nav>
-					{store.check > 0 && (
-						<Row>
-							<Col>
-								<OverlayTrigger placement="top" delay={{ show: 250, hide: 400 }} overlay={renderNew}>
-									{store.check[0].status == "new" ? (
-										<Button>&#9733;</Button>
-									) : (
-										<Button>&#9734;</Button>
-									)}
-								</OverlayTrigger>
-							</Col>
-							<Col>
-								<OverlayTrigger
-									placement="top"
-									delay={{ show: 250, hide: 400 }}
-									overlay={renderProgress}>
-									{store.check[0].status == "progress" ? (
-										<Button>
-											<i className="fas fa-wrench" />
-										</Button>
-									) : (
-										<Button>
-											<i className="fas fa-screwdriver" />
-										</Button>
-									)}
-								</OverlayTrigger>
-							</Col>
-							<Col>
-								<OverlayTrigger
-									placement="top"
-									delay={{ show: 250, hide: 400 }}
-									overlay={renderFinished}>
-									{store.check[0].status == "finished" ? (
-										<Button>
-											<i className="fas fa-check-square" />
-										</Button>
-									) : (
-										<Button>
-											<i className="far fa-check-square" />
-										</Button>
-									)}
-								</OverlayTrigger>
-							</Col>
-							<Col>
-								<OverlayTrigger
-									placement="top"
-									delay={{ show: 250, hide: 400 }}
-									overlay={renderCompleted}>
-									{store.check[0].status == "completed" ? (
-										<Button>
-											<i className="fas fa-trophy" />
-										</Button>
-									) : (
-										<Button>
-											<i className="fas fa-medal" />
-										</Button>
-									)}
-								</OverlayTrigger>
-							</Col>
-							<Col>
-								<OverlayTrigger
-									placement="top"
-									delay={{ show: 250, hide: 400 }}
-									overlay={renderFavorite}>
-									{store.check[0].status == "favorite" ? (
-										<Button>
-											<i className="fas fa-heart" />
-										</Button>
-									) : (
-										<Button>
-											<i className="far fa-heart" />
-										</Button>
-									)}
-								</OverlayTrigger>
-							</Col>
-							<Col>
-								<OverlayTrigger
-									placement="top"
-									delay={{ show: 250, hide: 400 }}
-									overlay={renderDropped}>
-									{store.check[0].status == "dropped" ? (
-										<Button>
-											<i className="fas fa-thumbs-down" />
-										</Button>
-									) : (
-										<Button>
-											<i className="far fa-thumbs-down" />
-										</Button>
-									)}
-								</OverlayTrigger>
-							</Col>
-							<Col>
-								<OverlayTrigger
-									placement="top"
-									delay={{ show: 250, hide: 400 }}
-									overlay={renderWishlist}>
-									{store.check[0].status == "wishlist" ? (
-										<Button>
-											<i className="fas fa-hand-holding-usd" />
-										</Button>
-									) : (
-										<Button>
-											<i className="fas fa-dollar-sign" />
-										</Button>
-									)}
-								</OverlayTrigger>
-							</Col>
-						</Row>
-					)}
-					<Tab.Content className="space">
-						<Tab.Pane eventKey="details">
-							<Row className="center detailspace">
-								<Col>
-									<div>
-										<h3>Platforms</h3>
-										<h5>
-											{store.game.platforms != null &&
-												store.game.platforms.map((value, index) => {
-													return ` ${value.platform.name}`;
-												})}
-										</h5>
-									</div>
+										)}
+									</OverlayTrigger>
 								</Col>
 								<Col>
-									<div>
-										<h3>Genres</h3>
-										<h5>
-											{store.game.genres != null &&
-												store.game.genres.map((value, index) => {
-													return ` ${value.name}`;
-												})}
-										</h5>
-									</div>
+									<OverlayTrigger
+										placement="top"
+										delay={{ show: 250, hide: 400 }}
+										overlay={renderFinished}>
+										{store.check[0].status == "finished" ? (
+											<Button>
+												<i className="fas fa-check-square" />
+											</Button>
+										) : (
+											<Button>
+												<i className="far fa-check-square" />
+											</Button>
+										)}
+									</OverlayTrigger>
 								</Col>
 								<Col>
-									<div>
-										<h3>Release Date</h3>
-										<h5>{store.game.released != null && store.game.released}</h5>
-									</div>
+									<OverlayTrigger
+										placement="top"
+										delay={{ show: 250, hide: 400 }}
+										overlay={renderCompleted}>
+										{store.check[0].status == "completed" ? (
+											<Button>
+												<i className="fas fa-trophy" />
+											</Button>
+										) : (
+											<Button>
+												<i className="fas fa-medal" />
+											</Button>
+										)}
+									</OverlayTrigger>
+								</Col>
+								<Col>
+									<OverlayTrigger
+										placement="top"
+										delay={{ show: 250, hide: 400 }}
+										overlay={renderFavorite}>
+										{store.check[0].status == "favorite" ? (
+											<Button>
+												<i className="fas fa-heart" />
+											</Button>
+										) : (
+											<Button>
+												<i className="far fa-heart" />
+											</Button>
+										)}
+									</OverlayTrigger>
+								</Col>
+								<Col>
+									<OverlayTrigger
+										placement="top"
+										delay={{ show: 250, hide: 400 }}
+										overlay={renderDropped}>
+										{store.check[0].status == "dropped" ? (
+											<Button>
+												<i className="fas fa-thumbs-down" />
+											</Button>
+										) : (
+											<Button>
+												<i className="far fa-thumbs-down" />
+											</Button>
+										)}
+									</OverlayTrigger>
+								</Col>
+								<Col>
+									<OverlayTrigger
+										placement="top"
+										delay={{ show: 250, hide: 400 }}
+										overlay={renderWishlist}>
+										{store.check[0].status == "wishlist" ? (
+											<Button>
+												<i className="fas fa-hand-holding-usd" />
+											</Button>
+										) : (
+											<Button>
+												<i className="fas fa-dollar-sign" />
+											</Button>
+										)}
+									</OverlayTrigger>
 								</Col>
 							</Row>
-							<Row className="center detailspace">
-								<Col>
-									<div>
-										<h3>Developers</h3>
-										<h5>
-											{store.game.developers != null &&
-												store.game.developers.map((value, index) => {
-													return ` ${value.name}`;
-												})}
-										</h5>
-									</div>
-								</Col>
-								<Col>
-									<div>
-										<h3>Publishers</h3>
-										<h5>
-											{Array.isArray(store.game.publishers) &&
-												store.game.publishers.length > 0 &&
-												store.game.publishers.map((value, index) => {
-													return ` ${value.name}`;
-												})}
-										</h5>
-									</div>
-								</Col>
-								<Col>
-									<div>
-										<h3>Age Ranting</h3>
-										<h5>{store.game.esrb_rating != null && store.game.esrb_rating.name}</h5>
-									</div>
-								</Col>
-							</Row>
-							<Row className="center detailspace">
-								<Col>
-									<h3> Downloadable Content </h3>
-									<Row id="detailsGameCardsRow">
-										{store.dlcsList != null &&
-											store.dlcsList.map((value, index) => {
-												return (
-													<GameCard
-														id={"detailsCard"}
-														className="card"
-														key={index}
-														game={value}
-													/>
-												);
-											})}
-									</Row>
-								</Col>
-							</Row>
-							<Row className="center detailspace">
-								<Col>
-									<h3> Game Series </h3>
-									<Row id="detailsGameCardsRow">
-										{store.otherGamesList != null &&
-											store.otherGamesList.map((value, index) => {
-												return (
-													<GameCard
-														id={"detailsCard"}
-														className="card"
-														key={index}
-														game={value}
-													/>
-												);
-											})}
-									</Row>
-								</Col>
-							</Row>
-							<Row className="center detailspace">
-								<Col>
-									<h3>Website</h3>
-									{store.game.reddit_url != "" && (
-										<a href={store.game.reddit_url} target="_blank" rel="noreferrer">
-											<i className="fab fa-reddit website" />
-										</a>
-									)}
-
-									{store.game.website != "" && (
-										<a target="_blank" rel="noreferrer" href={store.game.website}>
-											<i className="fas fa-window-restore website" />
-										</a>
-									)}
-								</Col>
-								<Col>
-									<h3>Tags</h3>
-									{store.game.tags != null &&
-										store.game.tags.map((value, index) => {
-											return ` ${value.name}`;
-										})}
-								</Col>
-							</Row>
-							<Row className="center detailspace">
-								<h3 className="center">PC Requirements</h3>
-							</Row>
-							<Row className="detailspace">
-								{gameRequirements.length > 0 &&
-									gameRequirements.map((value, index) => {
-										return <Col key={index}>{value}</Col>;
-									})}
-							</Row>
-							<Row className="center detailspace">
-								<Col>
-									<h3>Similar Games</h3>
-									<Row id="detailsGameCardsRow">
-										{store.similarGamesList.map((value, index) => {
-											return (
-												<GameCard
-													id={"detailsCard"}
-													className="card"
-													key={index}
-													game={value}
-												/>
-											);
-										})}
-									</Row>
-								</Col>
-							</Row>
-						</Tab.Pane>
-						<Tab.Pane eventKey="statistics">
-							<Row className="center detailspace">
-								<Col>
-									<h1>Rating</h1>
-									<Row>
-										{rating.map((value, index) => {
-											return value;
-										})}
-									</Row>
-								</Col>
-							</Row>
-							<Row className="center detailspace">
-								<Col>
-									<h3>Metascore</h3>
-									<div className="detailsbackground center detailsNumbers">
-										<h5 className="detailsbox center detailsNumbers">
-											{store.game.metacritic != null && store.game.metacritic}
-										</h5>
-									</div>
-								</Col>
-								<Col>
-									<h3>Rating Count</h3>
-									<div className="detailsbackground center detailsNumbers">
-										<h5 className="detailsbox center detailsNumbers">{store.game.ratings_count}</h5>
-									</div>
-								</Col>
-								<Col>
-									<h3>Added on Players</h3>
-									<div className="detailsbackground center detailsNumbers">
-										<h5 className="detailsbox center detailsNumbers">{store.game.added}</h5>
-									</div>
-								</Col>
-							</Row>
-							<Row className="center detailspace">
-								<Col>
-									<h3>Players Status</h3>
-									<div className="detailsbox detailsborders center" style={{ height: "fit-content" }}>
-										{store.addedByPlayers.map((value, index) => {
-											return (
-												<div key={index}>
-													<h5> {capitalize(value)}</h5>
-												</div>
-											);
-										})}
-									</div>
-								</Col>
-								<Col>
-									<h3>People with Game</h3>
-									{}
-								</Col>
-							</Row>
-							<Row className="center detailspace">
-								<Col>
-									<h3>Achievements</h3>
-									{store.gameAchievements != null && (
-										<Row style={{ maxWidth: "85rem" }} className="center">
-											{store.gameAchievements.map((value, index) => {
-												return (
-													<div
-														key={index}
-														className="center detailsbox  detailsborders fit"
-														style={{
-															width: "40rem",
-															textAlign: "center",
-															height: "fit-content",
-															margin: "1rem"
-														}}>
-														<h1>{value.name}</h1>
-														<p>{value.description}</p>
-														<img
-															src={value.image}
-															className="achivement"
-															alt="achievement"
+						)}
+						<Tab.Content className="space">
+							<Tab.Pane eventKey="details">
+								<Row className="center detailspace">
+									<Col>
+										<div>
+											<h3>Platforms</h3>
+											<h5>
+												{store.game.platforms != null &&
+													store.game.platforms.map((value, index) => {
+														return ` ${value.platform.name}`;
+													})}
+											</h5>
+										</div>
+									</Col>
+									<Col>
+										<div>
+											<h3>Genres</h3>
+											<h5>
+												{store.game.genres != null &&
+													store.game.genres.map((value, index) => {
+														return ` ${value.name}`;
+													})}
+											</h5>
+										</div>
+									</Col>
+									<Col>
+										<div>
+											<h3>Release Date</h3>
+											<h5>{store.game.released != null && store.game.released}</h5>
+										</div>
+									</Col>
+								</Row>
+								<Row className="center detailspace">
+									<Col>
+										<div>
+											<h3>Developers</h3>
+											<h5>
+												{store.game.developers != null &&
+													store.game.developers.map((value, index) => {
+														return ` ${value.name}`;
+													})}
+											</h5>
+										</div>
+									</Col>
+									<Col>
+										<div>
+											<h3>Publishers</h3>
+											<h5>
+												{Array.isArray(store.game.publishers) &&
+													store.game.publishers.length > 0 &&
+													store.game.publishers.map((value, index) => {
+														return ` ${value.name}`;
+													})}
+											</h5>
+										</div>
+									</Col>
+									<Col>
+										<div>
+											<h3>Age Ranting</h3>
+											<h5>{store.game.esrb_rating != null && store.game.esrb_rating.name}</h5>
+										</div>
+									</Col>
+								</Row>
+								<Row className="center detailspace">
+									<Col>
+										<h3> Downloadable Content </h3>
+										<Row id="detailsGameCardsRow">
+											{store.dlcsList != null &&
+												store.dlcsList.map((value, index) => {
+													return (
+														<GameCard
+															id={"detailsCard"}
+															className="card"
+															key={index}
+															game={value}
 														/>
-														<h6>{value.percent}%</h6>
-													</div>
+													);
+												})}
+										</Row>
+									</Col>
+								</Row>
+								<Row className="center detailspace">
+									<Col>
+										<h3> Game Series </h3>
+										<Row id="detailsGameCardsRow">
+											{store.otherGamesList != null &&
+												store.otherGamesList.map((value, index) => {
+													return (
+														<GameCard
+															id={"detailsCard"}
+															className="card"
+															key={index}
+															game={value}
+														/>
+													);
+												})}
+										</Row>
+									</Col>
+								</Row>
+								<Row className="center detailspace">
+									<Col>
+										<h3>Website</h3>
+										{store.game.reddit_url != "" && (
+											<a href={store.game.reddit_url} target="_blank" rel="noreferrer">
+												<i className="fab fa-reddit website" />
+											</a>
+										)}
+
+										{store.game.website != "" && (
+											<a target="_blank" rel="noreferrer" href={store.game.website}>
+												<i className="fas fa-window-restore website" />
+											</a>
+										)}
+									</Col>
+									<Col>
+										<h3>Tags</h3>
+										{store.game.tags != null &&
+											store.game.tags.map((value, index) => {
+												return ` ${value.name}`;
+											})}
+									</Col>
+								</Row>
+								<Row className="center detailspace">
+									<h3 className="center">PC Requirements</h3>
+								</Row>
+								<Row className="detailspace">
+									{gameRequirements.length > 0 &&
+										gameRequirements.map((value, index) => {
+											return <Col key={index}>{value}</Col>;
+										})}
+								</Row>
+								<Row className="center detailspace">
+									<Col>
+										<h3>Similar Games</h3>
+										<Row id="detailsGameCardsRow">
+											{store.similarGamesList.map((value, index) => {
+												return (
+													<GameCard
+														id={"detailsCard"}
+														className="card"
+														key={index}
+														game={value}
+													/>
 												);
 											})}
 										</Row>
-									)}
-								</Col>
-							</Row>
-						</Tab.Pane>
-						{/* <Tab.Pane eventKey="store">
+									</Col>
+								</Row>
+							</Tab.Pane>
+							<Tab.Pane eventKey="statistics">
+								<Row className="center detailspace">
+									<Col>
+										<h1>Rating</h1>
+										<Row>
+											{rating.map((value, index) => {
+												return value;
+											})}
+										</Row>
+									</Col>
+								</Row>
+								<Row className="center detailspace">
+									<Col>
+										<h3>Metascore</h3>
+										<div className="detailsbackground center detailsNumbers">
+											<h5 className="detailsbox center detailsNumbers">
+												{store.game.metacritic != null && store.game.metacritic}
+											</h5>
+										</div>
+									</Col>
+									<Col>
+										<h3>Rating Count</h3>
+										<div className="detailsbackground center detailsNumbers">
+											<h5 className="detailsbox center detailsNumbers">
+												{store.game.ratings_count}
+											</h5>
+										</div>
+									</Col>
+									<Col>
+										<h3>Added on Players</h3>
+										<div className="detailsbackground center detailsNumbers">
+											<h5 className="detailsbox center detailsNumbers">{store.game.added}</h5>
+										</div>
+									</Col>
+								</Row>
+								<Row className="center detailspace">
+									<Col>
+										<h3>Players Status</h3>
+										<div
+											className="detailsbox detailsborders center"
+											style={{ height: "fit-content" }}>
+											{store.addedByPlayers.map((value, index) => {
+												return (
+													<div key={index}>
+														<h5> {capitalize(value)}</h5>
+													</div>
+												);
+											})}
+										</div>
+									</Col>
+									<Col>
+										<h3>People with Game</h3>
+										{}
+									</Col>
+								</Row>
+								<Row className="center detailspace">
+									<Col>
+										<h3>Achievements</h3>
+										{store.gameAchievements != null && (
+											<Row style={{ maxWidth: "85rem" }} className="center">
+												{store.gameAchievements.map((value, index) => {
+													return (
+														<div
+															key={index}
+															className="center detailsbox  detailsborders fit"
+															style={{
+																width: "40rem",
+																textAlign: "center",
+																height: "fit-content",
+																margin: "1rem"
+															}}>
+															<h1>{value.name}</h1>
+															<p>{value.description}</p>
+															<img
+																src={value.image}
+																className="achivement"
+																alt="achievement"
+															/>
+															<h6>{value.percent}%</h6>
+														</div>
+													);
+												})}
+											</Row>
+										)}
+									</Col>
+								</Row>
+							</Tab.Pane>
+							{/* <Tab.Pane eventKey="store">
 							<Row className="center detailspace">
 								<Col>
 									<h1>Stores</h1>
@@ -629,38 +637,42 @@ export const GameDetails = props => {
 								</Col>
 							</Row>
 						</Tab.Pane> */}
-						<Tab.Pane eventKey="media">
-							<Row className="center">
-								<Col>
-									<h1>Media</h1>
-									<Row style={{ maxWidth: "100rem" }} className="center">
-										{store.gameTrailers != null &&
-											store.gameTrailers.map((value, index) => {
-												return (
-													<div className="center" style={{ marginTop: "3rem" }} key={index}>
-														<h3>{value.name}</h3>
-														<video width="500" poster={value.preview} controls>
-															<source src={value.data.max} type="video/mp4" />
-															Your browser does not support HTML video.
-														</video>
-													</div>
-												);
-											})}
-									</Row>
-									{store.game.clip != null && (
-										<div className="center">
-											<h3>Gameplay</h3>
-											<video width="400" controls>
-												<source src={store.game.clip.clip} type="video/mp4" />
-												Your browser does not support HTML video.
-											</video>
-										</div>
-									)}
-								</Col>
-							</Row>
-						</Tab.Pane>
-					</Tab.Content>
-				</Tab.Container>
+							<Tab.Pane eventKey="media">
+								<Row className="center">
+									<Col>
+										<h1>Media</h1>
+										<Row style={{ maxWidth: "100rem" }} className="center">
+											{store.gameTrailers != null &&
+												store.gameTrailers.map((value, index) => {
+													return (
+														<div
+															className="center"
+															style={{ marginTop: "3rem" }}
+															key={index}>
+															<h3>{value.name}</h3>
+															<video width="500" poster={value.preview} controls>
+																<source src={value.data.max} type="video/mp4" />
+																Your browser does not support HTML video.
+															</video>
+														</div>
+													);
+												})}
+										</Row>
+										{store.game.clip != null && (
+											<div className="center">
+												<h3>Gameplay</h3>
+												<video width="400" controls>
+													<source src={store.game.clip.clip} type="video/mp4" />
+													Your browser does not support HTML video.
+												</video>
+											</div>
+										)}
+									</Col>
+								</Row>
+							</Tab.Pane>
+						</Tab.Content>
+					</Tab.Container>
+				</Container>
 			</Container>
 		);
 	} else {
