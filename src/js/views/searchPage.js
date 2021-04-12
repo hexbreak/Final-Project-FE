@@ -164,31 +164,31 @@ export const SearchPage = props => {
 					<Row>
 						<Col className="search-margin">
 							{store.tags != null && (
-								<ButtonGroup value={tags} type="checkbox" className="mb-2" vertical>
+								<ToggleButtonGroup value={tags} type="checkbox" className="mb-2" vertical>
 									{store.tags.map((value, index) => {
 										if (index <= 5 && showMoreTags == false) {
 											return (
-												<Button
+												<ToggleButton
 													key={index}
-													onClick={
+													onChange={
 														tags == value.id ? e => setTags(null) : e => setTags(value.id)
 													}
 													value={value.id}
 													variant="dark">
 													{value.name}
-												</Button>
+												</ToggleButton>
 											);
 										} else if (showMoreTags == true) {
 											return (
-												<Button
+												<ToggleButton
 													key={index}
-													onClick={
+													onChange={
 														tags == value.id ? e => setTags(null) : e => setTags(value.id)
 													}
 													value={value.id}
 													variant="dark">
 													{value.name}
-												</Button>
+												</ToggleButton>
 											);
 										}
 									})}
@@ -201,20 +201,20 @@ export const SearchPage = props => {
 											Show Less
 										</Button>
 									)}
-								</ButtonGroup>
+								</ToggleButtonGroup>
 							)}
 						</Col>
 					</Row>
 					<Row className="search-margin">
 						<Col>
 							{store.platforms != null && (
-								<ButtonGroup value={platforms} type="checkbox" className="mb-2" vertical>
+								<ToggleButtonGroup value={platforms} type="checkbox" className="mb-2" vertical>
 									{store.platforms.map((value, index) => {
 										if (index <= 5 && showMorePlatforms == false) {
 											return (
-												<Button
+												<ToggleButton
 													key={index}
-													onClick={
+													onChange={
 														platforms == value.id
 															? e => setPlatforms(null)
 															: e => setPlatforms(value.id)
@@ -222,13 +222,13 @@ export const SearchPage = props => {
 													value={value.id}
 													variant="dark">
 													{value.name}
-												</Button>
+												</ToggleButton>
 											);
 										} else if (showMorePlatforms == true) {
 											return (
-												<Button
+												<ToggleButton
 													key={index}
-													onClick={
+													onChange={
 														platforms == value.id
 															? e => setPlatforms(null)
 															: e => setPlatforms(value.id)
@@ -236,7 +236,7 @@ export const SearchPage = props => {
 													value={value.id}
 													variant="dark">
 													{value.name}
-												</Button>
+												</ToggleButton>
 											);
 										}
 									})}
@@ -249,7 +249,7 @@ export const SearchPage = props => {
 											Show Less
 										</Button>
 									)}
-								</ButtonGroup>
+								</ToggleButtonGroup>
 							)}
 						</Col>
 					</Row>
