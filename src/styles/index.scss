@@ -608,7 +608,6 @@ th {
     background :linear-gradient(#c3f8ff, #6882ff) no-repeat center/2px 100%;
 }
 #userForm{
-    margin-top: 5rem;
     border: 10px solid;
     border-image-slice: 1;
     border-width: 1rem;
@@ -624,4 +623,14 @@ th {
 }
 .white{
     background-color: rgb(255, 255, 255);
+}
+.marginLogin{
+    margin-top: 5rem;
+}
+.marginLoginwError{
+    margin-top: 2rem;
+}
+.marginError{
+    margin-top: 3rem;
+    width: 44rem;
 }

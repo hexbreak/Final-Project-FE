@@ -1,6 +1,6 @@
 import { UserTags } from "../component/userTags";
 const getState = ({ getStore, getActions, setStore }) => {
-	const beURL = "https://3000-bronze-earwig-hbuagomx.ws-us03.gitpod.io"; // Use ${beURL} to make it easier when handling the BE's constant URL changes
+	const beURL = "https://3000-azure-bedbug-4awufp8u.ws-us03.gitpod.io"; // Use ${beURL} to make it easier when handling the BE's constant URL changes
 	const apiKey = "33af10ad5812440abf75a35c04492e15";
 	return {
 		store: {
@@ -37,7 +37,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 			searchBar: [],
 			superSearch: [],
 			found: [],
-			check: []
+			check: [],
+			errors: { loginError: false }
 		},
 		actions: {
 			// new user registration
@@ -57,6 +58,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 						if (!response.ok) {
 							throw Error(response.statusText);
 						}
+						setStore;
 						return response.json();
 					})
 					.then(response => {
@@ -68,25 +70,29 @@ const getState = ({ getStore, getActions, setStore }) => {
 			loginUser: (password, username) => {
 				const actions = getActions();
 				const store = getStore();
-				fetch(`${beURL}/login`, {
-					method: "POST",
-					headers: {
-						"Content-Type": "application/json"
-					},
-					body: JSON.stringify({
-						username: username,
-						password: password
+				if (password != "" && username != "") {
+					fetch(`${beURL}/login`, {
+						method: "POST",
+						headers: {
+							"Content-Type": "application/json"
+						},
+						body: JSON.stringify({
+							username: username,
+							password: password
+						})
 					})
-				})
-					.then(response => response.json())
-					.then(data => {
-						if (typeof data.msg != "undefined") {
-							// Notify.error(token.msg)
-						} else {
-							setStore({ token: data.token, user: { ...getStore().user, id: data.user_id } });
-							actions.getUserProfile(store.id);
-						}
-					});
+						.then(response => response.json())
+						.then(data => {
+							if (typeof data.msg != "undefined") {
+								setStore({ errors: { loginError: true } });
+							} else {
+								setStore({ token: data.token, id: data.user_id });
+								actions.getUserProfile(store.id);
+							}
+						});
+				} else {
+					setStore({ errors: { loginError: true } });
+				}
 			},
 			// logout from account
 			logout: () => {
