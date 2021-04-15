@@ -69,7 +69,7 @@ export const Navbar = () => {
 					</button>
 				</Link>
 			</Row>
-			{store.id > 0 ? (
+			{store.user.id > 0 ? (
 				<div className="ml">
 					<Link to="/usergames">
 						<button

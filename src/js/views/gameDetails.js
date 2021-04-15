@@ -20,7 +20,7 @@ export const GameDetails = props => {
 			actions.loadGame(props.location.state);
 			actions.loadGameAchievements(props.location.state);
 			actions.loadGameTrailers(props.location.state);
-			actions.getUserGames(store.id);
+			actions.getUserGames(store.user.id);
 		};
 		loadGame();
 	}, [props.location.state]);
@@ -150,7 +150,7 @@ export const GameDetails = props => {
 										<h4>Media</h4>
 									</Nav.Link>
 								</Nav.Item>
-								{store.id > 0 && (
+								{store.user.id > 0 && (
 									<div>
 										{store.check.length > 0 ? (
 											<OverlayTrigger

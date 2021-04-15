@@ -27,7 +27,7 @@ export const Sorter = props => {
 							<i className="fas fa-sort-down" />
 						)}
 					</Button>
-					{store.id > 0 && (
+					{store.user.id > 0 && (
 						<Button id="toggletags" variant="secondary" onClick={e => actions.changePreference()}>
 							{store.preference == false ? (
 								<i className="fas fa-chess-pawn" />

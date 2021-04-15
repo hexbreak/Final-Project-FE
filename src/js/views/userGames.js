@@ -9,7 +9,7 @@ export const UserGames = props => {
 	const { store, actions } = useContext(Context);
 	useEffect(() => {
 		const loadUserGames = () => {
-			actions.getUserGames(store.id);
+			actions.getUserGames(store.user.id);
 		};
 		loadUserGames();
 	}, []);

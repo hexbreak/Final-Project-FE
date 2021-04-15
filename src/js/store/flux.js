@@ -9,7 +9,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			username: "",
 			password: "",
 			email: "",
-			id: "",
+			user: "",
 			user_platforms: [],
 			tags_liked: [],
 			tags_disliked: [],
@@ -84,7 +84,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 							// Notify.error(token.msg)
 						} else {
 							setStore({ token: data.token, user: { ...getStore().user, id: data.user_id } });
-							actions.getUserProfile(store.id);
+							actions.getUserProfile(store.user.id);
 						}
 					});
 			},
@@ -95,7 +95,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 			addtoUserGames: () => {
 				const store = getStore();
-				fetch(`${beURL}/user/${store.id}/fav`, {
+				fetch(`${beURL}/user/${store.user.id}/backlog`, {
 					method: "POST",
 					headers: {
 						"Content-Type": "application/json"
@@ -113,7 +113,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 						return response.json();
 					})
 					.then(responseAsJson => {
-						fetch(`${beURL}/user/${store.id}/fav`)
+						fetch(`${beURL}/user/${store.user.id}/backlog`)
 							.then(function(response) {
 								if (!response.ok) {
 									throw Error(response.statusText);
@@ -481,13 +481,13 @@ const getState = ({ getStore, getActions, setStore }) => {
 						return response.json();
 					})
 					.then(response => {
-						actions.getUserProfile(store.id);
+						actions.getUserProfile(store.user.id);
 						return setStore({ user: user });
 					});
 			},
 			getUserProfile: user => {
 				const store = getStore();
-				fetch(`${beURL}/user/${store.id}`, {
+				fetch(`${beURL}/user/${store.user.id}`, {
 					method: "GET"
 				})
 					.then(response => {
@@ -510,7 +510,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 			getUserGames: userId => {
 				const store = getStore();
-				fetch(`${beURL}/user/${userId}/fav`)
+				fetch(`${beURL}/user/${userId}/backlog`)
 					.then(function(response) {
 						if (!response.ok) {
 							throw Error(response.statusText);
@@ -534,7 +534,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			deleteFromUserGames: gameId => {
 				const store = getStore();
 				let game = store.user_games.filter(value => gameId == value.game_id);
-				fetch(`${beURL}/user/${store.id}/delfav/` + game[0].id, {
+				fetch(`${beURL}/user/${store.user.id}/removebl/` + game[0].id, {
 					method: "DELETE",
 					headers: {
 						"Content-Type": "application/json"
@@ -548,7 +548,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					})
 					.then(responseAsJson => {
 						console.log("Success:", responseAsJson);
-						fetch(`${beURL}/user/${store.id}/fav`)
+						fetch(`${beURL}/user/${store.user.id}/backlog`)
 							.then(function(response) {
 								if (!response.ok) {
 									throw Error(response.statusText);
