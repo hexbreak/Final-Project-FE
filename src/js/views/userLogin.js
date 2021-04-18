@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Context } from "../store/appContext";
 import { Link, useHistory } from "react-router-dom";
-import { Container, Row, Col, Card, CardImg, CardFooter, Form, Button } from "react-bootstrap";
+import { Container, Row, Col, Card, CardImg, Alert, Form, Button } from "react-bootstrap";
 import PropTypes from "prop-types";
 
 export const UserLogin = props => {
@@ -10,14 +10,24 @@ export const UserLogin = props => {
 	const [logPassword, setLogPassword] = useState("");
 	let history = useHistory();
 	const handleSubmit = e => {
-		actions.loginUser(logPassword, logUsername);
-		history.push("/home");
+		actions.loginUser(logPassword, logUsername, history);
 	};
 	return (
 		<Container className="space blue">
 			<Row>
 				<Col>
-					<Container id="userForm" style={{ width: "40rem" }} className="center">
+					{store.errors.loginError == true && (
+						<Alert className="marginError center" variant="danger">
+							The username or password is incorrect, if you don&apos;t own an account please
+							<Alert.Link href="/registration"> register first.</Alert.Link>.
+						</Alert>
+					)}
+					<Container
+						id="userForm"
+						style={{ width: "40rem" }}
+						className={
+							store.errors.loginError == false ? "marginLogin center" : "marginLoginwError center"
+						}>
 						<h3 className="formTitle">Login</h3>
 						<Form className="search-margin">
 							<Form.Row>

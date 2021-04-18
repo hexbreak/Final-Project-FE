@@ -110,64 +110,7 @@ export const UserPreferenceUpdate = props => {
 		makePlatforms();
 		makeGenres();
 		makeTags();
-	}, [store.tags, store.platforms, store.genres]);
-	//Handle dislike of preference column
-	const handleMovement = (val, arr, method1, method2, type, movement) => {
-		let array = [];
-		if (type == 0) {
-			array = [...userPlatforms, { name: val.name, platform_id: val.id }];
-		}
-		if (type == 1) {
-			if (movement == 1) {
-				array = [...genres_liked, { name: val.name, genre_id: val.id }];
-			}
-			if (movement == 2) {
-				array = [...genres_disliked, { name: val.name, genre_id: val.id }];
-			}
-		}
-		if (type == 2) {
-			if (movement == 1) {
-				array = [...tags_liked, { name: val.name, tag_id: val.id }];
-			}
-			if (movement == 2) {
-				array = [...tags_disliked, { name: val.name, tag_id: val.id }];
-			}
-		}
-		array = sort(array);
-		method1(array);
-		array = arr.filter(value => {
-			return value.id != val.id;
-		});
-		array = sort(array);
-		method2(array);
-	};
-	const handleMiddle = (val, arr, method1, method2, type) => {
-		let array = [];
-		if (type == 0) {
-			array = [...platforms, val];
-		}
-		if (type == 1) {
-			array = [...genres, val];
-		}
-		if (type == 2) {
-			array = [...tags, val];
-		}
-		array = sort(array);
-		method1(array);
-		array = arr.filter(value => {
-			if (type == 0) {
-				return value.platform_id != val.platform_id;
-			}
-			if (type == 1) {
-				return value.genre_id != val.genre_id;
-			}
-			if (type == 2) {
-				return value.tag_id != val.tag_id;
-			}
-		});
-		array = sort(array);
-		method2(array);
-	};
+	}, [store.tags_liked, store.tags_disliked, store.platforms, store.genres_liked, store.genres_disliked]);
 	const renderStarted = props => (
 		<Tooltip id="button-tooltip" {...props}>
 			Games that you just started!
@@ -241,9 +184,7 @@ export const UserPreferenceUpdate = props => {
 											id="hover"
 											className="fas fa-trophy transform mouse"
 											style={{ float: "right" }}
-											onClick={e =>
-												handleMovement(value, platforms, setUserPlatforms, setPlatforms, 0)
-											}
+											onClick={e => actions.handlePreference("platform", "add", value)}
 										/>
 									</ListGroup.Item>
 								);
@@ -262,9 +203,7 @@ export const UserPreferenceUpdate = props => {
 											id="hover"
 											className="far fa-circle transform mouse"
 											style={{ float: "left" }}
-											onClick={e =>
-												handleMiddle(value, userPlatforms, setPlatforms, setUserPlatforms, 0)
-											}
+											onClick={e => actions.handlePreference("platform", "delete", value)}
 										/>
 										{value.name}
 									</ListGroup.Item>
@@ -287,9 +226,7 @@ export const UserPreferenceUpdate = props => {
 											id="hover"
 											className="far fa-circle transform mouse"
 											style={{ float: "right" }}
-											onClick={e =>
-												handleMiddle(value, genres_liked, setGenres, setGenresLiked, 1)
-											}
+											onClick={e => actions.handlePreference("genre", "delete", value, "liked")}
 										/>
 									</ListGroup.Item>
 								);
@@ -308,18 +245,14 @@ export const UserPreferenceUpdate = props => {
 											id="hover"
 											className="fas fa-trophy transform mouse"
 											style={{ float: "left" }}
-											onClick={e =>
-												handleMovement(value, genres, setGenresLiked, setGenres, 1, 1)
-											}
+											onClick={e => actions.handlePreference("genre", "add", value, "liked")}
 										/>
 										{value.name}
 										<i
 											id="hover"
 											className="fas fa-skull transform mouse"
 											style={{ float: "right" }}
-											onClick={e =>
-												handleMovement(value, genres, setGenresDisliked, setGenres, 1, 2)
-											}
+											onClick={e => actions.handlePreference("genre", "add", value, "disliked")}
 										/>
 									</ListGroup.Item>
 								);
@@ -339,7 +272,7 @@ export const UserPreferenceUpdate = props => {
 											className="far fa-circle transform mouse"
 											style={{ float: "left" }}
 											onClick={e =>
-												handleMiddle(value, genres_disliked, setGenres, setGenresDisliked, 1)
+												actions.handlePreference("genre", "delete", value, "disliked")
 											}
 										/>
 										{value.name}
@@ -363,7 +296,7 @@ export const UserPreferenceUpdate = props => {
 											id="hover"
 											className="far fa-circle transform mouse"
 											style={{ float: "right" }}
-											onClick={e => handleMiddle(value, tags_liked, setTags, setTagsLiked, 2)}
+											onClick={e => actions.handlePreference("tag", "delete", value, "liked")}
 										/>
 									</ListGroup.Item>
 								);
@@ -382,14 +315,14 @@ export const UserPreferenceUpdate = props => {
 											id="hover"
 											className="fas fa-trophy transform mouse"
 											style={{ float: "left" }}
-											onClick={e => handleMovement(value, tags, setTagsLiked, setTags, 2, 1)}
+											onClick={e => actions.handlePreference("tag", "add", value, "liked")}
 										/>
 										{value.name}
 										<i
 											id="hover"
 											className="fas fa-skull transform mouse"
 											style={{ float: "right" }}
-											onClick={e => handleMovement(value, tags, setTagsDisliked, setTags, 2, 2)}
+											onClick={e => actions.handlePreference("tag", "add", value, "disliked")}
 										/>
 									</ListGroup.Item>
 								);
@@ -408,9 +341,7 @@ export const UserPreferenceUpdate = props => {
 											id="hover"
 											className="far fa-circle transform mouse"
 											style={{ float: "left" }}
-											onClick={e =>
-												handleMiddle(value, tags_disliked, setTags, setTagsDisliked, 2)
-											}
+											onClick={e => actions.handlePreference("tag", "delete", value, "disliked")}
 										/>
 										{value.name}
 									</ListGroup.Item>
@@ -419,11 +350,6 @@ export const UserPreferenceUpdate = props => {
 						</ListGroup>
 					</Card>
 				</Col>
-			</Row>
-			<Row style={{ marginTop: "2rem" }}>
-				<Button variant="success" onClick={e => handleSave()}>
-					Save Changes
-				</Button>
 			</Row>
 		</Container>
 	);
