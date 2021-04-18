@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Context } from "../store/appContext";
 import { Link, useHistory } from "react-router-dom";
-import { Container, Row, Col, Card, CardImg, CardFooter, Form, Button } from "react-bootstrap";
+import { Container, Row, Col, Card, CardImg, CardFooter, Form, Button, Alert } from "react-bootstrap";
 import PropTypes from "prop-types";
 
 export const UserRegistration = props => {
@@ -11,13 +11,17 @@ export const UserRegistration = props => {
 	const [newPassword, setNewPassword] = useState("");
 	let history = useHistory();
 	const handleSubmit = e => {
-		actions.registerUser(newUsername, newEmail, newPassword);
-		history.push("/login");
+		actions.registerUser(newUsername, newEmail, newPassword, history);
 	};
 	return (
 		<Container className="space blue">
 			<Row>
 				<Col>
+					{store.errors.registerError == true && (
+						<Alert className="marginError center" variant="danger">
+							Please fill all fields.
+						</Alert>
+					)}
 					<Container id="userForm" style={{ width: "50rem", marginTop: "5rem" }} className="center">
 						<h3 className="formTitle">Registration</h3>
 						<Form className="search-margin">
@@ -59,7 +63,7 @@ export const UserRegistration = props => {
 								onClick={e => handleSubmit(e)}
 								variant="success"
 								className="input-space"
-								type="submit">
+								type="button">
 								Submit
 							</Button>
 						</Form>

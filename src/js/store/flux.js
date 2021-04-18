@@ -1,4 +1,4 @@
-import { UserTags } from "../component/userTags";
+import Cookies from "js-cookie";
 const getState = ({ getStore, getActions, setStore }) => {
 	const beURL = "https://3000-azure-bedbug-4awufp8u.ws-us03.gitpod.io"; // Use ${beURL} to make it easier when handling the BE's constant URL changes
 	const apiKey = "33af10ad5812440abf75a35c04492e15";
@@ -38,40 +38,46 @@ const getState = ({ getStore, getActions, setStore }) => {
 			superSearch: [],
 			found: [],
 			check: [],
-			errors: { loginError: false }
+			errors: { loginError: false, registerError: false }
 		},
 		actions: {
 			// new user registration
-			registerUser: (username, email, password) => {
-				fetch(`${beURL}/register`, {
-					method: "POST",
-					headers: {
-						"Content-Type": "application/json"
-					},
-					body: JSON.stringify({
-						username: username,
-						email: email,
-						password: password
+			registerUser: async (username, email, password, history) => {
+				if (username != "" && email != "" && password != "") {
+					await fetch(`${beURL}/register`, {
+						method: "POST",
+						headers: {
+							"Content-Type": "application/json"
+						},
+						body: JSON.stringify({
+							username: username,
+							email: email,
+							password: password
+						})
 					})
-				})
-					.then(response => {
-						if (!response.ok) {
-							throw Error(response.statusText);
-						}
-						setStore;
-						return response.json();
-					})
-					.then(response => {
-						console.log("Success:", response);
-					})
-					.catch(error => console.error("Error:", error));
+						.then(response => {
+							if (!response.ok) {
+								throw Error(response.statusText);
+							}
+							setStore;
+							return response.json();
+						})
+						.then(response => {
+							console.log("Success:", response);
+							history.push("/login");
+							setStore({ errors: { registerError: false } });
+						})
+						.catch(error => console.error("Error:", error));
+				} else {
+					setStore({ errors: { registerError: true } });
+				}
 			},
 			// login & generate token
-			loginUser: (password, username) => {
+			loginUser: async (password, username, history) => {
 				const actions = getActions();
 				const store = getStore();
 				if (password != "" && username != "") {
-					fetch(`${beURL}/login`, {
+					await fetch(`${beURL}/login`, {
 						method: "POST",
 						headers: {
 							"Content-Type": "application/json"
@@ -83,19 +89,36 @@ const getState = ({ getStore, getActions, setStore }) => {
 					})
 						.then(response => response.json())
 						.then(data => {
-							if (typeof data.msg != "undefined") {
-								setStore({ errors: { loginError: true } });
-							} else {
+							if (data.token != undefined && data.user_id != undefined) {
 								setStore({ token: data.token, id: data.user_id });
+								Cookies.set("access", data.token);
 								actions.getUserProfile(store.id);
+								history.push("/home");
+								console.log(Cookies.get("access"));
+								setStore({ errors: { loginError: false } });
+							} else {
+								setStore({ errors: { loginError: true } });
 							}
 						});
 				} else {
 					setStore({ errors: { loginError: true } });
 				}
 			},
+			makeRequestWithJWT: async () => {
+				const options = {
+					method: "post",
+					credentials: "same-origin",
+					headers: {
+						"X-CSRF-TOKEN": Cookies.get("access")
+					}
+				};
+				const response = await fetch("/protected", options);
+				const result = await response.json();
+				console.log(result);
+				return result;
+			},
 			// logout from account
-			logout: () => {
+			logout: async () => {
 				const store = getStore();
 				setStore({ token: null });
 			},
@@ -151,8 +174,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 				//reset the global store
 				setStore({ demo: demo });
 			},
-			loadGameList: pageNumber => {
-				fetch(`https://api.rawg.io/api/games?key=${apiKey}&page=${pageNumber}`)
+			loadGameList: async pageNumber => {
+				await fetch(`https://api.rawg.io/api/games?key=${apiKey}&page=${pageNumber}`)
 					.then(function(response) {
 						if (!response.ok) {
 							throw Error(response.statusText);
@@ -168,8 +191,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 						console.log("Looks like there was a problem: \n", error);
 					});
 			},
-			loadGame: gameId => {
-				fetch(`https://api.rawg.io/api/games/${gameId}?key=${apiKey}`)
+			loadGame: async gameId => {
+				await fetch(`https://api.rawg.io/api/games/${gameId}?key=${apiKey}`)
 					.then(function(response) {
 						if (!response.ok) {
 							throw Error(response.statusText);
@@ -185,8 +208,10 @@ const getState = ({ getStore, getActions, setStore }) => {
 						console.log("Looks like there was a problem: \n", error);
 					});
 			},
-			loadSortedGameList: (pageNumber, ordering) => {
-				fetch(`https://api.rawg.io/api/games?key=${apiKey}&ordering=${ordering}&page=${pageNumber}&page_size=8`)
+			loadSortedGameList: async (pageNumber, ordering) => {
+				await fetch(
+					`https://api.rawg.io/api/games?key=${apiKey}&ordering=${ordering}&page=${pageNumber}&page_size=8`
+				)
 					.then(function(response) {
 						if (!response.ok) {
 							throw Error(response.statusText);
@@ -502,17 +527,12 @@ const getState = ({ getStore, getActions, setStore }) => {
 						}
 						return response.json();
 					})
-					.then(
-						data =>
-							setStore({ user: { ...getStore().user, ...data } }) ||
-							console.log("data front, get userprofile", data)
-					)
+					.then(data => setStore({ ...data }) || console.log("data front, get userprofile", data))
 					.catch(error => console.log(error));
 			},
 			handlePicture: image => {
 				const store = getStore();
-				let newUser = { ...store.user, image: image };
-				return setStore({ user: newUser });
+				return setStore({ image: image });
 			},
 			getUserGames: userId => {
 				const store = getStore();

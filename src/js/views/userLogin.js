@@ -10,7 +10,7 @@ export const UserLogin = props => {
 	const [logPassword, setLogPassword] = useState("");
 	let history = useHistory();
 	const handleSubmit = e => {
-		actions.loginUser(logPassword, logUsername);
+		actions.loginUser(logPassword, logUsername, history);
 	};
 	return (
 		<Container className="space blue">
