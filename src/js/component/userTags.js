@@ -11,7 +11,7 @@ export const UserTags = () => {
 					<Card id="profile-tags" className="profileCardBackground center">
 						<Card.Header className="profileCardHeader centerText">Liked</Card.Header>
 						<Card.Text id="profile-tagsBackground" className="centerText">
-							{store.user.liked.map((value, index) => {
+							{store.liked.map((value, index) => {
 								if (index != store.user.liked.length - 1) {
 									return `${value.name}, `;
 								} else {

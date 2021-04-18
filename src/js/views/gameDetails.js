@@ -160,7 +160,7 @@ export const GameDetails = props => {
 												<Button
 													variant="danger"
 													onClick={() => actions.deleteFromUserGames(store.game.id)}>
-													<i className="fas fa-trash" />
+													<i className="fas fa-trash center" />
 												</Button>
 											</OverlayTrigger>
 										) : (
@@ -169,7 +169,7 @@ export const GameDetails = props => {
 												delay={{ show: 250, hide: 400 }}
 												overlay={renderUserGames}>
 												<Button variant="danger" onClick={() => actions.addtoUserGames()}>
-													<i className="fas fa-gamepad" />
+													<i className="fas fa-gamepad center" />
 												</Button>
 											</OverlayTrigger>
 										)}
@@ -185,9 +185,13 @@ export const GameDetails = props => {
 										delay={{ show: 250, hide: 400 }}
 										overlay={renderNew}>
 										{store.check[0].status == "new" ? (
-											<Button>&#9733;</Button>
+											<Button>
+												<i className="fas fa-star center" />
+											</Button>
 										) : (
-											<Button>&#9734;</Button>
+											<Button>
+												<i className="far fa-star center" />
+											</Button>
 										)}
 									</OverlayTrigger>
 								</Col>
@@ -198,11 +202,11 @@ export const GameDetails = props => {
 										overlay={renderProgress}>
 										{store.check[0].status == "progress" ? (
 											<Button>
-												<i className="fas fa-wrench" />
+												<i className="fas fa-wrench center" />
 											</Button>
 										) : (
 											<Button>
-												<i className="fas fa-screwdriver" />
+												<i className="fas fa-screwdriver center" />
 											</Button>
 										)}
 									</OverlayTrigger>
@@ -214,11 +218,11 @@ export const GameDetails = props => {
 										overlay={renderFinished}>
 										{store.check[0].status == "finished" ? (
 											<Button>
-												<i className="fas fa-check-square" />
+												<i className="fas fa-check-square center" />
 											</Button>
 										) : (
 											<Button>
-												<i className="far fa-check-square" />
+												<i className="far fa-check-square center" />
 											</Button>
 										)}
 									</OverlayTrigger>
@@ -230,11 +234,11 @@ export const GameDetails = props => {
 										overlay={renderCompleted}>
 										{store.check[0].status == "completed" ? (
 											<Button>
-												<i className="fas fa-trophy" />
+												<i className="fas fa-trophy center" />
 											</Button>
 										) : (
 											<Button>
-												<i className="fas fa-medal" />
+												<i className="fas fa-medal center" />
 											</Button>
 										)}
 									</OverlayTrigger>
@@ -246,11 +250,11 @@ export const GameDetails = props => {
 										overlay={renderFavorite}>
 										{store.check[0].status == "favorite" ? (
 											<Button>
-												<i className="fas fa-heart" />
+												<i className="fas fa-heart center" />
 											</Button>
 										) : (
 											<Button>
-												<i className="far fa-heart" />
+												<i className="far fa-heart center" />
 											</Button>
 										)}
 									</OverlayTrigger>
@@ -262,11 +266,11 @@ export const GameDetails = props => {
 										overlay={renderDropped}>
 										{store.check[0].status == "dropped" ? (
 											<Button>
-												<i className="fas fa-thumbs-down" />
+												<i className="fas fa-thumbs-down center" />
 											</Button>
 										) : (
 											<Button>
-												<i className="far fa-thumbs-down" />
+												<i className="far fa-thumbs-down center" />
 											</Button>
 										)}
 									</OverlayTrigger>
@@ -278,11 +282,11 @@ export const GameDetails = props => {
 										overlay={renderWishlist}>
 										{store.check[0].status == "wishlist" ? (
 											<Button>
-												<i className="fas fa-hand-holding-usd" />
+												<i className="fas fa-hand-holding-usd center" />
 											</Button>
 										) : (
 											<Button>
-												<i className="fas fa-dollar-sign" />
+												<i className="fas fa-dollar-sign center" />
 											</Button>
 										)}
 									</OverlayTrigger>
@@ -638,7 +642,7 @@ export const GameDetails = props => {
 							</Row>
 						</Tab.Pane> */}
 							<Tab.Pane eventKey="media">
-								<Row className="center">
+								<Row className="center detailspace">
 									<Col>
 										<h1>Media</h1>
 										<Row style={{ maxWidth: "100rem" }} className="center">

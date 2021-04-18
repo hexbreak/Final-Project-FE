@@ -61,14 +61,14 @@ export const UserGames = props => {
 				paddingBottom: "3rem"
 			}}
 			className="space center">
-			<Row>
+			<Row className="detailspace">
 				<Col>
-					<span>My Games</span>
+					<h2 className="subtitle">My Games</h2>
 				</Col>
 			</Row>
-			<Row>
+			<Row className="detailspace">
 				<Tab.Container defaultActiveKey="all">
-					<Nav variant="pills" style={{ height: "3rem" }} className="flex-column">
+					<Nav variant="pills" style={{ height: "3rem" }} className="flex-column center">
 						<Row>
 							<Nav.Item>
 								<OverlayTrigger placement="top" delay={{ show: 250, hide: 400 }} overlay={renderAll}>
@@ -77,7 +77,7 @@ export const UserGames = props => {
 											<h4>All</h4>
 										</Row>
 										<Row>
-											<i className="fas fa-gamepad" />
+											<i className="fas fa-gamepad center" />
 										</Row>
 									</Nav.Link>
 								</OverlayTrigger>
@@ -88,7 +88,9 @@ export const UserGames = props => {
 										<Row>
 											<h4>New</h4>
 										</Row>
-										<Row>&#9733;</Row>
+										<Row>
+											<i className="fas fa-star center" />
+										</Row>
 									</Nav.Link>
 								</OverlayTrigger>
 							</Nav.Item>
@@ -102,7 +104,7 @@ export const UserGames = props => {
 											<h4>In progress</h4>
 										</Row>
 										<Row>
-											<i className="fas fa-wrench" />
+											<i className="fas fa-wrench center" />
 										</Row>
 									</Nav.Link>
 								</OverlayTrigger>
@@ -117,7 +119,7 @@ export const UserGames = props => {
 											<h4>Finished</h4>
 										</Row>
 										<Row>
-											<i className="fas fa-check-square" />
+											<i className="fas fa-check-square center" />
 										</Row>
 									</Nav.Link>
 								</OverlayTrigger>
@@ -132,7 +134,7 @@ export const UserGames = props => {
 											<h4>Completed</h4>
 										</Row>
 										<Row>
-											<i className="fas fa-trophy" />
+											<i className="fas fa-trophy center" />
 										</Row>
 									</Nav.Link>
 								</OverlayTrigger>
@@ -147,7 +149,7 @@ export const UserGames = props => {
 											<h4>Favorites</h4>
 										</Row>
 										<Row>
-											<i className="fas fa-heart" />
+											<i className="fas fa-heart center" />
 										</Row>
 									</Nav.Link>
 								</OverlayTrigger>
@@ -162,7 +164,7 @@ export const UserGames = props => {
 											<h4>Dropped</h4>
 										</Row>
 										<Row>
-											<i className="fas fa-thumbs-down" />
+											<i className="fas fa-thumbs-down center" />
 										</Row>
 									</Nav.Link>
 								</OverlayTrigger>
@@ -177,7 +179,7 @@ export const UserGames = props => {
 											<h4>Wishlist</h4>
 										</Row>
 										<Row>
-											<i className="fas fa-hand-holding-usd" />
+											<i className="fas fa-hand-holding-usd center" />
 										</Row>
 									</Nav.Link>
 								</OverlayTrigger>
@@ -185,7 +187,7 @@ export const UserGames = props => {
 						</Row>
 					</Nav>
 					<Tab.Content className="space">
-						<Tab.Pane eventKey="all">
+						<Tab.Pane eventKey="all center">
 							<Row className="search-margin center">
 								<Col className="center search-margin search-box" sm={11}>
 									<Row className="search-margin">
@@ -223,7 +225,7 @@ export const UserGames = props => {
 						</Tab.Pane>
 						<Tab.Pane eventKey="progress">
 							<Row className="search-margin center">
-								<Col className="center search-margin search-box" sm={11}>
+								<Col className="center search-margin" sm={11}>
 									<Row className="search-margin">
 										{store.user_games.length > 0 &&
 											store.user_games.map((value, index) => {

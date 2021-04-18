@@ -4,12 +4,11 @@ const getState = ({ getStore, getActions, setStore }) => {
 	const apiKey = "33af10ad5812440abf75a35c04492e15";
 	return {
 		store: {
-			token: null,
-			// change to null after pitch day for code clean up
+			token: "",
+			id: null,
 			username: "",
 			password: "",
 			email: "",
-			id: "",
 			user_platforms: [],
 			tags_liked: [],
 			tags_disliked: [],
@@ -89,12 +88,11 @@ const getState = ({ getStore, getActions, setStore }) => {
 					})
 						.then(response => response.json())
 						.then(data => {
-							if (data.token != undefined && data.user_id != undefined) {
-								setStore({ token: data.token, id: data.user_id });
+							if (data.token != undefined) {
+								setStore({ token: data.token });
 								Cookies.set("access", data.token);
 								actions.getUserProfile(store.id);
 								history.push("/home");
-								console.log(Cookies.get("access"));
 								setStore({ errors: { loginError: false } });
 							} else {
 								setStore({ errors: { loginError: true } });
@@ -104,27 +102,22 @@ const getState = ({ getStore, getActions, setStore }) => {
 					setStore({ errors: { loginError: true } });
 				}
 			},
-			makeRequestWithJWT: async () => {
-				const options = {
-					method: "post",
-					credentials: "same-origin",
-					headers: {
-						"X-CSRF-TOKEN": Cookies.get("access")
-					}
-				};
-				const response = await fetch("/protected", options);
-				const result = await response.json();
-				console.log(result);
-				return result;
+			syncToken: () => {
+				const actions = getActions();
+				let token = Cookies.get("access");
+				if (token && token != undefined && token != "") {
+					setStore({ token: token });
+					actions.getUserProfile();
+				}
 			},
 			// logout from account
-			logout: async () => {
-				const store = getStore();
-				setStore({ token: null });
+			logout: () => {
+				setStore({ token: "", id: 0 });
+				Cookies.remove("access");
 			},
-			addtoUserGames: () => {
+			addtoUserGames: async () => {
 				const store = getStore();
-				fetch(`${beURL}/user/${store.id}/fav`, {
+				await fetch(`${beURL}/user/${store.id}/backlog`, {
 					method: "POST",
 					headers: {
 						"Content-Type": "application/json"
@@ -132,7 +125,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 					body: JSON.stringify({
 						game_id: store.game.id,
 						game_name: store.game.name,
-						game_image: store.game.background_image
+						game_image: store.game.background_image,
+						game_status: "all"
 					})
 				})
 					.then(response => {
@@ -142,7 +136,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 						return response.json();
 					})
 					.then(responseAsJson => {
-						fetch(`${beURL}/user/${store.id}/fav`)
+						fetch(`${beURL}/user/${store.id}/backlog`)
 							.then(function(response) {
 								if (!response.ok) {
 									throw Error(response.statusText);
@@ -227,8 +221,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 						console.log("Looks like there was a problem: \n", error);
 					});
 			},
-			loadDlcs: gameId => {
-				fetch(`https://api.rawg.io/api/games/${gameId}/additions?key=${apiKey}`)
+			loadDlcs: async gameId => {
+				await fetch(`https://api.rawg.io/api/games/${gameId}/additions?key=${apiKey}`)
 					.then(function(response) {
 						if (!response.ok) {
 							throw Error(response.statusText);
@@ -516,8 +510,17 @@ const getState = ({ getStore, getActions, setStore }) => {
 						return setStore({ user: user });
 					});
 			},
-			getUserProfile: user => {
+			getUserProfile: async () => {
 				const store = getStore();
+				const options = {
+					method: "GET",
+					headers: {
+						Authorization: `Bearer ${store.token}`
+					}
+				};
+				const response = await fetch(`${beURL}/protected`, options);
+				const result = await response.json();
+				setStore({ id: result.user_id });
 				fetch(`${beURL}/user/${store.id}`, {
 					method: "GET"
 				})
@@ -525,6 +528,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 						if (!response.ok) {
 							throw Error(response.statusText);
 						}
+						console.log(response.json);
 						return response.json();
 					})
 					.then(data => setStore({ ...data }) || console.log("data front, get userprofile", data))
@@ -536,7 +540,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 			getUserGames: userId => {
 				const store = getStore();
-				fetch(`${beURL}/user/${userId}/fav`)
+				fetch(`${beURL}/user/${userId}/backlog`)
 					.then(function(response) {
 						if (!response.ok) {
 							throw Error(response.statusText);
@@ -557,10 +561,47 @@ const getState = ({ getStore, getActions, setStore }) => {
 				let check = store.user_games.filter(value => gameId == value.game_id);
 				setStore({ check: check });
 			},
+			editUserGames: async (gameId, game_status) => {
+				const store = getStore();
+				let check = store.user_games.filter(value => gameId == value.game_id);
+				check = check[0].game_id;
+				await fetch(`${beURL}/user/${store.id}/updatebl/${check}`, {
+					method: "PUT",
+					headers: {
+						"Content-Type": "application/json"
+					},
+					body: JSON.stringify(game_status)
+				})
+					.then(response => {
+						if (!response.ok) {
+							throw Error(response.statusText);
+						}
+						return response.json();
+					})
+					.then(responseAsJson => {
+						console.log("Success:", responseAsJson);
+						fetch(`${beURL}/user/${store.id}/backlog`)
+							.then(function(response) {
+								if (!response.ok) {
+									throw Error(response.statusText);
+								}
+								// Read the response as json.
+								return response.json();
+							})
+							.then(function(responseAsJson) {
+								// Do stuff with the JSON
+								return setStore({ user_games: responseAsJson });
+							})
+							.catch(function(error) {
+								console.log("Looks like there was a problem: \n", error);
+							});
+					})
+					.catch(error => console.error("Error:", error));
+			},
 			deleteFromUserGames: gameId => {
 				const store = getStore();
 				let game = store.user_games.filter(value => gameId == value.game_id);
-				fetch(`${beURL}/user/${store.id}/delfav/` + game[0].id, {
+				fetch(`${beURL}/user/${store.id}/removebl/` + game[0].id, {
 					method: "DELETE",
 					headers: {
 						"Content-Type": "application/json"
@@ -574,7 +615,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					})
 					.then(responseAsJson => {
 						console.log("Success:", responseAsJson);
-						fetch(`${beURL}/user/${store.id}/fav`)
+						fetch(`${beURL}/user/${store.id}/backlog`)
 							.then(function(response) {
 								if (!response.ok) {
 									throw Error(response.statusText);

@@ -80,15 +80,25 @@ export const Navbar = () => {
 						</button>
 					</Link>
 					<Link to="/editpreference">
-						<button className="btn btn-light pl-4 pr-4 navButton" id="hover">
+						<button
+							style={{ marginRight: "1rem" }}
+							className="btn btn-light pl-4 pr-4 navButton"
+							id="hover">
 							<span>Preferences</span>
 						</button>
 					</Link>
+					<button className="btn btn-light navButton" onClick={e => actions.logout()} id="hover">
+						<span>Logout</span>
+					</button>
 				</div>
 			) : (
 				<div className="ml">
 					<Link to="/login">
-						<button style={{ marginRight: "1rem" }} className="btn btn-light navButton" id="hover">
+						<button
+							style={{ marginRight: "1rem" }}
+							onClick=""
+							className="btn btn-light navButton"
+							id="hover">
 							<span>Login</span>
 						</button>
 					</Link>
