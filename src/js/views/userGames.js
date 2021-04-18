@@ -12,7 +12,7 @@ export const UserGames = props => {
 			actions.getUserGames(store.id);
 		};
 		loadUserGames();
-	}, []);
+	}, [store.id]);
 	const renderAll = props => (
 		<Tooltip id="button-tooltip" {...props}>
 			All games!
@@ -187,153 +187,169 @@ export const UserGames = props => {
 						</Row>
 					</Nav>
 					<Tab.Content className="space">
-						<Tab.Pane eventKey="all center">
-							<Row className="search-margin center">
-								<Col className="center search-margin search-box" sm={11}>
-									<Row className="search-margin">
-										{store.user_games.length > 0 &&
-											store.user_games.map((value, index) => {
-												let game = {
-													id: value.game_id,
-													name: value.game_name,
-													background_image: value.game_image
-												};
-												return <GameCard className="card" key={index} game={game} />;
-											})}
-									</Row>
+						<Tab.Pane eventKey="all">
+							<Row className="search-margin">
+								<Col>
+									<Container fluid className="search-box">
+										<Row className="search-margin">
+											{store.user_games.length > 0 &&
+												store.user_games.map((value, index) => {
+													let game = {
+														id: value.game_id,
+														name: value.game_name,
+														background_image: value.game_image
+													};
+													return <GameCard className="card" key={index} game={game} />;
+												})}
+										</Row>
+									</Container>
 								</Col>
 							</Row>
 						</Tab.Pane>
 						<Tab.Pane eventKey="new">
-							<Row className="search-margin center">
-								<Col className="center search-margin search-box" sm={11}>
-									<Row className="search-margin">
-										{store.user_games.length > 0 &&
-											store.user_games.map((value, index) => {
-												if (value.status == "new") {
-													let game = {
-														id: value.game_id,
-														name: value.game_name,
-														background_image: value.game_image
-													};
-													return <GameCard className="card" key={index} game={game} />;
-												}
-											})}
-									</Row>
+							<Row className="search-margin ">
+								<Col>
+									<Container fluid className="search-box">
+										<Row className="search-margin">
+											{store.user_games.length > 0 &&
+												store.user_games.map((value, index) => {
+													if (value.game_status == "new") {
+														let game = {
+															id: value.game_id,
+															name: value.game_name,
+															background_image: value.game_image
+														};
+														return <GameCard className="card" key={index} game={game} />;
+													}
+												})}
+										</Row>
+									</Container>
 								</Col>
 							</Row>
 						</Tab.Pane>
 						<Tab.Pane eventKey="progress">
-							<Row className="search-margin center">
-								<Col className="center search-margin" sm={11}>
-									<Row className="search-margin">
-										{store.user_games.length > 0 &&
-											store.user_games.map((value, index) => {
-												if (value.status == "progress") {
-													let game = {
-														id: value.game_id,
-														name: value.game_name,
-														background_image: value.game_image
-													};
-													return <GameCard className="card" key={index} game={game} />;
-												}
-											})}
-									</Row>
+							<Row className="search-margin ">
+								<Col>
+									<Container fluid className="search-box">
+										<Row className="search-margin">
+											{store.user_games.length > 0 &&
+												store.user_games.map((value, index) => {
+													if (value.game_status == "progress") {
+														let game = {
+															id: value.game_id,
+															name: value.game_name,
+															background_image: value.game_image
+														};
+														return <GameCard className="card" key={index} game={game} />;
+													}
+												})}
+										</Row>
+									</Container>
 								</Col>
 							</Row>
 						</Tab.Pane>
 						<Tab.Pane eventKey="finished">
-							<Row className="search-margin center">
-								<Col className="center search-margin search-box" sm={11}>
-									<Row className="search-margin">
-										{store.user_games.length > 0 &&
-											store.user_games.map((value, index) => {
-												if (value.status == "finished") {
-													let game = {
-														id: value.game_id,
-														name: value.game_name,
-														background_image: value.game_image
-													};
-													return <GameCard className="card" key={index} game={game} />;
-												}
-											})}
-									</Row>
+							<Row className="search-margin">
+								<Col>
+									<Container fluid className="search-box">
+										<Row className="search-margin">
+											{store.user_games.length > 0 &&
+												store.user_games.map((value, index) => {
+													if (value.game_status == "finished") {
+														let game = {
+															id: value.game_id,
+															name: value.game_name,
+															background_image: value.game_image
+														};
+														return <GameCard className="card" key={index} game={game} />;
+													}
+												})}
+										</Row>
+									</Container>
 								</Col>
 							</Row>
 						</Tab.Pane>
 						<Tab.Pane eventKey="completed">
-							<Row className="search-margin center">
-								<Col className="center search-margin search-box" sm={11}>
-									<Row className="search-margin">
-										{store.user_games.length > 0 &&
-											store.user_games.map((value, index) => {
-												if (value.status == "completed") {
-													let game = {
-														id: value.game_id,
-														name: value.game_name,
-														background_image: value.game_image
-													};
-													return <GameCard className="card" key={index} game={game} />;
-												}
-											})}
-									</Row>
+							<Row className="search-margin">
+								<Col>
+									<Container fluid className="search-box">
+										<Row className="search-margin">
+											{store.user_games.length > 0 &&
+												store.user_games.map((value, index) => {
+													if (value.game_status == "completed") {
+														let game = {
+															id: value.game_id,
+															name: value.game_name,
+															background_image: value.game_image
+														};
+														return <GameCard className="card" key={index} game={game} />;
+													}
+												})}
+										</Row>
+									</Container>
 								</Col>
 							</Row>
 						</Tab.Pane>
 						<Tab.Pane eventKey="favorites">
-							<Row className="search-margin center">
-								<Col className="center search-margin search-box" sm={11}>
-									<Row className="search-margin">
-										{store.user_games.length > 0 &&
-											store.user_games.map((value, index) => {
-												if (value.status == "favorite") {
-													let game = {
-														id: value.game_id,
-														name: value.game_name,
-														background_image: value.game_image
-													};
-													return <GameCard className="card" key={index} game={game} />;
-												}
-											})}
-									</Row>
+							<Row className="search-margin">
+								<Col>
+									<Container fluid className="search-box">
+										<Row className="search-margin">
+											{store.user_games.length > 0 &&
+												store.user_games.map((value, index) => {
+													if (value.game_status == "favorite") {
+														let game = {
+															id: value.game_id,
+															name: value.game_name,
+															background_image: value.game_image
+														};
+														return <GameCard className="card" key={index} game={game} />;
+													}
+												})}
+										</Row>
+									</Container>
 								</Col>
 							</Row>
 						</Tab.Pane>
 						<Tab.Pane eventKey="dropped">
-							<Row className="search-margin center">
-								<Col className="center search-margin search-box" sm={11}>
-									<Row className="search-margin">
-										{store.user_games.length > 0 &&
-											store.user_games.map((value, index) => {
-												if (value.status == "dropped") {
-													let game = {
-														id: value.game_id,
-														name: value.game_name,
-														background_image: value.game_image
-													};
-													return <GameCard className="card" key={index} game={game} />;
-												}
-											})}
-									</Row>
+							<Row className="search-margin">
+								<Col>
+									<Container fluid className="search-box">
+										<Row className="search-margin">
+											{store.user_games.length > 0 &&
+												store.user_games.map((value, index) => {
+													if (value.game_status == "dropped") {
+														let game = {
+															id: value.game_id,
+															name: value.game_name,
+															background_image: value.game_image
+														};
+														return <GameCard className="card" key={index} game={game} />;
+													}
+												})}
+										</Row>
+									</Container>
 								</Col>
 							</Row>
 						</Tab.Pane>
 						<Tab.Pane eventKey="wishlist">
-							<Row className="search-margin center">
-								<Col className="center search-margin search-box" sm={11}>
-									<Row className="search-margin">
-										{store.user_games.length > 0 &&
-											store.user_games.map((value, index) => {
-												if (value.status == "wishlist") {
-													let game = {
-														id: value.game_id,
-														name: value.game_name,
-														background_image: value.game_image
-													};
-													return <GameCard className="card" key={index} game={game} />;
-												}
-											})}
-									</Row>
+							<Row className="search-margin">
+								<Col>
+									<Container fluid className="search-box">
+										<Row className="search-margin">
+											{store.user_games.length > 0 &&
+												store.user_games.map((value, index) => {
+													if (value.game_status == "wishlist") {
+														let game = {
+															id: value.game_id,
+															name: value.game_name,
+															background_image: value.game_image
+														};
+														return <GameCard className="card" key={index} game={game} />;
+													}
+												})}
+										</Row>
+									</Container>
 								</Col>
 							</Row>
 						</Tab.Pane>

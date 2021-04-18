@@ -1,4 +1,4 @@
-import Cookies from "js-cookie";
+import Cookies, { get } from "js-cookie";
 const getState = ({ getStore, getActions, setStore }) => {
 	const beURL = "https://3000-azure-bedbug-4awufp8u.ws-us03.gitpod.io"; // Use ${beURL} to make it easier when handling the BE's constant URL changes
 	const apiKey = "33af10ad5812440abf75a35c04492e15";
@@ -564,13 +564,13 @@ const getState = ({ getStore, getActions, setStore }) => {
 			editUserGames: async (gameId, game_status) => {
 				const store = getStore();
 				let check = store.user_games.filter(value => gameId == value.game_id);
-				check = check[0].game_id;
+				check = store.check[0].id;
 				await fetch(`${beURL}/user/${store.id}/updatebl/${check}`, {
 					method: "PUT",
 					headers: {
 						"Content-Type": "application/json"
 					},
-					body: JSON.stringify(game_status)
+					body: JSON.stringify({ game_status: game_status })
 				})
 					.then(response => {
 						if (!response.ok) {
@@ -632,6 +632,316 @@ const getState = ({ getStore, getActions, setStore }) => {
 							});
 					})
 					.catch(error => console.error("Error:", error));
+			},
+			handlePreference: async (type, movement, value, type2) => {
+				let store = getStore();
+				let actions = getActions();
+				console.log(type, movement, value, type2);
+				if (type == "platform") {
+					if (movement == "add") {
+						await fetch(`${beURL}/${store.id}/platforms`, {
+							method: "POST",
+							headers: {
+								"Content-Type": "application/json"
+							},
+							body: JSON.stringify({
+								platform_name: value.name,
+								platform_id: value.id
+							})
+						})
+							.then(response => {
+								if (!response.ok) {
+									throw Error(response.statusText);
+								}
+								response.json();
+							})
+							.then(response => {
+								actions.getPreference("platforms");
+							})
+							.catch(error => console.error("Error:", error));
+					}
+					if (movement == "delete") {
+						await fetch(`${beURL}/user/${store.id}/platforms/${value.id}`, {
+							method: "DELETE",
+							headers: {
+								"Content-Type": "application/json"
+							}
+						})
+							.then(response => {
+								if (!response.ok) {
+									throw Error(response.statusText);
+								}
+								response.json();
+							})
+							.then(responseAsJson => {
+								actions.getPreference("platforms");
+							})
+							.catch(error => console.error("Error:", error));
+					}
+				}
+				if (type == "genre") {
+					if (movement == "add") {
+						if (type2 == "liked") {
+							await fetch(`${beURL}/${store.id}/genrelikes`, {
+								method: "POST",
+								headers: {
+									"Content-Type": "application/json"
+								},
+								body: JSON.stringify({
+									genre_name: value.name,
+									genre_id: value.id
+								})
+							})
+								.then(response => {
+									if (!response.ok) {
+										throw Error(response.statusText);
+									}
+									return response.json();
+								})
+								.then(response => {
+									actions.getPreference(type, type2);
+								})
+								.catch(error => console.error("Error:", error));
+						}
+						if (type2 == "disliked") {
+							await fetch(`${beURL}/${store.id}/genredislikes`, {
+								method: "POST",
+								headers: {
+									"Content-Type": "application/json"
+								},
+								body: JSON.stringify({
+									genre_name: value.name,
+									genre_id: value.id
+								})
+							})
+								.then(response => {
+									if (!response.ok) {
+										throw Error(response.statusText);
+									}
+									return response.json();
+								})
+								.then(response => {
+									actions.getPreference(type, type2);
+								})
+								.catch(error => console.error("Error:", error));
+						}
+					}
+					if (movement == "delete") {
+						if (type2 == "liked") {
+							await fetch(`${beURL}/user/${store.id}/genrelikes/${value.id}`, {
+								method: "DELETE",
+								headers: {
+									"Content-Type": "application/json"
+								}
+							})
+								.then(response => {
+									if (!response.ok) {
+										throw Error(response.statusText);
+									}
+									return response.json();
+								})
+								.then(responseAsJson => {
+									actions.getPreference("platforms");
+								})
+								.catch(error => console.error("Error:", error));
+						}
+						if (type2 == "disliked") {
+							await fetch(`${beURL}/user/${store.id}/degd/${value.id}`, {
+								method: "DELETE",
+								headers: {
+									"Content-Type": "application/json"
+								}
+							})
+								.then(response => {
+									if (!response.ok) {
+										throw Error(response.statusText);
+									}
+									return response.json();
+								})
+								.then(responseAsJson => {
+									actions.getPreference("platforms");
+								})
+								.catch(error => console.error("Error:", error));
+						}
+					}
+				}
+				if (type == "tag") {
+					if (movement == "add") {
+						if (type2 == "liked") {
+							await fetch(`${beURL}/${store.id}/taglike`, {
+								method: "POST",
+								headers: {
+									"Content-Type": "application/json"
+								},
+								body: JSON.stringify({
+									tag_name: value.name,
+									tag_id: value.id
+								})
+							})
+								.then(response => {
+									if (!response.ok) {
+										throw Error(response.statusText);
+									}
+									return response.json();
+								})
+								.then(response => {
+									actions.getPreference(type, type2);
+								})
+								.catch(error => console.error("Error:", error));
+						}
+						if (type2 == "disliked") {
+							await fetch(`${beURL}/${store.id}/tagdislike`, {
+								method: "POST",
+								headers: {
+									"Content-Type": "application/json"
+								},
+								body: JSON.stringify({
+									tag_name: value.name,
+									tag_id: value.id
+								})
+							})
+								.then(response => {
+									if (!response.ok) {
+										throw Error(response.statusText);
+									}
+									return response.json();
+								})
+								.then(response => {
+									actions.getPreference(type, type2);
+								})
+								.catch(error => console.error("Error:", error));
+						}
+					}
+					if (movement == "delete") {
+						if (type2 == "liked") {
+							await fetch(`${beURL}/user/${store.id}/platforms/${value.id}`, {
+								method: "DELETE",
+								headers: {
+									"Content-Type": "application/json"
+								}
+							})
+								.then(response => {
+									if (!response.ok) {
+										throw Error(response.statusText);
+									}
+									return response.json();
+								})
+								.then(responseAsJson => {
+									actions.getPreference("tags", "liked");
+								})
+								.catch(error => console.error("Error:", error));
+						}
+						if (type2 == "disliked") {
+							await fetch(`${beURL}/user/${store.id}/detd/${value.id}`, {
+								method: "DELETE",
+								headers: {
+									"Content-Type": "application/json"
+								}
+							})
+								.then(response => {
+									if (!response.ok) {
+										throw Error(response.statusText);
+									}
+									return response.json();
+								})
+								.then(responseAsJson => {
+									actions.getPreference("tags", "disliked");
+								})
+								.catch(error => console.error("Error:", error));
+						}
+					}
+				}
+			},
+			getPreference: async (type, type2) => {
+				if (type == "platform") {
+					await fetch(`${beURL}/${store.id}/platforms`)
+						.then(function(response) {
+							if (!response.ok) {
+								throw Error(response.statusText);
+							}
+							// Read the response as json.
+							return response.json();
+						})
+						.then(function(responseAsJson) {
+							// Do stuff with the JSON
+							return setStore({ user_platforms: responseAsJson });
+						})
+						.catch(function(error) {
+							console.log("Looks like there was a problem: \n", error);
+						});
+				}
+				if (type == "genre") {
+					if (type2 == "liked") {
+						await fetch(`${beURL}/user/${store.id}/genrelikes`)
+							.then(function(response) {
+								if (!response.ok) {
+									throw Error(response.statusText);
+								}
+								// Read the response as json.
+								return response.json();
+							})
+							.then(function(responseAsJson) {
+								// Do stuff with the JSON
+								return setStore({ genres_liked: responseAsJson });
+							})
+							.catch(function(error) {
+								console.log("Looks like there was a problem: \n", error);
+							});
+					}
+					if (type2 == "disliked") {
+						await fetch(`${beURL}/user/${store.id}/genredislikes`)
+							.then(function(response) {
+								if (!response.ok) {
+									throw Error(response.statusText);
+								}
+								// Read the response as json.
+								return response.json();
+							})
+							.then(function(responseAsJson) {
+								// Do stuff with the JSON
+								return setStore({ genres_disliked: responseAsJson });
+							})
+							.catch(function(error) {
+								console.log("Looks like there was a problem: \n", error);
+							});
+						if (type == "tag") {
+							if (type2 == "liked") {
+								await fetch(`${beURL}/user/${store.id}/taglike`)
+									.then(function(response) {
+										if (!response.ok) {
+											throw Error(response.statusText);
+										}
+										// Read the response as json.
+										return response.json();
+									})
+									.then(function(responseAsJson) {
+										// Do stuff with the JSON
+										return setStore({ tags_liked: responseAsJson });
+									})
+									.catch(function(error) {
+										console.log("Looks like there was a problem: \n", error);
+									});
+							}
+							if (type2 == "disliked") {
+								await fetch(`${beURL}/user/${store.id}/tagdislike`)
+									.then(function(response) {
+										if (!response.ok) {
+											throw Error(response.statusText);
+										}
+										// Read the response as json.
+										return response.json();
+									})
+									.then(function(responseAsJson) {
+										// Do stuff with the JSON
+										return setStore({ tags_disliked: responseAsJson });
+									})
+									.catch(function(error) {
+										console.log("Looks like there was a problem: \n", error);
+									});
+							}
+						}
+					}
+				}
 			}
 		}
 	};

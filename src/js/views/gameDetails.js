@@ -177,19 +177,25 @@ export const GameDetails = props => {
 								)}
 							</Row>
 						</Nav>
-						{store.check > 0 && (
-							<Row>
+						{store.check.length > 0 && (
+							<Row style={{ marginTop: "3rem" }}>
 								<Col>
 									<OverlayTrigger
 										placement="top"
 										delay={{ show: 250, hide: 400 }}
 										overlay={renderNew}>
-										{store.check[0].status == "new" ? (
-											<Button>
+										{store.check[0].game_status == "new" ? (
+											<Button
+												id="toggletags"
+												variant="secondary"
+												onClick={e => actions.editUserGames(store.id, "all")}>
 												<i className="fas fa-star center" />
 											</Button>
 										) : (
-											<Button>
+											<Button
+												id="toggletags"
+												variant="secondary"
+												onClick={e => actions.editUserGames(store.id, "new")}>
 												<i className="far fa-star center" />
 											</Button>
 										)}
@@ -200,12 +206,18 @@ export const GameDetails = props => {
 										placement="top"
 										delay={{ show: 250, hide: 400 }}
 										overlay={renderProgress}>
-										{store.check[0].status == "progress" ? (
-											<Button>
+										{store.check[0].game_status == "progress" ? (
+											<Button
+												id="toggletags"
+												variant="secondary"
+												onClick={e => actions.editUserGames(store.id, "all")}>
 												<i className="fas fa-wrench center" />
 											</Button>
 										) : (
-											<Button>
+											<Button
+												id="toggletags"
+												variant="secondary"
+												onClick={e => actions.editUserGames(store.id, "progress")}>
 												<i className="fas fa-screwdriver center" />
 											</Button>
 										)}
@@ -216,12 +228,18 @@ export const GameDetails = props => {
 										placement="top"
 										delay={{ show: 250, hide: 400 }}
 										overlay={renderFinished}>
-										{store.check[0].status == "finished" ? (
-											<Button>
+										{store.check[0].game_status == "finished" ? (
+											<Button
+												id="toggletags"
+												variant="secondary"
+												onClick={e => actions.editUserGames(store.id, "all")}>
 												<i className="fas fa-check-square center" />
 											</Button>
 										) : (
-											<Button>
+											<Button
+												id="toggletags"
+												variant="secondary"
+												onClick={e => actions.editUserGames(store.id, "finished")}>
 												<i className="far fa-check-square center" />
 											</Button>
 										)}
@@ -232,12 +250,18 @@ export const GameDetails = props => {
 										placement="top"
 										delay={{ show: 250, hide: 400 }}
 										overlay={renderCompleted}>
-										{store.check[0].status == "completed" ? (
-											<Button>
+										{store.check[0].game_status == "completed" ? (
+											<Button
+												id="toggletags"
+												variant="secondary"
+												onClick={e => actions.editUserGames(store.id, "all")}>
 												<i className="fas fa-trophy center" />
 											</Button>
 										) : (
-											<Button>
+											<Button
+												id="toggletags"
+												variant="secondary"
+												onClick={e => actions.editUserGames(store.id, "completed")}>
 												<i className="fas fa-medal center" />
 											</Button>
 										)}
@@ -248,12 +272,18 @@ export const GameDetails = props => {
 										placement="top"
 										delay={{ show: 250, hide: 400 }}
 										overlay={renderFavorite}>
-										{store.check[0].status == "favorite" ? (
-											<Button>
+										{store.check[0].game_status == "favorite" ? (
+											<Button
+												id="toggletags"
+												variant="secondary"
+												onClick={e => actions.editUserGames(store.id, "all")}>
 												<i className="fas fa-heart center" />
 											</Button>
 										) : (
-											<Button>
+											<Button
+												id="toggletags"
+												variant="secondary"
+												onClick={e => actions.editUserGames(store.id, "favorite")}>
 												<i className="far fa-heart center" />
 											</Button>
 										)}
@@ -264,12 +294,18 @@ export const GameDetails = props => {
 										placement="top"
 										delay={{ show: 250, hide: 400 }}
 										overlay={renderDropped}>
-										{store.check[0].status == "dropped" ? (
-											<Button>
+										{store.check[0].game_status == "dropped" ? (
+											<Button
+												id="toggletags"
+												variant="secondary"
+												onClick={e => actions.editUserGames(store.id, "all")}>
 												<i className="fas fa-thumbs-down center" />
 											</Button>
 										) : (
-											<Button>
+											<Button
+												id="toggletags"
+												variant="secondary"
+												onClick={e => actions.editUserGames(store.id, "dropped")}>
 												<i className="far fa-thumbs-down center" />
 											</Button>
 										)}
@@ -280,12 +316,18 @@ export const GameDetails = props => {
 										placement="top"
 										delay={{ show: 250, hide: 400 }}
 										overlay={renderWishlist}>
-										{store.check[0].status == "wishlist" ? (
-											<Button>
+										{store.check[0].game_status == "wishlist" ? (
+											<Button
+												id="toggletags"
+												variant="secondary"
+												onClick={e => actions.editUserGames(store.id, "all")}>
 												<i className="fas fa-hand-holding-usd center" />
 											</Button>
 										) : (
-											<Button>
+											<Button
+												id="toggletags"
+												variant="secondary"
+												onClick={e => actions.editUserGames(store.id, "wishlist")}>
 												<i className="fas fa-dollar-sign center" />
 											</Button>
 										)}
