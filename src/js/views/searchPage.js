@@ -132,6 +132,7 @@ export const SearchPage = props => {
 										<GameCard
 											className="card"
 											key={index}
+											size={"bigCard"}
 											game={value}
 											cleanSearch={e => setGameName("")}
 										/>
