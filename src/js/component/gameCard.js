@@ -7,6 +7,7 @@ import PropTypes from "prop-types";
 export const GameCard = props => {
 	const { store, actions } = useContext(Context);
 	let history = useHistory();
+	let filters = `cardFilters ${props.size}`;
 	//Clean searchbar and takes you to details
 	const handleClick = e => {
 		if (props.cleanSearch != undefined) {
@@ -17,51 +18,51 @@ export const GameCard = props => {
 	};
 	//Make color for tags from tag ids
 	const checkPlatform = () => {
-		let platformColor = "text-light";
+		let platformColor = "normal";
 		props.game.platforms.forEach(value => {
 			store.user_platforms.forEach(platform => {
 				if (value.platform.id == platform.platform_id) {
-					platformColor = "text-success";
+					platformColor = "liked";
 				}
 			});
 		});
 		return platformColor;
 	};
 	const checkGenre = () => {
-		let genreColor = "text-light";
+		let genreColor = "normal";
 		props.game.genres.forEach(value => {
 			store.genres_liked.forEach(genre => {
-				if (value.id == genre.genre_id && genreColor != "text-light") {
-					genreColor = "text-warning";
+				if (value.id == genre.genre_id && genreColor != "normal") {
+					genreColor = "mixed";
 				} else if (value.id == genre.genre_id) {
-					genreColor = "text-success";
+					genreColor = "liked";
 				}
 			});
 			store.genres_disliked.forEach(genre => {
-				if (value.id == genre.genre_id && genreColor != "text-light") {
-					genreColor = "text-warning";
+				if (value.id == genre.genre_id && genreColor != "normal") {
+					genreColor = "mixed";
 				} else if (value.id == genre.genre_id) {
-					genreColor = "text-danger";
+					genreColor = "disliked";
 				}
 			});
 		});
 		return genreColor;
 	};
 	const checkTags = () => {
-		let tagColor = "text-light";
+		let tagColor = "normal";
 		props.game.tags.forEach(value => {
 			store.tags_liked.forEach(tags => {
-				if (value.id == tags.tag_id && tagColor != "text-light") {
-					tagColor = "text-warning";
+				if (value.id == tags.tag_id && tagColor != "normal") {
+					tagColor = "mixed";
 				} else if (value.id == tags.tag_id) {
-					tagColor = "text-success";
+					tagColor = "liked";
 				}
 			});
 			store.tags_disliked.forEach(tags => {
-				if (value.id == tags.tag_id && tagColor != "text-light") {
-					tagColor = "text-warning";
+				if (value.id == tags.tag_id && tagColor != "normal") {
+					tagColor = "mixed";
 				} else if (value.id == tags.tag_id) {
-					tagColor = "text-danger";
+					tagColor = "disliked";
 				}
 			});
 		});
@@ -86,11 +87,11 @@ export const GameCard = props => {
 				<Card.Title>{props.game.name}</Card.Title>
 				<Card.Text>
 					{store.preference == true > 0 && (
-						<>
-							{/* <span className={checkPlatform()}>P</span>
-							<span className={checkGenre()}>G</span> */}
-							<span className={checkTags()}>T</span>
-						</>
+						<div className={filters}>
+							{props.game.platforms != undefined && <span className={checkPlatform()}>P</span>}
+							{props.game.genres != undefined && <span className={checkGenre()}>G</span>}
+							{props.game.tags != undefined && <span className={checkTags()}>T</span>}
+						</div>
 					)}
 				</Card.Text>
 			</Card.ImgOverlay>
@@ -100,5 +101,6 @@ export const GameCard = props => {
 GameCard.propTypes = {
 	game: PropTypes.object,
 	cleanSearch: PropTypes.func,
-	id: PropTypes.string
+	id: PropTypes.string,
+	size: PropTypes.string
 };

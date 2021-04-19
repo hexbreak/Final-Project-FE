@@ -58,7 +58,9 @@ export const Home = () => {
 									</div>
 									<Row className="scroller fit center" style={{ marginTop: "1rem" }}>
 										{store.sortedGameList.map((value, index) => {
-											return <GameCard className="card" key={index} game={value} />;
+											return (
+												<GameCard className="card" key={index} size={"bigCard"} game={value} />
+											);
 										})}
 									</Row>
 									<Row className="center search-margin">
@@ -101,7 +103,9 @@ export const Home = () => {
 									<h2 className="subtitle center">Metacritic Rating</h2>
 									<Row className="scroller fit center content">
 										{store.gameMetacriticList.map((value, index) => {
-											return <GameCard className="card" key={index} game={value} />;
+											return (
+												<GameCard className="card" key={index} game={value} size={"bigCard"} />
+											);
 										})}
 									</Row>
 									<Row className="center search-margin">
@@ -123,7 +127,9 @@ export const Home = () => {
 									<h2 className="subtitle center">User Rating</h2>
 									<Row className="scroller fit center" style={{ marginTop: "3rem" }}>
 										{store.gameRatingList.map((value, index) => {
-											return <GameCard className="card" key={index} game={value} />;
+											return (
+												<GameCard className="card" key={index} game={value} size={"bigCard"} />
+											);
 										})}
 									</Row>
 									<Row className="center">

@@ -588,21 +588,33 @@ th {
 .mouse{
     cursor: pointer;
 }
-.border-danger{
-    border-width: 7px;
-    border-image: linear-gradient(147deg, #fa8a56 0%, #FF2525 85%);
-    border-image-slice: 1;
+.disliked{
+    font-weight: 600;
+    font-family: 'Bebas Neue', cursive;
+      background: linear-gradient(147deg, #fa8a56 0%, #FF2525 85%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
-.border-success{
-    border-width: 7px;
-    border-image: linear-gradient(0deg, #08AEEA 0%, #2AF598 100%);
-    border-image-slice: 1;
+.liked{
+    font-weight: 600;
+    font-family: 'Bebas Neue', cursive;
+      background: linear-gradient(0deg, #08AEEA 0%, #2AF598 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
-.border-warning{
-    border-width: 7px;
-    border-image: linear-gradient(62deg, #FBAB7E 0%, #F7CE68 100%);
-
-    border-image-slice: 1;
+.mixed{
+    font-weight: 600;
+    font-family: 'Bebas Neue', cursive;
+      background: linear-gradient(62deg, #FBAB7E 0%, #F7CE68 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.normal{
+    font-weight: 600;
+    font-family: 'Bebas Neue', cursive;
+      background: linear-gradient(62deg, #b4afac 0%, #bebebe 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 #middleLine{
     background :linear-gradient(#c3f8ff, #6882ff) no-repeat center/2px 100%;
@@ -633,4 +645,17 @@ th {
 .marginError{
     margin-top: 3rem;
     width: 44rem;
+}
+.cardFilters {
+    position: absolute;
+    font-size: 2rem;
+}
+.bigCard{
+    top: 85%;
+}
+.mediumCard{
+    top: 77%;
+}
+.smallCard{
+    top: 71%;
 }

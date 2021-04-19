@@ -409,6 +409,7 @@ export const GameDetails = props => {
 															id={"detailsCard"}
 															className="card"
 															key={index}
+															size={"mediumCard"}
 															game={value}
 														/>
 													);
@@ -427,6 +428,7 @@ export const GameDetails = props => {
 															id={"detailsCard"}
 															className="card"
 															key={index}
+															size={"mediumCard"}
 															game={value}
 														/>
 													);
@@ -475,6 +477,7 @@ export const GameDetails = props => {
 													<GameCard
 														id={"detailsCard"}
 														className="card"
+														size={"mediumCard"}
 														key={index}
 														game={value}
 													/>
