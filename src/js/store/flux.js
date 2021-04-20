@@ -1,6 +1,6 @@
 import Cookies, { get } from "js-cookie";
 const getState = ({ getStore, getActions, setStore }) => {
-	const beURL = "https://3000-azure-bedbug-4awufp8u.ws-us03.gitpod.io"; // Use ${beURL} to make it easier when handling the BE's constant URL changes
+	const beURL = "https://gamefinder99.herokuapp.com/"; // Use ${beURL} to make it easier when handling the BE's constant URL changes
 	const apiKey = "33af10ad5812440abf75a35c04492e15";
 	return {
 		store: {
@@ -62,7 +62,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 							return response.json();
 						})
 						.then(response => {
-							console.log("Success:", response);
 							history.push("/login");
 							setStore({ errors: { registerError: false } });
 						})
@@ -111,9 +110,10 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 			},
 			// logout from account
-			logout: () => {
-				setStore({ token: "", id: 0 });
+			logout: history => {
+				setStore({ token: "", id: 0, preference: false });
 				Cookies.remove("access");
+				history.push("/home");
 			},
 			addtoUserGames: async () => {
 				const store = getStore();
@@ -298,9 +298,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				return setStore({ addedByPlayers: playerlist });
 			},
 			loadLists: pageNumber => {
-				fetch(
-					`https://api.rawg.io/api/games??key=${apiKey}&ordering=-metacritic&page=${pageNumber}&page_size=8`
-				)
+				fetch(`https://api.rawg.io/api/games?key=${apiKey}&ordering=-metacritic&page=${pageNumber}&page_size=8`)
 					.then(function(response) {
 						if (!response.ok) {
 							throw Error(response.statusText);
@@ -579,7 +577,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 						return response.json();
 					})
 					.then(responseAsJson => {
-						console.log("Success:", responseAsJson);
 						fetch(`${beURL}/user/${store.id}/backlog`)
 							.then(function(response) {
 								if (!response.ok) {
@@ -614,7 +611,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 						return response.json();
 					})
 					.then(responseAsJson => {
-						console.log("Success:", responseAsJson);
 						fetch(`${beURL}/user/${store.id}/backlog`)
 							.then(function(response) {
 								if (!response.ok) {
@@ -633,13 +629,12 @@ const getState = ({ getStore, getActions, setStore }) => {
 					})
 					.catch(error => console.error("Error:", error));
 			},
-			handlePreference: async (type, movement, value, type2) => {
+			handlePreference: async (type, movement, value, make, type2) => {
 				let store = getStore();
 				let actions = getActions();
-				console.log(type, movement, value, type2);
 				if (type == "platform") {
 					if (movement == "add") {
-						await fetch(`${beURL}/${store.id}/platforms`, {
+						await fetch(`${beURL}/user/${store.id}/platforms`, {
 							method: "POST",
 							headers: {
 								"Content-Type": "application/json"
@@ -656,7 +651,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 								response.json();
 							})
 							.then(response => {
-								actions.getPreference("platforms");
+								actions.getPreference(type).then(() => {
+									return make();
+								});
 							})
 							.catch(error => console.error("Error:", error));
 					}
@@ -673,8 +670,10 @@ const getState = ({ getStore, getActions, setStore }) => {
 								}
 								response.json();
 							})
-							.then(responseAsJson => {
-								actions.getPreference("platforms");
+							.then(response => {
+								actions.getPreference(type).then(() => {
+									return make();
+								});
 							})
 							.catch(error => console.error("Error:", error));
 					}
@@ -682,7 +681,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				if (type == "genre") {
 					if (movement == "add") {
 						if (type2 == "liked") {
-							await fetch(`${beURL}/${store.id}/genrelikes`, {
+							await fetch(`${beURL}/user/${store.id}/genrelikes`, {
 								method: "POST",
 								headers: {
 									"Content-Type": "application/json"
@@ -699,12 +698,14 @@ const getState = ({ getStore, getActions, setStore }) => {
 									return response.json();
 								})
 								.then(response => {
-									actions.getPreference(type, type2);
+									actions.getPreference(type, type2).then(() => {
+										return make();
+									});
 								})
 								.catch(error => console.error("Error:", error));
 						}
 						if (type2 == "disliked") {
-							await fetch(`${beURL}/${store.id}/genredislikes`, {
+							await fetch(`${beURL}/user/${store.id}/genredislikes`, {
 								method: "POST",
 								headers: {
 									"Content-Type": "application/json"
@@ -721,7 +722,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 									return response.json();
 								})
 								.then(response => {
-									actions.getPreference(type, type2);
+									actions.getPreference(type, type2).then(() => {
+										return make();
+									});
 								})
 								.catch(error => console.error("Error:", error));
 						}
@@ -740,8 +743,10 @@ const getState = ({ getStore, getActions, setStore }) => {
 									}
 									return response.json();
 								})
-								.then(responseAsJson => {
-									actions.getPreference("platforms");
+								.then(response => {
+									actions.getPreference(type, type2).then(() => {
+										return make();
+									});
 								})
 								.catch(error => console.error("Error:", error));
 						}
@@ -758,8 +763,10 @@ const getState = ({ getStore, getActions, setStore }) => {
 									}
 									return response.json();
 								})
-								.then(responseAsJson => {
-									actions.getPreference("platforms");
+								.then(response => {
+									actions.getPreference(type, type2).then(() => {
+										return make();
+									});
 								})
 								.catch(error => console.error("Error:", error));
 						}
@@ -768,7 +775,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				if (type == "tag") {
 					if (movement == "add") {
 						if (type2 == "liked") {
-							await fetch(`${beURL}/${store.id}/taglike`, {
+							await fetch(`${beURL}/user/${store.id}/taglike`, {
 								method: "POST",
 								headers: {
 									"Content-Type": "application/json"
@@ -785,12 +792,14 @@ const getState = ({ getStore, getActions, setStore }) => {
 									return response.json();
 								})
 								.then(response => {
-									actions.getPreference(type, type2);
+									actions.getPreference(type, type2).then(() => {
+										return make();
+									});
 								})
 								.catch(error => console.error("Error:", error));
 						}
 						if (type2 == "disliked") {
-							await fetch(`${beURL}/${store.id}/tagdislike`, {
+							await fetch(`${beURL}/user/${store.id}/tagdislike`, {
 								method: "POST",
 								headers: {
 									"Content-Type": "application/json"
@@ -807,7 +816,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 									return response.json();
 								})
 								.then(response => {
-									actions.getPreference(type, type2);
+									actions.getPreference(type, type2).then(() => {
+										return make();
+									});
 								})
 								.catch(error => console.error("Error:", error));
 						}
@@ -826,8 +837,10 @@ const getState = ({ getStore, getActions, setStore }) => {
 									}
 									return response.json();
 								})
-								.then(responseAsJson => {
-									actions.getPreference("tags", "liked");
+								.then(response => {
+									actions.getPreference(type, type2).then(() => {
+										return make();
+									});
 								})
 								.catch(error => console.error("Error:", error));
 						}
@@ -844,8 +857,10 @@ const getState = ({ getStore, getActions, setStore }) => {
 									}
 									return response.json();
 								})
-								.then(responseAsJson => {
-									actions.getPreference("tags", "disliked");
+								.then(response => {
+									actions.getPreference(type, type2).then(() => {
+										return make();
+									});
 								})
 								.catch(error => console.error("Error:", error));
 						}
@@ -853,8 +868,10 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 			},
 			getPreference: async (type, type2) => {
+				const store = getStore();
+				console.log(type, type2);
 				if (type == "platform") {
-					await fetch(`${beURL}/${store.id}/platforms`)
+					await fetch(`${beURL}/user/${store.id}/platforms`)
 						.then(function(response) {
 							if (!response.ok) {
 								throw Error(response.statusText);
@@ -904,42 +921,42 @@ const getState = ({ getStore, getActions, setStore }) => {
 							.catch(function(error) {
 								console.log("Looks like there was a problem: \n", error);
 							});
-						if (type == "tag") {
-							if (type2 == "liked") {
-								await fetch(`${beURL}/user/${store.id}/taglike`)
-									.then(function(response) {
-										if (!response.ok) {
-											throw Error(response.statusText);
-										}
-										// Read the response as json.
-										return response.json();
-									})
-									.then(function(responseAsJson) {
-										// Do stuff with the JSON
-										return setStore({ tags_liked: responseAsJson });
-									})
-									.catch(function(error) {
-										console.log("Looks like there was a problem: \n", error);
-									});
-							}
-							if (type2 == "disliked") {
-								await fetch(`${beURL}/user/${store.id}/tagdislike`)
-									.then(function(response) {
-										if (!response.ok) {
-											throw Error(response.statusText);
-										}
-										// Read the response as json.
-										return response.json();
-									})
-									.then(function(responseAsJson) {
-										// Do stuff with the JSON
-										return setStore({ tags_disliked: responseAsJson });
-									})
-									.catch(function(error) {
-										console.log("Looks like there was a problem: \n", error);
-									});
-							}
-						}
+					}
+				}
+				if (type == "tag") {
+					if (type2 == "liked") {
+						await fetch(`${beURL}/user/${store.id}/taglike`)
+							.then(function(response) {
+								if (!response.ok) {
+									throw Error(response.statusText);
+								}
+								// Read the response as json.
+								return response.json();
+							})
+							.then(function(responseAsJson) {
+								// Do stuff with the JSON
+								return setStore({ tags_liked: responseAsJson });
+							})
+							.catch(function(error) {
+								console.log("Looks like there was a problem: \n", error);
+							});
+					}
+					if (type2 == "disliked") {
+						await fetch(`${beURL}/user/${store.id}/tagdislike`)
+							.then(function(response) {
+								if (!response.ok) {
+									throw Error(response.statusText);
+								}
+								// Read the response as json.
+								return response.json();
+							})
+							.then(function(responseAsJson) {
+								// Do stuff with the JSON
+								return setStore({ tags_disliked: responseAsJson });
+							})
+							.catch(function(error) {
+								console.log("Looks like there was a problem: \n", error);
+							});
 					}
 				}
 			}

@@ -25,6 +25,14 @@ export const UserPreferenceUpdate = props => {
 		};
 		loadSearch();
 	}, []);
+	useEffect(() => {
+		const loadPreferences = () => {
+			actions.getPreference("platform");
+			actions.getPreference("genre");
+			actions.getPreference("tag");
+		};
+		loadPreferences();
+	}, [store.id]);
 	const sort = array => {
 		array.sort(function(a, b) {
 			var nameA = a.name.toUpperCase();
@@ -60,57 +68,66 @@ export const UserPreferenceUpdate = props => {
 			alert("Confirm Password and Password don't match");
 		}
 	};
+	const makePlatforms = () => {
+		let sortedplatforms = [];
+		sortedplatforms = store.platforms.map(value => {
+			return { id: value.id, name: value.name };
+		});
+		console.log(store.user_platforms.length);
+		if (store.user_platforms.length > 0) {
+			store.user_platforms.forEach(value => {
+				sortedplatforms = sortedplatforms.filter(platform => platform.id != value.platform_id);
+			});
+		}
+		setPlatforms(sort(sortedplatforms));
+	};
+	const makeGenres = () => {
+		let sortedgenres = [];
+		sortedgenres = store.genres.map(value => {
+			return { id: value.id, name: value.name };
+		});
+		if (store.genres_liked.length > 0) {
+			store.genres_liked.forEach(value => {
+				sortedgenres = sortedgenres.filter(genre => genre.id != value.genre_id);
+			});
+		}
+		if (store.genres_disliked.length > 0) {
+			store.genres_disliked.forEach(value => {
+				sortedgenres = sortedgenres.filter(genre => genre.id != value.genre_id);
+			});
+		}
+		setGenres(sort(sortedgenres));
+	};
+	const makeTags = () => {
+		let sortedtags = [];
+		sortedtags = store.tags.map(value => {
+			return { id: value.id, name: value.name };
+		});
+		if (store.tags_liked.length > 0) {
+			store.tags_liked.forEach(value => {
+				sortedtags = sortedtags.filter(tag => tag.id != value.tag_id);
+			});
+		}
+		if (store.tags_disliked.length > 0) {
+			store.tags_disliked.forEach(value => {
+				sortedtags = sortedtags.filter(tag => tag.id != value.tag_id);
+			});
+		}
+		setTags(sort(sortedtags));
+	};
 	useEffect(() => {
-		let makePlatforms = () => {
-			let sortedplatforms = [];
-			sortedplatforms = store.platforms.map(value => {
-				return { id: value.id, name: value.name };
-			});
-			if (userPlatforms.length > 0) {
-				userPlatforms.forEach(value => {
-					sortedplatforms = sortedplatforms.filter(platform => platform.id != value.platform_id);
-				});
-			}
-			setPlatforms(sort(sortedplatforms));
+		const setPreferences = () => {
+			// setTagsLiked(store.tags_liked);
+			// setTagsDisliked(store.tags_disliked);
+			// setUserPlatforms(store.user_platforms);
+			// setGenresLiked(store.genres_liked);
+			// setGenresDisliked(store.genres_disliked);
+			makeTags();
+			makePlatforms();
+			makeGenres();
 		};
-		let makeGenres = () => {
-			let sortedgenres = [];
-			sortedgenres = store.genres.map(value => {
-				return { id: value.id, name: value.name };
-			});
-			if (genres_liked.length > 0) {
-				genres_liked.forEach(value => {
-					sortedgenres = sortedgenres.filter(genre => genre.id != value.genre_id);
-				});
-			}
-			if (genres_disliked.length > 0) {
-				genres_disliked.forEach(value => {
-					sortedgenres = sortedgenres.filter(genre => genre.id != value.genre_id);
-				});
-			}
-			setGenres(sort(sortedgenres));
-		};
-		let makeTags = () => {
-			let sortedtags = [];
-			sortedtags = store.tags.map(value => {
-				return { id: value.id, name: value.name };
-			});
-			if (tags_liked.length > 0) {
-				liked.forEach(value => {
-					sortedtags = sortedtags.filter(tag => tag.id != value.tag_id);
-				});
-			}
-			if (tags_disliked.length > 0) {
-				disliked.forEach(value => {
-					sortedtags = sortedtags.filter(tag => tag.id != value.tag_id);
-				});
-			}
-			setTags(sort(sortedtags));
-		};
-		makePlatforms();
-		makeGenres();
-		makeTags();
-	}, [store.tags_liked, store.tags_disliked, store.platforms, store.genres_liked, store.genres_disliked]);
+		setPreferences();
+	}, [store.tags, store.platforms, store.genres]);
 	const renderStarted = props => (
 		<Tooltip id="button-tooltip" {...props}>
 			Games that you just started!
@@ -184,7 +201,9 @@ export const UserPreferenceUpdate = props => {
 											id="hover"
 											className="fas fa-trophy transform mouse"
 											style={{ float: "right" }}
-											onClick={e => actions.handlePreference("platform", "add", value)}
+											onClick={e =>
+												actions.handlePreference("platform", "add", value, makePlatforms)
+											}
 										/>
 									</ListGroup.Item>
 								);
@@ -196,16 +215,18 @@ export const UserPreferenceUpdate = props => {
 					<Card id="tags" className="center" bg="light">
 						<Card.Header>User Platforms</Card.Header>
 						<ListGroup id="tagsContent" variant="flush">
-							{userPlatforms.map((value, index) => {
+							{store.user_platforms.map((value, index) => {
 								return (
 									<ListGroup.Item key={index} style={{ color: "black" }} variant="light">
 										<i
 											id="hover"
 											className="far fa-circle transform mouse"
 											style={{ float: "left" }}
-											onClick={e => actions.handlePreference("platform", "delete", value)}
+											onClick={e =>
+												actions.handlePreference("platform", "delete", value, makePlatforms)
+											}
 										/>
-										{value.name}
+										{value.platform_name}
 									</ListGroup.Item>
 								);
 							})}
@@ -218,15 +239,17 @@ export const UserPreferenceUpdate = props => {
 					<Card bg="light" className="detail" id="tags">
 						<Card.Header>Liked</Card.Header>
 						<ListGroup id="tagsContent" variant="flush">
-							{genres_liked.map((value, index) => {
+							{store.genres_liked.map((value, index) => {
 								return (
 									<ListGroup.Item key={index} style={{ color: "black" }} variant="light">
-										{value.name}
+										{value.genre_name}
 										<i
 											id="hover"
 											className="far fa-circle transform mouse"
 											style={{ float: "right" }}
-											onClick={e => actions.handlePreference("genre", "delete", value, "liked")}
+											onClick={e =>
+												actions.handlePreference("genre", "delete", value, makeGenres, "liked")
+											}
 										/>
 									</ListGroup.Item>
 								);
@@ -245,14 +268,18 @@ export const UserPreferenceUpdate = props => {
 											id="hover"
 											className="fas fa-trophy transform mouse"
 											style={{ float: "left" }}
-											onClick={e => actions.handlePreference("genre", "add", value, "liked")}
+											onClick={e =>
+												actions.handlePreference("genre", "add", value, makeGenres, "liked")
+											}
 										/>
 										{value.name}
 										<i
 											id="hover"
 											className="fas fa-skull transform mouse"
 											style={{ float: "right" }}
-											onClick={e => actions.handlePreference("genre", "add", value, "disliked")}
+											onClick={e =>
+												actions.handlePreference("genre", "add", value, makeGenres, "disliked")
+											}
 										/>
 									</ListGroup.Item>
 								);
@@ -264,7 +291,7 @@ export const UserPreferenceUpdate = props => {
 					<Card bg="light" className="detail" id="tags">
 						<Card.Header>Disliked</Card.Header>
 						<ListGroup id="tagsContent" variant="flush">
-							{genres_disliked.map((value, index) => {
+							{store.genres_disliked.map((value, index) => {
 								return (
 									<ListGroup.Item key={index} style={{ color: "black" }} variant="light">
 										<i
@@ -272,10 +299,16 @@ export const UserPreferenceUpdate = props => {
 											className="far fa-circle transform mouse"
 											style={{ float: "left" }}
 											onClick={e =>
-												actions.handlePreference("genre", "delete", value, "disliked")
+												actions.handlePreference(
+													"genre",
+													"delete",
+													value,
+													makeGenres,
+													"disliked"
+												)
 											}
 										/>
-										{value.name}
+										{value.genre_name}
 									</ListGroup.Item>
 								);
 							})}
@@ -288,15 +321,17 @@ export const UserPreferenceUpdate = props => {
 					<Card bg="light" className="detail" id="tags">
 						<Card.Header>Liked</Card.Header>
 						<ListGroup id="tagsContent" variant="flush">
-							{tags_liked.map((value, index) => {
+							{store.tags_liked.map((value, index) => {
 								return (
 									<ListGroup.Item key={index} style={{ color: "black" }} variant="light">
-										{value.name}
+										{value.tag_name}
 										<i
 											id="hover"
 											className="far fa-circle transform mouse"
 											style={{ float: "right" }}
-											onClick={e => actions.handlePreference("tag", "delete", value, "liked")}
+											onClick={e =>
+												actions.handlePreference("tag", "delete", value, makeTags, "liked")
+											}
 										/>
 									</ListGroup.Item>
 								);
@@ -315,14 +350,18 @@ export const UserPreferenceUpdate = props => {
 											id="hover"
 											className="fas fa-trophy transform mouse"
 											style={{ float: "left" }}
-											onClick={e => actions.handlePreference("tag", "add", value, "liked")}
+											onClick={e =>
+												actions.handlePreference("tag", "add", value, makeTags, "liked")
+											}
 										/>
 										{value.name}
 										<i
 											id="hover"
 											className="fas fa-skull transform mouse"
 											style={{ float: "right" }}
-											onClick={e => actions.handlePreference("tag", "add", value, "disliked")}
+											onClick={e =>
+												actions.handlePreference("tag", "add", value, makeTags, "disliked")
+											}
 										/>
 									</ListGroup.Item>
 								);
@@ -334,16 +373,18 @@ export const UserPreferenceUpdate = props => {
 					<Card bg="light" className="detail" id="tags">
 						<Card.Header>Disliked</Card.Header>
 						<ListGroup id="tagsContent" variant="flush">
-							{tags_disliked.map((value, index) => {
+							{store.tags_disliked.map((value, index) => {
 								return (
 									<ListGroup.Item key={index} style={{ color: "black" }} variant="light">
 										<i
 											id="hover"
 											className="far fa-circle transform mouse"
 											style={{ float: "left" }}
-											onClick={e => actions.handlePreference("tag", "delete", value, "disliked")}
+											onClick={e =>
+												actions.handlePreference("tag", "delete", value, makeTags, "disliked")
+											}
 										/>
-										{value.name}
+										{value.tag_name}
 									</ListGroup.Item>
 								);
 							})}

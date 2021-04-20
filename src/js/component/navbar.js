@@ -56,6 +56,7 @@ export const Navbar = () => {
 										className="card"
 										key={index}
 										game={value}
+										size={"smallCard"}
 										cleanSearch={e => setGameName("")}
 									/>
 								);
@@ -87,7 +88,7 @@ export const Navbar = () => {
 							<span>Preferences</span>
 						</button>
 					</Link>
-					<button className="btn btn-light navButton" onClick={e => actions.logout()} id="hover">
+					<button className="btn btn-light navButton" onClick={e => actions.logout(history)} id="hover">
 						<span>Logout</span>
 					</button>
 				</div>
