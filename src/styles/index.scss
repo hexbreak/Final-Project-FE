@@ -55,13 +55,9 @@
     max-width: 18rem;
     max-height: 10rem;
 }
-.navButton{
-    width: 8rem !important;
+.searchbar{
+    display: none;
 }
-.searchButton{
-    width: 6rem !important;
-}
-
 
 #card{
     color: rgb(252, 252, 252);
@@ -293,6 +289,7 @@ h2{
     font-weight: 600;
     font-family: 'Bebas Neue', cursive;
       background: -webkit-linear-gradient(45deg, #09009f, #00ff95 80%);
+      background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   filter: drop-shadow(2px 2px #333);
@@ -458,6 +455,7 @@ font-family: 'Fira Sans', sans-serif;
 }
 .nav-link{
     background: -webkit-linear-gradient(90deg, #0700b8 0%, #00ff88 100%);
+    background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
       &:hover{
@@ -520,6 +518,7 @@ font-family: 'Fira Sans', sans-serif;
     background: -webkit-linear-gradient(
 45deg
 , #09009f, #00ff95 80%);
+background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
@@ -592,6 +591,7 @@ th {
     font-weight: 600;
     font-family: 'Bebas Neue', cursive;
       background: linear-gradient(147deg, #fa8a56 0%, #FF2525 85%);
+      background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
@@ -599,6 +599,7 @@ th {
     font-weight: 600;
     font-family: 'Bebas Neue', cursive;
       background: linear-gradient(0deg, #08AEEA 0%, #2AF598 100%);
+      background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
@@ -606,6 +607,7 @@ th {
     font-weight: 600;
     font-family: 'Bebas Neue', cursive;
       background: linear-gradient(62deg, #FBAB7E 0%, #F7CE68 100%);
+      background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
@@ -613,6 +615,7 @@ th {
     font-weight: 600;
     font-family: 'Bebas Neue', cursive;
       background: linear-gradient(62deg, #b4afac 0%, #bebebe 100%);
+      background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
@@ -658,4 +661,31 @@ th {
 }
 .smallCard{
     top: 71%;
+}
+.navbar{
+    width: 100%
+}
+.bigScreen{
+    display: none;
+}
+@media only screen and (min-width: 768px){
+    .searchbar{
+        display: block;
+        width: 50rem;
+    }
+    .searchButton{
+        width: 6rem !important;
+    }
+    .navButton{
+        width: 8rem !important;
+    }
+    .navRight{
+        margin-right: 1rem
+    }
+    .bigScreen{
+        display: block;
+    }
+    .smallScreen{
+        display:none;
+    }
 }
