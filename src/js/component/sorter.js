@@ -18,13 +18,14 @@ export const Sorter = props => {
 					<Button
 						id="ascendingbtn"
 						variant="primary"
+						className="btn-fontsize"
 						onClick={
 							props.inverted == false ? e => props.setInverted(true) : e => props.setInverted(false)
 						}>
 						{props.inverted == false ? (
-							<i className="fas fa-sort-up" />
+							<i className="fas fa-sort-up btn-fontsize" />
 						) : (
-							<i className="fas fa-sort-down" />
+							<i className="fas fa-sort-down btn-fontsize" />
 						)}
 					</Button>
 					{store.id > 0 && (
@@ -38,7 +39,7 @@ export const Sorter = props => {
 					)}
 				</div>
 				<DropdownButton
-					className="center"
+					className="center btn-fontsize"
 					variant="success"
 					title={props.sortKey.charAt(0).toUpperCase() + props.sortKey.slice(1)}>
 					<Dropdown.Item variant="dark" onClick={e => handleSort("name")}>

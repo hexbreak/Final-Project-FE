@@ -14,8 +14,8 @@ export const UserLogin = props => {
 	};
 	return (
 		<Container className="space blue">
-			<Row>
-				<Col>
+			<Row className="justify-content-center">
+				<Col sm={11} md={7}>
 					{store.errors.loginError == true && (
 						<Alert className="marginError center" variant="danger">
 							The username or password is incorrect, if you don&apos;t own an account please
@@ -24,7 +24,6 @@ export const UserLogin = props => {
 					)}
 					<Container
 						id="userForm"
-						style={{ width: "40rem" }}
 						className={
 							store.errors.loginError == false ? "marginLogin center" : "marginLoginwError center"
 						}>

@@ -44,7 +44,7 @@ export const Home = () => {
 							</Col>
 						</Row>
 						<Container fluid className="white">
-							<Row style={{ marginTop: "13rem" }} className="spacing">
+							<Row style={{ marginTop: "2rem" }} className="spacing">
 								<Col style={{ marginTop: "2rem" }} className="center">
 									<h2 className="subtitle center">Sortable Games</h2>
 									<div className="center content">
@@ -98,7 +98,7 @@ export const Home = () => {
 									</Row>
 								</Col>
 							</Row>
-							<Row className="spacing">
+							<Row fluid className="spacing">
 								<Col>
 									<h2 className="subtitle center">Metacritic Rating</h2>
 									<Row className="scroller fit center content">

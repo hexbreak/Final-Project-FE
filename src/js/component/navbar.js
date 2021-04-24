@@ -73,7 +73,7 @@ export const Navbar = () => {
 					</button>
 					<button
 						className="btn btn-light navButton navRight"
-						onClick={e => history.push("/userpreference")}
+						onClick={e => history.push("/editpreference")}
 						id="hover">
 						<span>Preferences</span>
 					</button>
@@ -109,14 +109,14 @@ export const Navbar = () => {
 						<Dropdown.Item
 							className="btn btn-light navButton"
 							id="hover"
-							onClick={e => history.push("/userpreference")}>
+							onClick={e => history.push("/editpreference")}>
 							Preferences
 						</Dropdown.Item>
 						<Dropdown.Item
 							className="btn btn-light navButton"
 							id="hover"
 							onClick={e => actions.logout(history)}>
-							Something else
+							Logout
 						</Dropdown.Item>
 					</Dropdown.Menu>
 				</Dropdown>

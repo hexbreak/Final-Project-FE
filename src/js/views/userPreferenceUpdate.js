@@ -1,22 +1,15 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Context } from "../store/appContext";
 import { useHistory } from "react-router-dom";
-import { Container, Row, Col, Card, Form, ListGroup, Button, Tooltip } from "react-bootstrap";
+import { Container, Row, Col, Card, Form, ListGroup } from "react-bootstrap";
 
 export const UserPreferenceUpdate = props => {
 	const { store, actions } = useContext(Context);
 	const [newPassword, setNewPassword] = useState("");
 	const [confirmPassword, setConfirmPassword] = useState("");
 	const [tags, setTags] = useState([]);
-	const [tags_liked, setTagsLiked] = useState(store.tags_liked);
-	const [tags_disliked, setTagsDisliked] = useState(store.tags_disliked);
 	const [genres, setGenres] = useState([]);
-	const [genres_liked, setGenresLiked] = useState(store.genres_liked);
-	const [genres_disliked, setGenresDisliked] = useState(store.genres_disliked);
 	const [platforms, setPlatforms] = useState([]);
-	const [userPlatforms, setUserPlatforms] = useState(store.user_platforms);
-
-	let history = useHistory();
 	useEffect(() => {
 		const loadSearch = () => {
 			actions.loadTags("40");
@@ -47,26 +40,6 @@ export const UserPreferenceUpdate = props => {
 			return 0;
 		});
 		return array;
-	};
-	const handleSave = () => {
-		if (confirmPassword === newPassword) {
-			var user = {
-				...store.user,
-				password: !!confirmPassword ? newPassword : store.password,
-				about: about,
-				image: image,
-				platforms: [platform1, platform2, platform3],
-				liked: liked,
-				disliked: disliked
-			};
-			actions.handleSave(user);
-			history.push("/profile");
-			window.scrollTo(0, 0);
-		} else {
-			setNewPassword("");
-			setConfirmPassword("");
-			alert("Confirm Password and Password don't match");
-		}
 	};
 	const makePlatforms = () => {
 		let sortedplatforms = [];
@@ -117,32 +90,12 @@ export const UserPreferenceUpdate = props => {
 	};
 	useEffect(() => {
 		const setPreferences = () => {
-			// setTagsLiked(store.tags_liked);
-			// setTagsDisliked(store.tags_disliked);
-			// setUserPlatforms(store.user_platforms);
-			// setGenresLiked(store.genres_liked);
-			// setGenresDisliked(store.genres_disliked);
 			makeTags();
 			makePlatforms();
 			makeGenres();
 		};
 		setPreferences();
 	}, [store.tags, store.platforms, store.genres]);
-	const renderStarted = props => (
-		<Tooltip id="button-tooltip" {...props}>
-			Games that you just started!
-		</Tooltip>
-	);
-	const renderFinished = props => (
-		<Tooltip id="button-tooltip" {...props}>
-			Games that you finished!
-		</Tooltip>
-	);
-	const renderCompleted = props => (
-		<Tooltip id="button-tooltip" {...props}>
-			Games that you finished and completed all achivements/content!
-		</Tooltip>
-	);
 	return (
 		<Container style={{ backgroundSize: "cover" }} className="space">
 			<Row>
@@ -153,11 +106,36 @@ export const UserPreferenceUpdate = props => {
 					<Card.Body>
 						<Form>
 							<Form.Row>
-								<Form.Group as={Col} controlId="formGridEmail">
+								<Form.Group as={Col} className="bigScreen" controlId="formGridEmail">
 									<Form.Label>Username</Form.Label>
 									<Form.Control disabled type="email" placeholder={store.username} />
 								</Form.Group>
-
+								<Form.Group as={Col} className="bigScreen" controlId="formGridPassword">
+									<Form.Label>New Password</Form.Label>
+									<Form.Control
+										type="password"
+										placeholder="Password"
+										defaultValue={newPassword}
+										onChange={e => setNewPassword(e.target.value)}
+									/>
+								</Form.Group>
+								<Form.Group as={Col} className="bigScreen" controlId="formGridPassword">
+									<Form.Label>Confirm New Password</Form.Label>
+									<Form.Control
+										type="password"
+										placeholder="Password"
+										defaultValue={confirmPassword}
+										onChange={e => setConfirmPassword(e.target.value)}
+									/>
+								</Form.Group>
+							</Form.Row>
+							<Form.Row className="smallScreen">
+								<Form.Group as={Col} controlId="formGridEmail">
+									<Form.Label>Username</Form.Label>
+									<Form.Control disabled type="text" placeholder={store.username} />
+								</Form.Group>
+							</Form.Row>
+							<Form.Row className="smallScreen">
 								<Form.Group as={Col} controlId="formGridPassword">
 									<Form.Label>New Password</Form.Label>
 									<Form.Control
@@ -167,7 +145,8 @@ export const UserPreferenceUpdate = props => {
 										onChange={e => setNewPassword(e.target.value)}
 									/>
 								</Form.Group>
-
+							</Form.Row>
+							<Form.Row className="smallScreen">
 								<Form.Group as={Col} controlId="formGridPassword">
 									<Form.Label>Confirm New Password</Form.Label>
 									<Form.Control

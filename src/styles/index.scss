@@ -14,16 +14,26 @@
     max-width: 50em;
     max-height: 30em;
 }
+h1{
+    font-size: 1.5rem;
+}
+h3{
+    font-size: 1.3rem;
+}
+h4{
+    font-size: 1rem;
+}
+h5{
+    font-size: 1rem;
+}
 .scroller{
     display: flex;
-    background-image: gray;
-    width: 91rem;
-    height: 13rem;
+    width: 18rem;
     overflow: visible;
 }
 .card{
-    width: 20rem;
-    height: 20rem;
+    width: 7rem;
+    height: 7rem;
     flex: 0 0 auto;
     margin-top: 1rem;
 }
@@ -68,7 +78,6 @@
         
     }
 }
-
 #hover-logo{
     color: black;
     transition: color 300ms ease-in-out;
@@ -112,10 +121,9 @@
 //buttons
 #toggletags{
     margin-left: 1rem;
-    background: transparent;
+    background: white;
     border: 10px solid;
     border-image-slice: 1;
-    font-size: 1.2rem;
     border-width: 5px;
     border-image-source: linear-gradient(180deg, rgba(89,123,255,1) 0%, rgba(122,255,180,1) 100%);
     color: rgb(58, 66, 141);
@@ -163,14 +171,13 @@
     }
 }
 #ascendingbtn{
-    background: transparent;
+    background: white;
     border: 10px solid;
     border-image-slice: 1;
     border-width: 5px;
     border-image-source: linear-gradient(90deg, rgba(150,255,201,1) 0%, rgba(170,225,255,1) 100%);
     box-shadow: 5px 5px 5px grey !important;
     color: rgb(58, 66, 141);
-    font-size: 1.2rem;
     &:hover {
         color: white;
         background: rgb(170,225,255);
@@ -194,13 +201,15 @@
         padding: 0.7rem 1rem 0.7rem 1rem;
     }
 }
+.btn-fontsize{
+    font-size: 1rem;
+}
 .btn-dark{
     color: rgb(58, 66, 141);
     background-color: rgb(106,255,179);
     background: radial-gradient(circle, rgb(150, 247, 197) 0%, rgb(157, 201, 255) 100%);
     border-color: transparent !important;
     box-shadow: 5px 5px 5px grey !important;
-    font-size: 1.2rem;
     &:hover{
         background-color: rgb(92,235,161);
         background: radial-gradient(circle, rgba(92,235,161,1) 0%, rgba(16,53,97,1) 100%);
@@ -223,13 +232,13 @@
 }
 .btn-success{
     color: rgb(58, 66, 141);
-    background: transparent;
+    background: white;
     border: 10px solid;
     border-image-slice: 1;
     border-width: 5px;
     border-image-source: radial-gradient(circle, rgb(150, 247, 197) 0%, rgb(157, 201, 255) 100%);
     box-shadow: 5px 5px 5px grey !important;
-    font-size: 1.2rem;
+    font-size: 1rem;
     &:hover{
         background-color: rgb(92,235,161);
         background: radial-gradient(circle, rgba(92,235,161,1) 0%, rgba(16,53,97,1) 100%);
@@ -259,8 +268,7 @@
 }
 .btn-danger{
     color: rgb(58, 66, 141);
-    background: transparent;
-    font-size: 1.2rem;
+    background: white;
     border: 10px solid;
     border-image-slice: 1;
     border-width: 5px;
@@ -356,23 +364,18 @@ img{
     height: 100%;
     object-fit:cover;
 }
-.w-100 {
-  width: 100% !important;
-  height: 47rem;
-}
 .achivement {
     max-width: 5rem;
     max-height: 5rem;
 }
 .website {
-    font-size: 5rem;
+    font-size: 2rem;
     margin-left: 1rem;
     color: lightgray;
 }
 .btn-group{
     white-space: normal;
 }
-
 //tags
 
 #tags{
@@ -398,20 +401,26 @@ font-family: 'Fira Sans', sans-serif;
 .content{
     margin-top: 3rem
 }
-#detailsCard{
-    width: 13rem;
-    height: 13rem;
-}
 
 //detailsPage
 #detailsGameCardsRow{
     overflow: auto;
-    width: 95em;
+    width: 20em;
     max-height: 15rem;
 }
-.details-image{
-    height: 613px;
-    width: 1110px;
+.details-image {
+    height: 332px;
+    width: 281px;
+}
+.details-title{
+    margin: 1.5rem 0px;
+}
+.details-description{
+    line-height: 1.8rem;
+    font-size: 11px;
+}
+.details-navpills{
+    font-size: 1rem;
 }
 .detailsborders{
     border: 10px solid;
@@ -438,11 +447,15 @@ font-family: 'Fira Sans', sans-serif;
     box-shadow: 5px 5px 5px grey !important;
 }
 .detailsNumbers{
-    font-size: 3rem;
+    font-size: 2rem;
     border-radius: 50%;
 }
 .detailspace{
     margin-top: 2rem
+}
+#detailsCard{
+    width: 7rem;
+    height: 14rem;
 }
 .store {
     width: 10rem;
@@ -470,7 +483,13 @@ font-family: 'Fira Sans', sans-serif;
     background-color: white;
     box-shadow: 5px 5px 5px grey;
 }
-
+.user-games-navpills{
+    font-size: 12px;
+}
+#user-games-card{
+    width: 6rem !important;
+    height: 9rem !important;
+}
 //profilePage
 .container-profile {
     margin-top: 1rem;
@@ -634,7 +653,7 @@ th {
 }
 .formTitle{
     font-family: 'Roboto', sans-serif;
-    font-size: 2.3rem
+    font-size: 1.7rem
 }
 .white{
     background-color: rgb(255, 255, 255);
@@ -653,8 +672,8 @@ th {
     position: absolute;
     font-size: 2rem;
 }
-.bigCard{
-    top: 85%;
+.bigCard {
+    top: 61%;
 }
 .mediumCard{
     top: 77%;
@@ -667,6 +686,13 @@ th {
 }
 .bigScreen{
     display: none;
+}
+.w-100{
+    width: 100% !important;
+    height: 29rem;
+}
+.col-3{
+    max-width: 100%
 }
 @media only screen and (min-width: 768px){
     .searchbar{
@@ -687,5 +713,82 @@ th {
     }
     .smallScreen{
         display:none;
+    }
+    .w-100{
+        height: 47rem;
+        width: 90rem;
+    }
+    .carousel{
+        height: 47rem;
+        width: 100%;        
+    }
+    .scroller{
+        display: flex;
+        width: 91rem;
+        overflow: visible;
+    }
+    .card{
+        width: 20rem;
+        height: 20rem;
+        flex: 0 0 auto;
+        margin-top: 1rem;
+    }
+    .details-image{
+        height: 613px;
+        width: 1110px;
+    }
+    .details-description {
+        line-height: 1.9rem;
+        font-size: 1.1rem;
+    }
+    .details-title{
+        margin: 1.5rem 0px;
+    }
+    #detailsCard{
+        width: 13rem;
+        height: 13rem;
+    }
+    #detailsGameCardsRow{
+        overflow: auto;
+        width: 95em;
+        max-height: 15rem;
+    }
+    .detailsNumbers{
+        font-size: 3rem;
+        border-radius: 50%;
+    }
+    h1{
+        font-size: 2.5rem
+    }
+    h3{
+        font-size: 1.75rem;
+    }
+    h4{
+        font-size: 1.5rem;
+    }
+    h5{
+        font-size: 1.25rem;
+    }
+    .btn-fontsize{
+        font-size: 1.2rem;
+    }
+    .btn-success{
+        font-size: 1.2rem;
+    }
+    .bigCard{
+        top: 85%;
+    }
+    .website {
+        font-size: 5rem;
+    }
+    .col-md-1 {
+        max-width: 15%;
+    }
+    .user-games-navpills{
+        font-size: 1.5rem;
+    }
+    #user-games-card{
+        width: 19rem !important;
+        height: 19rem !important;
     }
 }

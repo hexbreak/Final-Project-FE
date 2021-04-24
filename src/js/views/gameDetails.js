@@ -77,9 +77,9 @@ export const GameDetails = props => {
 				Add to new games!
 			</Tooltip>
 		);
-		const renderProgress = props => (
+		const renderPlaying = props => (
 			<Tooltip id="button-tooltip" {...props}>
-				Add to games on progress!
+				Add to games playing!
 			</Tooltip>
 		);
 		const renderFinished = props => (
@@ -122,8 +122,8 @@ export const GameDetails = props => {
 								alt="First slide"
 							/>
 						</div>
-						<h1 style={{ margin: "1.5rem 0 1.5rem 0" }}>{store.game.name}</h1>
-						<p style={{ lineHeight: "1.8rem" }}>{store.game.description_raw}</p>
+						<h1 className="details-title">{store.game.name}</h1>
+						<p className="details-description">{store.game.description_raw}</p>
 					</Container>
 				</Jumbotron>
 				<Container fluid className="white">
@@ -205,8 +205,8 @@ export const GameDetails = props => {
 									<OverlayTrigger
 										placement="top"
 										delay={{ show: 250, hide: 400 }}
-										overlay={renderProgress}>
-										{store.check[0].game_status == "progress" ? (
+										overlay={renderPlaying}>
+										{store.check[0].game_status == "playing" ? (
 											<Button
 												id="toggletags"
 												variant="secondary"
@@ -217,7 +217,7 @@ export const GameDetails = props => {
 											<Button
 												id="toggletags"
 												variant="secondary"
-												onClick={e => actions.editUserGames(store.id, "progress")}>
+												onClick={e => actions.editUserGames(store.id, "playing")}>
 												<i className="fas fa-screwdriver center" />
 											</Button>
 										)}
@@ -446,7 +446,11 @@ export const GameDetails = props => {
 										)}
 
 										{store.game.website != "" && (
-											<a target="_blank" rel="noreferrer" href={store.game.website}>
+											<a
+												target="_blank"
+												rel="noreferrer"
+												style={{ marginLeft: "1rem" }}
+												href={store.game.website}>
 												<i className="fas fa-window-restore website" />
 											</a>
 										)}

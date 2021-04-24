@@ -9,8 +9,7 @@ export const GameCarousel = () => {
 	var history = useHistory();
 
 	return (
-		<Carousel
-			style={{ height: "40rem", width: "90rem", boxShadow: "-0.813rem 5.313rem 1.125rem rgb(0 0 0 / 47%)" }}>
+		<Carousel className="homeCarrousel">
 			{store.gameList.map((value, index) => {
 				return (
 					<Carousel.Item key={index}>
