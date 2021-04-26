@@ -4,21 +4,19 @@
 @import "~bootstrap/scss/bootstrap";
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Fira+Sans:ital@1&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@300&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Cabin&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@400;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@500&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap');
 
-.gameimg{
-    max-width: 50em;
-    max-height: 30em;
-}
 h1{
     font-size: 1.5rem;
+    font-family: 'Oswald', sans-serif;
 }
 h3{
     font-size: 1.3rem;
+    font-family: 'Oswald', sans-serif;
 }
 h4{
     font-size: 1rem;
@@ -26,13 +24,24 @@ h4{
 h5{
     font-size: 1rem;
 }
+.game-card-title{
+    font-family: 'Oswald', sans-serif;
+}
 .scroller{
     display: flex;
-    width: 18rem;
+    width: 100%;
     overflow: visible;
 }
+.background-full{
+    background: radial-gradient(circle, rgb(174, 238, 205) 0%, rgb(148, 187, 233) 100%);
+    padding-bottom: 3rem;
+}
+.cover{
+    width: 100%;
+    height: 100%
+}
 .card{
-    width: 7rem;
+    width: 100%;
     height: 7rem;
     flex: 0 0 auto;
     margin-top: 1rem;
@@ -62,17 +71,19 @@ h5{
     background-color: none;
 }
 #navCard{
-    max-width: 18rem;
+    max-width: 75%;
     max-height: 10rem;
 }
-.searchbar{
+.search-bar{
     display: none;
 }
-
+.fa-times{
+    cursor: pointer;
+}
 #card{
-    color: rgb(252, 252, 252);
+    color: #e2e2e2;
     transition: color 300ms ease-in-out;
-    
+    overflow: hidden;
     &:hover {
         color: rgb(153, 255, 179);
         
@@ -120,13 +131,15 @@ h5{
 
 //buttons
 #toggletags{
-    margin-left: 1rem;
+    font-family: 'Oswald', sans-serif;
     background: white;
     border: 10px solid;
     border-image-slice: 1;
     border-width: 5px;
     border-image-source: linear-gradient(180deg, rgba(89,123,255,1) 0%, rgba(122,255,180,1) 100%);
     color: rgb(58, 66, 141);
+    width: 100%;
+    margin: 1rem 0;
     box-shadow: 5px 5px 5px grey !important;
     &:hover {
         background: rgb(122,255,180);
@@ -204,6 +217,12 @@ h5{
 .btn-fontsize{
     font-size: 1rem;
 }
+.btn-font{
+    font-family: 'Oswald', sans-serif;
+}
+.dropdown button{
+    width: 100%;
+}
 .btn-dark{
     color: rgb(58, 66, 141);
     background-color: rgb(106,255,179);
@@ -232,6 +251,7 @@ h5{
 }
 .btn-success{
     color: rgb(58, 66, 141);
+    font-family: 'Oswald', sans-serif;
     background: white;
     border: 10px solid;
     border-image-slice: 1;
@@ -268,6 +288,11 @@ h5{
 }
 .btn-danger{
     color: rgb(58, 66, 141);
+    width: 100%;
+    font-size: 1.5rem;
+    letter-spacing: 1px;
+    font-weight: 600;
+    font-family: 'Bebas Neue', cursive;
     background: white;
     border: 10px solid;
     border-image-slice: 1;
@@ -293,6 +318,7 @@ h5{
 }
 //h2 
 h2{
+    letter-spacing: 1px;
     font-size: 2.1875rem;
     font-weight: 600;
     font-family: 'Bebas Neue', cursive;
@@ -303,7 +329,10 @@ h2{
   filter: drop-shadow(2px 2px #333);
   
 }
-
+.login-modal{
+    font-size: 1.2rem;
+    margin: 1rem; 
+}
 //banner
 #banner-font{
     margin-bottom: 0;
@@ -364,7 +393,7 @@ img{
     height: 100%;
     object-fit:cover;
 }
-.achivement {
+.achievement-img {
     max-width: 5rem;
     max-height: 5rem;
 }
@@ -379,7 +408,7 @@ img{
 //tags
 
 #tags{
-    width: 18rem;
+    width: 100%;
     height: 30rem;
 }
 #tagsContent{
@@ -403,14 +432,14 @@ font-family: 'Fira Sans', sans-serif;
 }
 
 //detailsPage
-#detailsGameCardsRow{
+#details-games{
     overflow: auto;
-    width: 20em;
+    width: 90%;
     max-height: 15rem;
 }
 .details-image {
-    height: 332px;
-    width: 281px;
+    height: 100%;
+    width: 100%;
 }
 .details-title{
     margin: 1.5rem 0px;
@@ -418,6 +447,11 @@ font-family: 'Fira Sans', sans-serif;
 .details-description{
     line-height: 1.8rem;
     font-size: 11px;
+}
+#details-games-row{
+    overflow: auto;
+    width: 90%;
+    max-height: 15rem;
 }
 .details-navpills{
     font-size: 1rem;
@@ -450,12 +484,12 @@ font-family: 'Fira Sans', sans-serif;
     font-size: 2rem;
     border-radius: 50%;
 }
-.detailspace{
+.details-space{
     margin-top: 2rem
 }
-#detailsCard{
-    width: 7rem;
-    height: 14rem;
+#details-card{
+    width: 90%;
+    height: 10rem;
 }
 .store {
     width: 10rem;
@@ -666,7 +700,7 @@ th {
 }
 .marginError{
     margin-top: 3rem;
-    width: 44rem;
+    width: 100%;
 }
 .cardFilters {
     position: absolute;
@@ -684,7 +718,7 @@ th {
 .navbar{
     width: 100%
 }
-.bigScreen{
+.screen-big{
     display: none;
 }
 .w-100{
@@ -694,48 +728,53 @@ th {
 .col-3{
     max-width: 100%
 }
+.screen-medium{
+    display:none;
+}
 @media only screen and (min-width: 768px){
-    .searchbar{
+    .nav-search{
+        width: 40%;
+        display: flex;
+    }
+    .screen-medium{
+        display:flex;
+    }
+    .screen-medium-off{
+        display: none;
+    }
+    .search-bar{
         display: block;
-        width: 50rem;
+        width: 90%;
     }
-    .searchButton{
-        width: 6rem !important;
+    .search-button{
+        width: 10% !important;
     }
-    .navButton{
-        width: 8rem !important;
+    .nav-buttons{
+        width: 41% !important;
+        float: right;
+        font-family: 'Oswald', sans-serif;
     }
-    .navRight{
-        margin-right: 1rem
-    }
-    .bigScreen{
-        display: block;
-    }
-    .smallScreen{
-        display:none;
+    .nav-buttons button{
+        float: right;
+        width: 27%;
+        margin: 0 1rem
     }
     .w-100{
-        height: 47rem;
-        width: 90rem;
+        height: 50rem;
     }
     .carousel{
-        height: 47rem;
+        height: 50rem;
         width: 100%;        
     }
     .scroller{
         display: flex;
-        width: 91rem;
         overflow: visible;
     }
     .card{
-        width: 20rem;
+        width: 100%;
         height: 20rem;
         flex: 0 0 auto;
         margin-top: 1rem;
-    }
-    .details-image{
-        height: 613px;
-        width: 1110px;
     }
     .details-description {
         line-height: 1.9rem;
@@ -748,15 +787,28 @@ th {
         width: 13rem;
         height: 13rem;
     }
-    #detailsGameCardsRow{
-        overflow: auto;
-        width: 95em;
-        max-height: 15rem;
-    }
     .detailsNumbers{
         font-size: 3rem;
         border-radius: 50%;
     }
+    .bigCard{
+        top: 85%;
+    }
+    .website {
+        font-size: 5rem;
+    }
+    .col-md-1 {
+        max-width: 15%;
+    }
+    .user-games-navpills{
+        font-size: 1.5rem;
+    }
+    #user-games-card{
+        width: 19rem !important;
+        height: 19rem !important;
+    }
+}
+@media only screen and (min-width: 1270px){
     h1{
         font-size: 2.5rem
     }
@@ -775,20 +827,10 @@ th {
     .btn-success{
         font-size: 1.2rem;
     }
-    .bigCard{
-        top: 85%;
+    .screen-big{
+        display: block;
     }
-    .website {
-        font-size: 5rem;
-    }
-    .col-md-1 {
-        max-width: 15%;
-    }
-    .user-games-navpills{
-        font-size: 1.5rem;
-    }
-    #user-games-card{
-        width: 19rem !important;
-        height: 19rem !important;
+    .smallScreen{
+        display:none;
     }
 }

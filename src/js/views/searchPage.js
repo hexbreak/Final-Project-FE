@@ -76,7 +76,7 @@ export const SearchPage = props => {
 				paddingBottom: "3rem"
 			}}
 			className="space center">
-			<Row className="search-margin center bigScreen">
+			<Row className="search-margin center screen-big">
 				<Col>
 					{store.genres != null && (
 						<ToggleButtonGroup value={genres} type="checkbox" className="mb-2">
@@ -140,9 +140,9 @@ export const SearchPage = props => {
 				</Col>
 			</Row>
 			<Row className="search-margin center">
-				<Col sm={10}>
+				<Col>
 					<Row classNamer="justify-content-center">
-						<Col xs={10}>
+						<Col>
 							<input
 								type="text"
 								className="form-control center"
@@ -154,7 +154,7 @@ export const SearchPage = props => {
 								style={{ width: "100%" }}
 							/>
 						</Col>
-						<Col xs={1}>
+						<Col>
 							{gameName != "" && (
 								<i
 									className="fas fa-times float-left"

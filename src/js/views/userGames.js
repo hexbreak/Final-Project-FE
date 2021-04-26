@@ -79,7 +79,7 @@ export const UserGames = props => {
 											overlay={renderAll}>
 											<Nav.Link bg="light" variant="light" eventKey="all">
 												<Row>
-													<h4 className="user-games-navpills">All</h4>
+													<h1 className="user-games-navpills">All</h1>
 												</Row>
 												<Row>
 													<i className="fas fa-gamepad center" />
@@ -96,7 +96,7 @@ export const UserGames = props => {
 											overlay={renderNew}>
 											<Nav.Link bg="light" variant="light" eventKey="new">
 												<Row>
-													<h4 className="user-games-navpills">New</h4>
+													<h1 className="user-games-navpills">New</h1>
 												</Row>
 												<Row>
 													<i className="fas fa-star center" />
@@ -113,7 +113,7 @@ export const UserGames = props => {
 											overlay={renderPlaying}>
 											<Nav.Link bg="light" variant="light" eventKey="playing">
 												<Row>
-													<h4 className="user-games-navpills">Playing</h4>
+													<h1 className="user-games-navpills">Playing</h1>
 												</Row>
 												<Row>
 													<i className="fas fa-wrench center" />
@@ -130,7 +130,7 @@ export const UserGames = props => {
 											overlay={renderFinished}>
 											<Nav.Link bg="light" variant="light" eventKey="finished">
 												<Row>
-													<h4 className="user-games-navpills">Finished</h4>
+													<h1 className="user-games-navpills">Finished</h1>
 												</Row>
 												<Row>
 													<i className="fas fa-check-square center" />
@@ -147,7 +147,7 @@ export const UserGames = props => {
 											overlay={renderCompleted}>
 											<Nav.Link bg="light" variant="light" eventKey="completed">
 												<Row>
-													<h4 className="user-games-navpills">Completed</h4>
+													<h1 className="user-games-navpills">Completed</h1>
 												</Row>
 												<Row>
 													<i className="fas fa-trophy center" />
@@ -164,7 +164,7 @@ export const UserGames = props => {
 											overlay={renderFavorite}>
 											<Nav.Link bg="light" variant="light" eventKey="favorites">
 												<Row>
-													<h4 className="user-games-navpills">Favorites</h4>
+													<h1 className="user-games-navpills">Favorites</h1>
 												</Row>
 												<Row>
 													<i className="fas fa-heart center" />
@@ -181,7 +181,7 @@ export const UserGames = props => {
 											overlay={renderDropped}>
 											<Nav.Link bg="light" variant="light" eventKey="dropped">
 												<Row>
-													<h4 className="user-games-navpills">Dropped</h4>
+													<h1 className="user-games-navpills">Dropped</h1>
 												</Row>
 												<Row>
 													<i className="fas fa-thumbs-down center" />
@@ -198,7 +198,7 @@ export const UserGames = props => {
 											overlay={renderWishlist}>
 											<Nav.Link bg="light" variant="light" eventKey="wishlist">
 												<Row>
-													<h4 className="user-games-navpills">Wishlist</h4>
+													<h1 className="user-games-navpills">Wishlist</h1>
 												</Row>
 												<Row>
 													<i className="fas fa-hand-holding-usd center" />

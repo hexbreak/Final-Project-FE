@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Context } from "../store/appContext";
-import { useHistory } from "react-router-dom";
 import { Container, Row, Col, Card, Form, ListGroup } from "react-bootstrap";
 
 export const UserPreferenceUpdate = props => {
@@ -46,7 +45,6 @@ export const UserPreferenceUpdate = props => {
 		sortedplatforms = store.platforms.map(value => {
 			return { id: value.id, name: value.name };
 		});
-		console.log(store.user_platforms.length);
 		if (store.user_platforms.length > 0) {
 			store.user_platforms.forEach(value => {
 				sortedplatforms = sortedplatforms.filter(platform => platform.id != value.platform_id);
@@ -97,280 +95,302 @@ export const UserPreferenceUpdate = props => {
 		setPreferences();
 	}, [store.tags, store.platforms, store.genres]);
 	return (
-		<Container style={{ backgroundSize: "cover" }} className="space">
-			<Row>
-				<Card bg="light" style={{ width: "100%", height: "100%" }} className="mb-2">
-					<Card.Header>
-						<h5>User</h5>
-					</Card.Header>
-					<Card.Body>
-						<Form>
-							<Form.Row>
-								<Form.Group as={Col} className="bigScreen" controlId="formGridEmail">
-									<Form.Label>Username</Form.Label>
-									<Form.Control disabled type="email" placeholder={store.username} />
-								</Form.Group>
-								<Form.Group as={Col} className="bigScreen" controlId="formGridPassword">
-									<Form.Label>New Password</Form.Label>
-									<Form.Control
-										type="password"
-										placeholder="Password"
-										defaultValue={newPassword}
-										onChange={e => setNewPassword(e.target.value)}
-									/>
-								</Form.Group>
-								<Form.Group as={Col} className="bigScreen" controlId="formGridPassword">
-									<Form.Label>Confirm New Password</Form.Label>
-									<Form.Control
-										type="password"
-										placeholder="Password"
-										defaultValue={confirmPassword}
-										onChange={e => setConfirmPassword(e.target.value)}
-									/>
-								</Form.Group>
-							</Form.Row>
-							<Form.Row className="smallScreen">
-								<Form.Group as={Col} controlId="formGridEmail">
-									<Form.Label>Username</Form.Label>
-									<Form.Control disabled type="text" placeholder={store.username} />
-								</Form.Group>
-							</Form.Row>
-							<Form.Row className="smallScreen">
-								<Form.Group as={Col} controlId="formGridPassword">
-									<Form.Label>New Password</Form.Label>
-									<Form.Control
-										type="password"
-										placeholder="Password"
-										defaultValue={newPassword}
-										onChange={e => setNewPassword(e.target.value)}
-									/>
-								</Form.Group>
-							</Form.Row>
-							<Form.Row className="smallScreen">
-								<Form.Group as={Col} controlId="formGridPassword">
-									<Form.Label>Confirm New Password</Form.Label>
-									<Form.Control
-										type="password"
-										placeholder="Password"
-										defaultValue={confirmPassword}
-										onChange={e => setConfirmPassword(e.target.value)}
-									/>
-								</Form.Group>
-							</Form.Row>
-							<Form.Row>
-								<Form.Group as={Col} controlId="formGridPassword">
-									<Form.Label>Email</Form.Label>
-									<Form.Control disabled type="email" placeholder={store.email} />
-								</Form.Group>
-							</Form.Row>
-						</Form>
-					</Card.Body>
-				</Card>
-			</Row>
-			<Row className="content">
-				<Col>
-					<Card bg="light" className="center" id="tags">
-						<Card.Header>Platform</Card.Header>
-						<ListGroup id="tagsContent" variant="flush">
-							{platforms.map((value, index) => {
-								return (
-									<ListGroup.Item key={index} style={{ color: "black" }} variant="light">
-										{value.name}
-										<i
-											id="hover"
-											className="fas fa-trophy transform mouse"
-											style={{ float: "right" }}
-											onClick={e =>
-												actions.handlePreference("platform", "add", value, makePlatforms)
-											}
-										/>
-									</ListGroup.Item>
-								);
-							})}
-						</ListGroup>
-					</Card>
-				</Col>
-				<Col>
-					<Card id="tags" className="center" bg="light">
-						<Card.Header>User Platforms</Card.Header>
-						<ListGroup id="tagsContent" variant="flush">
-							{store.user_platforms.map((value, index) => {
-								return (
-									<ListGroup.Item key={index} style={{ color: "black" }} variant="light">
-										<i
-											id="hover"
-											className="far fa-circle transform mouse"
-											style={{ float: "left" }}
-											onClick={e =>
-												actions.handlePreference("platform", "delete", value, makePlatforms)
-											}
-										/>
-										{value.platform_name}
-									</ListGroup.Item>
-								);
-							})}
-						</ListGroup>
-					</Card>
-				</Col>
-			</Row>
-			<Row className="content">
-				<Col>
-					<Card bg="light" className="detail" id="tags">
-						<Card.Header>Liked</Card.Header>
-						<ListGroup id="tagsContent" variant="flush">
-							{store.genres_liked.map((value, index) => {
-								return (
-									<ListGroup.Item key={index} style={{ color: "black" }} variant="light">
-										{value.genre_name}
-										<i
-											id="hover"
-											className="far fa-circle transform mouse"
-											style={{ float: "right" }}
-											onClick={e =>
-												actions.handlePreference("genre", "delete", value, makeGenres, "liked")
-											}
-										/>
-									</ListGroup.Item>
-								);
-							})}
-						</ListGroup>
-					</Card>
-				</Col>
-				<Col>
-					<Card id="tags" className="detail" bg="light">
-						<Card.Header>Genres</Card.Header>
-						<ListGroup id="tagsContent" variant="flush">
-							{genres.map((value, index) => {
-								return (
-									<ListGroup.Item key={index} style={{ color: "black" }} variant="light">
-										<i
-											id="hover"
-											className="fas fa-trophy transform mouse"
-											style={{ float: "left" }}
-											onClick={e =>
-												actions.handlePreference("genre", "add", value, makeGenres, "liked")
-											}
-										/>
-										{value.name}
-										<i
-											id="hover"
-											className="fas fa-skull transform mouse"
-											style={{ float: "right" }}
-											onClick={e =>
-												actions.handlePreference("genre", "add", value, makeGenres, "disliked")
-											}
-										/>
-									</ListGroup.Item>
-								);
-							})}
-						</ListGroup>
-					</Card>
-				</Col>
-				<Col>
-					<Card bg="light" className="detail" id="tags">
-						<Card.Header>Disliked</Card.Header>
-						<ListGroup id="tagsContent" variant="flush">
-							{store.genres_disliked.map((value, index) => {
-								return (
-									<ListGroup.Item key={index} style={{ color: "black" }} variant="light">
-										<i
-											id="hover"
-											className="far fa-circle transform mouse"
-											style={{ float: "left" }}
-											onClick={e =>
-												actions.handlePreference(
-													"genre",
-													"delete",
-													value,
-													makeGenres,
-													"disliked"
-												)
-											}
-										/>
-										{value.genre_name}
-									</ListGroup.Item>
-								);
-							})}
-						</ListGroup>
-					</Card>
-				</Col>
-			</Row>
-			<Row className="content">
-				<Col>
-					<Card bg="light" className="detail" id="tags">
-						<Card.Header>Liked</Card.Header>
-						<ListGroup id="tagsContent" variant="flush">
-							{store.tags_liked.map((value, index) => {
-								return (
-									<ListGroup.Item key={index} style={{ color: "black" }} variant="light">
-										{value.tag_name}
-										<i
-											id="hover"
-											className="far fa-circle transform mouse"
-											style={{ float: "right" }}
-											onClick={e =>
-												actions.handlePreference("tag", "delete", value, makeTags, "liked")
-											}
-										/>
-									</ListGroup.Item>
-								);
-							})}
-						</ListGroup>
-					</Card>
-				</Col>
-				<Col>
-					<Card id="tags" className="detail" bg="light">
-						<Card.Header>Tags</Card.Header>
-						<ListGroup id="tagsContent" variant="flush">
-							{tags.map((value, index) => {
-								return (
-									<ListGroup.Item key={index} style={{ color: "black" }} variant="light">
-										<i
-											id="hover"
-											className="fas fa-trophy transform mouse"
-											style={{ float: "left" }}
-											onClick={e =>
-												actions.handlePreference("tag", "add", value, makeTags, "liked")
-											}
-										/>
-										{value.name}
-										<i
-											id="hover"
-											className="fas fa-skull transform mouse"
-											style={{ float: "right" }}
-											onClick={e =>
-												actions.handlePreference("tag", "add", value, makeTags, "disliked")
-											}
-										/>
-									</ListGroup.Item>
-								);
-							})}
-						</ListGroup>
-					</Card>
-				</Col>
-				<Col>
-					<Card bg="light" className="detail" id="tags">
-						<Card.Header>Disliked</Card.Header>
-						<ListGroup id="tagsContent" variant="flush">
-							{store.tags_disliked.map((value, index) => {
-								return (
-									<ListGroup.Item key={index} style={{ color: "black" }} variant="light">
-										<i
-											id="hover"
-											className="far fa-circle transform mouse"
-											style={{ float: "left" }}
-											onClick={e =>
-												actions.handlePreference("tag", "delete", value, makeTags, "disliked")
-											}
-										/>
-										{value.tag_name}
-									</ListGroup.Item>
-								);
-							})}
-						</ListGroup>
-					</Card>
-				</Col>
-			</Row>
+		<Container fluid className="background-full">
+			<Container style={{ backgroundSize: "cover" }} className="space">
+				<Row>
+					<Col>
+						<Card bg="light" style={{ height: "95%", width: "100%" }}>
+							<Card.Header>
+								<h5>User</h5>
+							</Card.Header>
+							<Card.Body>
+								<Form>
+									<Form.Row>
+										<Form.Group as={Col} className="screen-big" controlId="formGridEmail">
+											<Form.Label>Username</Form.Label>
+											<Form.Control disabled type="email" placeholder={store.username} />
+										</Form.Group>
+										<Form.Group as={Col} className="screen-big" controlId="formGridPassword">
+											<Form.Label>New Password</Form.Label>
+											<Form.Control
+												type="password"
+												placeholder="Password"
+												defaultValue={newPassword}
+												onChange={e => setNewPassword(e.target.value)}
+											/>
+										</Form.Group>
+										<Form.Group as={Col} className="screen-big" controlId="formGridPassword">
+											<Form.Label>Confirm New Password</Form.Label>
+											<Form.Control
+												type="password"
+												placeholder="Password"
+												defaultValue={confirmPassword}
+												onChange={e => setConfirmPassword(e.target.value)}
+											/>
+										</Form.Group>
+									</Form.Row>
+									<Form.Row className="smallScreen">
+										<Form.Group as={Col} controlId="formGridEmail">
+											<Form.Label>Username</Form.Label>
+											<Form.Control disabled type="text" placeholder={store.username} />
+										</Form.Group>
+									</Form.Row>
+									<Form.Row className="smallScreen">
+										<Form.Group as={Col} controlId="formGridPassword">
+											<Form.Label>New Password</Form.Label>
+											<Form.Control
+												type="password"
+												placeholder="Password"
+												defaultValue={newPassword}
+												onChange={e => setNewPassword(e.target.value)}
+											/>
+										</Form.Group>
+									</Form.Row>
+									<Form.Row className="smallScreen">
+										<Form.Group as={Col} controlId="formGridPassword">
+											<Form.Label>Confirm New Password</Form.Label>
+											<Form.Control
+												type="password"
+												placeholder="Password"
+												defaultValue={confirmPassword}
+												onChange={e => setConfirmPassword(e.target.value)}
+											/>
+										</Form.Group>
+									</Form.Row>
+									<Form.Row>
+										<Form.Group as={Col} controlId="formGridPassword">
+											<Form.Label>Email</Form.Label>
+											<Form.Control disabled type="email" placeholder={store.email} />
+										</Form.Group>
+									</Form.Row>
+								</Form>
+							</Card.Body>
+						</Card>
+					</Col>
+				</Row>
+				<Row>
+					<Col className="col-12" md={6}>
+						<Card bg="light" className="center" id="tags">
+							<Card.Header>Platform</Card.Header>
+							<ListGroup id="tagsContent" variant="flush">
+								{platforms.map((value, index) => {
+									return (
+										<ListGroup.Item key={index} style={{ color: "black" }} variant="light">
+											{value.name}
+											<i
+												id="hover"
+												className="fas fa-plus transform mouse"
+												style={{ float: "right" }}
+												onClick={e =>
+													actions.handlePreference("platform", "add", value, makePlatforms)
+												}
+											/>
+										</ListGroup.Item>
+									);
+								})}
+							</ListGroup>
+						</Card>
+					</Col>
+					<Col className="col-12" md={6}>
+						<Card id="tags" className="center" bg="light">
+							<Card.Header>User Platforms</Card.Header>
+							<ListGroup id="tagsContent" variant="flush">
+								{store.user_platforms.map((value, index) => {
+									return (
+										<ListGroup.Item key={index} style={{ color: "black" }} variant="light">
+											<i
+												id="hover"
+												className="fas fa-times transform mouse"
+												style={{ float: "left" }}
+												onClick={e =>
+													actions.handlePreference("platform", "delete", value, makePlatforms)
+												}
+											/>
+											{value.platform_name}
+										</ListGroup.Item>
+									);
+								})}
+							</ListGroup>
+						</Card>
+					</Col>
+				</Row>
+				<Row>
+					<Col className="col-12">
+						<Card id="tags" className="detail" bg="light">
+							<Card.Header>Genres</Card.Header>
+							<ListGroup id="tagsContent" variant="flush">
+								{genres.map((value, index) => {
+									return (
+										<ListGroup.Item key={index} style={{ color: "black" }} variant="light">
+											<i
+												id="hover"
+												className="fas fa-trophy transform mouse"
+												style={{ float: "left" }}
+												onClick={e =>
+													actions.handlePreference("genre", "add", value, makeGenres, "liked")
+												}
+											/>
+											{value.name}
+											<i
+												id="hover"
+												className="fas fa-skull transform mouse"
+												style={{ float: "right" }}
+												onClick={e =>
+													actions.handlePreference(
+														"genre",
+														"add",
+														value,
+														makeGenres,
+														"disliked"
+													)
+												}
+											/>
+										</ListGroup.Item>
+									);
+								})}
+							</ListGroup>
+						</Card>
+					</Col>
+					<Col className="col-12" md={6}>
+						<Card bg="light" className="detail" id="tags">
+							<Card.Header>Liked</Card.Header>
+							<ListGroup id="tagsContent" variant="flush">
+								{store.genres_liked.map((value, index) => {
+									return (
+										<ListGroup.Item key={index} style={{ color: "black" }} variant="light">
+											{value.genre_name}
+											<i
+												id="hover"
+												className="fas fa-times transform mouse"
+												style={{ float: "right" }}
+												onClick={e =>
+													actions.handlePreference(
+														"genre",
+														"delete",
+														value,
+														makeGenres,
+														"liked"
+													)
+												}
+											/>
+										</ListGroup.Item>
+									);
+								})}
+							</ListGroup>
+						</Card>
+					</Col>
+					<Col className="col-12" md={6}>
+						<Card bg="light" className="detail" id="tags">
+							<Card.Header>Disliked</Card.Header>
+							<ListGroup id="tagsContent" variant="flush">
+								{store.genres_disliked.map((value, index) => {
+									return (
+										<ListGroup.Item key={index} style={{ color: "black" }} variant="light">
+											<i
+												id="hover"
+												className="fas fa-times transform mouse"
+												style={{ float: "left" }}
+												onClick={e =>
+													actions.handlePreference(
+														"genre",
+														"delete",
+														value,
+														makeGenres,
+														"disliked"
+													)
+												}
+											/>
+											{value.genre_name}
+										</ListGroup.Item>
+									);
+								})}
+							</ListGroup>
+						</Card>
+					</Col>
+				</Row>
+				<Row>
+					<Col className="col-12">
+						<Card id="tags" className="detail" bg="light">
+							<Card.Header>Tags</Card.Header>
+							<ListGroup id="tagsContent" variant="flush">
+								{tags.map((value, index) => {
+									return (
+										<ListGroup.Item key={index} style={{ color: "black" }} variant="light">
+											<i
+												id="hover"
+												className="fas fa-trophy transform mouse"
+												style={{ float: "left" }}
+												onClick={e =>
+													actions.handlePreference("tag", "add", value, makeTags, "liked")
+												}
+											/>
+											{value.name}
+											<i
+												id="hover"
+												className="fas fa-skull transform mouse"
+												style={{ float: "right" }}
+												onClick={e =>
+													actions.handlePreference("tag", "add", value, makeTags, "disliked")
+												}
+											/>
+										</ListGroup.Item>
+									);
+								})}
+							</ListGroup>
+						</Card>
+					</Col>
+					<Col className="col-12" md={6}>
+						<Card bg="light" className="detail" id="tags">
+							<Card.Header>Liked</Card.Header>
+							<ListGroup id="tagsContent" variant="flush">
+								{store.tags_liked.map((value, index) => {
+									return (
+										<ListGroup.Item key={index} style={{ color: "black" }} variant="light">
+											{value.tag_name}
+											<i
+												id="hover"
+												className="fas fa-times transform mouse"
+												style={{ float: "right" }}
+												onClick={e =>
+													actions.handlePreference("tag", "delete", value, makeTags, "liked")
+												}
+											/>
+										</ListGroup.Item>
+									);
+								})}
+							</ListGroup>
+						</Card>
+					</Col>
+					<Col className="col-12" md={6}>
+						<Card bg="light" className="detail" id="tags">
+							<Card.Header>Disliked</Card.Header>
+							<ListGroup id="tagsContent" variant="flush">
+								{store.tags_disliked.map((value, index) => {
+									return (
+										<ListGroup.Item key={index} style={{ color: "black" }} variant="light">
+											<i
+												id="hover"
+												className="fas fa-times transform mouse"
+												style={{ float: "left" }}
+												onClick={e =>
+													actions.handlePreference(
+														"tag",
+														"delete",
+														value,
+														makeTags,
+														"disliked"
+													)
+												}
+											/>
+											{value.tag_name}
+										</ListGroup.Item>
+									);
+								})}
+							</ListGroup>
+						</Card>
+					</Col>
+				</Row>
+			</Container>
 		</Container>
 	);
 };

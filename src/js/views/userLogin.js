@@ -1,8 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Context } from "../store/appContext";
 import { Link, useHistory } from "react-router-dom";
-import { Container, Row, Col, Card, CardImg, Alert, Form, Button } from "react-bootstrap";
-import PropTypes from "prop-types";
+import { Container, Row, Col, CardImg, Alert, Form, Button } from "react-bootstrap";
 
 export const UserLogin = props => {
 	const { store, actions } = useContext(Context);
@@ -11,6 +10,11 @@ export const UserLogin = props => {
 	let history = useHistory();
 	const handleSubmit = e => {
 		actions.loginUser(logPassword, logUsername, history);
+	};
+	const handleKeyDown = e => {
+		if (e.keyCode == 13) {
+			handleSubmit();
+		}
 	};
 	return (
 		<Container className="space blue">
@@ -36,6 +40,7 @@ export const UserLogin = props => {
 										onChange={e => setLogUsername(e.target.value)}
 										className="input-space input-shadow"
 										type="text"
+										onKeyDown={e => handleKeyDown(e)}
 										placeholder="Username"
 									/>
 								</Form.Group>
@@ -47,6 +52,7 @@ export const UserLogin = props => {
 										onChange={e => setLogPassword(e.target.value)}
 										className="input-space input-shadow"
 										type="password"
+										onKeyDown={e => handleKeyDown(e)}
 										placeholder="Password"
 									/>
 								</Form.Group>

@@ -34,11 +34,8 @@ export const Home = () => {
 		if (store.sortedGameList[0].name != undefined) {
 			return (
 				<>
-					<div className="header">
-						<p id="banner-font">A place to find games you love...</p>
-					</div>
-					<Container fluid style={{ marginTop: " -1.5rem" }}>
-						<Row style={{ marginTop: "45px" }}>
+					<Container fluid>
+						<Row className="row-carrousel" style={{ marginTop: "45px" }}>
 							<Col className="row justify-content-md-center">
 								<GameCarousel />
 							</Col>
@@ -59,19 +56,33 @@ export const Home = () => {
 									<Row className="scroller fit center" style={{ marginTop: "1rem" }}>
 										{store.sortedGameList.map((value, index) => {
 											return (
-												<GameCard className="card" key={index} size={"bigCard"} game={value} />
+												<div className="col-6 col-md-3" key={index}>
+													<GameCard className="card" size={"bigCard"} game={value} />
+												</div>
 											);
 										})}
 									</Row>
-									<Row className="center search-margin">
+									<Row className="center search-margin screen-medium-off">
 										{pagination > 1 && (
+											<Col>
+												<Button
+													className="center"
+													variant="success"
+													onClick={e => setPagination(pagination - 1)}>
+													Previous
+												</Button>
+											</Col>
+										)}
+										<Col>
 											<Button
 												className="center"
 												variant="success"
-												onClick={e => setPagination(pagination - 1)}>
-												Previous Page
+												onClick={e => setPagination(pagination + 1)}>
+												Next
 											</Button>
-										)}
+										</Col>
+									</Row>
+									<Row className="center search-margin screen-medium-off">
 										<Button
 											className="center"
 											variant="success"
@@ -89,12 +100,38 @@ export const Home = () => {
 											}>
 											View More
 										</Button>
-										<Button
-											className="center"
-											variant="success"
-											onClick={e => setPagination(pagination + 1)}>
-											Next Page
-										</Button>
+									</Row>
+									<Row className=" search-margin screen-medium">
+										{pagination > 1 && (
+											<Col className="col-4">
+												<Button variant="success" onClick={e => setPagination(pagination - 1)}>
+													Previous Page
+												</Button>
+											</Col>
+										)}
+										<Col className="col-4">
+											<Button
+												variant="success"
+												onClick={e =>
+													handleViewMore(
+														history.push({
+															pathname: "/search",
+															state: {
+																sort: sortKey,
+																pagination: pagination,
+																inverted: inverted
+															}
+														})
+													)
+												}>
+												View More
+											</Button>
+										</Col>
+										<Col className="col-4">
+											<Button variant="success" onClick={e => setPagination(pagination + 1)}>
+												Next Page
+											</Button>
+										</Col>
 									</Row>
 								</Col>
 							</Row>
@@ -104,21 +141,28 @@ export const Home = () => {
 									<Row className="scroller fit center content">
 										{store.gameMetacriticList.map((value, index) => {
 											return (
-												<GameCard className="card" key={index} game={value} size={"bigCard"} />
+												<div className="col-6 col-md-3" key={index}>
+													<GameCard className="card" size={"bigCard"} game={value} />
+												</div>
 											);
 										})}
 									</Row>
 									<Row className="center search-margin">
-										<Button
-											className="center"
-											variant="success"
-											onClick={e =>
-												handleViewMore(
-													history.push({ pathname: "/search", state: { sort: "metacritic" } })
-												)
-											}>
-											View More
-										</Button>
+										<Col className="col-12">
+											<Button
+												className="center"
+												variant="success"
+												onClick={e =>
+													handleViewMore(
+														history.push({
+															pathname: "/search",
+															state: { sort: "metacritic" }
+														})
+													)
+												}>
+												View More
+											</Button>
+										</Col>
 									</Row>
 								</Col>
 							</Row>
@@ -128,21 +172,25 @@ export const Home = () => {
 									<Row className="scroller fit center" style={{ marginTop: "3rem" }}>
 										{store.gameRatingList.map((value, index) => {
 											return (
-												<GameCard className="card" key={index} game={value} size={"bigCard"} />
+												<div className="col-6 col-md-3" key={index}>
+													<GameCard className="card" size={"bigCard"} game={value} />
+												</div>
 											);
 										})}
 									</Row>
 									<Row className="center">
-										<Button
-											className="center search-margin"
-											variant="success"
-											onClick={e =>
-												handleViewMore(
-													history.push({ pathname: "/search", state: { sort: "rating" } })
-												)
-											}>
-											View More
-										</Button>
+										<Col className="col-12">
+											<Button
+												className="center search-margin"
+												variant="success"
+												onClick={e =>
+													handleViewMore(
+														history.push({ pathname: "/search", state: { sort: "rating" } })
+													)
+												}>
+												View More
+											</Button>
+										</Col>
 									</Row>
 								</Col>
 							</Row>
