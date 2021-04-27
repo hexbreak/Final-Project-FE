@@ -1,12 +1,12 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useContext } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { Container, Row, Col, Dropdown, DropdownButton, Button, Modal } from "react-bootstrap";
 import { Context } from "../store/appContext";
-import { GameCard } from "../component/gameCard";
 import PropTypes from "prop-types";
 
 export const Sorter = props => {
 	const { store, actions } = useContext(Context);
+	let history = useHistory();
 	const [show, setShow] = useState(false);
 	const handleClose = () => setShow(false);
 	const handleShow = () => setShow(true);
@@ -53,8 +53,15 @@ export const Sorter = props => {
 							<Modal show={show} onHide={handleClose}>
 								<Modal.Header closeButton></Modal.Header>
 								<p className="center login-modal">
-									Please <a href="/login">login</a> or <a href="/registration">register</a> to use
-									this tool!
+									Please{" "}
+									<a onClick={e => history.push("/login")} className="link">
+										login
+									</a>{" "}
+									or{" "}
+									<a onClick={e => history.push("/registration")} className="link">
+										register
+									</a>{" "}
+									to use this tool!
 								</p>
 								<Modal.Footer>
 									<Button variant="secondary" onClick={handleClose}>

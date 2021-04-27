@@ -23,7 +23,11 @@ export const UserLogin = props => {
 					{store.errors.loginError == true && (
 						<Alert className="marginError center" variant="danger">
 							The username or password is incorrect, if you don&apos;t own an account please
-							<Alert.Link href="/registration"> register first.</Alert.Link>.
+							<Alert.Link onClick={e => history.push("/registration")} className="link">
+								{" "}
+								register first.
+							</Alert.Link>
+							.
 						</Alert>
 					)}
 					<Container
@@ -67,7 +71,9 @@ export const UserLogin = props => {
 						</Form>
 					</Container>
 					<div style={{ marginTop: "2rem" }} className="center">
-						<a href="/registration">Don&apos;t have an account?</a>
+						<a onClick={e => history.push("/registration")} className="link">
+							Don&apos;t have an account?
+						</a>
 					</div>
 				</Col>
 			</Row>

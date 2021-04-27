@@ -14,6 +14,12 @@ h1{
     font-size: 1.5rem;
     font-family: 'Oswald', sans-serif;
 }
+.link{
+    color: rgb(78, 90, 255);
+    &:hover{
+        color: rgb(50, 57, 158);
+    }
+}
 h3{
     font-size: 1.3rem;
     font-family: 'Oswald', sans-serif;
@@ -521,7 +527,7 @@ font-family: 'Fira Sans', sans-serif;
     font-size: 12px;
 }
 #user-games-card{
-    width: 6rem !important;
+    width: 100%;
     height: 9rem !important;
 }
 //profilePage
@@ -731,6 +737,15 @@ th {
 .screen-medium{
     display:none;
 }
+.small-preference-disliked{
+    float: right;
+}
+.small-preference-liked{
+    float: right;
+}
+.small-margin-left{
+    margin-right: 1rem;
+}
 @media only screen and (min-width: 768px){
     .nav-search{
         width: 40%;
@@ -804,8 +819,13 @@ th {
         font-size: 1.5rem;
     }
     #user-games-card{
-        width: 19rem !important;
         height: 19rem !important;
+    }
+    .small-preference-liked{
+        float: left;
+    }
+    .small-margin-left{
+        margin-right: 0;
     }
 }
 @media only screen and (min-width: 1270px){

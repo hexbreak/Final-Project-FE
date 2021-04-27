@@ -179,8 +179,7 @@ export const UserPreferenceUpdate = props => {
 											{value.name}
 											<i
 												id="hover"
-												className="fas fa-plus transform mouse"
-												style={{ float: "right" }}
+												className="fas fa-plus transform mouse small-preference-disliked"
 												onClick={e =>
 													actions.handlePreference("platform", "add", value, makePlatforms)
 												}
@@ -200,8 +199,7 @@ export const UserPreferenceUpdate = props => {
 										<ListGroup.Item key={index} style={{ color: "black" }} variant="light">
 											<i
 												id="hover"
-												className="fas fa-times transform mouse"
-												style={{ float: "left" }}
+												className="fas fa-times transform mouse small-preference-liked"
 												onClick={e =>
 													actions.handlePreference("platform", "delete", value, makePlatforms)
 												}
@@ -224,8 +222,7 @@ export const UserPreferenceUpdate = props => {
 										<ListGroup.Item key={index} style={{ color: "black" }} variant="light">
 											<i
 												id="hover"
-												className="fas fa-trophy transform mouse"
-												style={{ float: "left" }}
+												className="fas fa-trophy transform mouse small-preference-liked"
 												onClick={e =>
 													actions.handlePreference("genre", "add", value, makeGenres, "liked")
 												}
@@ -233,8 +230,7 @@ export const UserPreferenceUpdate = props => {
 											{value.name}
 											<i
 												id="hover"
-												className="fas fa-skull transform mouse"
-												style={{ float: "right" }}
+												className="fas fa-skull transform mouse small-preference-disliked small-margin-left"
 												onClick={e =>
 													actions.handlePreference(
 														"genre",
@@ -261,8 +257,7 @@ export const UserPreferenceUpdate = props => {
 											{value.genre_name}
 											<i
 												id="hover"
-												className="fas fa-times transform mouse"
-												style={{ float: "right" }}
+												className="fas fa-times transform mouse small-preference-liked"
 												onClick={e =>
 													actions.handlePreference(
 														"genre",
@@ -288,8 +283,7 @@ export const UserPreferenceUpdate = props => {
 										<ListGroup.Item key={index} style={{ color: "black" }} variant="light">
 											<i
 												id="hover"
-												className="fas fa-times transform mouse"
-												style={{ float: "left" }}
+												className="fas fa-times transform mouse small-preference-disliked"
 												onClick={e =>
 													actions.handlePreference(
 														"genre",
@@ -318,8 +312,7 @@ export const UserPreferenceUpdate = props => {
 										<ListGroup.Item key={index} style={{ color: "black" }} variant="light">
 											<i
 												id="hover"
-												className="fas fa-trophy transform mouse"
-												style={{ float: "left" }}
+												className="fas fa-trophy transform mouse small-preference-liked"
 												onClick={e =>
 													actions.handlePreference("tag", "add", value, makeTags, "liked")
 												}
@@ -327,8 +320,7 @@ export const UserPreferenceUpdate = props => {
 											{value.name}
 											<i
 												id="hover"
-												className="fas fa-skull transform mouse"
-												style={{ float: "right" }}
+												className="fas fa-skull transform small-preference-disliked small-margin-left"
 												onClick={e =>
 													actions.handlePreference("tag", "add", value, makeTags, "disliked")
 												}
@@ -349,8 +341,7 @@ export const UserPreferenceUpdate = props => {
 											{value.tag_name}
 											<i
 												id="hover"
-												className="fas fa-times transform mouse"
-												style={{ float: "right" }}
+												className="fas fa-times transform mouse small-preference-liked"
 												onClick={e =>
 													actions.handlePreference("tag", "delete", value, makeTags, "liked")
 												}
@@ -370,8 +361,7 @@ export const UserPreferenceUpdate = props => {
 										<ListGroup.Item key={index} style={{ color: "black" }} variant="light">
 											<i
 												id="hover"
-												className="fas fa-times transform mouse"
-												style={{ float: "left" }}
+												className="fas fa-times transform mouse small-preference-disliked"
 												onClick={e =>
 													actions.handlePreference(
 														"tag",

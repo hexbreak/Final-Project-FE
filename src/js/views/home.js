@@ -101,7 +101,7 @@ export const Home = () => {
 											View More
 										</Button>
 									</Row>
-									<Row className=" search-margin screen-medium">
+									<Row className=" search-margin screen-medium justify-content-between">
 										{pagination > 1 && (
 											<Col className="col-4">
 												<Button variant="success" onClick={e => setPagination(pagination - 1)}>

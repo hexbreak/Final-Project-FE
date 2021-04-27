@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { Jumbotron, OverlayTrigger, Container, Row, Col, Nav, Tab, Tooltip, Button, Modal } from "react-bootstrap";
 import { Context } from "../store/appContext";
 import { GameCard } from "../component/gameCard";
@@ -10,6 +10,7 @@ export const GameDetails = props => {
 	const [show, setShow] = useState(false);
 	const handleClose = () => setShow(false);
 	const handleShow = () => setShow(true);
+	let history = useHistory();
 	let rating = [];
 	var gameRequirements = [];
 	const capitalize = s => {
@@ -128,7 +129,15 @@ export const GameDetails = props => {
 					<Modal show={show} onHide={handleClose}>
 						<Modal.Header closeButton></Modal.Header>
 						<p className="center login-modal">
-							Please <a href="/login">login</a> or <a href="/registration">register</a> to use this tool!
+							Please{" "}
+							<a onClick={e => history.push("/login")} className="link">
+								login
+							</a>{" "}
+							or{" "}
+							<a onClick={e => history.push("/registration")} className="link">
+								register
+							</a>{" "}
+							to use this tool!
 						</p>
 						<Modal.Footer>
 							<Button variant="secondary" onClick={handleClose}>

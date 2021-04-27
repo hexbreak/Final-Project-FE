@@ -60,7 +60,7 @@ export const UserGames = props => {
 				background: "radial-gradient(circle, rgba(174,238,205,1) 0%, rgba(148,187,233,1) 100%)",
 				paddingBottom: "3rem"
 			}}
-			className="space center">
+			className="space center pt-3">
 			<Row className="detailspace">
 				<Col>
 					<h2 className="subtitle">My Games</h2>
@@ -70,8 +70,8 @@ export const UserGames = props => {
 				<Tab.Container defaultActiveKey="all">
 					<Row className="detailspace" style={{ width: "100%" }}>
 						<Nav variant="pills" className="flex-column center" style={{ width: "100%" }}>
-							<Row className="justify-content-between">
-								<Col className="col-3" md={1}>
+							<Row className="justify-content-center">
+								<Col className="col-5" md={1}>
 									<Nav.Item>
 										<OverlayTrigger
 											placement="top"
@@ -79,7 +79,7 @@ export const UserGames = props => {
 											overlay={renderAll}>
 											<Nav.Link bg="light" variant="light" eventKey="all">
 												<Row>
-													<h1 className="user-games-navpills">All</h1>
+													<h1 className="user-games-navpills center">All</h1>
 												</Row>
 												<Row>
 													<i className="fas fa-gamepad center" />
@@ -88,7 +88,7 @@ export const UserGames = props => {
 										</OverlayTrigger>
 									</Nav.Item>
 								</Col>
-								<Col className="col-3" md={1}>
+								<Col className="col-5" md={1}>
 									<Nav.Item>
 										<OverlayTrigger
 											placement="top"
@@ -96,7 +96,7 @@ export const UserGames = props => {
 											overlay={renderNew}>
 											<Nav.Link bg="light" variant="light" eventKey="new">
 												<Row>
-													<h1 className="user-games-navpills">New</h1>
+													<h1 className="user-games-navpills center">New</h1>
 												</Row>
 												<Row>
 													<i className="fas fa-star center" />
@@ -105,7 +105,7 @@ export const UserGames = props => {
 										</OverlayTrigger>
 									</Nav.Item>
 								</Col>
-								<Col className="col-3" md={1}>
+								<Col className="col-5" md={1}>
 									<Nav.Item>
 										<OverlayTrigger
 											placement="top"
@@ -113,7 +113,7 @@ export const UserGames = props => {
 											overlay={renderPlaying}>
 											<Nav.Link bg="light" variant="light" eventKey="playing">
 												<Row>
-													<h1 className="user-games-navpills">Playing</h1>
+													<h1 className="user-games-navpills center">Playing</h1>
 												</Row>
 												<Row>
 													<i className="fas fa-wrench center" />
@@ -122,7 +122,7 @@ export const UserGames = props => {
 										</OverlayTrigger>
 									</Nav.Item>
 								</Col>
-								<Col className="col-3" md={1}>
+								<Col className="col-5" md={1}>
 									<Nav.Item>
 										<OverlayTrigger
 											placement="top"
@@ -130,7 +130,7 @@ export const UserGames = props => {
 											overlay={renderFinished}>
 											<Nav.Link bg="light" variant="light" eventKey="finished">
 												<Row>
-													<h1 className="user-games-navpills">Finished</h1>
+													<h1 className="user-games-navpills center">Finished</h1>
 												</Row>
 												<Row>
 													<i className="fas fa-check-square center" />
@@ -139,7 +139,7 @@ export const UserGames = props => {
 										</OverlayTrigger>
 									</Nav.Item>
 								</Col>
-								<Col className="col-3" md={1}>
+								<Col className="col-5" md={1}>
 									<Nav.Item>
 										<OverlayTrigger
 											placement="top"
@@ -147,7 +147,7 @@ export const UserGames = props => {
 											overlay={renderCompleted}>
 											<Nav.Link bg="light" variant="light" eventKey="completed">
 												<Row>
-													<h1 className="user-games-navpills">Completed</h1>
+													<h1 className="user-games-navpills center">Completed</h1>
 												</Row>
 												<Row>
 													<i className="fas fa-trophy center" />
@@ -156,7 +156,7 @@ export const UserGames = props => {
 										</OverlayTrigger>
 									</Nav.Item>
 								</Col>
-								<Col className="col-3" md={1}>
+								<Col className="col-5" md={1}>
 									<Nav.Item>
 										<OverlayTrigger
 											placement="top"
@@ -164,7 +164,7 @@ export const UserGames = props => {
 											overlay={renderFavorite}>
 											<Nav.Link bg="light" variant="light" eventKey="favorites">
 												<Row>
-													<h1 className="user-games-navpills">Favorites</h1>
+													<h1 className="user-games-navpills center">Favorites</h1>
 												</Row>
 												<Row>
 													<i className="fas fa-heart center" />
@@ -173,7 +173,7 @@ export const UserGames = props => {
 										</OverlayTrigger>
 									</Nav.Item>
 								</Col>
-								<Col className="col-3" md={1}>
+								<Col className="col-5" md={1}>
 									<Nav.Item>
 										<OverlayTrigger
 											placement="top"
@@ -181,7 +181,7 @@ export const UserGames = props => {
 											overlay={renderDropped}>
 											<Nav.Link bg="light" variant="light" eventKey="dropped">
 												<Row>
-													<h1 className="user-games-navpills">Dropped</h1>
+													<h1 className="user-games-navpills center">Dropped</h1>
 												</Row>
 												<Row>
 													<i className="fas fa-thumbs-down center" />
@@ -190,7 +190,7 @@ export const UserGames = props => {
 										</OverlayTrigger>
 									</Nav.Item>
 								</Col>
-								<Col className="col-3" md={1}>
+								<Col className="col-5" md={1}>
 									<Nav.Item>
 										<OverlayTrigger
 											placement="top"
@@ -198,7 +198,7 @@ export const UserGames = props => {
 											overlay={renderWishlist}>
 											<Nav.Link bg="light" variant="light" eventKey="wishlist">
 												<Row>
-													<h1 className="user-games-navpills">Wishlist</h1>
+													<h1 className="user-games-navpills center">Wishlist</h1>
 												</Row>
 												<Row>
 													<i className="fas fa-hand-holding-usd center" />
@@ -225,12 +225,14 @@ export const UserGames = props => {
 															background_image: value.game_image
 														};
 														return (
-															<GameCard
-																className="card"
-																key={index}
-																game={game}
-																id={"user-games-card"}
-															/>
+															<Col className="col-12" md={3} key={index}>
+																<GameCard
+																	id={"user-games-card"}
+																	className="card"
+																	size={"mediumCard"}
+																	game={game}
+																/>
+															</Col>
 														);
 													})}
 											</Row>
@@ -252,12 +254,14 @@ export const UserGames = props => {
 																background_image: value.game_image
 															};
 															return (
-																<GameCard
-																	className="card"
-																	key={index}
-																	game={game}
-																	id={"user-games-card"}
-																/>
+																<Col className="col-12" md={3} key={index}>
+																	<GameCard
+																		id={"user-games-card"}
+																		className="card"
+																		size={"mediumCard"}
+																		game={game}
+																	/>
+																</Col>
 															);
 														}
 													})}
@@ -280,12 +284,14 @@ export const UserGames = props => {
 																background_image: value.game_image
 															};
 															return (
-																<GameCard
-																	className="card"
-																	key={index}
-																	game={game}
-																	id={"user-games-card"}
-																/>
+																<Col className="col-12" md={3} key={index}>
+																	<GameCard
+																		id={"user-games-card"}
+																		className="card"
+																		size={"mediumCard"}
+																		game={game}
+																	/>
+																</Col>
 															);
 														}
 													})}
@@ -308,12 +314,14 @@ export const UserGames = props => {
 																background_image: value.game_image
 															};
 															return (
-																<GameCard
-																	className="card"
-																	key={index}
-																	game={game}
-																	id={"user-games-card"}
-																/>
+																<Col className="col-12" md={3} key={index}>
+																	<GameCard
+																		id={"user-games-card"}
+																		className="card"
+																		size={"mediumCard"}
+																		game={game}
+																	/>
+																</Col>
 															);
 														}
 													})}
@@ -336,12 +344,14 @@ export const UserGames = props => {
 																background_image: value.game_image
 															};
 															return (
-																<GameCard
-																	className="card"
-																	key={index}
-																	game={game}
-																	id={"user-games-card"}
-																/>
+																<Col className="col-12" md={3} key={index}>
+																	<GameCard
+																		id={"user-games-card"}
+																		className="card"
+																		size={"mediumCard"}
+																		game={game}
+																	/>
+																</Col>
 															);
 														}
 													})}
@@ -364,12 +374,14 @@ export const UserGames = props => {
 																background_image: value.game_image
 															};
 															return (
-																<GameCard
-																	className="card"
-																	key={index}
-																	game={game}
-																	id={"user-games-card"}
-																/>
+																<Col className="col-12" md={3} key={index}>
+																	<GameCard
+																		id={"user-games-card"}
+																		className="card"
+																		size={"mediumCard"}
+																		game={game}
+																	/>
+																</Col>
 															);
 														}
 													})}
@@ -392,12 +404,14 @@ export const UserGames = props => {
 																background_image: value.game_image
 															};
 															return (
-																<GameCard
-																	className="card"
-																	key={index}
-																	game={game}
-																	id={"user-games-card"}
-																/>
+																<Col className="col-12" md={3} key={index}>
+																	<GameCard
+																		id={"user-games-card"}
+																		className="card"
+																		size={"mediumCard"}
+																		game={game}
+																	/>
+																</Col>
 															);
 														}
 													})}
@@ -420,12 +434,14 @@ export const UserGames = props => {
 																background_image: value.game_image
 															};
 															return (
-																<GameCard
-																	className="card"
-																	key={index}
-																	game={game}
-																	id={"user-games-card"}
-																/>
+																<Col className="col-12" md={3} key={index}>
+																	<GameCard
+																		id={"user-games-card"}
+																		className="card"
+																		size={"mediumCard"}
+																		game={game}
+																	/>
+																</Col>
 															);
 														}
 													})}
