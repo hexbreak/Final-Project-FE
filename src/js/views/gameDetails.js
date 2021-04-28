@@ -310,12 +310,12 @@ export const GameDetails = props => {
 							<Row style={{ marginTop: "1rem" }}>
 								<Nav.Item>
 									<Nav.Link bg="light" variant="light" eventKey="details">
-										<h1>Details</h1>
+										<h3>Details</h3>
 									</Nav.Link>
 								</Nav.Item>
 								<Nav.Item>
 									<Nav.Link eventKey="statistics">
-										<h1>Statistics</h1>
+										<h3>Statistics</h3>
 									</Nav.Link>
 								</Nav.Item>
 								{/* <Nav.Item>
@@ -325,7 +325,7 @@ export const GameDetails = props => {
 							</Nav.Item> */}
 								<Nav.Item>
 									<Nav.Link eventKey="media">
-										<h1>Media</h1>
+										<h3>Media</h3>
 									</Nav.Link>
 								</Nav.Item>
 							</Row>
@@ -691,8 +691,10 @@ export const GameDetails = props => {
 						</Tab.Pane> */}
 							<Tab.Pane eventKey="media">
 								<Row className="center detailspace">
-									<Row>
-										<h1>Media</h1>
+									<Row className="justify-content-center" style={{ width: "100%" }}>
+										<Col>
+											<h1>Media</h1>
+										</Col>
 									</Row>
 									<Row className="center">
 										{store.gameTrailers != null &&

@@ -16,6 +16,7 @@ import {
 import { Context } from "../store/appContext";
 import { GameCard } from "../component/gameCard";
 import { Sorter } from "../component/sorter";
+import { SearchPageDropdown } from "../component/searchPageDropdown";
 import PropTypes from "prop-types";
 
 export const SearchPage = props => {
@@ -76,8 +77,8 @@ export const SearchPage = props => {
 				paddingBottom: "3rem"
 			}}
 			className="space center">
-			<Row className="search-margin center screen-big">
-				<Col>
+			<Row className="search-margin center screen-medium">
+				<Col className="col-12">
 					{store.genres != null && (
 						<ToggleButtonGroup value={genres} type="checkbox" className="mb-2">
 							{store.genres.map((value, index) => {
@@ -95,57 +96,16 @@ export const SearchPage = props => {
 					)}
 				</Col>
 			</Row>
-			<Row className="smallScreen">
-				<Col className="search-margin">
-					{store.genres != null && (
-						<ToggleButtonGroup value={genres} type="checkbox" className="mb-2" vertical>
-							{store.genres.map((value, index) => {
-								if (index <= 5 && showMoreTags == false) {
-									return (
-										<ToggleButton
-											key={index}
-											onChange={
-												genres == value.id ? e => setGenres(null) : e => setGenres(value.id)
-											}
-											value={value.id}
-											variant="dark">
-											{value.name}
-										</ToggleButton>
-									);
-								} else if (showMoreGenres == true) {
-									return (
-										<ToggleButton
-											key={index}
-											onChange={
-												genres == value.id ? e => setGenres(null) : e => setGenres(value.id)
-											}
-											value={value.id}
-											variant="dark">
-											{value.name}
-										</ToggleButton>
-									);
-								}
-							})}
-							{showMoreGenres == false ? (
-								<Button id="viewmore" onClick={e => setShowMoreGenres(true)}>
-									Show More
-								</Button>
-							) : (
-								<Button id="viewmore" onClick={e => setShowMoreGenres(false)}>
-									Show Less
-								</Button>
-							)}
-						</ToggleButtonGroup>
-					)}
-				</Col>
+			<Row className="screen-medium-off">
+				<SearchPageDropdown setTags={setTags} setGenres={setGenres} setPlatforms={setPlatforms} />
 			</Row>
 			<Row className="search-margin center">
 				<Col>
-					<Row classNamer="justify-content-center">
-						<Col>
+					<Row className="justify-content-center">
+						<Col className="col-11">
 							<input
 								type="text"
-								className="form-control center"
+								className="form-control"
 								onChange={event => setGameName(event.target.value)}
 								placeholder="Search..."
 								value={gameName}
@@ -153,15 +113,7 @@ export const SearchPage = props => {
 								aria-expanded="false"
 								style={{ width: "100%" }}
 							/>
-						</Col>
-						<Col>
-							{gameName != "" && (
-								<i
-									className="fas fa-times float-left"
-									style={{ fontSize: "2rem" }}
-									onClick={e => setGameName("")}
-								/>
-							)}
+							{gameName != "" && <i className="fas fa-times search-x" onClick={e => setGameName("")} />}
 						</Col>
 					</Row>
 					<Row>
@@ -213,7 +165,7 @@ export const SearchPage = props => {
 						)}
 					</Col>
 				</Col>
-				<Col>
+				<Col className="screen-medium col-3">
 					<Row>
 						<Col className="search-margin">
 							{store.tags != null && (

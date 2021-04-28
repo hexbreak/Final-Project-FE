@@ -21,7 +21,7 @@ h1{
     }
 }
 h3{
-    font-size: 1.3rem;
+    font-size: 1.1rem;
     font-family: 'Oswald', sans-serif;
 }
 h4{
@@ -504,6 +504,7 @@ font-family: 'Fira Sans', sans-serif;
 }
 .nav-pills .nav-link.active, .nav-pills .show > .nav-link {
     background: linear-gradient(90deg, #e3ffe7 0%, #d9e7ff 100%);
+    display: block;
     -webkit-text-fill-color: rgb(59, 41, 163)
 }
 .nav-link{
@@ -746,13 +747,22 @@ th {
 .small-margin-left{
     margin-right: 1rem;
 }
+.search-x{
+    font-size: 1rem;
+    position: absolute;
+    top: 25%;
+    right: 9%;
+}
 @media only screen and (min-width: 768px){
+    .search-x{
+        right: 4%;
+    }
     .nav-search{
         width: 40%;
         display: flex;
     }
     .screen-medium{
-        display:flex;
+        display:block;
     }
     .screen-medium-off{
         display: none;
