@@ -753,6 +753,9 @@ th {
     top: 25%;
     right: 9%;
 }
+.screen-xl{
+    display: none;
+}
 @media only screen and (min-width: 768px){
     .search-x{
         right: 4%;
@@ -766,6 +769,9 @@ th {
     }
     .screen-medium-off{
         display: none;
+    }
+    .screen-medium-xl{
+        display: block;
     }
     .search-bar{
         display: block;
@@ -862,5 +868,13 @@ th {
     }
     .smallScreen{
         display:none;
+    }
+}
+@media only screen and (min-width: 1627px){
+    .screen-medium-xl{
+        display: none;
+    }
+    .screen-xl{
+        display: block;
     }
 }

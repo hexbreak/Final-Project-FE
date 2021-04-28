@@ -77,7 +77,7 @@ export const SearchPage = props => {
 				paddingBottom: "3rem"
 			}}
 			className="space center">
-			<Row className="search-margin center screen-medium">
+			<Row className="search-margin center screen-xl">
 				<Col className="col-12">
 					{store.genres != null && (
 						<ToggleButtonGroup value={genres} type="checkbox" className="mb-2">
@@ -132,14 +132,15 @@ export const SearchPage = props => {
 							{store.superSearch[0] != undefined &&
 								store.superSearch.map((value, index) => {
 									return (
-										<GameCard
-											className="card"
-											key={index}
-											size={"bigCard"}
-											game={value}
-											id={"user-games-card"}
-											cleanSearch={e => setGameName("")}
-										/>
+										<Col className="col-12" md={4} lg={3} key={index}>
+											<GameCard
+												className="card"
+												size={"bigCard"}
+												game={value}
+												id={"user-games-card"}
+												cleanSearch={e => setGameName("")}
+											/>
+										</Col>
 									);
 								})}
 						</Row>
@@ -166,6 +167,54 @@ export const SearchPage = props => {
 					</Col>
 				</Col>
 				<Col className="screen-medium col-3">
+					<Row className="screen-medium-xl">
+						<Col className="search-margin">
+							{store.genres != null && (
+								<ToggleButtonGroup value={genres} type="checkbox" className="mb-2" vertical>
+									{store.genres.map((value, index) => {
+										if (index <= 5 && showMoreTags == false) {
+											return (
+												<ToggleButton
+													key={index}
+													onChange={
+														genres == value.id
+															? e => setGenres(null)
+															: e => setGenres(value.id)
+													}
+													value={value.id}
+													variant="dark">
+													{value.name}
+												</ToggleButton>
+											);
+										} else if (showMoreGenres == true) {
+											return (
+												<ToggleButton
+													key={index}
+													onChange={
+														genres == value.id
+															? e => setGenres(null)
+															: e => setGenres(value.id)
+													}
+													value={value.id}
+													variant="dark">
+													{value.name}
+												</ToggleButton>
+											);
+										}
+									})}
+									{showMoreGenres == false ? (
+										<Button id="viewmore" onClick={e => setShowMoreGenres(true)}>
+											Show More
+										</Button>
+									) : (
+										<Button id="viewmore" onClick={e => setShowMoreGenres(false)}>
+											Show Less
+										</Button>
+									)}
+								</ToggleButtonGroup>
+							)}
+						</Col>
+					</Row>
 					<Row>
 						<Col className="search-margin">
 							{store.tags != null && (
