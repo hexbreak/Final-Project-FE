@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useContext } from "react";
-import { Carousel, Card, Container, Row, Col, Dropdown, DropdownButton, Button } from "react-bootstrap";
-import { Link, useHistory } from "react-router-dom";
+import { Container, Row, Col, Button } from "react-bootstrap";
+import { useHistory } from "react-router-dom";
 import { Context } from "../store/appContext";
-import PropTypes from "prop-types";
 import "../../styles/home.scss";
+import { debounce } from "lodash";
 import { GameCarousel } from "../component/gameCarousel";
 import { GameCard } from "../component/gameCard";
 import { Sorter } from "../component/sorter";
@@ -17,6 +17,9 @@ export const Home = () => {
 		viewMore;
 		window.scrollTo(0, 0);
 	};
+	const handlePagination = debounce(value => {
+		setPagination(value);
+	}, 250);
 	useEffect(() => {
 		actions.loadGameList(1);
 		actions.loadLists(1);
@@ -68,7 +71,7 @@ export const Home = () => {
 												<Button
 													className="center"
 													variant="success"
-													onClick={e => setPagination(pagination - 1)}>
+													onClick={e => handlePagination(pagination - 1)}>
 													Previous
 												</Button>
 											</Col>
@@ -77,7 +80,7 @@ export const Home = () => {
 											<Button
 												className="center"
 												variant="success"
-												onClick={e => setPagination(pagination + 1)}>
+												onClick={e => handlePagination(pagination + 1)}>
 												Next
 											</Button>
 										</Col>
@@ -101,10 +104,12 @@ export const Home = () => {
 											View More
 										</Button>
 									</Row>
-									<Row className=" search-margin screen-medium justify-content-between">
+									<Row className=" search-margin screen-medium screen-medium-flex justify-content-between">
 										{pagination > 1 && (
 											<Col className="col-4">
-												<Button variant="success" onClick={e => setPagination(pagination - 1)}>
+												<Button
+													variant="success"
+													onClick={e => handlePagination(pagination - 1)}>
 													Previous Page
 												</Button>
 											</Col>
@@ -128,7 +133,7 @@ export const Home = () => {
 											</Button>
 										</Col>
 										<Col className="col-4">
-											<Button variant="success" onClick={e => setPagination(pagination + 1)}>
+											<Button variant="success" onClick={e => handlePagination(pagination + 1)}>
 												Next Page
 											</Button>
 										</Col>

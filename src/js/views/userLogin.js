@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Context } from "../store/appContext";
 import { Link, useHistory } from "react-router-dom";
-import { Container, Row, Col, CardImg, Alert, Form, Button } from "react-bootstrap";
+import { Container, Row, Col, Alert, Form, Button } from "react-bootstrap";
 
 export const UserLogin = props => {
 	const { store, actions } = useContext(Context);

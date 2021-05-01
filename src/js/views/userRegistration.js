@@ -1,8 +1,7 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useContext } from "react";
 import { Context } from "../store/appContext";
-import { Link, useHistory } from "react-router-dom";
-import { Container, Row, Col, Card, CardImg, CardFooter, Form, Button, Alert } from "react-bootstrap";
-import PropTypes from "prop-types";
+import { useHistory } from "react-router-dom";
+import { Container, Row, Col, Form, Button, Alert } from "react-bootstrap";
 
 export const UserRegistration = props => {
 	const { store, actions } = useContext(Context);

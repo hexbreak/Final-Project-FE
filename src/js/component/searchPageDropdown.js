@@ -1,6 +1,5 @@
 import React, { useState, useContext } from "react";
-import { Link, useHistory } from "react-router-dom";
-import { Container, Row, Col, Dropdown, DropdownButton, Button, Modal } from "react-bootstrap";
+import { Container, Row, Col, Dropdown, DropdownButton } from "react-bootstrap";
 import { Context } from "../store/appContext";
 import PropTypes from "prop-types";
 
@@ -18,7 +17,7 @@ export const SearchPageDropdown = props => {
 		props.setTags(id);
 	};
 	const handlePlatform = (name, id) => {
-		setPlatforms(name);
+		setPlatform(name);
 		props.setPlatforms(id);
 	};
 	return (

@@ -1,19 +1,24 @@
-import React, { useState, useEffect, useContext } from "react";
-import { Link, useHistory } from "react-router-dom";
+import React, { useState, useContext, useCallback } from "react";
+import { useHistory } from "react-router-dom";
 import { Dropdown } from "react-bootstrap";
 import { Context } from "../store/appContext";
 import { GameCard } from "../component/gameCard";
-
+import { debounce } from "lodash";
 export const Navbar = () => {
 	const [gameName, setGameName] = useState("");
 	const { store, actions } = useContext(Context);
 	let history = useHistory();
-	useEffect(() => {
-		const search = () => {
-			actions.loadSearch(gameName);
-		};
-		search();
-	}, [gameName]);
+
+	const debouncedSave = useCallback(
+		debounce(nextValue => actions.loadSearch(nextValue), 200),
+		[]
+	);
+
+	const handleChange = event => {
+		const { value: nextValue } = event.target;
+		setGameName(nextValue);
+		debouncedSave(nextValue);
+	};
 	const handleKeyDown = e => {
 		if (e.keyCode == 13 && gameName != "") {
 			history.push({ pathname: "/search", state: { gameName: gameName } });
@@ -32,7 +37,7 @@ export const Navbar = () => {
 					<input
 						type="text"
 						className="form-control"
-						onChange={event => setGameName(event.target.value)}
+						onChange={handleChange}
 						onKeyDown={e => handleKeyDown(e)}
 						placeholder="Search..."
 						value={gameName}

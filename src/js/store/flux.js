@@ -1,4 +1,5 @@
-import Cookies, { get } from "js-cookie";
+import Cookies from "js-cookie";
+import { debounce } from "lodash";
 const getState = ({ getStore, getActions, setStore }) => {
 	const beURL = "https://gamefinder99.herokuapp.com"; // Use ${beURL} to make it easier when handling the BE's constant URL changes
 	const apiKey = "33af10ad5812440abf75a35c04492e15";

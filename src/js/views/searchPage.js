@@ -1,21 +1,9 @@
-import React, { useState, useEffect, useContext } from "react";
-import { Link } from "react-router-dom";
-import {
-	Jumbotron,
-	Card,
-	Container,
-	Row,
-	Col,
-	Nav,
-	Sonnet,
-	Button,
-	ToggleButton,
-	ToggleButtonGroup,
-	ButtonGroup
-} from "react-bootstrap";
+import React, { useState, useEffect, useContext, useCallback } from "react";
+import { Container, Row, Col, Button, ToggleButton, ToggleButtonGroup } from "react-bootstrap";
 import { Context } from "../store/appContext";
 import { GameCard } from "../component/gameCard";
 import { Sorter } from "../component/sorter";
+import { debounce } from "lodash";
 import { SearchPageDropdown } from "../component/searchPageDropdown";
 import PropTypes from "prop-types";
 
@@ -30,9 +18,9 @@ export const SearchPage = props => {
 	);
 	const [sortKey, setSort] = useState(
 		props.location.state == undefined
-			? "metacritics"
+			? "metacritic"
 			: props.location.state.sort == undefined
-			? "metacritics"
+			? "metacritic"
 			: props.location.state.sort
 	);
 	const [inverted, setInverted] = useState(
@@ -42,6 +30,19 @@ export const SearchPage = props => {
 			? true
 			: props.location.state.inverted
 	);
+	const realSearch = searchBar => {
+		let sort = "";
+		if (inverted == true) {
+			sort = `-${sortKey}`;
+		} else {
+			sort = sortKey;
+		}
+		if (!!searchBar) {
+			actions.loadSuperSearch(searchBar, pagination, genres, tags, sort, platforms);
+		} else {
+			actions.loadSuperSearch(gameName, pagination, genres, tags, sort, platforms);
+		}
+	};
 	const [pagination, setPagination] = useState(1);
 	const [tags, setTags] = useState(null);
 	const [genres, setGenres] = useState(null);
@@ -57,18 +58,22 @@ export const SearchPage = props => {
 		};
 		loadSearch();
 	}, []);
+	const debouncedSave = useCallback(
+		debounce(nextValue => realSearch(nextValue), 250),
+		[]
+	);
+	const handleChange = event => {
+		const { value: nextValue } = event.target;
+		setGameName(nextValue);
+		debouncedSave(nextValue);
+	};
 	useEffect(() => {
-		let sort = "";
-		const realSearch = () => {
-			if (inverted == true) {
-				sort = `-${sortKey}`;
-			} else {
-				sort = sortKey;
-			}
-			actions.loadSuperSearch(gameName, pagination, genres, tags, sort, platforms);
-		};
 		realSearch();
-	}, [sortKey, pagination, inverted, tags, genres, platforms, gameName]);
+	}, [sortKey, pagination, inverted, tags, genres, platforms]);
+
+	const handlePagination = debounce(value => {
+		setPagination(value);
+	}, 250);
 	return (
 		<Container
 			fluid
@@ -106,7 +111,7 @@ export const SearchPage = props => {
 							<input
 								type="text"
 								className="form-control"
-								onChange={event => setGameName(event.target.value)}
+								onChange={handleChange}
 								placeholder="Search..."
 								value={gameName}
 								aria-haspopup="true"
@@ -151,7 +156,7 @@ export const SearchPage = props => {
 										style={{ marginBottom: "2rem" }}
 										className="center"
 										variant="success"
-										onClick={e => setPagination(pagination - 1)}>
+										onClick={e => handlePagination(pagination - 1)}>
 										Previous Page
 									</Button>
 								)}
@@ -159,7 +164,7 @@ export const SearchPage = props => {
 									style={{ marginBottom: "2rem" }}
 									className="center"
 									variant="success"
-									onClick={e => setPagination(pagination + 1)}>
+									onClick={e => handlePagination(pagination + 1)}>
 									Next Page
 								</Button>
 							</Row>

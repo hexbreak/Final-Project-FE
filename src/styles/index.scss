@@ -756,6 +756,7 @@ th {
 .screen-xl{
     display: none;
 }
+
 @media only screen and (min-width: 768px){
     .search-x{
         right: 4%;
@@ -766,6 +767,9 @@ th {
     }
     .screen-medium{
         display:block;
+    }
+    .screen-medium-flex{
+        display:flex !important;
     }
     .screen-medium-off{
         display: none;

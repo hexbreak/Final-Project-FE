@@ -1,6 +1,5 @@
-import React, { useState, useEffect, useContext } from "react";
-import { Link } from "react-router-dom";
-import { Card, Container, Row, Col, Nav, Tab, Sonnet, Button, Tooltip, OverlayTrigger } from "react-bootstrap";
+import React, { useEffect, useContext } from "react";
+import { Card, Container, Row, Col, Nav, Tab, Tooltip, OverlayTrigger } from "react-bootstrap";
 import { Context } from "../store/appContext";
 import { GameCard } from "../component/gameCard";
 import PropTypes from "prop-types";

@@ -1,7 +1,6 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useContext } from "react";
 import { Context } from "../store/appContext";
-import { Link } from "react-router-dom";
-import { Carousel, Card, Container, Row, Col, Dropdown, DropdownButton, Button, ListGroup } from "react-bootstrap";
+import { Card, Container, Row, Col } from "react-bootstrap";
 export const UserTags = () => {
 	const { store, actions } = useContext(Context);
 	return (
