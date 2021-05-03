@@ -33,6 +33,10 @@ h5{
 .game-card-title{
     font-family: 'Oswald', sans-serif;
 }
+.loading-screen{
+    width: 50%;
+    height: 20rem;
+}
 .scroller{
     display: flex;
     width: 100%;
@@ -398,6 +402,7 @@ img{
     width: 100%;
     height: 100%;
     object-fit:cover;
+    background: transparent url(https://cutewallpaper.org/21/loading-gif-transparent-background/Update-throbber-icon-in-Seven-theme-2775725-Drupalorg.gif) no-repeat scroll center center;
 }
 .achievement-img {
     max-width: 5rem;
