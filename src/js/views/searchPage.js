@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext, useCallback } from "react";
-import { Container, Row, Col, Button, ToggleButton, ToggleButtonGroup } from "react-bootstrap";
+import { Container, Row, Col, Button, ToggleButton, ToggleButtonGroup, Spinner } from "react-bootstrap";
 import { Context } from "../store/appContext";
 import { GameCard } from "../component/gameCard";
 import { Sorter } from "../component/sorter";
@@ -133,22 +133,32 @@ export const SearchPage = props => {
 						</Col>
 					</Row>
 					<Col className="search-margin search-box">
-						<Row className="search-margin">
-							{store.superSearch[0] != undefined &&
-								store.superSearch.map((value, index) => {
-									return (
-										<Col className="col-12" md={4} lg={3} key={index}>
-											<GameCard
-												className="card"
-												size={"bigCard"}
-												game={value}
-												id={"user-games-card"}
-												cleanSearch={e => setGameName("")}
-											/>
-										</Col>
-									);
-								})}
-						</Row>
+						{store.loading.searchLoading == true ? (
+							<Row>
+								<Col>
+									<div className="center">
+										<Spinner animation="border" variant="secondary" />
+									</div>
+								</Col>
+							</Row>
+						) : (
+							<Row className="search-margin">
+								{store.superSearch[0] != undefined &&
+									store.superSearch.map((value, index) => {
+										return (
+											<Col className="col-12" md={4} lg={3} key={index}>
+												<GameCard
+													className="card"
+													size={"bigCard"}
+													game={value}
+													id={"user-games-card"}
+													cleanSearch={e => setGameName("")}
+												/>
+											</Col>
+										);
+									})}
+							</Row>
+						)}
 						{store.superSearch.length >= 20 && (
 							<Row className="center search-margin">
 								{pagination > 1 && (

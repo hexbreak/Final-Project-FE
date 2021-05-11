@@ -1,6 +1,6 @@
 import React, { useState, useContext, useCallback } from "react";
 import { useHistory } from "react-router-dom";
-import { Dropdown } from "react-bootstrap";
+import { Dropdown, Spinner, Card } from "react-bootstrap";
 import { Context } from "../store/appContext";
 import { GameCard } from "../component/gameCard";
 import { debounce } from "lodash";
@@ -8,12 +8,10 @@ export const Navbar = () => {
 	const [gameName, setGameName] = useState("");
 	const { store, actions } = useContext(Context);
 	let history = useHistory();
-
 	const debouncedSave = useCallback(
 		debounce(nextValue => actions.loadSearch(nextValue), 200),
 		[]
 	);
-
 	const handleChange = event => {
 		const { value: nextValue } = event.target;
 		setGameName(nextValue);
@@ -52,24 +50,40 @@ export const Navbar = () => {
 						/>
 					)}
 					{store.searchBar != undefined && gameName != "" && (
-						<div
-							id="myDropdown"
-							aria-labelledby="dropdownMenuButton"
-							className="dropdown-content"
-							style={{ display: "show", position: "absolute", zIndex: "300" }}>
-							{store.searchBar.map((value, index) => {
-								return (
-									<GameCard
-										id={"navCard"}
-										className="card"
-										key={index}
-										game={value}
-										size={"smallCard"}
-										cleanSearch={e => setGameName("")}
-									/>
-								);
-							})}
-						</div>
+						<>
+							{store.loading.searchBarLoading == true ? (
+								<div
+									id="myDropdown"
+									aria-labelledby="dropdownMenuButton"
+									className="dropdown-content"
+									style={{ display: "show", position: "absolute", zIndex: "300", width: "100%" }}>
+									<Card bg="dark" id="navCard">
+										<Card.Body className="center">
+											<Spinner style={{ margin: "2rem" }} animation="border" variant="white" />
+										</Card.Body>
+									</Card>
+								</div>
+							) : (
+								<div
+									id="myDropdown"
+									aria-labelledby="dropdownMenuButton"
+									className="dropdown-content"
+									style={{ display: "show", position: "absolute", zIndex: "300" }}>
+									{store.searchBar.map((value, index) => {
+										return (
+											<GameCard
+												id={"navCard"}
+												className="card"
+												key={index}
+												game={value}
+												size={"smallCard"}
+												cleanSearch={e => setGameName("")}
+											/>
+										);
+									})}
+								</div>
+							)}
+						</>
 					)}
 				</div>
 				<button className="btn btn-light search-button" onClick={e => history.push("/search")} id="hover">

@@ -1,27 +1,18 @@
 import React, { useState, useEffect, useContext } from "react";
-import { Container, Row, Col, Button } from "react-bootstrap";
+import { Container, Row, Col, Button, Spinner } from "react-bootstrap";
 import { useHistory } from "react-router-dom";
 import { Context } from "../store/appContext";
 import "../../styles/home.scss";
 import { debounce } from "lodash";
-import { Backdrop, CircularProgress } from "@material-ui/core";
 import { GameCarousel } from "../component/gameCarousel";
 import { GameCard } from "../component/gameCard";
 import { Sorter } from "../component/sorter";
-import { makeStyles } from "@material-ui/core/styles";
 export const Home = () => {
 	const { store, actions } = useContext(Context);
 	const [sortKey, setSort] = useState("name");
 	const [inverted, setInverted] = useState(false);
 	const [pagination, setPagination] = useState(1);
 	let history = useHistory();
-	const useStyles = makeStyles(theme => ({
-		backdrop: {
-			zIndex: theme.zIndex.drawer + 1,
-			color: "#fff"
-		}
-	}));
-	const classes = useStyles();
 	const handleViewMore = viewMore => {
 		viewMore;
 		window.scrollTo(0, 0);
@@ -65,15 +56,25 @@ export const Home = () => {
 											setPagination={setPagination}
 										/>
 									</div>
-									<Row className="scroller fit center" style={{ marginTop: "1rem" }}>
-										{store.sortedGameList.map((value, index) => {
-											return (
-												<div className="col-6 col-md-3" key={index}>
-													<GameCard className="card" size={"bigCard"} game={value} />
+									{store.loading.homeLoading == true ? (
+										<Row>
+											<Col>
+												<div className="center">
+													<Spinner animation="border" variant="secondary" />
 												</div>
-											);
-										})}
-									</Row>
+											</Col>
+										</Row>
+									) : (
+										<Row className="scroller fit center" style={{ marginTop: "1rem" }}>
+											{store.sortedGameList.map((value, index) => {
+												return (
+													<div className="col-6 col-md-3" key={index}>
+														<GameCard className="card" size={"bigCard"} game={value} />
+													</div>
+												);
+											})}
+										</Row>
+									)}
 									<Row className="center search-margin screen-medium-off">
 										{pagination > 1 && (
 											<Col>
@@ -213,9 +214,29 @@ export const Home = () => {
 				</>
 			);
 		} else {
-			return <h1>Loading</h1>;
+			return (
+				<Container>
+					<Row>
+						<Col>
+							<div className="center">
+								<Spinner animation="border" variant="secondary" />
+							</div>
+						</Col>
+					</Row>
+				</Container>
+			);
 		}
 	} else {
-		return <h1>Loading</h1>;
+		return (
+			<Container>
+				<Row>
+					<Col>
+						<div className="center">
+							<Spinner animation="border" variant="secondary" />
+						</div>
+					</Col>
+				</Row>
+			</Container>
+		);
 	}
 };

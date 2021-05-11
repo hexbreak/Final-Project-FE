@@ -34,7 +34,7 @@ h5{
     font-family: 'Oswald', sans-serif;
 }
 .loading-screen{
-    width: 50%;
+    width: 100%;
     height: 20rem;
 }
 .scroller{
@@ -402,7 +402,8 @@ img{
     width: 100%;
     height: 100%;
     object-fit:cover;
-    background: transparent url(https://cutewallpaper.org/21/loading-gif-transparent-background/Update-throbber-icon-in-Seven-theme-2775725-Drupalorg.gif) no-repeat scroll center center;
+    background-image:url("https://i.pinimg.com/originals/f9/41/ae/f941ae9d16fd7d2957eea6e5b1100d1e.gif");
+    background-repeat: no-repeat;
 }
 .achievement-img {
     max-width: 5rem;
@@ -761,7 +762,11 @@ th {
 .screen-xl{
     display: none;
 }
-
+.spinner-border {
+    width: 3rem;
+    height: 3rem;
+    margin: 3rem;
+}
 @media only screen and (min-width: 768px){
     .search-x{
         right: 4%;
@@ -787,7 +792,7 @@ th {
         width: 90%;
     }
     .search-button{
-        width: 10% !important;
+        width: 12% !important;
     }
     .nav-buttons{
         width: 41% !important;

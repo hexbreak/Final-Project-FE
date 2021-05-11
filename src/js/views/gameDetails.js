@@ -1,6 +1,18 @@
 import React, { useState, useEffect, useContext } from "react";
 import { useHistory } from "react-router-dom";
-import { Jumbotron, OverlayTrigger, Container, Row, Col, Nav, Tab, Tooltip, Button, Modal } from "react-bootstrap";
+import {
+	Jumbotron,
+	OverlayTrigger,
+	Container,
+	Row,
+	Col,
+	Nav,
+	Tab,
+	Tooltip,
+	Button,
+	Modal,
+	Spinner
+} from "react-bootstrap";
 import { Context } from "../store/appContext";
 import { GameCard } from "../component/gameCard";
 import PropTypes from "prop-types";
@@ -731,7 +743,17 @@ export const GameDetails = props => {
 			</Container>
 		);
 	} else {
-		return <h1>Loading...</h1>;
+		return (
+			<Container>
+				<Row>
+					<Col>
+						<div className="center">
+							<Spinner animation="border" variant="secondary" />
+						</div>
+					</Col>
+				</Row>
+			</Container>
+		);
 	}
 };
 

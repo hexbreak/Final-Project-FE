@@ -37,6 +37,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			superSearch: [],
 			found: [],
 			check: [],
+			loading: { homeLoading: true, searchLoading: true, searchBarLoading: true },
 			errors: { loginError: false, registerError: false }
 		},
 		actions: {
@@ -203,6 +204,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 					});
 			},
 			loadSortedGameList: async (pageNumber, ordering) => {
+				let store = getStore();
+				setStore({ loading: { ...store.loading, homeLoading: true } });
 				await fetch(
 					`https://api.rawg.io/api/games?key=${apiKey}&ordering=${ordering}&page=${pageNumber}&page_size=8`
 				)
@@ -215,7 +218,10 @@ const getState = ({ getStore, getActions, setStore }) => {
 					})
 					.then(function(responseAsJson) {
 						// Do stuff with the JSON
-						return setStore({ sortedGameList: responseAsJson.results });
+						return setStore({
+							sortedGameList: responseAsJson.results,
+							loading: { ...store.loading, homeLoading: false }
+						});
 					})
 					.catch(function(error) {
 						console.log("Looks like there was a problem: \n", error);
@@ -330,6 +336,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 					});
 			},
 			loadSearch: gameName => {
+				let store = getStore();
+				setStore({ loading: { ...store.loading, searchBarLoading: true } });
 				fetch(`https://api.rawg.io/api/games?key=${apiKey}&search=${gameName}&page_size=6`)
 					.then(function(response) {
 						if (!response.ok) {
@@ -340,13 +348,18 @@ const getState = ({ getStore, getActions, setStore }) => {
 					})
 					.then(function(responseAsJson) {
 						// Do stuff with the JSON
-						return setStore({ searchBar: responseAsJson.results });
+						return setStore({
+							searchBar: responseAsJson.results,
+							loading: { ...store.loading, searchBarLoading: false }
+						});
 					})
 					.catch(function(error) {
 						console.log("Looks like there was a problem: \n", error);
 					});
 			},
 			loadSuperSearch: (gameName, pagination, genres, tags, sort, platforms) => {
+				let store = getStore();
+				setStore({ loading: { ...store.loading, searchLoading: true } });
 				let get = `https://api.rawg.io/api/games?key=${apiKey}&page_size=20`;
 				let filters = {
 					search: gameName,
@@ -371,7 +384,10 @@ const getState = ({ getStore, getActions, setStore }) => {
 					})
 					.then(function(responseAsJson) {
 						// Do stuff with the JSON
-						return setStore({ superSearch: responseAsJson.results });
+						return setStore({
+							superSearch: responseAsJson.results,
+							loading: { ...store.loading, searchLoading: false }
+						});
 					})
 					.catch(function(error) {
 						console.log("Looks like there was a problem: \n", error);
