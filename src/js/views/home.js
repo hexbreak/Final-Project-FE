@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useContext } from "react";
-import { Carousel, Card, Container, Row, Col, Dropdown, DropdownButton, Button } from "react-bootstrap";
-import { Link, useHistory } from "react-router-dom";
+import { Container, Row, Col, Button, Spinner } from "react-bootstrap";
+import { useHistory } from "react-router-dom";
 import { Context } from "../store/appContext";
-import PropTypes from "prop-types";
 import "../../styles/home.scss";
+import { debounce } from "lodash";
 import { GameCarousel } from "../component/gameCarousel";
 import { GameCard } from "../component/gameCard";
 import { Sorter } from "../component/sorter";
@@ -17,6 +17,9 @@ export const Home = () => {
 		viewMore;
 		window.scrollTo(0, 0);
 	};
+	const handlePagination = debounce(value => {
+		setPagination(value);
+	}, 250);
 	useEffect(() => {
 		actions.loadGameList(1);
 		actions.loadLists(1);
@@ -34,17 +37,14 @@ export const Home = () => {
 		if (store.sortedGameList[0].name != undefined) {
 			return (
 				<>
-					<div className="header">
-						<p id="banner-font">A place to find games you love...</p>
-					</div>
-					<Container fluid style={{ marginTop: " -1.5rem" }}>
-						<Row style={{ marginTop: "45px" }}>
+					<Container fluid>
+						<Row className="row-carrousel" style={{ marginTop: "45px" }}>
 							<Col className="row justify-content-md-center">
 								<GameCarousel />
 							</Col>
 						</Row>
 						<Container fluid className="white">
-							<Row style={{ marginTop: "13rem" }} className="spacing">
+							<Row style={{ marginTop: "2rem" }} className="spacing">
 								<Col style={{ marginTop: "2rem" }} className="center">
 									<h2 className="subtitle center">Sortable Games</h2>
 									<div className="center content">
@@ -56,22 +56,46 @@ export const Home = () => {
 											setPagination={setPagination}
 										/>
 									</div>
-									<Row className="scroller fit center" style={{ marginTop: "1rem" }}>
-										{store.sortedGameList.map((value, index) => {
-											return (
-												<GameCard className="card" key={index} size={"bigCard"} game={value} />
-											);
-										})}
-									</Row>
-									<Row className="center search-margin">
+									{store.loading.homeLoading == true ? (
+										<Row>
+											<Col>
+												<div className="center">
+													<Spinner animation="border" variant="secondary" />
+												</div>
+											</Col>
+										</Row>
+									) : (
+										<Row className="scroller fit center" style={{ marginTop: "1rem" }}>
+											{store.sortedGameList.map((value, index) => {
+												return (
+													<div className="col-6 col-md-3" key={index}>
+														<GameCard className="card" size={"bigCard"} game={value} />
+													</div>
+												);
+											})}
+										</Row>
+									)}
+									<Row className="center search-margin screen-medium-off">
 										{pagination > 1 && (
+											<Col>
+												<Button
+													className="center"
+													variant="success"
+													onClick={e => handlePagination(pagination - 1)}>
+													Previous
+												</Button>
+											</Col>
+										)}
+										<Col>
 											<Button
 												className="center"
 												variant="success"
-												onClick={e => setPagination(pagination - 1)}>
-												Previous Page
+												onClick={e => handlePagination(pagination + 1)}>
+												Next
 											</Button>
-										)}
+										</Col>
+									</Row>
+									<Row className="center search-margin screen-medium-off">
 										<Button
 											className="center"
 											variant="success"
@@ -89,36 +113,71 @@ export const Home = () => {
 											}>
 											View More
 										</Button>
-										<Button
-											className="center"
-											variant="success"
-											onClick={e => setPagination(pagination + 1)}>
-											Next Page
-										</Button>
+									</Row>
+									<Row className=" search-margin screen-medium screen-medium-flex justify-content-between">
+										{pagination > 1 && (
+											<Col className="col-4">
+												<Button
+													variant="success"
+													onClick={e => handlePagination(pagination - 1)}>
+													Previous Page
+												</Button>
+											</Col>
+										)}
+										<Col className="col-4">
+											<Button
+												variant="success"
+												onClick={e =>
+													handleViewMore(
+														history.push({
+															pathname: "/search",
+															state: {
+																sort: sortKey,
+																pagination: pagination,
+																inverted: inverted
+															}
+														})
+													)
+												}>
+												View More
+											</Button>
+										</Col>
+										<Col className="col-4">
+											<Button variant="success" onClick={e => handlePagination(pagination + 1)}>
+												Next Page
+											</Button>
+										</Col>
 									</Row>
 								</Col>
 							</Row>
-							<Row className="spacing">
+							<Row fluid className="spacing">
 								<Col>
 									<h2 className="subtitle center">Metacritic Rating</h2>
 									<Row className="scroller fit center content">
 										{store.gameMetacriticList.map((value, index) => {
 											return (
-												<GameCard className="card" key={index} game={value} size={"bigCard"} />
+												<div className="col-6 col-md-3" key={index}>
+													<GameCard className="card" size={"bigCard"} game={value} />
+												</div>
 											);
 										})}
 									</Row>
 									<Row className="center search-margin">
-										<Button
-											className="center"
-											variant="success"
-											onClick={e =>
-												handleViewMore(
-													history.push({ pathname: "/search", state: { sort: "metacritic" } })
-												)
-											}>
-											View More
-										</Button>
+										<Col className="col-12">
+											<Button
+												className="center"
+												variant="success"
+												onClick={e =>
+													handleViewMore(
+														history.push({
+															pathname: "/search",
+															state: { sort: "metacritic" }
+														})
+													)
+												}>
+												View More
+											</Button>
+										</Col>
 									</Row>
 								</Col>
 							</Row>
@@ -128,21 +187,25 @@ export const Home = () => {
 									<Row className="scroller fit center" style={{ marginTop: "3rem" }}>
 										{store.gameRatingList.map((value, index) => {
 											return (
-												<GameCard className="card" key={index} game={value} size={"bigCard"} />
+												<div className="col-6 col-md-3" key={index}>
+													<GameCard className="card" size={"bigCard"} game={value} />
+												</div>
 											);
 										})}
 									</Row>
 									<Row className="center">
-										<Button
-											className="center search-margin"
-											variant="success"
-											onClick={e =>
-												handleViewMore(
-													history.push({ pathname: "/search", state: { sort: "rating" } })
-												)
-											}>
-											View More
-										</Button>
+										<Col className="col-12">
+											<Button
+												className="center search-margin"
+												variant="success"
+												onClick={e =>
+													handleViewMore(
+														history.push({ pathname: "/search", state: { sort: "rating" } })
+													)
+												}>
+												View More
+											</Button>
+										</Col>
 									</Row>
 								</Col>
 							</Row>
@@ -151,9 +214,29 @@ export const Home = () => {
 				</>
 			);
 		} else {
-			return <h1>Loading...</h1>;
+			return (
+				<Container>
+					<Row>
+						<Col>
+							<div className="center">
+								<Spinner animation="border" variant="secondary" />
+							</div>
+						</Col>
+					</Row>
+				</Container>
+			);
 		}
 	} else {
-		return <h1>Loading...</h1>;
+		return (
+			<Container>
+				<Row>
+					<Col>
+						<div className="center">
+							<Spinner animation="border" variant="secondary" />
+						</div>
+					</Col>
+				</Row>
+			</Container>
+		);
 	}
 };

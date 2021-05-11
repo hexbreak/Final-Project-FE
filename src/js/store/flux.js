@@ -1,6 +1,6 @@
-import Cookies, { get } from "js-cookie";
+import Cookies from "js-cookie";
 const getState = ({ getStore, getActions, setStore }) => {
-	const beURL = "https://gamefinder99.herokuapp.com/"; // Use ${beURL} to make it easier when handling the BE's constant URL changes
+	const beURL = "https://gamefinder99.herokuapp.com"; // Use ${beURL} to make it easier when handling the BE's constant URL changes
 	const apiKey = "33af10ad5812440abf75a35c04492e15";
 	return {
 		store: {
@@ -37,6 +37,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			superSearch: [],
 			found: [],
 			check: [],
+			loading: { homeLoading: true, searchLoading: true, searchBarLoading: true, loginLoading: false },
 			errors: { loginError: false, registerError: false }
 		},
 		actions: {
@@ -74,6 +75,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			loginUser: async (password, username, history) => {
 				const actions = getActions();
 				const store = getStore();
+				setStore({ loading: { ...store.loading, loginLoading: true } });
 				if (password != "" && username != "") {
 					await fetch(`${beURL}/login`, {
 						method: "POST",
@@ -92,13 +94,19 @@ const getState = ({ getStore, getActions, setStore }) => {
 								Cookies.set("access", data.token);
 								actions.getUserProfile(store.id);
 								history.push("/home");
-								setStore({ errors: { loginError: false } });
+								setStore({
+									errors: { loginError: false },
+									loading: { ...store.loading, loginLoading: false }
+								});
 							} else {
-								setStore({ errors: { loginError: true } });
+								setStore({
+									errors: { loginError: true },
+									loading: { ...store.loading, loginLoading: false }
+								});
 							}
 						});
 				} else {
-					setStore({ errors: { loginError: true } });
+					setStore({ errors: { loginError: true }, loading: { ...store.loading, loginLoading: false } });
 				}
 			},
 			syncToken: () => {
@@ -203,6 +211,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 					});
 			},
 			loadSortedGameList: async (pageNumber, ordering) => {
+				let store = getStore();
+				setStore({ loading: { ...store.loading, homeLoading: true } });
 				await fetch(
 					`https://api.rawg.io/api/games?key=${apiKey}&ordering=${ordering}&page=${pageNumber}&page_size=8`
 				)
@@ -215,7 +225,10 @@ const getState = ({ getStore, getActions, setStore }) => {
 					})
 					.then(function(responseAsJson) {
 						// Do stuff with the JSON
-						return setStore({ sortedGameList: responseAsJson.results });
+						return setStore({
+							sortedGameList: responseAsJson.results,
+							loading: { ...store.loading, homeLoading: false }
+						});
 					})
 					.catch(function(error) {
 						console.log("Looks like there was a problem: \n", error);
@@ -330,6 +343,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 					});
 			},
 			loadSearch: gameName => {
+				let store = getStore();
+				setStore({ loading: { ...store.loading, searchBarLoading: true } });
 				fetch(`https://api.rawg.io/api/games?key=${apiKey}&search=${gameName}&page_size=6`)
 					.then(function(response) {
 						if (!response.ok) {
@@ -340,13 +355,18 @@ const getState = ({ getStore, getActions, setStore }) => {
 					})
 					.then(function(responseAsJson) {
 						// Do stuff with the JSON
-						return setStore({ searchBar: responseAsJson.results });
+						return setStore({
+							searchBar: responseAsJson.results,
+							loading: { ...store.loading, searchBarLoading: false }
+						});
 					})
 					.catch(function(error) {
 						console.log("Looks like there was a problem: \n", error);
 					});
 			},
 			loadSuperSearch: (gameName, pagination, genres, tags, sort, platforms) => {
+				let store = getStore();
+				setStore({ loading: { ...store.loading, searchLoading: true } });
 				let get = `https://api.rawg.io/api/games?key=${apiKey}&page_size=20`;
 				let filters = {
 					search: gameName,
@@ -371,7 +391,10 @@ const getState = ({ getStore, getActions, setStore }) => {
 					})
 					.then(function(responseAsJson) {
 						// Do stuff with the JSON
-						return setStore({ superSearch: responseAsJson.results });
+						return setStore({
+							superSearch: responseAsJson.results,
+							loading: { ...store.loading, searchLoading: false }
+						});
 					})
 					.catch(function(error) {
 						console.log("Looks like there was a problem: \n", error);
@@ -731,7 +754,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					}
 					if (movement == "delete") {
 						if (type2 == "liked") {
-							await fetch(`${beURL}/user/${store.id}/genrelikes/${value.id}`, {
+							await fetch(`${beURL}/user/${store.id}/degl/${value.id}`, {
 								method: "DELETE",
 								headers: {
 									"Content-Type": "application/json"
@@ -825,7 +848,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					}
 					if (movement == "delete") {
 						if (type2 == "liked") {
-							await fetch(`${beURL}/user/${store.id}/platforms/${value.id}`, {
+							await fetch(`${beURL}/user/${store.id}/detl/${value.id}`, {
 								method: "DELETE",
 								headers: {
 									"Content-Type": "application/json"

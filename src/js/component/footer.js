@@ -1,9 +1,10 @@
 import React, { useContext } from "react";
-import { Link, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { Context } from "../store/appContext";
 import { Row, Col } from "react-bootstrap";
 export const Footer = () => {
 	const { store, actions } = useContext(Context);
+	let history = useHistory();
 	return (
 		<footer className="footer mt-auto py-3 text-center bg-white">
 			<Row>
@@ -18,8 +19,14 @@ export const Footer = () => {
 						<Col id="middleLine"></Col>
 						<Col>
 							<p>
-								<a href="/registration">Sign Up</a> or <a href="/login">Log In</a> to get better
-								comprehensive experience and more!
+								<a onClick={e => history.push("/registration")} className="link">
+									Sign Up
+								</a>{" "}
+								or{" "}
+								<a onClick={e => history.push("/login")} className="link">
+									Log In
+								</a>{" "}
+								to get better comprehensive experience and more!
 							</p>
 						</Col>
 					</>

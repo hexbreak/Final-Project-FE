@@ -1,8 +1,7 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useContext } from "react";
 import { Context } from "../store/appContext";
-import { Link, useHistory } from "react-router-dom";
-import { Container, Row, Col, Card, CardImg, CardFooter, Form, Button, Alert } from "react-bootstrap";
-import PropTypes from "prop-types";
+import { useHistory } from "react-router-dom";
+import { Container, Row, Col, Form, Button, Alert } from "react-bootstrap";
 
 export const UserRegistration = props => {
 	const { store, actions } = useContext(Context);
@@ -15,14 +14,14 @@ export const UserRegistration = props => {
 	};
 	return (
 		<Container className="space blue">
-			<Row>
-				<Col>
+			<Row className="justify-content-center">
+				<Col sm={11} md={8}>
 					{store.errors.registerError == true && (
 						<Alert className="marginError center" variant="danger">
 							Please fill all fields.
 						</Alert>
 					)}
-					<Container id="userForm" style={{ width: "50rem", marginTop: "5rem" }} className="center">
+					<Container id="userForm" style={{ marginTop: "5rem" }} className="center">
 						<h3 className="formTitle">Registration</h3>
 						<Form className="search-margin">
 							<Form.Row>
@@ -69,7 +68,9 @@ export const UserRegistration = props => {
 						</Form>
 					</Container>
 					<div style={{ marginTop: "2rem" }} className="center">
-						<a href="/login">Already have an account?</a>
+						<a onClick={e => history.push("/login")} className="link">
+							Already have an account?
+						</a>
 					</div>
 				</Col>
 			</Row>

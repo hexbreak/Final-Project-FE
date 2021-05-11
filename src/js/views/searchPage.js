@@ -1,21 +1,10 @@
-import React, { useState, useEffect, useContext } from "react";
-import { Link } from "react-router-dom";
-import {
-	Jumbotron,
-	Card,
-	Container,
-	Row,
-	Col,
-	Nav,
-	Sonnet,
-	Button,
-	ToggleButton,
-	ToggleButtonGroup,
-	ButtonGroup
-} from "react-bootstrap";
+import React, { useState, useEffect, useContext, useCallback } from "react";
+import { Container, Row, Col, Button, ToggleButton, ToggleButtonGroup, Spinner } from "react-bootstrap";
 import { Context } from "../store/appContext";
 import { GameCard } from "../component/gameCard";
 import { Sorter } from "../component/sorter";
+import { debounce } from "lodash";
+import { SearchPageDropdown } from "../component/searchPageDropdown";
 import PropTypes from "prop-types";
 
 export const SearchPage = props => {
@@ -29,9 +18,9 @@ export const SearchPage = props => {
 	);
 	const [sortKey, setSort] = useState(
 		props.location.state == undefined
-			? "metacritics"
+			? "metacritic"
 			: props.location.state.sort == undefined
-			? "metacritics"
+			? "metacritic"
 			: props.location.state.sort
 	);
 	const [inverted, setInverted] = useState(
@@ -41,12 +30,26 @@ export const SearchPage = props => {
 			? true
 			: props.location.state.inverted
 	);
+	const realSearch = searchBar => {
+		let sort = "";
+		if (inverted == true) {
+			sort = `-${sortKey}`;
+		} else {
+			sort = sortKey;
+		}
+		if (!!searchBar) {
+			actions.loadSuperSearch(searchBar, pagination, genres, tags, sort, platforms);
+		} else {
+			actions.loadSuperSearch(gameName, pagination, genres, tags, sort, platforms);
+		}
+	};
 	const [pagination, setPagination] = useState(1);
 	const [tags, setTags] = useState(null);
 	const [genres, setGenres] = useState(null);
 	const [platforms, setPlatforms] = useState(null);
 	const [showMorePlatforms, setShowMorePlatforms] = useState(false);
 	const [showMoreTags, setShowMoreTags] = useState(false);
+	const [showMoreGenres, setShowMoreGenres] = useState(false);
 	useEffect(() => {
 		const loadSearch = () => {
 			actions.loadTags("40");
@@ -55,18 +58,22 @@ export const SearchPage = props => {
 		};
 		loadSearch();
 	}, []);
+	const debouncedSave = useCallback(
+		debounce(nextValue => realSearch(nextValue), 250),
+		[]
+	);
+	const handleChange = event => {
+		const { value: nextValue } = event.target;
+		setGameName(nextValue);
+		debouncedSave(nextValue);
+	};
 	useEffect(() => {
-		let sort = "";
-		const realSearch = () => {
-			if (inverted == true) {
-				sort = `-${sortKey}`;
-			} else {
-				sort = sortKey;
-			}
-			actions.loadSuperSearch(gameName, pagination, genres, tags, sort, platforms);
-		};
 		realSearch();
-	}, [sortKey, pagination, inverted, tags, genres, platforms, gameName]);
+	}, [sortKey, pagination, inverted, tags, genres, platforms]);
+
+	const handlePagination = debounce(value => {
+		setPagination(value);
+	}, 250);
 	return (
 		<Container
 			fluid
@@ -75,8 +82,8 @@ export const SearchPage = props => {
 				paddingBottom: "3rem"
 			}}
 			className="space center">
-			<Row className="search-margin center">
-				<Col>
+			<Row className="search-margin center screen-xl">
+				<Col className="col-12">
 					{store.genres != null && (
 						<ToggleButtonGroup value={genres} type="checkbox" className="mb-2">
 							{store.genres.map((value, index) => {
@@ -94,51 +101,64 @@ export const SearchPage = props => {
 					)}
 				</Col>
 			</Row>
+			<Row className="screen-medium-off">
+				<SearchPageDropdown setTags={setTags} setGenres={setGenres} setPlatforms={setPlatforms} />
+			</Row>
 			<Row className="search-margin center">
-				<Col sm={10}>
-					<Row>
-						<Col>
+				<Col>
+					<Row className="justify-content-center">
+						<Col className="col-11">
 							<input
 								type="text"
-								className="form-control center"
-								onChange={event => setGameName(event.target.value)}
+								className="form-control"
+								onChange={handleChange}
 								placeholder="Search..."
 								value={gameName}
 								aria-haspopup="true"
 								aria-expanded="false"
-								style={{ width: "50em" }}
+								style={{ width: "100%" }}
 							/>
-							{gameName != "" && (
-								<i className="fas fa-times float-right" onClick={e => setGameName("")} />
-							)}
+							{gameName != "" && <i className="fas fa-times search-x" onClick={e => setGameName("")} />}
+						</Col>
+					</Row>
+					<Row>
+						<Col className="search-margin">
+							<Sorter
+								setSort={setSort}
+								sortKey={sortKey}
+								setInverted={setInverted}
+								inverted={inverted}
+								setPagination={setPagination}
+							/>
 						</Col>
 					</Row>
 					<Col className="search-margin search-box">
-						<Row>
-							<Col className="search-margin">
-								<Sorter
-									setSort={setSort}
-									sortKey={sortKey}
-									setInverted={setInverted}
-									inverted={inverted}
-									setPagination={setPagination}
-								/>
-							</Col>
-						</Row>
-						<Row className="search-margin">
-							{store.superSearch[0] != undefined &&
-								store.superSearch.map((value, index) => {
-									return (
-										<GameCard
-											className="card"
-											key={index}
-											size={"bigCard"}
-											game={value}
-											cleanSearch={e => setGameName("")}
-										/>
-									);
-								})}
-						</Row>
+						{store.loading.searchLoading == true ? (
+							<Row>
+								<Col>
+									<div className="center">
+										<Spinner animation="border" variant="secondary" />
+									</div>
+								</Col>
+							</Row>
+						) : (
+							<Row className="search-margin">
+								{store.superSearch[0] != undefined &&
+									store.superSearch.map((value, index) => {
+										return (
+											<Col className="col-12" md={4} lg={3} key={index}>
+												<GameCard
+													className="card"
+													size={"bigCard"}
+													game={value}
+													id={"user-games-card"}
+													cleanSearch={e => setGameName("")}
+												/>
+											</Col>
+										);
+									})}
+							</Row>
+						)}
 						{store.superSearch.length >= 20 && (
 							<Row className="center search-margin">
 								{pagination > 1 && (
@@ -146,7 +166,7 @@ export const SearchPage = props => {
 										style={{ marginBottom: "2rem" }}
 										className="center"
 										variant="success"
-										onClick={e => setPagination(pagination - 1)}>
+										onClick={e => handlePagination(pagination - 1)}>
 										Previous Page
 									</Button>
 								)}
@@ -154,14 +174,62 @@ export const SearchPage = props => {
 									style={{ marginBottom: "2rem" }}
 									className="center"
 									variant="success"
-									onClick={e => setPagination(pagination + 1)}>
+									onClick={e => handlePagination(pagination + 1)}>
 									Next Page
 								</Button>
 							</Row>
 						)}
 					</Col>
 				</Col>
-				<Col sm={2}>
+				<Col className="screen-medium col-3">
+					<Row className="screen-medium-xl">
+						<Col className="search-margin">
+							{store.genres != null && (
+								<ToggleButtonGroup value={genres} type="checkbox" className="mb-2" vertical>
+									{store.genres.map((value, index) => {
+										if (index <= 5 && showMoreTags == false) {
+											return (
+												<ToggleButton
+													key={index}
+													onChange={
+														genres == value.id
+															? e => setGenres(null)
+															: e => setGenres(value.id)
+													}
+													value={value.id}
+													variant="dark">
+													{value.name}
+												</ToggleButton>
+											);
+										} else if (showMoreGenres == true) {
+											return (
+												<ToggleButton
+													key={index}
+													onChange={
+														genres == value.id
+															? e => setGenres(null)
+															: e => setGenres(value.id)
+													}
+													value={value.id}
+													variant="dark">
+													{value.name}
+												</ToggleButton>
+											);
+										}
+									})}
+									{showMoreGenres == false ? (
+										<Button id="viewmore" onClick={e => setShowMoreGenres(true)}>
+											Show More
+										</Button>
+									) : (
+										<Button id="viewmore" onClick={e => setShowMoreGenres(false)}>
+											Show Less
+										</Button>
+									)}
+								</ToggleButtonGroup>
+							)}
+						</Col>
+					</Row>
 					<Row>
 						<Col className="search-margin">
 							{store.tags != null && (

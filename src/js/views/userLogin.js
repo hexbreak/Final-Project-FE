@@ -1,8 +1,7 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useContext } from "react";
 import { Context } from "../store/appContext";
-import { Link, useHistory } from "react-router-dom";
-import { Container, Row, Col, Card, CardImg, Alert, Form, Button } from "react-bootstrap";
-import PropTypes from "prop-types";
+import { useHistory } from "react-router-dom";
+import { Container, Row, Col, Alert, Form, Button, Spinner } from "react-bootstrap";
 
 export const UserLogin = props => {
 	const { store, actions } = useContext(Context);
@@ -12,19 +11,27 @@ export const UserLogin = props => {
 	const handleSubmit = e => {
 		actions.loginUser(logPassword, logUsername, history);
 	};
+	const handleKeyDown = e => {
+		if (e.keyCode == 13) {
+			handleSubmit();
+		}
+	};
 	return (
 		<Container className="space blue">
-			<Row>
-				<Col>
+			<Row className="justify-content-center">
+				<Col sm={11} md={7}>
 					{store.errors.loginError == true && (
 						<Alert className="marginError center" variant="danger">
 							The username or password is incorrect, if you don&apos;t own an account please
-							<Alert.Link href="/registration"> register first.</Alert.Link>.
+							<Alert.Link onClick={e => history.push("/registration")} className="link">
+								{" "}
+								register first.
+							</Alert.Link>
+							.
 						</Alert>
 					)}
 					<Container
 						id="userForm"
-						style={{ width: "40rem" }}
 						className={
 							store.errors.loginError == false ? "marginLogin center" : "marginLoginwError center"
 						}>
@@ -37,6 +44,7 @@ export const UserLogin = props => {
 										onChange={e => setLogUsername(e.target.value)}
 										className="input-space input-shadow"
 										type="text"
+										onKeyDown={e => handleKeyDown(e)}
 										placeholder="Username"
 									/>
 								</Form.Group>
@@ -48,6 +56,7 @@ export const UserLogin = props => {
 										onChange={e => setLogPassword(e.target.value)}
 										className="input-space input-shadow"
 										type="password"
+										onKeyDown={e => handleKeyDown(e)}
 										placeholder="Password"
 									/>
 								</Form.Group>
@@ -62,10 +71,20 @@ export const UserLogin = props => {
 						</Form>
 					</Container>
 					<div style={{ marginTop: "2rem" }} className="center">
-						<a href="/registration">Don&apos;t have an account?</a>
+						<a onClick={e => history.push("/registration")} className="link">
+							Don&apos;t have an account?
+						</a>
 					</div>
 				</Col>
 			</Row>
+			{store.loading.loginLoading == true && (
+				<div id="cover-spin">
+					<div className="center">
+						<h1 className="details-space"> Login in... </h1>
+						<Spinner animation="grow" variant="info" />
+					</div>
+				</div>
+			)}
 		</Container>
 	);
 };

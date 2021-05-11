@@ -72,7 +72,7 @@ export const GameCard = props => {
 		<Card
 			id={props.id}
 			style={{ marginBottom: "1rem", cursor: "pointer" }}
-			className="bg-dark rounded-3 mr-3 ml-3 text-white transform"
+			className="bg-dark rounded-3 text-white transform"
 			onClick={e => handleClick(e)}>
 			<Card.Img
 				className="card-img"
@@ -84,7 +84,7 @@ export const GameCard = props => {
 				alt="Card Image"
 			/>
 			<Card.ImgOverlay id="card">
-				<Card.Title>{props.game.name}</Card.Title>
+				<Card.Title className="game-card-title">{props.game.name}</Card.Title>
 				<Card.Text>
 					{store.preference == true > 0 && (
 						<div className={filters}>
