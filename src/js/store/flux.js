@@ -37,7 +37,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			superSearch: [],
 			found: [],
 			check: [],
-			loading: { homeLoading: true, searchLoading: true, searchBarLoading: true },
+			loading: { homeLoading: true, searchLoading: true, searchBarLoading: true, loginLoading: false },
 			errors: { loginError: false, registerError: false }
 		},
 		actions: {
@@ -75,6 +75,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			loginUser: async (password, username, history) => {
 				const actions = getActions();
 				const store = getStore();
+				setStore({ loading: { ...store.loading, loginLoading: true } });
 				if (password != "" && username != "") {
 					await fetch(`${beURL}/login`, {
 						method: "POST",
@@ -93,13 +94,19 @@ const getState = ({ getStore, getActions, setStore }) => {
 								Cookies.set("access", data.token);
 								actions.getUserProfile(store.id);
 								history.push("/home");
-								setStore({ errors: { loginError: false } });
+								setStore({
+									errors: { loginError: false },
+									loading: { ...store.loading, loginLoading: false }
+								});
 							} else {
-								setStore({ errors: { loginError: true } });
+								setStore({
+									errors: { loginError: true },
+									loading: { ...store.loading, loginLoading: false }
+								});
 							}
 						});
 				} else {
-					setStore({ errors: { loginError: true } });
+					setStore({ errors: { loginError: true }, loading: { ...store.loading, loginLoading: false } });
 				}
 			},
 			syncToken: () => {

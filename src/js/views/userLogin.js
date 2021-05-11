@@ -1,7 +1,7 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useContext } from "react";
 import { Context } from "../store/appContext";
-import { Link, useHistory } from "react-router-dom";
-import { Container, Row, Col, Alert, Form, Button } from "react-bootstrap";
+import { useHistory } from "react-router-dom";
+import { Container, Row, Col, Alert, Form, Button, Spinner } from "react-bootstrap";
 
 export const UserLogin = props => {
 	const { store, actions } = useContext(Context);
@@ -77,6 +77,14 @@ export const UserLogin = props => {
 					</div>
 				</Col>
 			</Row>
+			{store.loading.loginLoading == true && (
+				<div id="cover-spin">
+					<div className="center">
+						<h1 className="details-space"> Login in... </h1>
+						<Spinner animation="grow" variant="info" />
+					</div>
+				</div>
+			)}
 		</Container>
 	);
 };
